@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":domain"))
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
