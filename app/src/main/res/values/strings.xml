@@ -5,4 +5,8 @@
     <string name="sign_in_with_apple">Sign in with Apple</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="by_privacy_policy">By registering, you agree to our \nPrivacy Policy and Terms of use</string>
+    <string name="next_step">Continue</string>
+    <string name="acquainted">Let\'s get\nacquainted</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
 </resources>
