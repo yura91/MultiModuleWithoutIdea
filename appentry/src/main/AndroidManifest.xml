@@ -14,9 +14,8 @@
         android:theme="@style/Theme.MultiModuleApp"
         tools:targetApi="31">
         <activity
-            android:name="com.example.multimoduleapp.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MultiModuleApp">
+            android:name="com.example.multimoduleapp.SignInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

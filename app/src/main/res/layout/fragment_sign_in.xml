@@ -8,9 +8,9 @@
     tools:context=".SignInFragment">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="@dimen/size_zero"
+        android:layout_height="@dimen/size_zero"
+        android:layout_marginBottom="@dimen/margin_44"
         android:scaleType="fitXY"
         android:src="@drawable/best_cards_tittle"
         app:layout_constraintBottom_toTopOf="@id/signWithApple"
@@ -20,13 +20,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signWithApple"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="@dimen/margin_40"
+        android:layout_marginEnd="@dimen/margin_40"
+        android:layout_marginBottom="@dimen/margin_10"
         android:background="@drawable/rounded_corner_bg"
-        android:text="Sign in with Apple"
+        android:text="@string/sign_in_with_apple"
+        app:backgroundTint="@null"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/signWithGoogle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,13 +35,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signWithGoogle"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginStart="@dimen/margin_40"
+        android:layout_marginEnd="@dimen/margin_40"
+        android:layout_marginBottom="@dimen/margin_34"
         android:background="@drawable/rounded_corner_bg"
-        android:text="Sign in with Google"
+        android:text="@string/sign_in_with_google"
+        app:backgroundTint="@null"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/textPrivacyPolicy"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="34dp"
-        android:text="By registering, you agree to our \nPrivacy Policy and Terms of use"
+        android:layout_marginBottom="@dimen/margin_34"
+        android:text="@string/by_privacy_policy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
