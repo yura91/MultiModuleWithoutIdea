@@ -9,4 +9,15 @@
     <string name="acquainted">Let\'s get\nacquainted</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="location_tittle">Where are you\nlocated?</string>
+    <string name="user_address">Address approve conditions</string>
+    <string name="desc_address">We cannot approve your account\n if you are in Russia or 15 other countries</string>
+
+    <string-array name="spinner_items">
+        <item>Russia</item>
+        <item>Iran</item>
+        <item>Turkey</item>
+        <item>Andorra</item>
+    </string-array>
+
 </resources>
