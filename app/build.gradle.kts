@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("androidx.activity:activity-ktx:1.3.1")
+    implementation("com.github.rtugeek:colorseekbar:2.0.3")
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 }

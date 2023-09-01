@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.multimoduleapp.databinding.FragmentLocationBinding
 
 
@@ -44,6 +45,10 @@ class LocationFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        binding.next.setOnClickListener {
+            it.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
         }
 
     }
