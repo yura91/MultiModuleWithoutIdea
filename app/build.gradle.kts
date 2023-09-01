@@ -11,6 +11,10 @@ android {
     namespace = "com.example.multimoduleapp"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         minSdk = 24
         targetSdk = 33
@@ -48,8 +52,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("androidx.activity:activity-ktx:1.3.1")
-//    implementation ("androidx.activity:activity-ktx:2.6.1")
-//    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 }
