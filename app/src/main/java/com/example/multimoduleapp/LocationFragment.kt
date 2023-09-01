@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -33,7 +32,7 @@ class LocationFragment : Fragment() {
 
         binding.countries.adapter = spinnerAdapter;
 
-        binding.countries.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        /*binding.countries.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
@@ -45,7 +44,7 @@ class LocationFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+        }*/
 
         binding.next.setOnClickListener {
             it.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)

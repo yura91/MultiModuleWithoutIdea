@@ -24,16 +24,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_10"
-        app:layout_constraintBottom_toTopOf="@+id/signWithGoogle"
+        app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signWithGoogle"
+        android:id="@+id/next"
         android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_40"
-        android:layout_marginEnd="@dimen/margin_40"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_34"
         android:background="@drawable/rounded_corner_bg"
         android:text="@string/next_step"
