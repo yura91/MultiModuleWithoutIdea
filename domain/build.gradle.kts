@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.domain"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -27,8 +27,8 @@ android {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
     implementation(project(":data"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

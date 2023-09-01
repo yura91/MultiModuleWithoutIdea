@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.appentry"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.appentry"
@@ -34,8 +34,8 @@ android {
 dependencies {
     implementation(project(":app"))
     implementation(project(":di"))
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
