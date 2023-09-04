@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
 
 class CardPaletteFragment : Fragment() {
@@ -37,6 +38,10 @@ class CardPaletteFragment : Fragment() {
         )
 
         binding.colorSeekBar.setColorSeeds(colors)
+
+        binding.next.setOnClickListener {
+            it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
+        }
 
         binding.colorSeekBar.setOnColorChangeListener { progress, color ->
             val startColor = color

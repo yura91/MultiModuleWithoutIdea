@@ -12,6 +12,14 @@
     <string name="location_tittle">Where are you\nlocated?</string>
     <string name="user_address">Address approve conditions</string>
     <string name="desc_address">We cannot approve your account\n if you are in Russia or 15 other countries</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="restore">Restore</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="secured_appstore">Secured by the App Store. Cancel anytime</string>
+    <string name="billed_annually">Billed Annually</string>
+    <string name="billed_monthly">Billed Monthly</string>
+    <string name="payments">Payments</string>
+    <string name="top_up_card">+ Top up card</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>
