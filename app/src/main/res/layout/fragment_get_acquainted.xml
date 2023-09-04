@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/first_name"
         android:layout_marginTop="@dimen/margin_28"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tittle">
@@ -34,6 +35,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             tools:text="John" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,6 +44,7 @@
         android:id="@+id/lastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginTop="@dimen/margin_20"
         android:hint="@string/last_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +54,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             tools:text="Doe" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
         android:hint="@string/last_name"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lastName">
@@ -68,6 +73,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             tools:text="24.05.23" />
 
     </com.google.android.material.textfield.TextInputLayout>
