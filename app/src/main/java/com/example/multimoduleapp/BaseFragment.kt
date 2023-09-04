@@ -10,12 +10,8 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (layoutInflater: LayoutInflater) -> T) :
     Fragment() {
 
-    // Bindings
     private var _binding: T? = null
 
-    /**
-     * Binding
-     */
     protected val binding get() = _binding
 
 

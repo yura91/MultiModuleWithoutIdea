@@ -20,12 +20,11 @@ class CardPaletteFragment :
         super.onViewCreated(view, savedInstanceState)
 
         val colors: IntArray = intArrayOf(
-            getColor(requireContext(), R.color.first_gr_color),
-            getColor(requireContext(), R.color.second_gr_color),
+            getColor(requireContext(), R.color.red_gr_color),
             getColor(requireContext(), R.color.third_gr_color),
             getColor(requireContext(), R.color.fourth_gr_color),
             getColor(requireContext(), R.color.fifth_gr_color),
-            getColor(requireContext(), R.color.sixth_gr_color)
+            getColor(requireContext(), R.color.red_gr_color)
         )
 
         binding?.colorSeekBar?.setColorSeeds(colors)

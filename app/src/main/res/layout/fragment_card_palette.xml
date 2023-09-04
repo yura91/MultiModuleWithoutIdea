@@ -21,7 +21,7 @@
 
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSeekBar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_10"
         app:colorSeekBarBarHeight="@dimen/seekbar_height"

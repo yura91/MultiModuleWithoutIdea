@@ -8,7 +8,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/payments"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_16"
@@ -39,8 +39,8 @@
         app:layout_goneMarginBottom="@dimen/margin_10" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/size_zero"
+        android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_60"
         android:scaleType="fitXY"
         android:src="@drawable/complete_auth_screen"
