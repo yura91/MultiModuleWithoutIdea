@@ -8,4 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_grey">#F1F2F4</color>
+    <color name="first_gr_color">#FB3B1F</color>
+    <color name="second_gr_color">#FB3B1F</color>
+    <color name="third_gr_color">#A5D62B</color>
+    <color name="fourth_gr_color">#1D30FB</color>
+    <color name="fifth_gr_color">#DC2ADA</color>
+    <color name="sixth_gr_color">#FB3B1F</color>
+
 </resources>

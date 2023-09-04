@@ -12,7 +12,7 @@
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_44"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/card_design"
         app:layout_constraintBottom_toTopOf="@id/colorSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_10"
+        app:colorSeekBarBarHeight="@dimen/seekbar_height"
         app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
