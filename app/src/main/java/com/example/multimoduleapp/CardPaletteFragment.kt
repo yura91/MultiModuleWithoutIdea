@@ -3,27 +3,18 @@ package com.example.multimoduleapp
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
 
-class CardPaletteFragment : Fragment() {
-    private lateinit var binding: FragmentCardPaletteBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCardPaletteBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class CardPaletteFragment :
+    BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
 
     private val layerCornerRadius = 80.0F
 
-    private val gradientOffset = 55
+    private val gradientOffset = 10
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,13 +28,13 @@ class CardPaletteFragment : Fragment() {
             getColor(requireContext(), R.color.sixth_gr_color)
         )
 
-        binding.colorSeekBar.setColorSeeds(colors)
+        binding?.colorSeekBar?.setColorSeeds(colors)
 
-        binding.next.setOnClickListener {
+        binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
         }
 
-        binding.colorSeekBar.setOnColorChangeListener { progress, color ->
+        binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
             val startColor = color
             val colorPosition = progress - gradientOffset
             val endColor = pickColor(colorPosition)
@@ -61,13 +52,16 @@ class CardPaletteFragment : Fragment() {
                 getDrawable(requireContext(), R.drawable.card_design)
             val layers = arrayOf(layer1, layer2)
             val layerDrawable = LayerDrawable(layers)
-            binding.cardDesign.background = layerDrawable
+            binding?.cardDesign?.background = layerDrawable
         }
     }
 
     private fun pickColor(progress: Int): Int {
-        if (progress < 0) return Int.MAX_VALUE
-        if (progress > binding.colorSeekBar.maxProgress) return Int.MAX_VALUE
-        return if (progress >= binding.colorSeekBar.colors.size) Int.MAX_VALUE else binding.colorSeekBar.colors[progress]
+        binding?.colorSeekBar?.let { colorSeekBar ->
+            if (progress < 0) return Int.MAX_VALUE
+            if (progress > colorSeekBar.maxProgress) return Int.MAX_VALUE
+            return if (progress >= colorSeekBar.colors.size) Int.MAX_VALUE else colorSeekBar.colors[progress]
+        }
+        return Int.MAX_VALUE
     }
 }
