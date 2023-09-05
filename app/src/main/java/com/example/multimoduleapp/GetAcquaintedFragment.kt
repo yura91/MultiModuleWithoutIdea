@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import com.example.multimoduleapp.databinding.FragmentGetAcquaintedBinding
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class GetAcquaintedFragment :
     BaseFragment<FragmentGetAcquaintedBinding>(FragmentGetAcquaintedBinding::inflate) {
@@ -20,8 +22,11 @@ class GetAcquaintedFragment :
 
         val dateSetListener: DatePickerDialog.OnDateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                val selectedDate: String = dayOfMonth.toString() + "." + (month + 1) + "." + year
-                binding?.birthDate?.text = selectedDate
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, month)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                val formattedDate = formatDate(calendar)
+                binding?.birthDate?.text = formattedDate
             }
         val datePickerDialog =
             DatePickerDialog(requireContext(), dateSetListener, year, month, dayOfMonth);
@@ -33,5 +38,13 @@ class GetAcquaintedFragment :
             it.findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
         }
     }
+
+    private fun formatDate(calendar: Calendar): String {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
 }
+
+
+
 
