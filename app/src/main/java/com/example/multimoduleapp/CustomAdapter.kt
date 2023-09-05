@@ -10,6 +10,12 @@ import android.widget.TextView
 
 
 class CustomAdapter(list: List<String>) : BaseAdapter() {
+
+    private class ViewHolder {
+        lateinit var flagImageView: ImageView
+        lateinit var countryTextView: TextView
+    }
+
     private var countries: List<String> = list
     override fun getCount(): Int {
         return countries.size
@@ -24,12 +30,23 @@ class CustomAdapter(list: List<String>) : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val inflater = LayoutInflater.from(parent?.context)
-        val view = inflater.inflate(R.layout.select_country_item, null)
-        val logo = view.findViewById<ImageView>(R.id.logoView)
-        logo.setImageResource(R.drawable.icon_russia)
-        val countryName = view.findViewById<TextView>(R.id.countryName)
-        countryName.text = countries[position]
-        return view
+        var view = convertView
+        var viewHolder = ViewHolder()
+
+        if (view == null) {
+            view = LayoutInflater.from(parent?.context)
+                .inflate(R.layout.select_country_item, parent, false)
+            viewHolder.flagImageView = view.findViewById(R.id.logoView)
+            viewHolder.countryTextView = view.findViewById(R.id.countryName)
+            view.tag = viewHolder
+        } else {
+            viewHolder = view.tag as ViewHolder
+        }
+
+        val country = countries[position]
+        viewHolder.countryTextView.text = country
+
+        return view!!
     }
+
 }
