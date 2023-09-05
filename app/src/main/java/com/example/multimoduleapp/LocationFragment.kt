@@ -20,10 +20,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             "Japan",
             "USA"
         )
-        val customAdapter = CustomAdapter(requireContext(), counriesList)
-//       val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, counriesList)
-        binding?.countries?.setAdapter(customAdapter)
-//      binding?.countries?.setOnItemClickListener { parent, view, position, id -> Log.d("FFFF", "mvsmvl;") }
+        val countriesAdapter = CountriesAdapter(requireContext(), counriesList)
+        binding?.countries?.setAdapter(countriesAdapter)
 
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
