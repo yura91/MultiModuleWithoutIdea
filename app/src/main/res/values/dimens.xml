@@ -18,4 +18,6 @@
     <dimen name="padding_16">16dp</dimen>
     <dimen name="margin_60">60dp</dimen>
     <dimen name="padding_4">4dp</dimen>
+    <dimen name="text_28">28sp</dimen>
+    <dimen name="text_12">12sp</dimen>
 </resources>

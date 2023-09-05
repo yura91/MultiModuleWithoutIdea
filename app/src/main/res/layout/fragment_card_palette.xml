@@ -11,7 +11,7 @@
     tools:context=".SignInFragment">
 
     <ImageView
-        android:id="@+id/card_design"
+        android:id="@+id/cardDesign"
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_44"

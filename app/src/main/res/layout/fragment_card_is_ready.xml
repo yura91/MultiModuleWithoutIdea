@@ -66,7 +66,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/billed_annually"
+        android:id="@+id/billedAnnually"
         android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_40"
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/billed_monthly"
+        android:id="@+id/billedMonthly"
         android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_40"
@@ -91,7 +91,7 @@
         android:paddingTop="@dimen/padding_20"
         android:paddingBottom="@dimen/padding_20"
         android:text="@string/billed_monthly"
-        app:layout_constraintBottom_toTopOf="@+id/billed_annually"
+        app:layout_constraintBottom_toTopOf="@+id/billedAnnually"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -101,7 +101,7 @@
         android:layout_marginBottom="@dimen/margin_40"
         android:scaleType="fitXY"
         android:src="@drawable/card_is_ready"
-        app:layout_constraintBottom_toTopOf="@+id/billed_monthly"
+        app:layout_constraintBottom_toTopOf="@+id/billedMonthly"
         app:layout_constraintTop_toTopOf="parent" />
 
 

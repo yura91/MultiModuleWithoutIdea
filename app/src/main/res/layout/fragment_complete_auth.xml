@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/top_up_card"
+        android:id="@+id/topUpButton"
         android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16"
@@ -47,7 +47,7 @@
         android:layout_marginBottom="@dimen/margin_60"
         android:scaleType="fitXY"
         android:src="@drawable/complete_auth_screen"
-        app:layout_constraintBottom_toTopOf="@+id/top_up_card"
+        app:layout_constraintBottom_toTopOf="@+id/topUpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

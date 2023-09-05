@@ -21,6 +21,10 @@
     <string name="payments">Payments</string>
     <string name="top_up_card">+ Top up card</string>
     <string name="birth_date">Birth date DD.MM.YYYY</string>
+    <string name="top_up_card_tittle">Top up card</string>
+    <string name="top_up_description">To top up your account, send any amount to the address below.</string>
+    <string name="top_up_service_fee">Top-up service fee</string>
+    <string name="wallet_network">Wallet network</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>
