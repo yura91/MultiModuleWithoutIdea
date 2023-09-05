@@ -1,52 +1,75 @@
 package com.example.multimoduleapp
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
+import android.widget.ArrayAdapter
+import android.widget.Filter
 import android.widget.TextView
+import java.util.Locale
 
 
-class CustomAdapter(list: List<String>) : BaseAdapter() {
+class CustomAdapter(context: Context, private val countries: MutableList<String>) :
+    ArrayAdapter<String>(context, R.layout.select_country_item, countries) {
 
-    private class ViewHolder {
-        lateinit var flagImageView: ImageView
-        lateinit var countryTextView: TextView
-    }
+    val initialCounries = countries.toList()
 
-    private var countries: List<String> = list
     override fun getCount(): Int {
         return countries.size
     }
 
-    override fun getItem(position: Int): Any? {
-        return null
+    override fun getItem(position: Int): String? {
+        return countries.get(position)
     }
 
     override fun getItemId(position: Int): Long {
-        return 0
+        return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var view = convertView
-        var viewHolder = ViewHolder()
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val inflater: LayoutInflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.select_country_item, parent, false)
 
-        if (view == null) {
-            view = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.select_country_item, parent, false)
-            viewHolder.flagImageView = view.findViewById(R.id.logoView)
-            viewHolder.countryTextView = view.findViewById(R.id.countryName)
-            view.tag = viewHolder
-        } else {
-            viewHolder = view.tag as ViewHolder
+        val countryNameTextView: TextView = view.findViewById(R.id.countryName);
+//        ImageView countryFlagImageView = view.findViewById(R.id.country_flag);
+
+        countryNameTextView.setText(countries.get(position));
+//        countryFlagImageView.setImageResource(countryFlags.get(position));
+
+        return view;
+    }
+
+    override fun getFilter(): Filter {
+        return countryFilter
+    }
+
+    private val countryFilter: Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val results = FilterResults()
+            val suggestions: MutableList<String> = ArrayList<String>()
+            if (constraint.isNullOrEmpty()) {
+                suggestions.addAll(initialCounries)
+            } else {
+                val filterPattern =
+                    constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+                for (item in initialCounries) {
+                    if (item.toLowerCase().contains(filterPattern)) {
+                        suggestions.add(item)
+                    }
+                }
+            }
+            results.values = suggestions
+            results.count = suggestions.size
+            return results
         }
 
-        val country = countries[position]
-        viewHolder.countryTextView.text = country
-
-        return view!!
+        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+            clear()
+            (results.values as? List<String>)?.let { addAll(it) }
+            notifyDataSetChanged()
+        }
     }
-
 }

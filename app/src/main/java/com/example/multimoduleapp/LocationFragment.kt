@@ -10,9 +10,21 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val counriesList = listOf("Russia", "Iran", "Turkey", "Andorra")
-        val customAdapter = CustomAdapter(counriesList)
-        binding?.countries?.adapter = customAdapter;
+        val counriesList = mutableListOf<String>(
+            "Russia",
+            "Iran",
+            "Turkey",
+            "Andorra",
+            "Holand",
+            "China",
+            "Japan",
+            "USA"
+        )
+        val customAdapter = CustomAdapter(requireContext(), counriesList)
+//       val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, counriesList)
+        binding?.countries?.setAdapter(customAdapter)
+//      binding?.countries?.setOnItemClickListener { parent, view, position, id -> Log.d("FFFF", "mvsmvl;") }
+
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
         }
