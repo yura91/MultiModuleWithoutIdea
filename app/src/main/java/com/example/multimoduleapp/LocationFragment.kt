@@ -10,7 +10,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val counriesList = mutableListOf<String>(
+        val counriesList = listOf(
             "Russia",
             "Iran",
             "Turkey",

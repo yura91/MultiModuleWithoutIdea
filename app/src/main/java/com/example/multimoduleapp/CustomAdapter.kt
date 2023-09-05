@@ -11,22 +11,8 @@ import android.widget.TextView
 import java.util.Locale
 
 
-class CustomAdapter(context: Context, private val countries: MutableList<String>) :
-    ArrayAdapter<String>(context, R.layout.select_country_item, countries) {
-
-    val initialCounries = countries.toList()
-
-    override fun getCount(): Int {
-        return countries.size
-    }
-
-    override fun getItem(position: Int): String? {
-        return countries.get(position)
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+class CustomAdapter(context: Context, private val countries: List<String>) :
+    ArrayAdapter<String>(context, R.layout.select_country_item, countries.toMutableList()) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater: LayoutInflater =
@@ -34,10 +20,7 @@ class CustomAdapter(context: Context, private val countries: MutableList<String>
         val view = inflater.inflate(R.layout.select_country_item, parent, false)
 
         val countryNameTextView: TextView = view.findViewById(R.id.countryName);
-//        ImageView countryFlagImageView = view.findViewById(R.id.country_flag);
-
-        countryNameTextView.setText(countries.get(position));
-//        countryFlagImageView.setImageResource(countryFlags.get(position));
+        countryNameTextView.setText(getItem(position));
 
         return view;
     }
@@ -51,11 +34,11 @@ class CustomAdapter(context: Context, private val countries: MutableList<String>
             val results = FilterResults()
             val suggestions: MutableList<String> = ArrayList<String>()
             if (constraint.isNullOrEmpty()) {
-                suggestions.addAll(initialCounries)
+                suggestions.addAll(countries)
             } else {
                 val filterPattern =
                     constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
-                for (item in initialCounries) {
+                for (item in countries) {
                     if (item.toLowerCase().contains(filterPattern)) {
                         suggestions.add(item)
                     }
