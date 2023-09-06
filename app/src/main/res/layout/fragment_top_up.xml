@@ -95,7 +95,8 @@
         android:layout_height="160dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_qr_code"
-        app:layout_constraintBottom_toTopOf="@+id/support"
+        app:layout_constraintBottom_toTopOf="@+id/copyQr"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topUpService" />
@@ -119,6 +120,7 @@
         app:layout_constraintEnd_toStartOf="@+id/restore"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/support"
+        app:layout_constraintBottom_toTopOf="@+id/support"
         app:layout_constraintTop_toBottomOf="@+id/qrCode" />
 
     <com.google.android.material.button.MaterialButton
@@ -127,6 +129,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/rounded_corner_gray_bg"
+        style="@style/Widget.MaterialComponents.Button.IconOnly"
         app:backgroundTint="@null"
         app:icon="@drawable/share"
         app:iconGravity="textStart"
