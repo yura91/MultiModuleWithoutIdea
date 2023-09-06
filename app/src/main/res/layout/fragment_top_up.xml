@@ -90,6 +90,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
+        android:id="@+id/qrCode"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
@@ -98,6 +99,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topUpService" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/copyQr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:background="@drawable/copy_qr_bg"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="10dp"
+        android:text="@string/copy_qr_text"
+        app:backgroundTint="@null"
+        app:icon="@drawable/copy"
+        app:iconGravity="textEnd"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/restore"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/support"
+        app:layout_constraintTop_toBottomOf="@+id/qrCode" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/restore"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/rounded_corner_gray_bg"
+        app:backgroundTint="@null"
+        app:icon="@drawable/share"
+        app:iconGravity="textStart"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/copyQr"
+        app:layout_constraintEnd_toEndOf="@+id/support"
+        app:layout_constraintStart_toEndOf="@+id/copyQr"
+        app:layout_constraintTop_toTopOf="@+id/copyQr" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/support"

@@ -26,6 +26,7 @@
     <string name="top_up_service_fee">Top-up service fee</string>
     <string name="wallet_network">Wallet network</string>
     <string name="support">Support</string>
+    <string name="copy_qr_text">0x6f4e25bd70275</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>
