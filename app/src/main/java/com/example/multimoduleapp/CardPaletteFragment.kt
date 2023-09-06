@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
 
 class CardPaletteFragment :
@@ -19,7 +20,12 @@ class CardPaletteFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.toolbar?.inflateMenu(R.menu.main_menu)
-
+        val menu = binding?.toolbar?.menu
+        val menuItem = menu?.findItem(R.id.action_settings)
+        menuItem?.setOnMenuItemClickListener {
+            findNavController().navigate(R.id.action_cardPaletteFragment_to_settingsFragment)
+            return@setOnMenuItemClickListener false
+        }
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
             getColor(requireContext(), R.color.third_gr_color),

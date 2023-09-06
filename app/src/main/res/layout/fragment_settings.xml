@@ -89,6 +89,4 @@
             android:layout_marginStart="@dimen/margin_18"
             android:text="@string/log_out" />
     </LinearLayout>
-
-
 </LinearLayout>

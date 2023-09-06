@@ -2,6 +2,7 @@ package com.example.multimoduleapp
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -52,6 +53,10 @@ class GetAcquaintedFragment :
     private fun formatDate(calendar: Calendar): String {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }
 
