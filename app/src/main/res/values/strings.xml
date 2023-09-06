@@ -27,6 +27,10 @@
     <string name="support">Support</string>
     <string name="copy_qr_text">0x6f4e25bd70275</string>
     <string name="settings">Settings</string>
+    <string name="more">More</string>
+    <string name="help_and_support">Help and support</string>
+    <string name="legal_information">Legal information</string>
+    <string name="log_out">Log out</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>

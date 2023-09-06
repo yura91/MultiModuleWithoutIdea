@@ -4,10 +4,12 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentGetAcquaintedBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
 
 class GetAcquaintedFragment :
     BaseFragment<FragmentGetAcquaintedBinding>(FragmentGetAcquaintedBinding::inflate) {
@@ -15,6 +17,13 @@ class GetAcquaintedFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.toolbar?.inflateMenu(R.menu.main_menu)
+
+        val menu = binding?.toolbar?.menu
+        val menuItem = menu?.findItem(R.id.action_settings)
+        menuItem?.setOnMenuItemClickListener {
+            findNavController().navigate(R.id.action_getAcquaintedFragment_to_settingsFragment)
+            return@setOnMenuItemClickListener false
+        }
 
         val calendar = Calendar.getInstance()
         val year: Int = calendar.get(Calendar.YEAR)

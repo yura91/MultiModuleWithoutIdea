@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_getAcquaintedFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_getAcquaintedFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
@@ -30,6 +33,9 @@
         <action
             android:id="@+id/action_locationFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardPaletteFragment"
@@ -38,6 +44,9 @@
         <action
             android:id="@+id/action_cardPaletteFragment_to_cardIsReadyFragment"
             app:destination="@id/cardIsReadyFragment" />
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardIsReadyFragment"
@@ -46,6 +55,9 @@
         <action
             android:id="@+id/action_cardIsReadyFragment_to_completeAuthFragment"
             app:destination="@id/completeAuthFragment" />
+        <action
+            android:id="@+id/action_cardIsReadyFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/completeAuthFragment"
@@ -55,10 +67,18 @@
         <action
             android:id="@+id/action_completeAuthFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />
+        <action
+            android:id="@+id/action_completeAuthFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/topUpFragment"
         android:name="com.example.multimoduleapp.TopUpFragment"
         android:label="fragment_top_up"
         tools:layout="@layout/fragment_top_up" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.multimoduleapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
