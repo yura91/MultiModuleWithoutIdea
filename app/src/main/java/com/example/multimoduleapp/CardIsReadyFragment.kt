@@ -10,6 +10,7 @@ class CardIsReadyFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.toolbar?.inflateMenu(R.menu.main_menu)
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_completeAuthFragment)
         }

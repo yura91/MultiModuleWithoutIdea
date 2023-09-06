@@ -10,6 +10,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.toolbar?.inflateMenu(R.menu.main_menu)
         val counriesList = listOf(
             "Russia",
             "Iran",

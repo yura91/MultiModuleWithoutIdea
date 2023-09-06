@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MultiModuleApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in_with_apple">Sign in with Apple</string>
@@ -27,6 +26,7 @@
     <string name="wallet_network">Wallet network</string>
     <string name="support">Support</string>
     <string name="copy_qr_text">0x6f4e25bd70275</string>
+    <string name="settings">Settings</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>

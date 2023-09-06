@@ -18,6 +18,7 @@ class CardPaletteFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.toolbar?.inflateMenu(R.menu.main_menu)
 
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),

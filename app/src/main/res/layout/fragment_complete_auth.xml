@@ -9,6 +9,15 @@
     android:paddingEnd="@dimen/padding_4"
     tools:context=".CompleteAuthFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/payments"
         android:layout_width="@dimen/size_zero"
@@ -36,12 +45,12 @@
         android:layout_marginBottom="@dimen/margin_10"
         android:background="@drawable/rounded_corner_bg"
         android:text="@string/top_up_card"
-        app:icon="@drawable/add"
-        app:iconGravity="textStart"
-        app:iconTint="@null"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@null"
+        app:icon="@drawable/add"
+        app:iconGravity="textStart"
+        app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

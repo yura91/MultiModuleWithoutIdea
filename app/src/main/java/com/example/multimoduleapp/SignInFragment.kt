@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import com.example.multimoduleapp.databinding.FragmentSignInBinding
 
+
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
