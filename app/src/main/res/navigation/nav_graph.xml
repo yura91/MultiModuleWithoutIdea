@@ -51,5 +51,14 @@
         android:id="@+id/completeAuthFragment"
         android:name="com.example.multimoduleapp.CompleteAuthFragment"
         android:label="fragment_complete_auth"
-        tools:layout="@layout/fragment_complete_auth" />
+        tools:layout="@layout/fragment_complete_auth">
+        <action
+            android:id="@+id/action_completeAuthFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.example.multimoduleapp.TopUpFragment"
+        android:label="fragment_top_up"
+        tools:layout="@layout/fragment_top_up" />
 </navigation>
