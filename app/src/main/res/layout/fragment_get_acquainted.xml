@@ -88,7 +88,7 @@
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_34"
-        android:background="@drawable/rounded_corner_bg"
+        android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/next_step"
         android:textColor="@color/white"
         app:backgroundTint="@null"

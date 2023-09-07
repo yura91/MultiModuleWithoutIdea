@@ -20,5 +20,10 @@ class CompleteAuthFragment :
         binding?.topUpButton?.setOnClickListener {
             it.findNavController().navigate(R.id.action_completeAuthFragment_to_topUpFragment)
         }
+
+        binding?.payments?.setOnClickListener {
+            it.findNavController()
+                .navigate(R.id.action_completeAuthFragment_to_historyPaymentsFragment)
+        }
     }
 }

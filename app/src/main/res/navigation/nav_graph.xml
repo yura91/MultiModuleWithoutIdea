@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_completeAuthFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_completeAuthFragment_to_historyPaymentsFragment"
+            app:destination="@id/historyPaymentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/topUpFragment"
@@ -96,4 +99,9 @@
         android:id="@+id/legalInformationFragment"
         android:name="com.example.multimoduleapp.LegalInformationFragment"
         android:label="LegalInformationFragment" />
+    <fragment
+        android:id="@+id/historyPaymentsFragment"
+        android:name="com.example.multimoduleapp.HistoryPaymentsFragment"
+        android:label="fragment_history_payments"
+        tools:layout="@layout/fragment_history_payments" />
 </navigation>

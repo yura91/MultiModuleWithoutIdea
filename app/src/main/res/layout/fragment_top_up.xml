@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_16"
-        android:background="@drawable/copy_qr_bg"
+        android:background="@drawable/gray_purple_qr_bg"
         android:paddingStart="12dp"
         android:paddingTop="10dp"
         android:paddingEnd="12dp"
