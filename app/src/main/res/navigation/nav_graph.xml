@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_completeAuthFragment_to_historyPaymentsFragment"
             app:destination="@id/historyPaymentsFragment" />
+        <action
+            android:id="@+id/action_completeAuthFragment_to_fullCardInfoFragment"
+            app:destination="@id/fullCardInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/topUpFragment"
@@ -104,4 +107,8 @@
         android:name="com.example.multimoduleapp.HistoryPaymentsFragment"
         android:label="fragment_history_payments"
         tools:layout="@layout/fragment_history_payments" />
+    <fragment
+        android:id="@+id/fullCardInfoFragment"
+        android:name="com.example.multimoduleapp.FullCardInfoFragment"
+        android:label="FullCardInfoFragment" />
 </navigation>

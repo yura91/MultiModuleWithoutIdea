@@ -25,5 +25,9 @@ class CompleteAuthFragment :
             it.findNavController()
                 .navigate(R.id.action_completeAuthFragment_to_historyPaymentsFragment)
         }
+
+        /*binding?.cardInfo?.setOnClickListener {
+           it.findNavController().navigate(R.id.action_completeAuthFragment_to_fullCardInfoFragment)
+        }*/
     }
 }
