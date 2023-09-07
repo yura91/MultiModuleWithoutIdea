@@ -30,6 +30,8 @@
     <string name="help_and_support">Help and support</string>
     <string name="legal_information">Legal information</string>
     <string name="log_out">Log out</string>
+    <string name="telegram">Telegram</string>
+    <string name="skype">Skype</string>
 
     <string-array name="spinner_items">
         <item>Russia</item>
