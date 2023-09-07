@@ -12,5 +12,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding?.helpSupport?.setOnClickListener {
             it.findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
         }
+
+        binding?.legalInformation?.setOnClickListener {
+            it.findNavController()
+                .navigate(R.id.action_settingsFragment_to_legalInformationFragment)
+        }
     }
 }
