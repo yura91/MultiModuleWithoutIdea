@@ -13,5 +13,9 @@ allprojects {
             jvmTarget = JavaVersion.VERSION_1_8.toString()
         }
     }
+
+    tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:deprecation")
+    }
 }
 true // Needed to make the SupprÏess annotation work for the plugins block;
