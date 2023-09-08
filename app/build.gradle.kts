@@ -55,4 +55,7 @@ dependencies {
     implementation(libs.rtugeek.colorseekbar)
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }
