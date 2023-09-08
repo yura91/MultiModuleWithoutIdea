@@ -11,7 +11,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_30"
         android:paddingStart="@dimen/padding_12"
+        android:paddingEnd="@dimen/padding_12"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:text="@string/birth_date"
@@ -84,7 +85,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/size_1"
         android:layout_marginTop="@dimen/margin_16"
         android:background="@color/gray_purple"
         app:layout_constraintStart_toStartOf="parent"

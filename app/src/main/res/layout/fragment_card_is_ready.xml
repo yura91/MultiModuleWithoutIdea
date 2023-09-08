@@ -7,21 +7,9 @@
     android:paddingTop="@dimen/padding_4"
     android:paddingEnd="@dimen/padding_4">
 
-    <TextView
-        android:id="@+id/terms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginBottom="@dimen/margin_16"
-        android:text="@string/terms_of_service"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/restore"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/size_zero"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +17,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:text="@string/terms_of_service"
+        android:layout_marginStart="@dimen/margin_8"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/restore"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/next" />
+
+    <TextView
         android:id="@+id/restore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_16"
         android:text="@string/restore"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/privacy"
         app:layout_constraintStart_toEndOf="@+id/terms" />
@@ -42,11 +46,13 @@
         android:id="@+id/privacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_16"
         android:text="@string/privacy_policy"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_12"
+        android:layout_marginEnd="@dimen/margin_8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/next"
         app:layout_constraintStart_toEndOf="@+id/restore" />
 
     <TextView
@@ -54,6 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_40"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_12"
         android:text="@string/secured_appstore"
         app:layout_constraintBottom_toTopOf="@id/terms"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +89,8 @@
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
         android:layout_marginBottom="@dimen/margin_40"
-        android:paddingStart="@dimen/padding_16"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_16"
         android:paddingTop="@dimen/padding_20"
         android:paddingBottom="@dimen/padding_20"
         android:text="@string/billed_annually"
@@ -96,8 +105,9 @@
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
         android:layout_marginBottom="@dimen/margin_10"
-        android:paddingStart="@dimen/padding_16"
         android:paddingTop="@dimen/padding_20"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_16"
         android:paddingBottom="@dimen/padding_20"
         android:text="@string/billed_monthly"
         app:layout_constraintBottom_toTopOf="@+id/billedAnnually"

@@ -1,5 +1,4 @@
 <resources>
-    <!--<string name="app_name">MultiModuleApp</string>-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in_with_apple">Sign in with Apple</string>
     <string name="sign_in_with_google">Sign in with Google</string>
@@ -33,12 +32,4 @@
     <string name="log_out">Log out</string>
     <string name="telegram">Telegram</string>
     <string name="skype">Skype</string>
-
-    <string-array name="spinner_items">
-        <item>Russia</item>
-        <item>Iran</item>
-        <item>Turkey</item>
-        <item>Andorra</item>
-    </string-array>
-
 </resources>

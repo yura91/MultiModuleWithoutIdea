@@ -23,4 +23,10 @@
     <dimen name="margin_18">18dp</dimen>
     <dimen name="margin_30">35dp</dimen>
     <dimen name="padding_12">12dp</dimen>
+    <dimen name="size_1">1dp</dimen>
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="size_160">160dp</dimen>
+    <dimen name="text_22">22sp</dimen>
+    <dimen name="size_50">50dp</dimen>
 </resources>
