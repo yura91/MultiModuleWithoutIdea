@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingStart="@dimen/padding_4"
     android:paddingTop="@dimen/padding_4"
     android:paddingEnd="@dimen/padding_4"
-    android:orientation="vertical"
     tools:context=".SignInFragment">
 
     <ImageView
@@ -28,12 +28,12 @@
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
         android:layout_marginBottom="@dimen/margin_10"
-        app:icon="@drawable/ic_apple"
-        app:iconGravity="textStart"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/sign_in_with_apple"
-        app:backgroundTint="@null"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_apple"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toTopOf="@id/signWithGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,12 +45,12 @@
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
         android:layout_marginBottom="@dimen/margin_34"
-        app:icon="@drawable/ic_google"
-        app:iconGravity="textStart"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/sign_in_with_google"
-        app:backgroundTint="@null"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_google"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toTopOf="@id/textPrivacyPolicy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

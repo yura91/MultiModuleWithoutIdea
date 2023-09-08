@@ -46,6 +46,12 @@ class HistoryPaymentsFragment :
         historyItems5.add(HistoryItem("Miro", "- 12,99 €", "9:55"))
         historyPayments.add(HistoryPaymentModel("5 May", historyItems5))
 
+        val historyItems6: MutableList<HistoryItem> = mutableListOf()
+        historyItems6.add(HistoryItem("Zepliin", "- 8,57 €", "18:55"))
+        historyItems6.add(HistoryItem("Miro", "- 12,99 €", "9:55"))
+        historyItems6.add(HistoryItem("Apple TV+", "- 12,99 €", "6:15"))
+        historyPayments.add(HistoryPaymentModel("3 May", historyItems6))
+
         binding?.historyPayments?.adapter = HistoryPaymentsAdapter(historyPayments)
 
         binding?.toolbar?.setNavigationOnClickListener {

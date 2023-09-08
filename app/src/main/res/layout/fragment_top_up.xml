@@ -44,8 +44,8 @@
                 android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_20"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="@string/top_up_description"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_16" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -85,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_20"
-                android:textColor="@color/black"
                 android:text="@string/wallet_network"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_12" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -98,10 +98,10 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_qr_code"
         app:layout_constraintBottom_toTopOf="@+id/copyQr"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topUpService" />
+        app:layout_constraintTop_toBottomOf="@+id/topUpService"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/copyQr"
@@ -119,19 +119,19 @@
         app:icon="@drawable/copy"
         app:iconGravity="textEnd"
         app:iconTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/support"
         app:layout_constraintEnd_toStartOf="@+id/restore"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/support"
-        app:layout_constraintBottom_toTopOf="@+id/support"
         app:layout_constraintTop_toBottomOf="@+id/qrCode" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/restore"
+        style="@style/Widget.MaterialComponents.Button.IconOnly"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/size_zero"
         android:layout_marginStart="@dimen/margin_8"
         android:background="@drawable/rounded_corner_gray_bg"
-        style="@style/Widget.MaterialComponents.Button.IconOnly"
         app:backgroundTint="@null"
         app:icon="@drawable/share"
         app:iconGravity="textStart"
