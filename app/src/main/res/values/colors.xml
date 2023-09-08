@@ -13,5 +13,7 @@
     <color name="third_gr_color">#A5D62B</color>
     <color name="fourth_gr_color">#1D30FB</color>
     <color name="fifth_gr_color">#DC2ADA</color>
+    <color name="text_black">#15191D</color>
+    <color name="text_gray">#9FA1A3</color>
 
 </resources>

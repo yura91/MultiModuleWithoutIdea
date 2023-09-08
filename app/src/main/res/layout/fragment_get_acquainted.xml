@@ -72,7 +72,8 @@
         android:id="@+id/birthDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_30"
+        android:paddingStart="@dimen/padding_12"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:text="@string/birth_date"
@@ -80,6 +81,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lastName" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_16"
+        android:background="@color/gray_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/next"
