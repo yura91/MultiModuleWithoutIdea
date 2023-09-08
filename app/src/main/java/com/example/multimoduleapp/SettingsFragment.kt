@@ -20,22 +20,23 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 .navigate(R.id.action_settingsFragment_to_legalInformationFragment)
         }
 
+        binding?.toolbar?.setNavigationOnClickListener {
+            it.findNavController().popBackStack()
+        }
+
         binding?.logOut?.setOnClickListener {
             val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(
                 requireContext()
             );
 
-            // set title
             alertDialogBuilder.setTitle(
-                "Are you sure you want \n" +
-                        "to log out?"
+                getString(R.string.log_out_dialog_title)
             );
 
-            // set dialog message
             alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(
-                    "Log out"
+                    getString(R.string.log_out_positive)
                 ) { dialog, which ->
                     Toast.makeText(
                         requireContext(),
@@ -44,7 +45,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                     ).show()
                 }
                 .setNegativeButton(
-                    "No"
+                    getString(R.string.log_out_negative)
                 ) { dialog, which ->
                     Toast.makeText(
                         requireContext(),
@@ -53,8 +54,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                     ).show()
                 }
             val alertDialog: AlertDialog = alertDialogBuilder.create();
-
-            // show it
             alertDialog.show()
         }
     }

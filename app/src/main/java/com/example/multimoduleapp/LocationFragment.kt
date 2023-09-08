@@ -18,6 +18,9 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             findNavController().navigate(R.id.action_locationFragment_to_settingsFragment)
             return@setOnMenuItemClickListener false
         }
+        binding?.toolbar?.setNavigationOnClickListener {
+            it.findNavController().popBackStack()
+        }
         val counriesList = listOf(
             "Russia",
             "Iran",

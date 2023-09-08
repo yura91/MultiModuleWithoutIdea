@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        app:navigationIcon="@drawable/ic_arrow_back">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -43,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/help_and_support"
             android:layout_marginStart="@dimen/margin_18"
+            android:text="@string/help_and_support"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16" />
     </LinearLayout>
@@ -66,10 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_16"
             android:layout_marginStart="@dimen/margin_18"
-            android:text="@string/legal_information" />
+            android:text="@string/legal_information"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16" />
     </LinearLayout>
 
     <View
@@ -94,9 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_16"
             android:layout_marginStart="@dimen/margin_18"
-            android:text="@string/log_out" />
+            android:text="@string/log_out"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16" />
     </LinearLayout>
 </LinearLayout>

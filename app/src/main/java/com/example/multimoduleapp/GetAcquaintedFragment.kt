@@ -25,7 +25,9 @@ class GetAcquaintedFragment :
             findNavController().navigate(R.id.action_getAcquaintedFragment_to_settingsFragment)
             return@setOnMenuItemClickListener false
         }
-
+        binding?.toolbar?.setNavigationOnClickListener {
+            it.findNavController().popBackStack()
+        }
         val calendar = Calendar.getInstance()
         val year: Int = calendar.get(Calendar.YEAR)
         val month: Int = calendar.get(Calendar.MONTH)
