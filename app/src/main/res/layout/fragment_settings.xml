@@ -43,8 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="@string/help_and_support"
             android:layout_marginStart="@dimen/margin_18"
-            android:text="@string/help_and_support" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,6 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
             android:layout_marginStart="@dimen/margin_18"
             android:text="@string/legal_information" />
     </LinearLayout>
@@ -90,6 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
             android:layout_marginStart="@dimen/margin_18"
             android:text="@string/log_out" />
     </LinearLayout>

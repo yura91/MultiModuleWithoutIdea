@@ -37,6 +37,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
             android:layout_gravity="center"
             android:text="@string/terms_of_service" />
 
@@ -63,6 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
             android:text="@string/privacy_policy" />
 
         <View
