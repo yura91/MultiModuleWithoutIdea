@@ -54,9 +54,7 @@ class GetAcquaintedFragment :
 
         binding?.lastNameField?.setOnEditorActionListener { v, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
-                val imm =
-                    requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                hideKeyBoard(imm, view, datePickerDialog)
+                hideKeyBoard(view, datePickerDialog)
             }
             false
         }
@@ -67,10 +65,11 @@ class GetAcquaintedFragment :
     }
 
     private fun hideKeyBoard(
-        imm: InputMethodManager,
         view: View,
         datePickerDialog: DatePickerDialog
     ) {
+        val imm =
+            requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
         datePickerDialog.show()
     }
