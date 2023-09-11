@@ -4,30 +4,37 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.multimoduleapp.databinding.FragmentCompleteAuthBinding
+import com.example.multimoduleapp.databinding.FragmentCardInfoBinding
 
 
-class CompleteAuthFragment :
-    BaseFragment<FragmentCompleteAuthBinding>(FragmentCompleteAuthBinding::inflate) {
+class CardInfoFragment :
+    BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding?.toolbar?.inflateMenu(R.menu.main_menu)
-        val menu = binding?.toolbar?.menu
+        super.onViewCreated(view, savedInstanceState)
+
+        val frontBinding = binding?.restrictedCardInfo
+        val backBinding = binding?.fullCardInfo
+        frontBinding?.toolbar?.inflateMenu(R.menu.main_menu)
+        val menu = frontBinding?.toolbar?.menu
         val menuItem = menu?.findItem(R.id.action_settings)
         menuItem?.setOnMenuItemClickListener {
             findNavController().navigate(R.id.action_completeAuthFragment_to_settingsFragment)
             return@setOnMenuItemClickListener false
         }
-        binding?.topUpButton?.setOnClickListener {
+        frontBinding?.topUpButton?.setOnClickListener {
             it.findNavController().navigate(R.id.action_completeAuthFragment_to_topUpFragment)
         }
 
-        binding?.payments?.setOnClickListener {
+        frontBinding?.payments?.setOnClickListener {
             it.findNavController()
                 .navigate(R.id.action_completeAuthFragment_to_historyPaymentsFragment)
         }
-
-        /*binding?.cardInfo?.setOnClickListener {
-           it.findNavController().navigate(R.id.action_completeAuthFragment_to_fullCardInfoFragment)
-        }*/
+        frontBinding?.cardInfo?.setOnClickListener {
+            binding?.easyFlipView?.flipTheView()
+        }
+        backBinding?.back?.setOnClickListener {
+            binding?.easyFlipView?.flipTheView()
+        }
     }
 }

@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation("com.wajahatkarim:EasyFlipView:3.0.3")
     implementation(libs.navigation)
     implementation(libs.navigationui)
     implementation(libs.activityktx)
