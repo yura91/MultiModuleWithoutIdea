@@ -1,9 +1,12 @@
 package com.example.multimoduleapp
 
 import android.app.DatePickerDialog
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentGetAcquaintedBinding
@@ -41,24 +44,40 @@ class GetAcquaintedFragment :
                 val formattedDate = formatDate(calendar)
                 binding?.birthDate?.text = formattedDate
             }
+
         val datePickerDialog =
             DatePickerDialog(requireContext(), dateSetListener, year, month, dayOfMonth);
 
         binding?.birthDate?.setOnClickListener {
             datePickerDialog.show()
         }
+
+        binding?.lastNameField?.setOnEditorActionListener { v, actionId, event ->
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
+                val imm =
+                    requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                hideKeyBoard(imm, view, datePickerDialog)
+            }
+            false
+        }
+
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
         }
     }
 
+    private fun hideKeyBoard(
+        imm: InputMethodManager,
+        view: View,
+        datePickerDialog: DatePickerDialog
+    ) {
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+        datePickerDialog.show()
+    }
+
     private fun formatDate(calendar: Calendar): String {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
     }
 }
 

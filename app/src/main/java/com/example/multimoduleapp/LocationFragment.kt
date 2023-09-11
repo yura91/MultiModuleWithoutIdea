@@ -28,6 +28,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             "Andorra",
             "Germany",
             "Holand",
+            "France",
             "China",
             "Japan",
             "USA"
