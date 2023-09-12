@@ -54,7 +54,7 @@
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_60"
         android:scaleType="fitXY"
-        android:src="@drawable/complete_auth_screen"
+        android:src="@drawable/card_info"
         app:layout_constraintBottom_toTopOf="@+id/topUpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
