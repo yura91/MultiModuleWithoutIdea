@@ -31,9 +31,11 @@ class CardInfoFragment :
                 .navigate(R.id.action_completeAuthFragment_to_historyPaymentsFragment)
         }
         frontBinding?.cardInfo?.setOnClickListener {
+            binding?.easyFlipView?.setFlipTypeFromFront()
             binding?.easyFlipView?.flipTheView()
         }
         backBinding?.back?.setOnClickListener {
+            binding?.easyFlipView?.setFlipTypeFromBack()
             binding?.easyFlipView?.flipTheView()
         }
     }
