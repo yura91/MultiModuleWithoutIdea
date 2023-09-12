@@ -1,5 +1,6 @@
 package com.example.multimoduleapp
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -13,9 +14,9 @@ import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
 
-    private val layerCornerRadius = 80.0F
+    private val layerCornerRadius = 30.0F
 
-    private val gradientOffset = 10
+    private val gradientOffset = 25.0F
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,21 +42,21 @@ class CardPaletteFragment :
         }
 
         binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
-            val startColor = color
-            val colorPosition = progress - gradientOffset
-            val endColor = pickColor(colorPosition)
+            val endColor = color
+            val colorPosition = progress - requireContext().dpToPx(gradientOffset)
+            val startColor = pickColor(colorPosition.toInt())
 
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
             )
 
-            gradientDrawable.cornerRadius = layerCornerRadius
+            gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
 
 
             val layer1 = gradientDrawable
             val layer2 =
-                getDrawable(requireContext(), R.drawable.card_design)
+                getDrawable(requireContext(), R.drawable.card_design_bg)
             val layers = arrayOf(layer1, layer2)
             val layerDrawable = LayerDrawable(layers)
             binding?.cardDesign?.background = layerDrawable
@@ -70,4 +71,10 @@ class CardPaletteFragment :
         }
         return Int.MAX_VALUE
     }
+
+    fun Context.dpToPx(dp: Float): Float {
+        val scale = resources.displayMetrics.density
+        return dp * scale
+    }
+
 }
