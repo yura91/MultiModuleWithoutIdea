@@ -37,23 +37,155 @@
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_60"
         android:background="@drawable/card_background"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/size_zero"
             android:layout_weight="1" />
 
         <View
             android:id="@+id/tintBackground"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/size_zero"
             android:layout_weight="1"
             android:background="@drawable/card_tint_bg" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/expDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_28"
+        android:text="@string/card_exp_date"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_22"
+        app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+    <ImageView
+        android:id="@+id/copyExpDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintBottom_toBottomOf="@+id/expDate"
+        app:layout_constraintStart_toEndOf="@+id/expDate"
+        app:layout_constraintTop_toTopOf="@+id/expDate" />
+
+    <TextView
+        android:id="@+id/expDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_4"
+        android:text="@string/expire_date"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toTopOf="@+id/expDate"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+    <TextView
+        android:id="@+id/cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="@string/_173"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_22"
+        app:layout_constraintBottom_toBottomOf="@+id/expDate"
+        app:layout_constraintStart_toEndOf="@+id/copyExpDate" />
+
+    <ImageView
+        android:id="@+id/copyCvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintBottom_toBottomOf="@+id/cvv"
+        app:layout_constraintStart_toEndOf="@+id/cvv"
+        app:layout_constraintTop_toTopOf="@+id/cvv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cvv"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toBottomOf="@+id/expDateTitle"
+        app:layout_constraintStart_toStartOf="@+id/cvv" />
+
+    <TextView
+        android:id="@+id/cardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_28"
+        android:text="@string/_1234_5678_9012_3456"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_22"
+        app:layout_constraintBottom_toTopOf="@+id/expDateTitle"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+    <ImageView
+        android:id="@+id/copyCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintBottom_toBottomOf="@+id/cardNumber"
+        app:layout_constraintStart_toEndOf="@+id/cardNumber"
+        app:layout_constraintTop_toTopOf="@+id/cardNumber" />
+
+    <TextView
+        android:id="@+id/cardNumberTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_4"
+        android:text="@string/card_number"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toTopOf="@+id/cardNumber"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+    <TextView
+        android:id="@+id/cardHolderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_28"
+        android:text="@string/john_doe"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_22"
+        app:layout_constraintBottom_toTopOf="@+id/cardNumberTitle"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+    <ImageView
+        android:id="@+id/copyCardHolderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintBottom_toBottomOf="@+id/cardHolderName"
+        app:layout_constraintStart_toEndOf="@+id/cardHolderName"
+        app:layout_constraintTop_toTopOf="@+id/cardHolderName" />
+
+    <TextView
+        android:id="@+id/cardHolderNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_4"
+        android:text="@string/name"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toTopOf="@+id/cardHolderName"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,5 +15,6 @@
     <color name="fifth_gr_color">#DC2ADA</color>
     <color name="text_black">#15191D</color>
     <color name="text_gray">#9FA1A3</color>
+    <color name="hint_color">#D6D7D9</color>
 
 </resources>

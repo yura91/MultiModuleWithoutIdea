@@ -40,4 +40,5 @@
     <dimen name="margin_118">118dp</dimen>
     <dimen name="margin_218">218dp</dimen>
     <dimen name="size_52">52dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
 </resources>
