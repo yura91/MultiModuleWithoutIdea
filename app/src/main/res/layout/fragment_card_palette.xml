@@ -26,7 +26,8 @@
         android:layout_height="@dimen/size_68"
         android:layout_marginStart="216dp"
         android:layout_marginTop="108dp"
-        android:background="@drawable/ic_card_chip"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_card_chip"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

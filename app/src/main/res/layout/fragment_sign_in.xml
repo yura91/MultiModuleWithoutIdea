@@ -10,76 +10,59 @@
     android:paddingEnd="@dimen/padding_4"
     tools:context=".SignInFragment">
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/virtual_card_bg"
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_44"
-        android:background="@drawable/virtual_card_bg"
+        android:scaleType="fitXY"
+        android:src="@drawable/best_cards_tittle"
         app:layout_constraintBottom_toTopOf="@id/signWithApple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/text_virtual_cards" />
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="@dimen/margin_36"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_card_chip_hor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="42dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="@dimen/margin_28"
-            android:layout_marginTop="@dimen/margin_10"
-            android:src="@drawable/ic_card_chip_hor" />
+    <TextView
+        android:id="@+id/cardNumTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_34"
+        android:layout_marginBottom="@dimen/margin_56"
+        android:text="@string/card_num_holder"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toBottomOf="@+id/virtual_card_bg"
+        app:layout_constraintEnd_toEndOf="@+id/virtual_card_bg" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_28"
-            android:src="@drawable/visa" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_34"
+        android:text="@string/card_exp_date"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="@dimen/margin_54"
-            android:layout_marginEnd="@dimen/margin_28"
-            android:src="@drawable/euro" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
-            android:layout_marginStart="@dimen/margin_34"
-            android:layout_marginBottom="62dp"
-            android:text="@string/your_name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginEnd="@dimen/margin_34"
-            android:layout_marginBottom="62dp"
-            android:text="@string/card_num_holder"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginEnd="@dimen/margin_34"
-            android:layout_marginBottom="@dimen/margin_30"
-            android:text="@string/card_exp_date"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16" />
-    </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_34"
+        android:layout_marginBottom="56dp"
+        android:text="@string/john_doe"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toBottomOf="@+id/virtual_card_bg"
+        app:layout_constraintStart_toStartOf="@+id/virtual_card_bg" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signWithApple"
