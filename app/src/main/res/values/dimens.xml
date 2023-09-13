@@ -30,4 +30,7 @@
     <dimen name="text_22">22sp</dimen>
     <dimen name="size_50">50dp</dimen>
     <dimen name="margin_54">54dp</dimen>
+    <dimen name="margin_438">438dp</dimen>
+    <dimen name="size_58">58dp</dimen>
+    <dimen name="size_68">68dp</dimen>
 </resources>
