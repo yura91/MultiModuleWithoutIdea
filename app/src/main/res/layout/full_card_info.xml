@@ -31,16 +31,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/cardInfo"
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_60"
-        android:scaleType="fitXY"
-        android:src="@drawable/expanded_card_info"
+        android:background="@drawable/card_background"
         app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/tintBackground"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/card_tint_bg" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

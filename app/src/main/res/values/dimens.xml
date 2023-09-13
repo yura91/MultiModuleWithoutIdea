@@ -29,4 +29,5 @@
     <dimen name="size_160">160dp</dimen>
     <dimen name="text_22">22sp</dimen>
     <dimen name="size_50">50dp</dimen>
+    <dimen name="margin_54">54dp</dimen>
 </resources>

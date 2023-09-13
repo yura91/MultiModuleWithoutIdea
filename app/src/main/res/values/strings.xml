@@ -35,4 +35,7 @@
     <string name="log_out_dialog_title">Are you sure you want \n to log out?</string>
     <string name="log_out_positive">Log out</string>
     <string name="log_out_negative">No</string>
+    <string name="your_name">YOUR NAME</string>
+    <string name="card_num_holder">• • • • 0000</string>
+    <string name="card_exp_date">02/24</string>
 </resources>
