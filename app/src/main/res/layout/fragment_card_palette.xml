@@ -35,13 +35,13 @@
         android:id="@+id/cardNumTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_438"
         android:layout_marginEnd="@dimen/margin_34"
         android:text="@string/card_num_holder"
         android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/margin_56"
         android:textSize="@dimen/text_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
+        app:layout_constraintEnd_toEndOf="@+id/cardDesign" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,13 +56,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_34"
-        android:layout_marginTop="@dimen/margin_438"
+        android:layout_marginStart="@dimen/margin_28"
+        android:layout_marginBottom="@dimen/margin_56"
         android:text="@string/john_doe"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
+        app:layout_constraintStart_toStartOf="@+id/cardDesign" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
