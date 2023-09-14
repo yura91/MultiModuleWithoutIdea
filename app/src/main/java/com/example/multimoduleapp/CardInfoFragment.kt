@@ -3,7 +3,7 @@ package com.example.multimoduleapp
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.findNavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentCardInfoBinding
 
@@ -19,17 +19,26 @@ class CardInfoFragment :
         frontBinding?.toolbar?.inflateMenu(R.menu.main_menu)
         val menu = frontBinding?.toolbar?.menu
         val menuItem = menu?.findItem(R.id.action_settings)
+        val navController = findNavController()
+
+        val navOptions =
+            NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_top)
+                .setExitAnim(R.anim.slide_out_top)
+                .setPopEnterAnim(R.anim.slide_in_bottom)
+                .setPopExitAnim(R.anim.slide_out_bottom)
+                .build()
+
         menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_completeAuthFragment_to_settingsFragment)
+            navController.navigate(R.id.action_completeAuthFragment_to_settingsFragment)
             return@setOnMenuItemClickListener false
         }
         frontBinding?.topUpButton?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_completeAuthFragment_to_topUpFragment)
+            navController.navigate(R.id.topUpFragment, null, navOptions)
         }
 
         frontBinding?.payments?.setOnClickListener {
-            it.findNavController()
-                .navigate(R.id.action_completeAuthFragment_to_historyPaymentsFragment)
+            navController.navigate(R.id.historyPaymentsFragment, null, navOptions)
         }
         frontBinding?.cardInfo?.setOnClickListener {
             binding?.easyFlipView?.setFlipTypeFromFront()
