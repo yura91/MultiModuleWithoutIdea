@@ -102,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_34"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="@dimen/margin_56"
         android:text="@string/john_doe"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
@@ -113,11 +113,11 @@
         android:id="@+id/sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_24"
         android:text="@string/_0_00"
         android:textColor="@color/white"
-        android:textSize="46sp"
+        android:textSize="@dimen/text_46"
         app:layout_constraintBottom_toTopOf="@+id/cardHolderName"
         app:layout_constraintStart_toStartOf="@+id/cardInfo" />
 

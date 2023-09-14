@@ -41,4 +41,7 @@
     <dimen name="margin_218">218dp</dimen>
     <dimen name="size_52">52dp</dimen>
     <dimen name="margin_4">4dp</dimen>
+    <dimen name="text_46">46sp</dimen>
+    <dimen name="margin_216">216dp</dimen>
+    <dimen name="margin_108">108dp</dimen>
 </resources>

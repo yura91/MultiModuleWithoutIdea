@@ -13,7 +13,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
             Toast.makeText(requireContext(), "QR is copied", Toast.LENGTH_SHORT).show()
         }
         binding?.share?.setOnClickListener {
-            Toast.makeText(requireContext(), "Share id clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Share is clicked", Toast.LENGTH_SHORT).show()
         }
 
         binding?.support?.setOnClickListener {

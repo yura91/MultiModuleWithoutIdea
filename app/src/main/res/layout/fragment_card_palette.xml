@@ -24,8 +24,8 @@
     <ImageView
         android:layout_width="@dimen/size_58"
         android:layout_height="@dimen/size_68"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="@dimen/margin_216"
+        android:layout_marginTop="@dimen/margin_108"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_card_chip"
         app:layout_constraintStart_toStartOf="parent"

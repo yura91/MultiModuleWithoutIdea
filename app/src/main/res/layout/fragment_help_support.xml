@@ -51,7 +51,7 @@
             android:textSize="@dimen/text_16" />
 
         <View
-            android:layout_width="0dp"
+            android:layout_width="@dimen/size_zero"
             android:layout_height="@dimen/size_zero"
             android:layout_weight="1" />
 
