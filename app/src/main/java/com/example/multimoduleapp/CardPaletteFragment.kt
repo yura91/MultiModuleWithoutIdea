@@ -9,7 +9,9 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
+import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
@@ -17,6 +19,8 @@ class CardPaletteFragment :
     private val layerCornerRadius = 30.0F
 
     private val gradientOffset = 25.0F
+
+    val viewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +49,8 @@ class CardPaletteFragment :
             val endColor = color
             val colorPosition = progress - requireContext().dpToPx(gradientOffset)
             val startColor = pickColor(colorPosition.toInt())
-
+            viewModel.setStartColor(startColor)
+            viewModel.setEndColor(endColor)
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
