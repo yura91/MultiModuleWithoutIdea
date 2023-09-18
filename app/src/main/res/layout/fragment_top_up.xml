@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".TopUpFragment">
 
+    <ImageView
+        android:id="@+id/cardInfo"
+        android:layout_width="@dimen/size_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_60"
+        android:background="@drawable/card_background_bg"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/topUpCard"
         android:layout_width="@dimen/size_zero"
@@ -17,7 +28,7 @@
         app:cardCornerRadius="@dimen/radius_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/cardInfo">
 
         <LinearLayout
             android:layout_width="match_parent"
