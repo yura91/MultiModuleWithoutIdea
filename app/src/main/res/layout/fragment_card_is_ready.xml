@@ -115,11 +115,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:id="@+id/cardIsReadyImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_40"
-        android:scaleType="fitXY"
-        android:src="@drawable/card_is_ready"
+        android:background="@drawable/card_is_ready"
         app:layout_constraintBottom_toTopOf="@+id/billedMonthly"
         app:layout_constraintTop_toTopOf="parent" />
 

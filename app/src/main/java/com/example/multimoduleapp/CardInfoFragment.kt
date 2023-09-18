@@ -1,16 +1,27 @@
 package com.example.multimoduleapp
 
+import android.content.Context
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentCardInfoBinding
+import com.example.multimoduleapp.databinding.FullCardInfoBinding
+import com.example.multimoduleapp.databinding.RestrictedCardInfoBinding
+import com.example.multimoduleapp.model.GradientModel
+import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
-
+    val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+    private val layerCornerRadius = 24.0F
+    var grModel = GradientModel(0, 0)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -20,6 +31,26 @@ class CardInfoFragment :
         val menu = frontBinding?.toolbar?.menu
         val menuItem = menu?.findItem(R.id.action_settings)
         val navController = findNavController()
+
+        sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
+            if (gradientData != null) {
+                setGradient(gradientData, frontBinding, backBinding)
+            }
+        }
+
+        binding?.easyFlipView?.setOnFlipListener { easyFlipView, newCurrentSide ->
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(grModel.startColor, grModel.endColor)
+            )
+            gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+            val layer1 = gradientDrawable
+            val layer2 =
+                AppCompatResources.getDrawable(requireContext(), R.drawable.card_background)
+            val layers = arrayOf(layer1, layer2)
+            val layerDrawable = LayerDrawable(layers)
+            frontBinding?.cardInfo?.background = layerDrawable
+        }
 
         val navOptions =
             NavOptions.Builder()
@@ -64,5 +95,30 @@ class CardInfoFragment :
         backBinding?.copyExpDate?.setOnClickListener {
             Toast.makeText(requireContext(), "Exp date is copied", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setGradient(
+        gradientData: GradientModel,
+        frontBinding: RestrictedCardInfoBinding?,
+        backBinding: FullCardInfoBinding?
+    ) {
+        grModel = gradientData
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(gradientData.startColor, gradientData.endColor)
+        )
+        gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+        val layer1 = gradientDrawable
+        val layer2 =
+            AppCompatResources.getDrawable(requireContext(), R.drawable.card_background)
+        val layers = arrayOf(layer1, layer2)
+        val layerDrawable = LayerDrawable(layers)
+        frontBinding?.cardInfo?.background = layerDrawable
+        backBinding?.cardInfo?.background = layerDrawable
+    }
+
+    fun Context.dpToPx(dp: Float): Float {
+        val scale = resources.displayMetrics.density
+        return dp * scale
     }
 }

@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
+import com.example.multimoduleapp.model.GradientModel
+import com.example.multimoduleapp.viewmodels.CardPaletteViewModel
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class CardPaletteFragment :
@@ -20,7 +23,8 @@ class CardPaletteFragment :
 
     private val gradientOffset = 25.0F
 
-    val viewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+    val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
+    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +35,16 @@ class CardPaletteFragment :
             findNavController().navigate(R.id.action_cardPaletteFragment_to_settingsFragment)
             return@setOnMenuItemClickListener false
         }
+        val colorProgress = cardPalleteViewModel.colorProgress
+
+        if (colorProgress != null) {
+            binding?.colorSeekBar?.progress = colorProgress
+            val endColor = sharedViewModel.gradientData.value?.endColor
+            setGradient(colorProgress, endColor)
+        } else {
+            sharedViewModel.setGradientData(null)
+        }
+
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
             getColor(requireContext(), R.color.third_gr_color),
@@ -46,25 +60,8 @@ class CardPaletteFragment :
         }
 
         binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
-            val endColor = color
-            val colorPosition = progress - requireContext().dpToPx(gradientOffset)
-            val startColor = pickColor(colorPosition.toInt())
-            viewModel.setStartColor(startColor)
-            viewModel.setEndColor(endColor)
-            val gradientDrawable = GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                intArrayOf(startColor, endColor)
-            )
-
-            gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
-
-
-            val layer1 = gradientDrawable
-            val layer2 =
-                getDrawable(requireContext(), R.drawable.card_design_bg)
-            val layers = arrayOf(layer1, layer2)
-            val layerDrawable = LayerDrawable(layers)
-            binding?.cardDesign?.background = layerDrawable
+            cardPalleteViewModel.colorProgress = progress
+            setGradient(progress, color)
         }
     }
 
@@ -77,9 +74,33 @@ class CardPaletteFragment :
         return Int.MAX_VALUE
     }
 
-    fun Context.dpToPx(dp: Float): Float {
+    private fun Context.dpToPx(dp: Float): Float {
         val scale = resources.displayMetrics.density
         return dp * scale
+    }
+
+    private fun setGradient(progress: Int, color: Int?) {
+        val endColor = color
+        val colorPosition = progress - requireContext().dpToPx(gradientOffset)
+        val startColor = pickColor(colorPosition.toInt())
+        val gradientDrawable = endColor?.let {
+            val gradientData = GradientModel(startColor, it)
+            sharedViewModel.setGradientData(gradientData)
+            GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(startColor, it)
+            )
+        }
+
+        gradientDrawable?.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+
+
+        val layer1 = gradientDrawable
+        val layer2 =
+            getDrawable(requireContext(), R.drawable.card_design_bg)
+        val layers = arrayOf(layer1, layer2)
+        val layerDrawable = LayerDrawable(layers)
+        binding?.cardDesign?.background = layerDrawable
     }
 
 }
