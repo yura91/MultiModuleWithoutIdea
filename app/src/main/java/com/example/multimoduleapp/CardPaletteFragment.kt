@@ -94,7 +94,6 @@ class CardPaletteFragment :
 
         gradientDrawable?.cornerRadius = requireContext().dpToPx(layerCornerRadius)
 
-
         val layer1 = gradientDrawable
         val layer2 =
             getDrawable(requireContext(), R.drawable.card_design_bg)
