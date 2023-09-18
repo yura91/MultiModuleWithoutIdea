@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.navGraphViewModels
@@ -50,6 +51,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                 }
             })
         }
+
+        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_top_view)
+        animation.fillAfter = true
+        binding?.cardInfo?.startAnimation(animation)
 
         binding?.copyQr?.setOnClickListener {
             Toast.makeText(requireContext(), "QR is copied", Toast.LENGTH_SHORT).show()

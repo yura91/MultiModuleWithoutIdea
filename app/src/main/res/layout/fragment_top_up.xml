@@ -13,6 +13,8 @@
         android:layout_marginBottom="@dimen/margin_60"
         android:background="@drawable/card_background_bg"
         android:orientation="vertical"
+        android:layout_marginStart="@dimen/margin_4"
+        android:layout_marginEnd="@dimen/margin_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
