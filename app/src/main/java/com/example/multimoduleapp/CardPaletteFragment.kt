@@ -70,6 +70,7 @@ class CardPaletteFragment :
         return Int.MAX_VALUE
     }
 
+    //TODO вынести в Utils
     private fun Context.dpToPx(dp: Float): Float {
         val scale = resources.displayMetrics.density
         return dp * scale
@@ -113,5 +114,4 @@ class CardPaletteFragment :
         val layerDrawable = LayerDrawable(layers)
         binding?.cardDesign?.background = layerDrawable
     }
-
 }

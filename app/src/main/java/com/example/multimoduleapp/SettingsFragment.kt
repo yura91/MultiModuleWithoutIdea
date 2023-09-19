@@ -23,7 +23,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
-
+// TODO вынести в строки
         binding?.logOut?.setOnClickListener {
             val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(
                 requireContext()

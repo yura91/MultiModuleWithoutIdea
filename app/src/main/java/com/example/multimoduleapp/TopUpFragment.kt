@@ -72,6 +72,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
         }
     }
 
+    //TODO вынести в Utils
     fun Context.dpToPx(dp: Float): Float {
         val scale = resources.displayMetrics.density
         return dp * scale

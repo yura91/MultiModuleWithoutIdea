@@ -73,7 +73,7 @@ class GetAcquaintedFragment :
         imm.hideSoftInputFromWindow(view.windowToken, 0)
         datePickerDialog.show()
     }
-
+// TODO вынести в utils
     private fun formatDate(calendar: Calendar): String {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
         return dateFormat.format(calendar.time)
