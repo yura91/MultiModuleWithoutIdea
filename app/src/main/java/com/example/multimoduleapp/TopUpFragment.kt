@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentTopUpBinding
 import com.example.multimoduleapp.viewmodels.SharedViewModel
@@ -49,6 +50,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                     viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             })
+        }
+
+        binding?.cardInfo?.setOnClickListener {
+            it.findNavController().popBackStack()
         }
 
         val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_top_view)
