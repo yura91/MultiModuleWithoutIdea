@@ -36,14 +36,6 @@ class CardPaletteFragment :
             return@setOnMenuItemClickListener false
         }
 
-        val colorProgress = cardPalleteViewModel.colorProgress
-
-        if (colorProgress != null) {
-            binding?.colorSeekBar?.progress = colorProgress
-            val endColor = sharedViewModel.gradientData.value?.endColor
-            setGradient(colorProgress, endColor)
-        }
-
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
             getColor(requireContext(), R.color.third_gr_color),
@@ -54,6 +46,11 @@ class CardPaletteFragment :
 
         binding?.colorSeekBar?.setColorSeeds(colors)
 
+        val colorProgress = cardPalleteViewModel.colorProgress
+        colorProgress?.let {
+            binding?.colorSeekBar?.progress = colorProgress
+            setGradient()
+        }
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
         }
@@ -93,6 +90,22 @@ class CardPaletteFragment :
 
         gradientDrawable?.cornerRadius = requireContext().dpToPx(layerCornerRadius)
 
+        val layer1 = gradientDrawable
+        val layer2 =
+            getDrawable(requireContext(), R.drawable.card_design_bg)
+        val layers = arrayOf(layer1, layer2)
+        val layerDrawable = LayerDrawable(layers)
+        binding?.cardDesign?.background = layerDrawable
+    }
+
+    private fun setGradient() {
+        val startColor = sharedViewModel.gradientData.value?.startColor
+        val endColor = sharedViewModel.gradientData.value?.endColor
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(startColor!!, endColor!!)
+        )
+        gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
         val layer1 = gradientDrawable
         val layer2 =
             getDrawable(requireContext(), R.drawable.card_design_bg)
