@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TopUpFragment">
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/cardInfo"
         android:layout_width="@dimen/size_zero"
         android:layout_height="wrap_content"
@@ -17,7 +17,15 @@
         android:layout_marginEnd="@dimen/margin_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@drawable/arrow_down" />
+    </FrameLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/topUpCard"
