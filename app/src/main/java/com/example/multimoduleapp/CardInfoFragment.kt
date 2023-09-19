@@ -19,7 +19,7 @@ import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
-    val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+    val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     var grModel = GradientModel(0, 0)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

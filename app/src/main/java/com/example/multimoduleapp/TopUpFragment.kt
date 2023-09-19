@@ -15,7 +15,7 @@ import com.example.multimoduleapp.databinding.FragmentTopUpBinding
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
-    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

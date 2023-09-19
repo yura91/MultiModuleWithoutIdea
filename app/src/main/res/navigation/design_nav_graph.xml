@@ -33,10 +33,10 @@
         android:label="restricted_card_info"
         tools:layout="@layout/restricted_card_info">
         <action
-            android:id="@+id/action_cardInfoFragment_to_topUpFragment2"
+            android:id="@+id/action_cardInfoFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />
         <action
-            android:id="@+id/action_cardInfoFragment_to_historyPaymentsFragment2"
+            android:id="@+id/action_cardInfoFragment_to_historyPaymentsFragment"
             app:destination="@id/historyPaymentsFragment" />
         <action
             android:id="@+id/action_cardInfoFragment_to_settings_nav_graph"

@@ -24,7 +24,7 @@ class CardPaletteFragment :
     private val gradientOffset = 25.0F
 
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
-    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,14 +35,13 @@ class CardPaletteFragment :
             findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
             return@setOnMenuItemClickListener false
         }
+
         val colorProgress = cardPalleteViewModel.colorProgress
 
         if (colorProgress != null) {
             binding?.colorSeekBar?.progress = colorProgress
             val endColor = sharedViewModel.gradientData.value?.endColor
             setGradient(colorProgress, endColor)
-        } else {
-            sharedViewModel.setGradientData(null)
         }
 
         val colors: IntArray = intArrayOf(
