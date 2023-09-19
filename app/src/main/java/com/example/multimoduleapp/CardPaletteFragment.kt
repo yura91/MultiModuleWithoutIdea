@@ -32,7 +32,7 @@ class CardPaletteFragment :
         val menu = binding?.toolbar?.menu
         val menuItem = menu?.findItem(R.id.action_settings)
         menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_cardPaletteFragment_to_settingsFragment)
+            findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
             return@setOnMenuItemClickListener false
         }
         val colorProgress = cardPalleteViewModel.colorProgress

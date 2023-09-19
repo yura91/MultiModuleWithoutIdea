@@ -23,85 +23,21 @@
             android:id="@+id/action_getAcquaintedFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
         <action
-            android:id="@+id/action_getAcquaintedFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_getAcquaintedFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.multimoduleapp.LocationFragment"
         android:label="LocationFragment">
         <action
-            android:id="@+id/action_locationFragment_to_cardPaletteFragment"
-            app:destination="@id/cardPaletteFragment" />
+            android:id="@+id/action_locationFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
         <action
-            android:id="@+id/action_locationFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_locationFragment_to_design_nav_graph"
+            app:destination="@id/design_nav_graph" />
     </fragment>
-    <fragment
-        android:id="@+id/cardPaletteFragment"
-        android:name="com.example.multimoduleapp.CardPaletteFragment"
-        android:label="CardPaletteFragment">
-        <action
-            android:id="@+id/action_cardPaletteFragment_to_cardIsReadyFragment"
-            app:destination="@id/cardIsReadyFragment" />
-        <action
-            android:id="@+id/action_cardPaletteFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/cardIsReadyFragment"
-        android:name="com.example.multimoduleapp.CardIsReadyFragment"
-        android:label="CardIsReadyFragment">
-        <action
-            android:id="@+id/action_cardIsReadyFragment_to_completeAuthFragment"
-            app:destination="@id/completeAuthFragment" />
-        <action
-            android:id="@+id/action_cardIsReadyFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/completeAuthFragment"
-        android:name="com.example.multimoduleapp.CardInfoFragment"
-        android:label="fragment_complete_auth"
-        tools:layout="@layout/restricted_card_info">
-        <action
-            android:id="@+id/action_completeAuthFragment_to_topUpFragment"
-            app:destination="@id/topUpFragment" />
-        <action
-            android:id="@+id/action_completeAuthFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_completeAuthFragment_to_historyPaymentsFragment"
-            app:destination="@id/historyPaymentsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/topUpFragment"
-        android:name="com.example.multimoduleapp.TopUpFragment"
-        android:label="fragment_top_up"
-        tools:layout="@layout/fragment_top_up" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.multimoduleapp.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_helpSupportFragment"
-            app:destination="@id/helpSupportFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_legalInformationFragment"
-            app:destination="@id/legalInformationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/helpSupportFragment"
-        android:name="com.example.multimoduleapp.HelpSupportFragment"
-        android:label="HelpSupportFragment" />
-    <fragment
-        android:id="@+id/legalInformationFragment"
-        android:name="com.example.multimoduleapp.LegalInformationFragment"
-        android:label="LegalInformationFragment" />
-    <fragment
-        android:id="@+id/historyPaymentsFragment"
-        android:name="com.example.multimoduleapp.HistoryPaymentsFragment"
-        android:label="fragment_history_payments"
-        tools:layout="@layout/fragment_history_payments" />
+    <include app:graph="@navigation/settings_nav_graph" />
+    <include app:graph="@navigation/design_nav_graph" />
+
 </navigation>

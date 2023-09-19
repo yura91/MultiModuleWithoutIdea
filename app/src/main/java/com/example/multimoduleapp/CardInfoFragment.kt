@@ -60,7 +60,7 @@ class CardInfoFragment :
                 .build()
 
         menuItem?.setOnMenuItemClickListener {
-            navController.navigate(R.id.action_completeAuthFragment_to_settingsFragment)
+            navController.navigate(R.id.action_cardInfoFragment_to_settings_nav_graph)
             return@setOnMenuItemClickListener false
         }
         frontBinding?.topUpButton?.setOnClickListener {

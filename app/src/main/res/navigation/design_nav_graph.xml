@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/design_nav_graph"
+    app:startDestination="@id/cardPaletteFragment">
+
+    <fragment
+        android:id="@+id/cardPaletteFragment"
+        android:name="com.example.multimoduleapp.CardPaletteFragment"
+        android:label="CardPaletteFragment">
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_cardIsReadyFragment"
+            app:destination="@id/cardIsReadyFragment" />
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardIsReadyFragment"
+        android:name="com.example.multimoduleapp.CardIsReadyFragment"
+        android:label="CardIsReadyFragment">
+        <action
+            android:id="@+id/action_cardIsReadyFragment_to_cardInfoFragment"
+            app:destination="@id/cardInfoFragment" />
+        <action
+            android:id="@+id/action_cardIsReadyFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardInfoFragment"
+        android:name="com.example.multimoduleapp.CardInfoFragment"
+        android:label="restricted_card_info"
+        tools:layout="@layout/restricted_card_info">
+        <action
+            android:id="@+id/action_cardInfoFragment_to_topUpFragment2"
+            app:destination="@id/topUpFragment" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_historyPaymentsFragment2"
+            app:destination="@id/historyPaymentsFragment" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.example.multimoduleapp.TopUpFragment"
+        android:label="fragment_top_up"
+        tools:layout="@layout/fragment_top_up" />
+    <fragment
+        android:id="@+id/historyPaymentsFragment"
+        android:name="com.example.multimoduleapp.HistoryPaymentsFragment"
+        android:label="fragment_history_payments"
+        tools:layout="@layout/fragment_history_payments" />
+    <include app:graph="@navigation/settings_nav_graph" />
+
+</navigation>

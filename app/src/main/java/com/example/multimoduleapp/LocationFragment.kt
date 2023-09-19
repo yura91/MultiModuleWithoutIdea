@@ -19,7 +19,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         val menu = binding?.toolbar?.menu
         val menuItem = menu?.findItem(R.id.action_settings)
         menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_locationFragment_to_settingsFragment)
+            findNavController().navigate(R.id.action_locationFragment_to_settings_nav_graph)
             return@setOnMenuItemClickListener false
         }
         binding?.toolbar?.setNavigationOnClickListener {
@@ -28,7 +28,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
         binding?.countries?.setOnEditorActionListener { v, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
-                v.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
+                v.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
             }
             false
         }
@@ -53,7 +53,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         binding?.countries?.setAdapter(countriesAdapter)
 
         binding?.next?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
+            it.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
         }
     }
 
