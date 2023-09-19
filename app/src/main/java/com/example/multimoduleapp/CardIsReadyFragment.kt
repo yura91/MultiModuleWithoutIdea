@@ -23,7 +23,17 @@ class CardIsReadyFragment :
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(gradientData.startColor, gradientData.endColor)
                 )
-                gradientDrawable.cornerRadius = requireContext().dpToPx(gradientData.cornerRadius)
+                val radii = floatArrayOf(
+                    0f,
+                    0f,
+                    0f,
+                    0f,
+                    requireContext().dpToPx(gradientData.cornerRadius),
+                    requireContext().dpToPx(gradientData.cornerRadius),
+                    requireContext().dpToPx(gradientData.cornerRadius),
+                    requireContext().dpToPx(gradientData.cornerRadius)
+                )
+                gradientDrawable.cornerRadii = radii
                 val layer1 = gradientDrawable
                 val layer2 =
                     AppCompatResources.getDrawable(requireContext(), R.drawable.card_is_ready_bg)
