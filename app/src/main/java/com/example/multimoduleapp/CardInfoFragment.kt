@@ -15,6 +15,8 @@ import com.example.multimoduleapp.databinding.FullCardInfoBinding
 import com.example.multimoduleapp.databinding.RestrictedCardInfoBinding
 import com.example.multimoduleapp.model.GradientModel
 import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
 
 
 class CardInfoFragment :
@@ -37,18 +39,22 @@ class CardInfoFragment :
             }
         }
 
-        binding?.easyFlipView?.setOnFlipListener { easyFlipView, newCurrentSide ->
-            val gradientDrawable = GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                intArrayOf(grModel.startColor, grModel.endColor)
-            )
-            gradientDrawable.cornerRadius = requireContext().dpToPx(grModel.cornerRadius)
-            val layer1 = gradientDrawable
-            val layer2 =
-                AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
-            val layers = arrayOf(layer1, layer2)
-            val layerDrawable = LayerDrawable(layers)
-            frontBinding?.cardInfo?.background = layerDrawable
+        val frontShapedImage = (frontBinding?.cardInfo as? ShapeableImageView)
+        frontShapedImage?.let { imageview ->
+            imageview.shapeAppearanceModel = imageview
+                .shapeAppearanceModel
+                .toBuilder()
+                .setAllCorners(CornerFamily.ROUNDED, requireContext().dpToPx(30.0F))
+                .build()
+        }
+
+        val backShapedImage = (backBinding?.cardInfo as? ShapeableImageView)
+        backShapedImage?.let { imageview ->
+            imageview.shapeAppearanceModel = imageview
+                .shapeAppearanceModel
+                .toBuilder()
+                .setAllCorners(CornerFamily.ROUNDED, requireContext().dpToPx(30.0F))
+                .build()
         }
 
         val navOptions =

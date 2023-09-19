@@ -4,9 +4,7 @@
         <shape android:shape="rectangle">
             <corners
                 android:bottomLeftRadius="30dp"
-                android:bottomRightRadius="30dp"
-                android:topLeftRadius="30dp"
-                android:topRightRadius="30dp" />
+                android:bottomRightRadius="30dp" />
         </shape>
     </item>
     <item android:drawable="@drawable/card_is_ready" />
