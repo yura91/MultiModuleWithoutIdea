@@ -14,7 +14,6 @@ import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class CardIsReadyFragment :
     BaseFragment<FragmentCardIsReadyBinding>(FragmentCardIsReadyBinding::inflate) {
-    private val layerCornerRadius = 30.0F
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +23,7 @@ class CardIsReadyFragment :
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(gradientData.startColor, gradientData.endColor)
                 )
-                gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+                gradientDrawable.cornerRadius = requireContext().dpToPx(gradientData.cornerRadius)
                 val layer1 = gradientDrawable
                 val layer2 =
                     AppCompatResources.getDrawable(requireContext(), R.drawable.card_is_ready_bg)

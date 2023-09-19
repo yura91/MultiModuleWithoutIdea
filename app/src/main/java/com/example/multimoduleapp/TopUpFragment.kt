@@ -15,7 +15,6 @@ import com.example.multimoduleapp.databinding.FragmentTopUpBinding
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
-    private val layerCornerRadius = 30.0F
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +26,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(gradientData.startColor, gradientData.endColor)
                 )
-                gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+                gradientDrawable.cornerRadius = requireContext().dpToPx(gradientData.cornerRadius)
                 val layer1 = gradientDrawable
                 val layer2 =
                     AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)

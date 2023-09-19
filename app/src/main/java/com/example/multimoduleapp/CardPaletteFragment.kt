@@ -23,7 +23,7 @@ class CardPaletteFragment :
 
     private val gradientOffset = 25.0F
 
-    val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
+    private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
