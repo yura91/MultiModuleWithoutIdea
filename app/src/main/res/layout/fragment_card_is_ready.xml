@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_16"
-        android:text="@string/privacy_policy"
+        android:text="@string/privacy_policy_label"
         android:textColor="@color/black"
         android:textSize="@dimen/text_12"
         app:layout_constraintBottom_toBottomOf="parent"
