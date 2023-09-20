@@ -36,9 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_34"
+        android:layout_marginBottom="@dimen/margin_56"
         android:text="@string/card_num_holder"
         android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/margin_56"
         android:textSize="@dimen/text_16"
         app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
         app:layout_constraintEnd_toEndOf="@+id/cardDesign" />
@@ -47,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_34"
+        android:layout_marginTop="@dimen/margin_8"
         android:text="@string/card_exp_date"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
@@ -64,14 +65,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
         app:layout_constraintStart_toStartOf="@+id/cardDesign" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/actionMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:src="@drawable/ic_on_card_more"
+        app:layout_constraintEnd_toEndOf="@+id/cardDesign"
+        app:layout_constraintTop_toTopOf="@+id/cardDesign" />
 
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSeekBar"

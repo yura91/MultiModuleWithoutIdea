@@ -20,14 +20,6 @@ class GetAcquaintedFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.toolbar?.inflateMenu(R.menu.main_menu)
-
-        val menu = binding?.toolbar?.menu
-        val menuItem = menu?.findItem(R.id.action_settings)
-        menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_getAcquaintedFragment_to_settings_nav_graph)
-            return@setOnMenuItemClickListener false
-        }
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
@@ -50,6 +42,10 @@ class GetAcquaintedFragment :
 
         binding?.birthDate?.setOnClickListener {
             datePickerDialog.show()
+        }
+
+        binding?.actionMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_getAcquaintedFragment_to_settings_nav_graph)
         }
 
         binding?.lastNameField?.setOnEditorActionListener { v, actionId, event ->

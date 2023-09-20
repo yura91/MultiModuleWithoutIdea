@@ -15,13 +15,6 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.toolbar?.inflateMenu(R.menu.main_menu)
-        val menu = binding?.toolbar?.menu
-        val menuItem = menu?.findItem(R.id.action_settings)
-        menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_locationFragment_to_settings_nav_graph)
-            return@setOnMenuItemClickListener false
-        }
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
@@ -31,6 +24,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
                 v.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
             }
             false
+        }
+
+        binding?.actionMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_locationFragment_to_settings_nav_graph)
         }
 
         binding?.countries?.setOnItemClickListener { parent, view, position, id ->

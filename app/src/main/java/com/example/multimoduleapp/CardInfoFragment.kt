@@ -28,11 +28,7 @@ class CardInfoFragment :
 
         val frontBinding = binding?.restrictedCardInfo
         val backBinding = binding?.fullCardInfo
-        frontBinding?.toolbar?.inflateMenu(R.menu.main_menu)
-        val menu = frontBinding?.toolbar?.menu
-        val menuItem = menu?.findItem(R.id.action_settings)
         val navController = findNavController()
-
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 setGradient(gradientData, frontBinding, backBinding)
@@ -65,12 +61,12 @@ class CardInfoFragment :
                 .setPopExitAnim(R.anim.slide_out_bottom)
                 .build()
 
-        menuItem?.setOnMenuItemClickListener {
-            navController.navigate(R.id.action_cardInfoFragment_to_settings_nav_graph)
-            return@setOnMenuItemClickListener false
-        }
         frontBinding?.topUpButton?.setOnClickListener {
             navController.navigate(R.id.topUpFragment, null, navOptions)
+        }
+
+        frontBinding?.actionMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_cardInfoFragment_to_settings_nav_graph)
         }
 
         frontBinding?.payments?.setOnClickListener {

@@ -42,12 +42,8 @@ class CardIsReadyFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
-        binding?.toolbar?.inflateMenu(R.menu.main_menu)
-        val menu = binding?.toolbar?.menu
-        val menuItem = menu?.findItem(R.id.action_settings)
-        menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
-            return@setOnMenuItemClickListener false
+        binding?.actionMore?.setOnClickListener {
+            it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
         }
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_cardInfoFragment)

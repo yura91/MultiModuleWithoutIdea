@@ -60,6 +60,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/actionMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:src="@drawable/ic_on_card_more"
+        app:layout_constraintEnd_toEndOf="@+id/cardInfo"
+        app:layout_constraintTop_toTopOf="@+id/cardInfo" />
+
     <TextView
         android:id="@+id/cardNumTemp"
         android:layout_width="wrap_content"
@@ -78,6 +88,7 @@
         android:layout_marginEnd="@dimen/margin_34"
         android:text="@string/card_exp_date"
         android:textColor="@color/white"
+        android:layout_marginTop="@dimen/margin_8"
         android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
@@ -122,15 +133,6 @@
         android:layout_marginStart="@dimen/margin_26"
         android:layout_marginTop="@dimen/margin_24"
         android:src="@drawable/ic_visa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

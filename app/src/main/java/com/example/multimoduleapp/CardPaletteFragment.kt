@@ -28,13 +28,6 @@ class CardPaletteFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.toolbar?.inflateMenu(R.menu.main_menu)
-        val menu = binding?.toolbar?.menu
-        val menuItem = menu?.findItem(R.id.action_settings)
-        menuItem?.setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
-            return@setOnMenuItemClickListener false
-        }
 
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
@@ -53,6 +46,10 @@ class CardPaletteFragment :
         }
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
+        }
+
+        binding?.actionMore?.setOnClickListener {
+            findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
         }
 
         binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
