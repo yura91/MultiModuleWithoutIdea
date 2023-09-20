@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.findNavController
@@ -19,6 +20,17 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             it.findNavController().popBackStack()
         }
 
+        binding?.countries?.apply {
+            viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val height = height
+
+                    dropDownVerticalOffset = -height / 2
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+        }
         binding?.countries?.setOnEditorActionListener { v, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
                 v.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
