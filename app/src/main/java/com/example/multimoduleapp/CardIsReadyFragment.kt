@@ -4,10 +4,10 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentCardIsReadyBinding
 import com.example.multimoduleapp.viewmodels.SharedViewModel
@@ -23,15 +23,18 @@ class CardIsReadyFragment :
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(gradientData.startColor, gradientData.endColor)
                 )
+                val outValue = TypedValue()
+                resources.getValue(R.dimen.corner_radius, outValue, true)
+                val cornerRadius = outValue.float
                 val radii = floatArrayOf(
                     0f,
                     0f,
                     0f,
                     0f,
-                    requireContext().dpToPx(gradientData.cornerRadius),
-                    requireContext().dpToPx(gradientData.cornerRadius),
-                    requireContext().dpToPx(gradientData.cornerRadius),
-                    requireContext().dpToPx(gradientData.cornerRadius)
+                    requireContext().dpToPx(cornerRadius),
+                    requireContext().dpToPx(cornerRadius),
+                    requireContext().dpToPx(cornerRadius),
+                    requireContext().dpToPx(cornerRadius)
                 )
                 gradientDrawable.cornerRadii = radii
                 val layer1 = gradientDrawable

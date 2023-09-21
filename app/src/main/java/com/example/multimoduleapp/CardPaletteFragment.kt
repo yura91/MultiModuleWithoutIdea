@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
@@ -16,10 +17,9 @@ import com.example.multimoduleapp.model.GradientModel
 import com.example.multimoduleapp.viewmodels.CardPaletteViewModel
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
+
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
-
-    private val layerCornerRadius = 30.0F
 
     private val gradientOffset = 25.0F
 
@@ -86,7 +86,11 @@ class CardPaletteFragment :
             )
         }
 
-        gradientDrawable?.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+        val outValue = TypedValue()
+        resources.getValue(R.dimen.corner_radius, outValue, true)
+        val radius = outValue.float
+
+        gradientDrawable?.cornerRadius = requireContext().dpToPx(radius)
 
         val layer1 = gradientDrawable
         val layer2 =
@@ -103,7 +107,10 @@ class CardPaletteFragment :
             GradientDrawable.Orientation.TOP_BOTTOM,
             intArrayOf(startColor!!, endColor!!)
         )
-        gradientDrawable.cornerRadius = requireContext().dpToPx(layerCornerRadius)
+        val outValue = TypedValue()
+        resources.getValue(R.dimen.corner_radius, outValue, true)
+        val radius = outValue.float
+        gradientDrawable.cornerRadius = requireContext().dpToPx(radius)
         val layer1 = gradientDrawable
         val layer2 =
             getDrawable(requireContext(), R.drawable.card_design_bg)

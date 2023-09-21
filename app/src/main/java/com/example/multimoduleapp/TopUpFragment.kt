@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -27,7 +28,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(gradientData.startColor, gradientData.endColor)
                 )
-                gradientDrawable.cornerRadius = requireContext().dpToPx(gradientData.cornerRadius)
+                val outValue = TypedValue()
+                resources.getValue(R.dimen.corner_radius, outValue, true)
+                val cornerRadius = outValue.float
+                gradientDrawable.cornerRadius = requireContext().dpToPx(cornerRadius)
                 val layer1 = gradientDrawable
                 val layer2 =
                     AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
