@@ -94,6 +94,7 @@
         android:completionThreshold="1"
         android:imeOptions="actionNext"
         android:inputType="text"
+        android:drawableEnd="@drawable/ic_text_arrow_down"
         android:popupBackground="@drawable/rounded_corners_autocomplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
