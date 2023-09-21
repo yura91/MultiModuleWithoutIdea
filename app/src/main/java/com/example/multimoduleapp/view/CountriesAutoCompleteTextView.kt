@@ -3,7 +3,9 @@ package com.example.multimoduleapp.view
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
+import com.example.multimoduleapp.R
 
 
 class CountriesAutoCompleteTextView(context: Context, attrs: AttributeSet) :
@@ -11,6 +13,25 @@ class CountriesAutoCompleteTextView(context: Context, attrs: AttributeSet) :
 
     override fun enoughToFilter(): Boolean {
         return true
+    }
+
+    override fun onFilterComplete(count: Int) {
+        super.onFilterComplete(count)
+        if (isPopupShowing == true) {
+            setCompoundDrawablesRelativeWithIntrinsicBounds(
+                null,
+                null,
+                AppCompatResources.getDrawable(context, R.drawable.ic_text_arrow_up),
+                null
+            )
+        } else {
+            setCompoundDrawablesRelativeWithIntrinsicBounds(
+                null,
+                null,
+                AppCompatResources.getDrawable(context, R.drawable.ic_text_arrow_down),
+                null
+            )
+        }
     }
 
     override fun onFocusChanged(

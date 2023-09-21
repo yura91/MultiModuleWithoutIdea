@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentLocationBinding
@@ -45,6 +47,44 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         binding?.countries?.setOnItemClickListener { parent, view, position, id ->
             hideKeyBoard(binding?.countries)
         }
+
+        binding?.countries?.doAfterTextChanged {
+            if (binding?.countries?.isPopupShowing == true) {
+                binding?.countries?.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(requireContext(), R.drawable.ic_text_arrow_up),
+                    null
+                )
+            } else {
+                binding?.countries?.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(requireContext(), R.drawable.ic_text_arrow_down),
+                    null
+                )
+            }
+        }
+
+
+        binding?.countries?.setOnDismissListener {
+            if (binding?.countries?.isPopupShowing == true) {
+                binding?.countries?.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(requireContext(), R.drawable.ic_text_arrow_up),
+                    null
+                )
+            } else {
+                binding?.countries?.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    getDrawable(requireContext(), R.drawable.ic_text_arrow_down),
+                    null
+                )
+            }
+        }
+
 
         val counriesList = listOf(
             "Russia",
