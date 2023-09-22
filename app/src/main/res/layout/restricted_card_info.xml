@@ -60,6 +60,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintTop_toTopOf="@+id/cardInfo" />
+
+    <View
+        android:id="@+id/rotate"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/cardInfo"
+        app:layout_constraintEnd_toEndOf="@+id/cardInfo"
+        app:layout_constraintStart_toStartOf="@+id/cardInfo"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
     <ImageView
         android:id="@+id/actionMore"
         android:layout_width="wrap_content"
@@ -69,6 +86,7 @@
         android:src="@drawable/ic_on_card_more"
         app:layout_constraintEnd_toEndOf="@+id/cardInfo"
         app:layout_constraintTop_toTopOf="@+id/cardInfo" />
+
 
     <TextView
         android:id="@+id/cardNumTemp"
@@ -85,10 +103,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_34"
         android:text="@string/card_exp_date"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/margin_8"
         android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />

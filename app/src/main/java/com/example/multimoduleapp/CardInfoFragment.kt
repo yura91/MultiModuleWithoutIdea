@@ -73,12 +73,14 @@ class CardInfoFragment :
         frontBinding?.payments?.setOnClickListener {
             navController.navigate(R.id.historyPaymentsFragment, null, navOptions)
         }
-        frontBinding?.cardInfo?.setOnClickListener {
-            binding?.easyFlipView?.setFlipTypeFromFront()
-            binding?.easyFlipView?.flipTheView()
-        }
+
         backBinding?.back?.setOnClickListener {
             binding?.easyFlipView?.setFlipTypeFromBack()
+            binding?.easyFlipView?.flipTheView()
+        }
+
+        frontBinding?.rotate?.setOnClickListener {
+            binding?.easyFlipView?.setFlipTypeFromFront()
             binding?.easyFlipView?.flipTheView()
         }
 
