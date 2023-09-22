@@ -99,11 +99,8 @@ class CardInfoFragment :
         backBinding?.copyExpDate?.setOnClickListener {
             Toast.makeText(requireContext(), "Exp date is copied", Toast.LENGTH_SHORT).show()
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().onBackPressedDispatcher.addCallback {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (binding?.easyFlipView?.isBackSide == true) {
                 binding?.easyFlipView?.setFlipTypeFromBack()
                 binding?.easyFlipView?.flipTheView()

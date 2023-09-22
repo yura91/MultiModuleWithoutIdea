@@ -15,11 +15,7 @@ class HelpSupportFragment :
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        requireActivity().onBackPressedDispatcher.addCallback {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
     }
