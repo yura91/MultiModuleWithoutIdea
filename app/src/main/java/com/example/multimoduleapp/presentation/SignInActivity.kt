@@ -1,7 +1,8 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.multimoduleapp.R
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

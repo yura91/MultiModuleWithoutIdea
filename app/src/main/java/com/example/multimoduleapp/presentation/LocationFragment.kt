@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,8 +9,9 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentLocationBinding
-import com.example.multimoduleapp.model.hideKeyBoard
+import com.example.multimoduleapp.presentation.model.hideKeyBoard
 
 
 class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationBinding::inflate) {

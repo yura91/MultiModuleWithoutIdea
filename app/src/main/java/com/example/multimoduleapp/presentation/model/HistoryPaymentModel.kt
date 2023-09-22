@@ -1,4 +1,4 @@
-package com.example.multimoduleapp.model
+package com.example.multimoduleapp.presentation.model
 
 data class HistoryPaymentModel(val title: String, val historyItems: List<HistoryItem>)
 

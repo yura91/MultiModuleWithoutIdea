@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,8 @@ import androidx.activity.addCallback
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentHistoryPaymentsBinding
-import com.example.multimoduleapp.model.HistoryItem
-import com.example.multimoduleapp.model.HistoryPaymentModel
+import com.example.multimoduleapp.presentation.model.HistoryItem
+import com.example.multimoduleapp.presentation.model.HistoryPaymentModel
 
 
 class HistoryPaymentsFragment :

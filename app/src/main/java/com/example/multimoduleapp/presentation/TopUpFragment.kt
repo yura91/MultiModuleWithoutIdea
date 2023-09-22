@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -14,9 +14,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentTopUpBinding
-import com.example.multimoduleapp.model.dpToPx
-import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.example.multimoduleapp.presentation.model.dpToPx
+import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 
 class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)

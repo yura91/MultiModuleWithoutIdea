@@ -5,7 +5,7 @@
     android:id="@+id/userData"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GetAcquaintedFragment">
+    tools:context=".presentation.GetAcquaintedFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -84,7 +84,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.example.multimoduleapp.view.CountriesAutoCompleteTextView
+    <com.example.multimoduleapp.presentation.view.CountriesAutoCompleteTextView
         android:id="@+id/countries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

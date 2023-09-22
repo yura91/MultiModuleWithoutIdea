@@ -1,4 +1,4 @@
-package com.example.multimoduleapp.view
+package com.example.multimoduleapp.presentation.view
 
 import android.content.Context
 import android.graphics.Rect
@@ -17,7 +17,7 @@ class CountriesAutoCompleteTextView(context: Context, attrs: AttributeSet) :
 
     override fun onFilterComplete(count: Int) {
         super.onFilterComplete(count)
-        if (isPopupShowing == true) {
+        if (isPopupShowing) {
             setCompoundDrawablesRelativeWithIntrinsicBounds(
                 null,
                 null,

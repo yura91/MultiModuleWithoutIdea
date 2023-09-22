@@ -1,6 +1,5 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -12,17 +11,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
-import com.example.multimoduleapp.model.GradientModel
-import com.example.multimoduleapp.viewmodels.CardPaletteViewModel
-import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.example.multimoduleapp.presentation.model.GradientModel
+import com.example.multimoduleapp.presentation.model.dpToPx
+import com.example.multimoduleapp.presentation.viewmodels.CardPaletteViewModel
+import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 
 
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
-
     private val gradientOffset = 25.0F
-
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
@@ -67,12 +66,6 @@ class CardPaletteFragment :
         return Int.MAX_VALUE
     }
 
-    //TODO вынести в Utils
-    private fun Context.dpToPx(dp: Float): Float {
-        val scale = resources.displayMetrics.density
-        return dp * scale
-    }
-
     private fun setGradient(progress: Int, color: Int?) {
         val endColor = color
         val colorPosition = progress - requireContext().dpToPx(gradientOffset)
@@ -103,19 +96,21 @@ class CardPaletteFragment :
     private fun setGradient() {
         val startColor = sharedViewModel.gradientData.value?.startColor
         val endColor = sharedViewModel.gradientData.value?.endColor
-        val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(startColor!!, endColor!!)
-        )
-        val outValue = TypedValue()
-        resources.getValue(R.dimen.corner_radius, outValue, true)
-        val radius = outValue.float
-        gradientDrawable.cornerRadius = requireContext().dpToPx(radius)
-        val layer1 = gradientDrawable
-        val layer2 =
-            getDrawable(requireContext(), R.drawable.card_design_bg)
-        val layers = arrayOf(layer1, layer2)
-        val layerDrawable = LayerDrawable(layers)
-        binding?.cardDesign?.background = layerDrawable
+        if (startColor != null && endColor != null) {
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(startColor, endColor)
+            )
+            val outValue = TypedValue()
+            resources.getValue(R.dimen.corner_radius, outValue, true)
+            val radius = outValue.float
+            gradientDrawable.cornerRadius = requireContext().dpToPx(radius)
+            val layer1 = gradientDrawable
+            val layer2 =
+                getDrawable(requireContext(), R.drawable.card_design_bg)
+            val layers = arrayOf(layer1, layer2)
+            val layerDrawable = LayerDrawable(layers)
+            binding?.cardDesign?.background = layerDrawable
+        }
     }
 }
