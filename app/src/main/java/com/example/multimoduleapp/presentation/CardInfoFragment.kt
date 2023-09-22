@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -11,12 +11,13 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentCardInfoBinding
 import com.example.multimoduleapp.databinding.FullCardInfoBinding
 import com.example.multimoduleapp.databinding.RestrictedCardInfoBinding
-import com.example.multimoduleapp.model.GradientModel
-import com.example.multimoduleapp.model.dpToPx
-import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.example.multimoduleapp.presentation.model.GradientModel
+import com.example.multimoduleapp.presentation.model.dpToPx
+import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 import com.google.android.material.shape.CornerFamily
 
 

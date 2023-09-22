@@ -1,4 +1,4 @@
-package com.example.multimoduleapp.view
+package com.example.multimoduleapp.presentation.view
 
 import android.content.Context
 import android.graphics.Rect

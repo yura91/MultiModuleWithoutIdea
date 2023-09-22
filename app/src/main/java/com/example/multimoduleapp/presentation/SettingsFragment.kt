@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentSettingsBinding
 
 
@@ -30,8 +31,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             findNavController().popBackStack()
         }
 
-
-// TODO вынести в строки
         binding?.logOut?.setOnClickListener {
             val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(
                 requireContext()
@@ -48,7 +47,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 ) { dialog, which ->
                     Toast.makeText(
                         requireContext(),
-                        "You are logged out",
+                        getString(R.string.you_are_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -57,7 +56,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 ) { dialog, which ->
                     Toast.makeText(
                         requireContext(),
-                        "You are not logged out",
+                        getString(R.string.you_are_not_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

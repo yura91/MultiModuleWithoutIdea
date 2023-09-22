@@ -46,4 +46,6 @@
     <string name="cvv">CVV</string>
     <string name="_173">173</string>
     <string name="expire_date">Expire date</string>
+    <string name="you_are_logged_out">You are logged out</string>
+    <string name="you_are_not_logged_out">You are not logged out</string>
 </resources>

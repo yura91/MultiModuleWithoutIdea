@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -8,9 +8,10 @@ import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentCardIsReadyBinding
-import com.example.multimoduleapp.model.dpToPx
-import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.example.multimoduleapp.presentation.model.dpToPx
+import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 
 class CardIsReadyFragment :
     BaseFragment<FragmentCardIsReadyBinding>(FragmentCardIsReadyBinding::inflate) {

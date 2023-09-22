@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -7,8 +7,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentSignInBinding
-import com.example.multimoduleapp.model.getClickableSpan
+import com.example.multimoduleapp.presentation.model.getClickableSpan
 
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {

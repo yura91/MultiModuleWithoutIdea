@@ -6,7 +6,7 @@
     app:startDestination="@id/settingsFragment">
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.multimoduleapp.SettingsFragment"
+        android:name="com.example.multimoduleapp.presentation.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
@@ -19,10 +19,10 @@
 
     <fragment
         android:id="@+id/helpSupportFragment"
-        android:name="com.example.multimoduleapp.HelpSupportFragment"
+        android:name="com.example.multimoduleapp.presentation.HelpSupportFragment"
         android:label="HelpSupportFragment" />
     <fragment
         android:id="@+id/legalInformationFragment"
-        android:name="com.example.multimoduleapp.LegalInformationFragment"
+        android:name="com.example.multimoduleapp.presentation.LegalInformationFragment"
         android:label="LegalInformationFragment" />
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cardPaletteFragment"
-        android:name="com.example.multimoduleapp.CardPaletteFragment"
+        android:name="com.example.multimoduleapp.presentation.CardPaletteFragment"
         android:label="CardPaletteFragment">
         <action
             android:id="@+id/action_cardPaletteFragment_to_cardIsReadyFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardIsReadyFragment"
-        android:name="com.example.multimoduleapp.CardIsReadyFragment"
+        android:name="com.example.multimoduleapp.presentation.CardIsReadyFragment"
         android:label="CardIsReadyFragment">
         <action
             android:id="@+id/action_cardIsReadyFragment_to_cardInfoFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardInfoFragment"
-        android:name="com.example.multimoduleapp.CardInfoFragment"
+        android:name="com.example.multimoduleapp.presentation.CardInfoFragment"
         android:label="restricted_card_info"
         tools:layout="@layout/restricted_card_info">
         <action
@@ -44,12 +44,12 @@
     </fragment>
     <fragment
         android:id="@+id/topUpFragment"
-        android:name="com.example.multimoduleapp.TopUpFragment"
+        android:name="com.example.multimoduleapp.presentation.TopUpFragment"
         android:label="fragment_top_up"
         tools:layout="@layout/fragment_top_up" />
     <fragment
         android:id="@+id/historyPaymentsFragment"
-        android:name="com.example.multimoduleapp.HistoryPaymentsFragment"
+        android:name="com.example.multimoduleapp.presentation.HistoryPaymentsFragment"
         android:label="fragment_history_payments"
         tools:layout="@layout/fragment_history_payments" />
     <include app:graph="@navigation/settings_nav_graph" />

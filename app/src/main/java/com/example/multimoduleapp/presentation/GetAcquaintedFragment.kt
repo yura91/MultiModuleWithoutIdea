@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -7,9 +7,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentGetAcquaintedBinding
-import com.example.multimoduleapp.model.formatDate
-import com.example.multimoduleapp.model.hideKeyBoard
+import com.example.multimoduleapp.presentation.model.formatDate
+import com.example.multimoduleapp.presentation.model.hideKeyBoard
 import java.util.Calendar
 
 

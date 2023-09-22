@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.multimoduleapp.SignInFragment"
+        android:name="com.example.multimoduleapp.presentation.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/getAcquaintedFragment"
-        android:name="com.example.multimoduleapp.GetAcquaintedFragment"
+        android:name="com.example.multimoduleapp.presentation.GetAcquaintedFragment"
         android:label="fragment_get_acquainted"
         tools:layout="@layout/fragment_get_acquainted">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.example.multimoduleapp.LocationFragment"
+        android:name="com.example.multimoduleapp.presentation.LocationFragment"
         android:label="LocationFragment">
         <action
             android:id="@+id/action_locationFragment_to_settings_nav_graph"

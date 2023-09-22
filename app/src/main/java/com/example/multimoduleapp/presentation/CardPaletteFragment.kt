@@ -1,6 +1,5 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -12,10 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.R
 import com.example.multimoduleapp.databinding.FragmentCardPaletteBinding
-import com.example.multimoduleapp.model.GradientModel
-import com.example.multimoduleapp.viewmodels.CardPaletteViewModel
-import com.example.multimoduleapp.viewmodels.SharedViewModel
+import com.example.multimoduleapp.presentation.model.GradientModel
+import com.example.multimoduleapp.presentation.model.dpToPx
+import com.example.multimoduleapp.presentation.viewmodels.CardPaletteViewModel
+import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 
 
 class CardPaletteFragment :
@@ -65,12 +66,6 @@ class CardPaletteFragment :
             return if (progress >= colorSeekBar.colors.size) Int.MAX_VALUE else colorSeekBar.colors[progress]
         }
         return Int.MAX_VALUE
-    }
-
-    //TODO вынести в Utils
-    private fun Context.dpToPx(dp: Float): Float {
-        val scale = resources.displayMetrics.density
-        return dp * scale
     }
 
     private fun setGradient(progress: Int, color: Int?) {

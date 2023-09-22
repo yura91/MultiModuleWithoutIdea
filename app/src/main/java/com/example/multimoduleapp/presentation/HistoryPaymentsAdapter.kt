@@ -1,11 +1,12 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.multimoduleapp.model.HistoryPaymentModel
+import com.example.multimoduleapp.R
+import com.example.multimoduleapp.presentation.model.HistoryPaymentModel
 
 class HistoryPaymentsAdapter(private val dataSet: List<HistoryPaymentModel>) :
     RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {

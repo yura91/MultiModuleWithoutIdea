@@ -1,4 +1,4 @@
-package com.example.multimoduleapp.model
+package com.example.multimoduleapp.presentation.model
 
 import android.app.Activity
 import android.content.Context
