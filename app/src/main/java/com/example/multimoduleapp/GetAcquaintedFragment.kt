@@ -60,6 +60,7 @@ class GetAcquaintedFragment :
         }
     }
 
+    // TODO вынести в utils
     private fun hideKeyBoard(
         view: View,
         datePickerDialog: DatePickerDialog

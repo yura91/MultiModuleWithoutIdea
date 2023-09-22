@@ -2,7 +2,9 @@ package com.example.multimoduleapp
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentHistoryPaymentsBinding
 import com.example.multimoduleapp.model.HistoryItem
 import com.example.multimoduleapp.model.HistoryPaymentModel
@@ -53,6 +55,10 @@ class HistoryPaymentsFragment :
         historyPayments.add(HistoryPaymentModel("3 May", historyItems6))
 
         binding?.historyPayments?.adapter = HistoryPaymentsAdapter(historyPayments)
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
+        }
 
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()

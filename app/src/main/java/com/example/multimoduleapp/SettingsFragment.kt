@@ -3,8 +3,10 @@ package com.example.multimoduleapp
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentSettingsBinding
 
 
@@ -23,6 +25,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
+        }
+
 // TODO вынести в строки
         binding?.logOut?.setOnClickListener {
             val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(

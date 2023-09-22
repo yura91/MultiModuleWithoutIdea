@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -79,6 +80,13 @@ class CardInfoFragment :
         backBinding?.back?.setOnClickListener {
             binding?.easyFlipView?.setFlipTypeFromBack()
             binding?.easyFlipView?.flipTheView()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if (binding?.easyFlipView?.isBackSide == true) {
+                binding?.easyFlipView?.setFlipTypeFromBack()
+                binding?.easyFlipView?.flipTheView()
+            }
         }
 
         backBinding?.copyCardNumber?.setOnClickListener {

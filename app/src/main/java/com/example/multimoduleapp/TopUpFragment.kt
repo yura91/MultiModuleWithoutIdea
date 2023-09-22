@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentTopUpBinding
 import com.example.multimoduleapp.viewmodels.SharedViewModel
@@ -54,6 +56,10 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                     viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             })
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
         }
 
         binding?.cardInfo?.setOnClickListener {
