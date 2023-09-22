@@ -1,6 +1,5 @@
 package com.example.multimoduleapp
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -16,6 +15,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentTopUpBinding
+import com.example.multimoduleapp.model.dpToPx
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
@@ -80,11 +80,5 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
         binding?.support?.setOnClickListener {
             Toast.makeText(requireContext(), "Support is clicked", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    //TODO вынести в Utils
-    fun Context.dpToPx(dp: Float): Float {
-        val scale = resources.displayMetrics.density
-        return dp * scale
     }
 }

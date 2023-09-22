@@ -1,18 +1,16 @@
 package com.example.multimoduleapp
 
 import android.app.DatePickerDialog
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.databinding.FragmentGetAcquaintedBinding
-import java.text.SimpleDateFormat
+import com.example.multimoduleapp.model.formatDate
+import com.example.multimoduleapp.model.hideKeyBoard
 import java.util.Calendar
-import java.util.Locale
 
 
 class GetAcquaintedFragment :
@@ -50,7 +48,8 @@ class GetAcquaintedFragment :
 
         binding?.lastNameField?.setOnEditorActionListener { v, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
-                hideKeyBoard(view, datePickerDialog)
+                requireActivity().hideKeyBoard(view)
+                datePickerDialog.show()
             }
             false
         }
@@ -58,22 +57,6 @@ class GetAcquaintedFragment :
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
         }
-    }
-
-    // TODO вынести в utils
-    private fun hideKeyBoard(
-        view: View,
-        datePickerDialog: DatePickerDialog
-    ) {
-        val imm =
-            requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
-        datePickerDialog.show()
-    }
-// TODO вынести в utils
-    private fun formatDate(calendar: Calendar): String {
-        val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
     }
 }
 

@@ -1,6 +1,5 @@
 package com.example.multimoduleapp
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -10,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.databinding.FragmentCardIsReadyBinding
+import com.example.multimoduleapp.model.dpToPx
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 
 class CardIsReadyFragment :
@@ -51,11 +51,5 @@ class CardIsReadyFragment :
         binding?.next?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_cardInfoFragment)
         }
-    }
-
-    //TODO вынести в Utils
-    fun Context.dpToPx(dp: Float): Float {
-        val scale = resources.displayMetrics.density
-        return dp * scale
     }
 }

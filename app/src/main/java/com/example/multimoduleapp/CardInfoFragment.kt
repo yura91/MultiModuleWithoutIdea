@@ -1,6 +1,5 @@
 package com.example.multimoduleapp
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -16,6 +15,7 @@ import com.example.multimoduleapp.databinding.FragmentCardInfoBinding
 import com.example.multimoduleapp.databinding.FullCardInfoBinding
 import com.example.multimoduleapp.databinding.RestrictedCardInfoBinding
 import com.example.multimoduleapp.model.GradientModel
+import com.example.multimoduleapp.model.dpToPx
 import com.example.multimoduleapp.viewmodels.SharedViewModel
 import com.google.android.material.shape.CornerFamily
 
@@ -127,11 +127,5 @@ class CardInfoFragment :
         val layerDrawable = LayerDrawable(layers)
         frontBinding?.cardInfo?.background = layerDrawable
         backBinding?.cardInfo?.background = layerDrawable
-    }
-
-    //TODO вынести в Utils
-    fun Context.dpToPx(dp: Float): Float {
-        val scale = resources.displayMetrics.density
-        return dp * scale
     }
 }
