@@ -58,10 +58,6 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
             })
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().popBackStack()
-        }
-
         binding?.cardInfo?.setOnClickListener {
             it.findNavController().popBackStack()
         }
@@ -79,6 +75,13 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
 
         binding?.support?.setOnClickListener {
             Toast.makeText(requireContext(), "Support is clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
         }
     }
 }

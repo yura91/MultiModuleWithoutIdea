@@ -26,9 +26,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             it.findNavController().popBackStack()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().popBackStack()
-        }
 
 // TODO вынести в строки
         binding?.logOut?.setOnClickListener {
@@ -62,6 +59,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 }
             val alertDialog: AlertDialog = alertDialogBuilder.create();
             alertDialog.show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
         }
     }
 }

@@ -84,13 +84,6 @@ class CardInfoFragment :
             binding?.easyFlipView?.flipTheView()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            if (binding?.easyFlipView?.isBackSide == true) {
-                binding?.easyFlipView?.setFlipTypeFromBack()
-                binding?.easyFlipView?.flipTheView()
-            }
-        }
-
         backBinding?.copyCardNumber?.setOnClickListener {
             Toast.makeText(requireContext(), "Card number is copied", Toast.LENGTH_SHORT).show()
         }
@@ -105,6 +98,16 @@ class CardInfoFragment :
 
         backBinding?.copyExpDate?.setOnClickListener {
             Toast.makeText(requireContext(), "Exp date is copied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if (binding?.easyFlipView?.isBackSide == true) {
+                binding?.easyFlipView?.setFlipTypeFromBack()
+                binding?.easyFlipView?.flipTheView()
+            }
         }
     }
 
