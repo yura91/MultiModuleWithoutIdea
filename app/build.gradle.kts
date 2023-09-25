@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.material)
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
