@@ -22,6 +22,8 @@ import com.example.multimoduleapp.presentation.viewmodels.SharedViewModel
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
     private val gradientOffset = 25.0F
+    private val initialProgress = 0
+    private val initialColor = -312545
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
@@ -54,6 +56,9 @@ class CardPaletteFragment :
         binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
             cardPalleteViewModel.colorProgress = progress
             setGradient(progress, color)
+        }
+        if (cardPalleteViewModel.colorProgress == null) {
+            setGradient(initialProgress, initialColor)
         }
     }
 

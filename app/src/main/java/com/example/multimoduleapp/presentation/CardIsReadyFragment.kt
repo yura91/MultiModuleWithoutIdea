@@ -5,6 +5,8 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
@@ -40,12 +42,29 @@ class CardIsReadyFragment :
                 gradientDrawable.cornerRadii = radii
                 val layer1 = gradientDrawable
                 val layer2 =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.card_is_ready_bg)
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
                 val layers = arrayOf(layer1, layer2)
                 val layerDrawable = LayerDrawable(layers)
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
+
+        binding?.cardIsReadyImage?.apply {
+            viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val height = height
+                    val negativeMargin = (height * 0.3).toInt()
+
+                    val layoutParams = layoutParams as ViewGroup.MarginLayoutParams
+                    layoutParams.topMargin = -negativeMargin
+                    setLayoutParams(layoutParams)
+
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+        }
+
         binding?.actionMore?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
         }

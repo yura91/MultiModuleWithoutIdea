@@ -79,12 +79,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
-        android:layout_marginBottom="@dimen/margin_40"
         android:paddingTop="@dimen/padding_20"
         android:paddingBottom="@dimen/padding_20"
         android:text="@string/billed_annually"
         android:textColor="@color/black"
         android:textSize="@dimen/text_16"
+        app:layout_constraintTop_toBottomOf="@+id/billedMonthly"
         app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -101,7 +101,9 @@
         android:text="@string/billed_monthly"
         android:textColor="@color/black"
         android:textSize="@dimen/text_16"
+        app:layout_constraintTop_toBottomOf="@+id/cardIsReadyImage"
         app:layout_constraintBottom_toTopOf="@+id/billedAnnually"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -110,9 +112,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_zero"
         android:layout_marginBottom="@dimen/margin_40"
-        android:background="@drawable/card_is_ready_bg"
-        app:layout_constraintBottom_toTopOf="@+id/billedMonthly"
+        android:background="@drawable/card_background_bg"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_26"
+        android:src="@drawable/card_is_ready_issued"
+        app:layout_constraintBottom_toBottomOf="@+id/cardIsReadyImage"
+        app:layout_constraintEnd_toEndOf="@+id/cardIsReadyImage"
+        app:layout_constraintStart_toStartOf="@+id/cardIsReadyImage" />
 
     <ImageView
         android:id="@+id/actionMore"
@@ -122,6 +132,6 @@
         android:layout_marginEnd="@dimen/margin_16"
         android:src="@drawable/ic_on_card_more"
         app:layout_constraintEnd_toEndOf="@+id/cardIsReadyImage"
-        app:layout_constraintTop_toTopOf="@+id/cardIsReadyImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
