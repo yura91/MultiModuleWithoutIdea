@@ -4,16 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
 
 class SignInFragment : Fragment() {
@@ -29,36 +37,72 @@ class SignInFragment : Fragment() {
         }
     }
 
+    @Preview
     @Composable
     fun SignInLayout() {
+
+        val mainButtonColor = ButtonDefaults.buttonColors(
+            containerColor = Color.Black,
+            contentColor = MaterialTheme.colorScheme.surface
+        )
+
         ConstraintLayout {
-            val (redBox, blueBox, yellowBox, text) = createRefs()
+            val (best, signApple, signGoogle, text) = createRefs()
+            Image(
+                painter = painterResource(id = R.drawable.the_best_v_cards),
+                contentDescription = "",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .constrainAs(best) {
+                        top.linkTo(parent.top, 4.dp)
+                        bottom.linkTo(signApple.top, 44.dp)
+                        start.linkTo(parent.start, 4.dp)
+                        end.linkTo(parent.end, 4.dp)
+                        height = Dimension.fillToConstraints
+                        width = Dimension.fillToConstraints
+                    }
+            )
 
-            Box(modifier = Modifier
-                .size(50.dp)
-                .background(Color.Red)
-                .constrainAs(redBox) {})
+            Button(
+                colors = mainButtonColor,
+                onClick = { },
+                modifier = Modifier
+                    .constrainAs(signApple) {
+                        bottom.linkTo(signGoogle.top)
+                        start.linkTo(parent.start, margin = 40.dp)
+                        end.linkTo(parent.end, margin = 40.dp)
+                        width = Dimension.fillToConstraints
+                    },
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Text(text = "Sign in with Apple", Modifier.padding(0.dp))
+            }
 
-            Box(modifier = Modifier
-                .size(50.dp)
-                .background(Color.Blue)
-                .constrainAs(blueBox) {
-                    top.linkTo(redBox.bottom)
-                    start.linkTo(redBox.end)
-                })
+            Button(
+                colors = mainButtonColor,
+                onClick = { },
+                modifier = Modifier
+                    .constrainAs(signGoogle) {
+                        bottom.linkTo(text.top, 36.dp)
+                        start.linkTo(parent.start, 40.dp)
+                        end.linkTo(parent.end, 40.dp)
+                        width = Dimension.fillToConstraints
+                    },
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Text(text = "Sign in with Google", Modifier.padding(0.dp))
+            }
 
-            Box(modifier = Modifier
-                .size(50.dp)
-                .background(Color.Yellow)
-                .constrainAs(yellowBox) {
-                    bottom.linkTo(blueBox.bottom)
-                    start.linkTo(blueBox.end, 20.dp)
-                })
-
-            Text("Hello World", modifier = Modifier.constrainAs(text) {
-                top.linkTo(parent.top)
-                start.linkTo(yellowBox.start)
-            })
+            Text("By registering, you agree to our\n" +
+                    "Privacy Policy and Terms of use",
+                modifier = Modifier
+                    .wrapContentSize()
+                    .constrainAs(text) {
+                        bottom.linkTo(parent.bottom, 34.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        width = Dimension.fillToConstraints
+                    })
         }
     }
 }
