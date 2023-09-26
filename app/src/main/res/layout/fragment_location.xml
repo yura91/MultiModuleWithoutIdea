@@ -84,7 +84,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.example.multimoduleapp.presentation.view.CountriesAutoCompleteTextView
+    <net.pst.cash.presentation.view.CountriesAutoCompleteTextView
         android:id="@+id/countries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

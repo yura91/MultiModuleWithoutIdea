@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.multimoduleapp"
+    namespace = "net.pst.cash"
     compileSdk = 34
 
     buildFeatures {
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 33
-
+        applicationId = "net.pst.cash"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -43,13 +43,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(libs.daggerhilt)
     kapt(libs.compilerhilt)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
-    implementation("com.wajahatkarim:EasyFlipView:3.0.3")
+    implementation(libs.easyFlipView)
     implementation(libs.navigation)
     implementation(libs.navigationui)
     implementation(libs.activityktx)

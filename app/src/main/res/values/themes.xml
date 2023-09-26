@@ -11,5 +11,5 @@
         <item name="iconGravity">textStart</item>
     </style>
 
-    <style name="Theme.MultiModuleApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MultiModuleApp" parent="Theme.MaterialComponents.Light.NoActionBar" />
 </resources>

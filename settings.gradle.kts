@@ -17,7 +17,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "MultiModuleApp"
 include(":app")
-include(":appentry")
-include(":domain")
-include(":data")
-include(":di")
