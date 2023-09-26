@@ -1,5 +1,5 @@
 package net.pst.cash.data
 
 interface Repository {
-    fun googleSignIn(googleToken: String): String
+    fun googleSignIn(googleToken: String)
 }

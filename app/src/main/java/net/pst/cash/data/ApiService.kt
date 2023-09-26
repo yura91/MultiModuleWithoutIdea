@@ -6,7 +6,7 @@ import retrofit2.http.POST
 
 interface ApiService {
     @POST("/oauth/google/callback-jwt")
-    fun signInGoogle(@Body requestBody: GoogleSignInRequest): GoogleSignInResponse
+    fun signInGoogle(@Body requestBody: GoogleSignInRequest): MyCall<GoogleSignInResponse>
 }
 
 
