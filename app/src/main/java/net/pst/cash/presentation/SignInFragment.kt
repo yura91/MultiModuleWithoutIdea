@@ -11,21 +11,24 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSignInBinding
 import net.pst.cash.presentation.model.getClickableSpan
+import net.pst.cash.presentation.viewmodels.SignInViewModel
 
-
+@AndroidEntryPoint
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
     private lateinit var oneTapClient: SignInClient
     private lateinit var signUpRequest: BeginSignInRequest
-    private val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
-    private var showOneTapUI = true
+
+    private val signInViewModel: SignInViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +68,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
                                     "Email: " + email,
                                     Toast.LENGTH_SHORT
                                 ).show()
+
+                                signInViewModel.sendTokenToBackend(idToken)
                                 // Got an ID token from Google. Use it to authenticate
                                 // with your backend.
                                 //                                         Log.d(TAG, "Got ID token.")
