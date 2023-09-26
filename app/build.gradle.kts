@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation(libs.daggerhilt)
     kapt(libs.compilerhilt)
     implementation(libs.appcompat)
