@@ -19,7 +19,7 @@ class RepositoryImpl @Inject constructor(
                     val token = responseData?.data?.token
                     val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                     with(sharedPref.edit()) {
-                        putString("authorization", token)
+                        putString("authorizationGoogle", token)
                         apply()
                     }
                 } else {
@@ -33,9 +33,38 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getAppleLink(): String? {
         return withContext(Dispatchers.IO) {
-            val response = api.getAppleLink()
-            val appleUrl = response.body()?.data?.appleUrl
-            appleUrl
+            try {
+                val linkResponse = api.getAppleLink()
+                if (linkResponse.isSuccessful) {
+                    val appleUrl = linkResponse.body()?.data?.appleUrl
+                    appleUrl
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        }
+    }
+
+    override suspend fun signInApple(code: String?) {
+        withContext(Dispatchers.IO) {
+            try {
+                val signInAppleResponse = api.signInApple(AppleSignInRequest(code))
+                if (signInAppleResponse.isSuccessful) {
+                    val token = signInAppleResponse.body()?.data?.token
+                    val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putString("authorizationApple", token)
+                        apply()
+                    }
+                } else {
+                    Log.d("TAG", "Failure")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

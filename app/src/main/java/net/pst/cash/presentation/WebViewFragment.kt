@@ -8,11 +8,16 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.addCallback
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.databinding.FragmentWebViewBinding
+import net.pst.cash.presentation.viewmodels.WebViewViewModel
 
+@AndroidEntryPoint
 class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBinding::inflate) {
+    private val viewModel: WebViewViewModel by viewModels()
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +38,7 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
                     val code = uri.getQueryParameter("code")
 
                     // Делайте что угодно с кодом
-
+                    viewModel.sendTokenToBackend(code)
                     return true // Это остановит загрузку URL
                 }
 

@@ -7,6 +7,8 @@ class SignInInteractorImpl @Inject constructor(private val repository: Repositor
     SignInInteractor {
     override suspend fun googleSignIn(googleToken: String) = repository.googleSignIn(googleToken)
 
+    override suspend fun signInApple(code: String?) = repository.signInApple(code)
+
     override suspend fun getAppleLink() = repository.getAppleLink()
 
 }

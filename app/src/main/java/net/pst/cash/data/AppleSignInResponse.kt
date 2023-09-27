@@ -2,8 +2,8 @@ package net.pst.cash.data
 
 import com.google.gson.annotations.SerializedName
 
-data class GoogleSignInResponse(val data: Data)
-data class Data(
+data class AppleSignInResponse(val data: AppleTokenData)
+data class AppleTokenData(
     @SerializedName("token")
     val token: String?,
     @SerializedName("type")
