@@ -4,14 +4,14 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import net.pst.cash.data.ApiService
-import net.pst.cash.data.Repository
-import net.pst.cash.data.RepositoryImpl
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object AppModule {
+    @Singleton
     @Provides
-    fun repository(api: ApiService, context: Context): Repository = RepositoryImpl(api, context)
+    fun provideContext(@ApplicationContext appContext: Context): Context = appContext
 }

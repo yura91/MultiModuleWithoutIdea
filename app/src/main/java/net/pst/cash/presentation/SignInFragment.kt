@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -88,7 +89,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             }
 
         binding?.signWithGoogle?.setOnClickListener {
-            /*oneTapClient.beginSignIn(signUpRequest)
+            oneTapClient.beginSignIn(signUpRequest)
                 .addOnSuccessListener(requireActivity()) { result ->
                     val intentSenderRequest: IntentSenderRequest =
                         IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
@@ -97,8 +98,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
                 .addOnFailureListener(requireActivity()) { e ->
                     // No Google Accounts found. Just continue presenting the signed-out UI.
                     Log.d("TAG", e.localizedMessage)
-                }*/
-            signInViewModel.sendTokenToBackend("eyJhbGciOiJSUzI1NiIsImtpZCI6ImI5YWM2MDFkMTMxZmQ0ZmZkNTU2ZmYwMzJhYWIxODg4ODBjZGUzYjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjQyOTAyMDk2MjktcDdicHMzZTJ2c2JldTNwYWN0YmYwNGRtZDZzbTVqc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjQyOTAyMDk2MjktMmkxb2Y2dTk5bzM2dm5hM3FydmFiajJhM2tqdmhtMjguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDEwNDIwNzQ1Mzc3MzA4Njc2MzYiLCJlbWFpbCI6InVyaWp2bGFzaWtAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY5NTczMjI1MCwiZXhwIjoxNjk1NzM1ODUwfQ.f61uc7vxWH7uI8edmxQ-iq2_CnvAmeoYhtMufaLvKcAVp65sg1z6H71Ysr9sDMU-_Rpj5uwZr3OYTaoVKJrWb_j_d6r3q3yvNtEZTTbhEclFkToBktPmyNiAVM3IVeBfDQNIli4ykKIEad4NIuXRPSqo-6KOXSxMiDgfacJWgzmZ4DT2CE8V9u50eiabiygPIiaQIBW0uz3HWrrYNFDXMBxpJBcvX9WL_q3FD9gNbdTeyGiJyNcKDyDekxa8z-iH64jFBa4FlEoaB2q2_aDBgSpZmhwExl1B9SQYoQ48zwFV8u2UrrcxI5-1HZ-FvRx6R-yntZk6Ej6qwVM0sBZzxA\n")
+                }
+//            signInViewModel.sendTokenToBackend("eyJhbGciOiJSUzI1NiIsImtpZCI6ImI5YWM2MDFkMTMxZmQ0ZmZkNTU2ZmYwMzJhYWIxODg4ODBjZGUzYjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjQyOTAyMDk2MjktcDdicHMzZTJ2c2JldTNwYWN0YmYwNGRtZDZzbTVqc3EuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjQyOTAyMDk2MjktMmkxb2Y2dTk5bzM2dm5hM3FydmFiajJhM2tqdmhtMjguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDEwNDIwNzQ1Mzc3MzA4Njc2MzYiLCJlbWFpbCI6InVyaWp2bGFzaWtAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY5NTczMjI1MCwiZXhwIjoxNjk1NzM1ODUwfQ.f61uc7vxWH7uI8edmxQ-iq2_CnvAmeoYhtMufaLvKcAVp65sg1z6H71Ysr9sDMU-_Rpj5uwZr3OYTaoVKJrWb_j_d6r3q3yvNtEZTTbhEclFkToBktPmyNiAVM3IVeBfDQNIli4ykKIEad4NIuXRPSqo-6KOXSxMiDgfacJWgzmZ4DT2CE8V9u50eiabiygPIiaQIBW0uz3HWrrYNFDXMBxpJBcvX9WL_q3FD9gNbdTeyGiJyNcKDyDekxa8z-iH64jFBa4FlEoaB2q2_aDBgSpZmhwExl1B9SQYoQ48zwFV8u2UrrcxI5-1HZ-FvRx6R-yntZk6Ej6qwVM0sBZzxA\n")
 
         }
         binding?.signWithApple?.setOnClickListener {
