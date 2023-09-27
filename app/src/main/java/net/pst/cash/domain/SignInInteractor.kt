@@ -1,5 +1,5 @@
 package net.pst.cash.domain
 
 interface SignInInteractor {
-    fun googleSignIn(googleToken: String)
+    suspend fun googleSignIn(googleToken: String)
 }
