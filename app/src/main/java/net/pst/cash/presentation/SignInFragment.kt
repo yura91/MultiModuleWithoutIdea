@@ -10,7 +10,7 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSignInBinding
@@ -39,11 +39,19 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         signInViewModel.signInRequest.observe(viewLifecycleOwner) { request ->
             activityResultLauncher.launch(request)
         }
+        signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
+            link?.let {
+                val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(it)
+                findNavController().navigate(action)
+                signInViewModel.clearAppleLink()
+            }
+        }
         binding?.signWithGoogle?.setOnClickListener {
             signInViewModel.startSignIn()
         }
         binding?.signWithApple?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
+            signInViewModel.getAppleLink()
+//            it.findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
     }
 

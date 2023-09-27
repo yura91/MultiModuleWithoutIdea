@@ -37,6 +37,9 @@ class SignInViewModel @Inject constructor(
     private val _signInRequest = MutableLiveData<IntentSenderRequest>()
     val signInRequest: LiveData<IntentSenderRequest> get() = _signInRequest
 
+    private val _appleLink = MutableLiveData<String?>()
+    val appleLink: LiveData<String?> get() = _appleLink
+
     fun startSignIn() {
         oneTapClient.beginSignIn(signUpRequest)
             .addOnSuccessListener { result ->
@@ -53,6 +56,17 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             interactor.googleSignIn(googleToken)
         }
+    }
+
+    fun getAppleLink() {
+        viewModelScope.launch {
+            val link: String? = interactor.getAppleLink()
+            _appleLink.value = link
+        }
+    }
+
+    fun clearAppleLink() {
+        _appleLink.value = null
     }
 
     fun handleSignInResult(result: ActivityResult?) {
