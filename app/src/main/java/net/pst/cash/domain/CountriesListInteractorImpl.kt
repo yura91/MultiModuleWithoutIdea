@@ -1,20 +1,21 @@
 package net.pst.cash.domain
 
 import net.pst.cash.data.CountriesRepository
+import net.pst.cash.domain.model.CountryModel
 import javax.inject.Inject
 
 class CountriesListInteractorImpl @Inject constructor(private val countriesRepository: CountriesRepository) :
     CountriesListInteractor {
-    override suspend fun getCountriesList(): List<String>? {
+    override suspend fun getCountriesList(): List<CountryModel>? {
         val countriesList = countriesRepository.getCountriesList()
         if (countriesList != null) {
-            val countriesTittles = mutableListOf<String>()
-            countriesList?.forEach { country ->
+            val countriesModels = mutableListOf<CountryModel>()
+            countriesList.forEach { country ->
                 country.title?.let {
-                    countriesTittles.add(it)
+                    countriesModels.add(CountryModel(country.id, it))
                 }
             }
-            return countriesTittles
+            return countriesModels
         }
         return null
     }

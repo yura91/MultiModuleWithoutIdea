@@ -7,13 +7,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.CountriesListInteractor
+import net.pst.cash.domain.model.CountryModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LocationViewModel @Inject constructor(private val interactor: CountriesListInteractor) :
     ViewModel() {
-    private val _countriesList = MutableLiveData<List<String>>()
-    val countriesList: LiveData<List<String>> get() = _countriesList
+    var selectedItem: CountryModel? = null
+    private val _countriesList = MutableLiveData<List<CountryModel>>()
+    val countriesList: LiveData<List<CountryModel>> get() = _countriesList
 
     init {
         viewModelScope.launch {

@@ -10,11 +10,12 @@ import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import net.pst.cash.R
+import net.pst.cash.domain.model.CountryModel
 import java.util.Locale
 
 
-class CountriesAdapter(context: Context, private val countries: List<String>) :
-    ArrayAdapter<String>(context, R.layout.select_country_item, countries.toMutableList()) {
+class CountriesAdapter(context: Context, private val countries: List<CountryModel>) :
+    ArrayAdapter<CountryModel>(context, R.layout.select_country_item, countries.toMutableList()) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
@@ -30,8 +31,8 @@ class CountriesAdapter(context: Context, private val countries: List<String>) :
         } else {
             viewHolder = view.tag as ViewHolder
         }
-        val countryName = getItem(position)
-        viewHolder.countryTextView.text = countryName
+        val countryItem = getItem(position)
+        viewHolder.countryTextView.text = countryItem?.title
 
         return view!!;
     }
@@ -43,14 +44,14 @@ class CountriesAdapter(context: Context, private val countries: List<String>) :
     private val countryFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
             val results = FilterResults()
-            val suggestions: MutableList<String> = ArrayList()
+            val suggestions: MutableList<CountryModel> = ArrayList()
             if (constraint.isEmpty()) {
                 suggestions.addAll(countries)
             } else {
                 val filterPattern =
                     constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
                 for (item in countries) {
-                    if (item.lowercase().contains(filterPattern)) {
+                    if (item.title.lowercase().contains(filterPattern)) {
                         suggestions.add(item)
                     }
                 }
@@ -62,7 +63,7 @@ class CountriesAdapter(context: Context, private val countries: List<String>) :
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
             clear()
-            (results.values as? List<String>)?.let { addAll(it) }
+            (results.values as? List<CountryModel>)?.let { addAll(it) }
             notifyDataSetChanged()
         }
     }
