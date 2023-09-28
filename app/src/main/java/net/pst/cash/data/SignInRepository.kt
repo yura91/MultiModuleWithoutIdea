@@ -1,6 +1,6 @@
 package net.pst.cash.data
 
-interface Repository {
+interface SignInRepository {
     suspend fun signInGoogle(googleToken: String): Boolean
 
     suspend fun getAppleLink(): String?

@@ -6,10 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(
+class SignInRepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val context: Context
-) : Repository {
+) : SignInRepository {
     override suspend fun signInGoogle(googleToken: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {

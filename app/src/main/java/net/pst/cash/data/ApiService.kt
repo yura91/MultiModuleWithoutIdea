@@ -19,6 +19,10 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("/oauth/apple/callback")
     suspend fun signInApple(@Body requestBody: AppleSignInRequest): Response<AppleSignInResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("/dictionary/countries")
+    suspend fun getCountriesList(): Response<CountriesListResponse>
 }
 
 
