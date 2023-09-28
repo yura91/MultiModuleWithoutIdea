@@ -54,7 +54,7 @@ class SignInViewModel @Inject constructor(
 
     private fun sendTokenToBackend(googleToken: String) {
         viewModelScope.launch {
-            interactor.googleSignIn(googleToken)
+            interactor.signInGoogle(googleToken)
         }
     }
 

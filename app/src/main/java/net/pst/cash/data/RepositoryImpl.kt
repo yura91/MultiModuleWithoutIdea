@@ -10,7 +10,7 @@ class RepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val context: Context
 ) : Repository {
-    override suspend fun googleSignIn(googleToken: String) {
+    override suspend fun signInGoogle(googleToken: String) {
         withContext(Dispatchers.IO) {
             try {
                 val signInResponse = api.signInGoogle(GoogleSignInRequest(googleToken))
