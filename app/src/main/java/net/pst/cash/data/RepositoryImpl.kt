@@ -10,23 +10,26 @@ class RepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val context: Context
 ) : Repository {
-    override suspend fun signInGoogle(googleToken: String) {
-        withContext(Dispatchers.IO) {
+    override suspend fun signInGoogle(googleToken: String): Boolean {
+        return withContext(Dispatchers.IO) {
             try {
                 val signInResponse = api.signInGoogle(GoogleSignInRequest(googleToken))
                 if (signInResponse.isSuccessful) {
                     val responseData = signInResponse.body()
-                    val token = responseData?.data?.token
+                    val token: String? = responseData?.data?.token
                     val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putString("authorizationGoogle", token)
                         apply()
                     }
+                    true
                 } else {
                     Log.d("TAG", "Failure")
+                    false
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                false
             }
         }
     }

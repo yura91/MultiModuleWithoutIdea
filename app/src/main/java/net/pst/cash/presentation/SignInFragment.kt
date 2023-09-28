@@ -39,6 +39,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         signInViewModel.signInRequest.observe(viewLifecycleOwner) { request ->
             activityResultLauncher.launch(request)
         }
+
+        signInViewModel.isGoogleSuccess.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
+        }
+
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
             link?.let {
                 val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(it)

@@ -34,6 +34,9 @@ class SignInViewModel @Inject constructor(
         )
         .build()
 
+    private val _isGoogleSuccess = MutableLiveData<Boolean>()
+    val isGoogleSuccess = _isGoogleSuccess
+
     private val _signInRequest = MutableLiveData<IntentSenderRequest>()
     val signInRequest: LiveData<IntentSenderRequest> get() = _signInRequest
 
@@ -54,7 +57,8 @@ class SignInViewModel @Inject constructor(
 
     private fun sendTokenToBackend(googleToken: String) {
         viewModelScope.launch {
-            interactor.signInGoogle(googleToken)
+            val isGoogleSuccess = interactor.signInGoogle(googleToken)
+            _isGoogleSuccess.value = isGoogleSuccess
         }
     }
 
