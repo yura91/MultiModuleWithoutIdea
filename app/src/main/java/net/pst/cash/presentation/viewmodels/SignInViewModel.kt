@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.R
 import net.pst.cash.domain.SignInInteractor
+import net.pst.cash.presentation.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,14 +35,14 @@ class SignInViewModel @Inject constructor(
         )
         .build()
 
-    private val _isGoogleSuccess = MutableLiveData<Boolean>()
+    private val _isGoogleSuccess = SingleLiveEvent<Boolean>()
     val isGoogleSuccess = _isGoogleSuccess
 
     private val _signInRequest = MutableLiveData<IntentSenderRequest>()
     val signInRequest: LiveData<IntentSenderRequest> get() = _signInRequest
 
-    private val _appleLink = MutableLiveData<String?>()
-    val appleLink: LiveData<String?> get() = _appleLink
+    private val _appleLink = SingleLiveEvent<String>()
+    val appleLink: LiveData<String> get() = _appleLink
 
     fun startSignIn() {
         oneTapClient.beginSignIn(signUpRequest)
@@ -65,12 +66,10 @@ class SignInViewModel @Inject constructor(
     fun getAppleLink() {
         viewModelScope.launch {
             val link: String? = interactor.getAppleLink()
-            _appleLink.value = link
+            link?.let {
+                _appleLink.value = link
+            }
         }
-    }
-
-    fun clearAppleLink() {
-        _appleLink.value = null
     }
 
     fun handleSignInResult(result: ActivityResult?) {

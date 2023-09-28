@@ -45,15 +45,14 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         }
 
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
-            link?.let {
-                val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(it)
+                val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(link)
                 findNavController().navigate(action)
-                signInViewModel.clearAppleLink()
-            }
         }
+
         binding?.signWithGoogle?.setOnClickListener {
             signInViewModel.startSignIn()
         }
+
         binding?.signWithApple?.setOnClickListener {
             signInViewModel.getAppleLink()
 //            it.findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
