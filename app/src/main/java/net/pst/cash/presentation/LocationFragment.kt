@@ -12,6 +12,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentLocationBinding
@@ -28,7 +29,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         binding?.toolbar?.setNavigationOnClickListener {
             it.findNavController().popBackStack()
         }
-
+        val args: LocationFragmentArgs by navArgs()
+        val fistName = args.firstName
+        val lastname = args.lastName
+        val bithDate = args.birthDate
         viewModel.countriesList.observe(viewLifecycleOwner) {
             Log.d("TAG", "")
             val countriesAdapter = CountriesAdapter(requireContext(), it)

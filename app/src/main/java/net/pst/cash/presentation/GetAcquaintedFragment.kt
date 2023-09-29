@@ -56,7 +56,13 @@ class GetAcquaintedFragment :
         }
 
         binding?.next?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+            val action =
+                GetAcquaintedFragmentDirections.actionGetAcquaintedFragmentToLocationFragment(
+                    binding?.firstNameField?.text.toString(),
+                    binding?.lastNameField?.text.toString(),
+                    binding?.birthDate?.text.toString()
+                )
+            it.findNavController().navigate(action)
         }
     }
 }
