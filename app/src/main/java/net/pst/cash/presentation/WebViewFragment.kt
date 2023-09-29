@@ -3,6 +3,7 @@ package net.pst.cash.presentation
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -32,17 +33,17 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
                 request: WebResourceRequest?
             ): Boolean {
                 val url = request?.url.toString()
-
+                Log.d("INTERURL", url)
                 if (url.startsWith("https://vue3.pstage.net")) {
                     val uri = Uri.parse(url)
                     val code = uri.getQueryParameter("code")
 
                     // Делайте что угодно с кодом
-                    viewModel.sendTokenToBackend(code)
-                    return true // Это остановит загрузку URL
+                    viewModel.sendTokenToBackend(code?.trim())
+//                 true // Это остановит загрузку URL
                 }
 
-                return super.shouldOverrideUrlLoading(view, request)
+                return true
             }
         }
         binding?.webView?.loadUrl(loadUrl)
