@@ -2,6 +2,7 @@ package net.pst.cash.presentation.viewmodels
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
@@ -16,13 +17,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.R
 import net.pst.cash.domain.SignInInteractor
+import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.presentation.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    application: Application,
-    private val interactor: SignInInteractor
+    private val application: Application,
+    private val interactor: SignInInteractor,
+    private val verifyInteractor: VerificationInteractor
 ) : AndroidViewModel(application) {
     private val oneTapClient = Identity.getSignInClient(application)
     private var signUpRequest: BeginSignInRequest = BeginSignInRequest.builder()
@@ -35,8 +38,8 @@ class SignInViewModel @Inject constructor(
         )
         .build()
 
-    private val _isGoogleSuccess = SingleLiveEvent<Boolean>()
-    val isGoogleSuccess = _isGoogleSuccess
+    private val _isVerificationNeeded = SingleLiveEvent<Boolean>()
+    val isVerificationNeeded = _isVerificationNeeded
 
     private val _signInRequest = MutableLiveData<IntentSenderRequest>()
     val signInRequest: LiveData<IntentSenderRequest> get() = _signInRequest
@@ -59,7 +62,15 @@ class SignInViewModel @Inject constructor(
     private fun sendTokenToBackend(googleToken: String) {
         viewModelScope.launch {
             val isGoogleSuccess = interactor.signInGoogle(googleToken)
-            _isGoogleSuccess.value = isGoogleSuccess
+            if (isGoogleSuccess) {
+                val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                val token = sharedPref.getString("token", "")
+
+                val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
+                if (isVerificationNeeded) {
+                    _isVerificationNeeded.value = true
+                }
+            }
         }
     }
 

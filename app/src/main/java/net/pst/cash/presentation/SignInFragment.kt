@@ -40,7 +40,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             activityResultLauncher.launch(request)
         }
 
-        signInViewModel.isGoogleSuccess.observe(viewLifecycleOwner) {
+        signInViewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
 
