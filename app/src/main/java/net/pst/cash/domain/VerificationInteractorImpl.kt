@@ -7,4 +7,7 @@ class VerificationInteractorImpl @Inject constructor(private val verificationRep
     VerificationInteractor {
     override suspend fun isVerificationNeeded(token: String): Boolean =
         verificationRepository.isVerificationNeeded(token)
+
+    override suspend fun verifyUser(token: String): Boolean? =
+        verificationRepository.verifyUser(token)
 }

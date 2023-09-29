@@ -28,6 +28,13 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/verification/actual")
     suspend fun isVerificationNeeded(@Header("Authorization") token: String): Response<VerificationNeedResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("/verification")
+    suspend fun verifyUser(
+        @Header("Authorization") token: String,
+        @Body requestBody: VerificationRequest
+    ): Response<VerificationResponse>
 }
 
 

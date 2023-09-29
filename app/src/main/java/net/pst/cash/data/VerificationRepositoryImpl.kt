@@ -19,8 +19,27 @@ class VerificationRepositoryImpl @Inject constructor(
                     false
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
                 false
             }
         }
     }
+
+    override suspend fun verifyUser(token: String): Boolean? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val verifyResponse = api.verifyUser(token, VerificationRequest())
+                if (verifyResponse.isSuccessful) {
+                    verifyResponse.body()?.success
+                } else {
+                    false
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                false
+            }
+        }
+    }
+
+
 }
