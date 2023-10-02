@@ -15,11 +15,11 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentWebViewBinding
-import net.pst.cash.presentation.viewmodels.WebViewViewModel
+import net.pst.cash.presentation.viewmodels.AppleWebViewViewModel
 
 @AndroidEntryPoint
-class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBinding::inflate) {
-    private val viewModel: WebViewViewModel by viewModels()
+class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBinding::inflate) {
+    private val viewModel: AppleWebViewViewModel by viewModels()
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
         viewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_webViewFragment_to_getAcquaintedFragment)
         }
-        val args: WebViewFragmentArgs by navArgs()
+        val args: AppleWebViewFragmentArgs by navArgs()
         val loadUrl = args.link
         binding?.webView?.settings?.javaScriptEnabled = true
         binding?.webView?.webViewClient = object : WebViewClient() {
@@ -42,7 +42,7 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
                     val code = uri.getQueryParameter("code")
 
                     // Делайте что угодно с кодом
-                    viewModel.sendCodeToBackend(code?.trim())
+                    viewModel.sendAppleCodeToBackend(code?.trim())
 //                 true // Это остановит загрузку URL
                 }
 

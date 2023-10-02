@@ -12,7 +12,7 @@ import net.pst.cash.presentation.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
-class WebViewViewModel @Inject constructor(
+class AppleWebViewViewModel @Inject constructor(
     private val application: Application,
     private val interactor: SignInInteractor,
     private val verifyInteractor: VerificationInteractor
@@ -20,7 +20,7 @@ class WebViewViewModel @Inject constructor(
     private val _isVerificationNeeded = SingleLiveEvent<Unit?>()
     val isVerificationNeeded = _isVerificationNeeded
 
-    fun sendCodeToBackend(code: String?) {
+    fun sendAppleCodeToBackend(code: String?) {
         viewModelScope.launch {
             val isAppleSuccess = interactor.signInApple(code)
             if (isAppleSuccess) {

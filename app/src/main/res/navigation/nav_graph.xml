@@ -59,7 +59,7 @@
     <include app:graph="@navigation/design_nav_graph" />
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="net.pst.cash.presentation.WebViewFragment"
+        android:name="net.pst.cash.presentation.AppleWebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view">
         <argument
