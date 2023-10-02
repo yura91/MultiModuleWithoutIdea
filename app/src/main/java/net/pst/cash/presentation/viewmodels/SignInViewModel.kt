@@ -59,7 +59,7 @@ class SignInViewModel @Inject constructor(
             }
     }
 
-    private fun sendTokenToBackend(googleToken: String) {
+    private fun sendGoogleTokenToBackend(googleToken: String) {
         viewModelScope.launch {
             val isGoogleSuccess = interactor.signInGoogle(googleToken)
             if (isGoogleSuccess) {
@@ -90,7 +90,7 @@ class SignInViewModel @Inject constructor(
                 val idToken = credential.googleIdToken
                 when {
                     idToken != null -> {
-                        sendTokenToBackend(idToken)
+                        sendGoogleTokenToBackend(idToken)
                     }
 
                     else -> {

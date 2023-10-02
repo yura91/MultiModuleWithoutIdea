@@ -16,10 +16,38 @@ import javax.inject.Inject
 class LocationViewModel @Inject constructor(
     private val countriesInteractor: CountriesListInteractor,
     private val verificationInteractor: VerificationInteractor
-) :
-    ViewModel() {
-
+) : ViewModel() {
+    private val bannedCountries = listOf(
+        "Belarus",
+        "Burma",
+        "Burundi",
+        "Central African",
+        "Cuba",
+        "Republic of the Congo",
+        "Hong Kong",
+        "Islamic Republic of Iran",
+        "Iraq",
+        "Lebanon",
+        "Libya",
+        "Nicaragua",
+        "North Korea",
+        "Russian Federation",
+        "Somalia",
+        "Sudan",
+        "South Sudan",
+        "Syrian Arab Republic",
+        "Ukraine",
+        "United States",
+        "Venezuela",
+        "Yemen",
+        "Zimbabwe",
+        "USA"
+    )
     var selectedItem: CountryModel? = null
+        set(country) {
+            field = country
+            _banned.value = bannedCountries.contains(country?.title)
+        }
     private val _countriesList = MutableLiveData<List<CountryModel>>()
     val countriesList: LiveData<List<CountryModel>> get() = _countriesList
     var firstName = ""
@@ -27,6 +55,9 @@ class LocationViewModel @Inject constructor(
     var birthDate = ""
     private val _verified = SingleLiveEvent<Unit?>()
     val verified: LiveData<Unit?> get() = _verified
+
+    private val _banned = MutableLiveData<Boolean>()
+    val banned: LiveData<Boolean> get() = _banned
 
     init {
         viewModelScope.launch {
