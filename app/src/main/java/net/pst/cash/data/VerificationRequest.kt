@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class VerificationRequest(
     @SerializedName("step")
-    val step: String? = "unlimited",
+    val step: String? = "welcome",
     @SerializedName("first_name")
     val firstName: String = "John",
     @SerializedName("last_name")

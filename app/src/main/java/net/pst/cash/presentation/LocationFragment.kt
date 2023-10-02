@@ -1,7 +1,7 @@
 package net.pst.cash.presentation
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewTreeObserver
@@ -30,11 +30,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             it.findNavController().popBackStack()
         }
         val args: LocationFragmentArgs by navArgs()
-        val fistName = args.firstName
-        val lastname = args.lastName
-        val bithDate = args.birthDate
+        viewModel.firstName = args.firstName
+        viewModel.lastName = args.lastName
+        viewModel.birthDate = args.birthDate
         viewModel.countriesList.observe(viewLifecycleOwner) {
-            Log.d("TAG", "")
             val countriesAdapter = CountriesAdapter(requireContext(), it)
             binding?.countries?.setAdapter(countriesAdapter)
 
@@ -48,6 +47,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
                     viewModel.selectedItem = parent?.adapter?.getItem(position) as? CountryModel
                 }
             }
+        }
+
+        viewModel.verified.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
         }
 
         binding?.countries?.apply {
@@ -115,7 +118,13 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         }
 
         binding?.next?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
+            val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            token?.let { token ->
+                viewModel.verifyUser(
+                    "Bearer $token"
+                )
+            }
         }
     }
 }

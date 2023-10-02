@@ -2,6 +2,7 @@ package net.pst.cash.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import net.pst.cash.domain.model.CountryModel
 import javax.inject.Inject
 
 class VerificationRepositoryImpl @Inject constructor(
@@ -25,10 +26,25 @@ class VerificationRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun verifyUser(token: String): Boolean? {
+    override suspend fun verifyUser(
+        token: String,
+        firstName: String,
+        lastName: String,
+        birthDate: String,
+        selectedItem: CountryModel?
+    ): Boolean? {
         return withContext(Dispatchers.IO) {
             try {
-                val verifyResponse = api.verifyUser(token, VerificationRequest())
+                val verifyResponse = api.verifyUser(
+                    token,
+                    VerificationRequest(
+                        firstName = firstName,
+                        lastName = lastName,
+                        birthday = birthDate,
+                        countryId = selectedItem?.id.toString(),
+                        actualCountryId = selectedItem?.id.toString()
+                    )
+                )
                 if (verifyResponse.isSuccessful) {
                     verifyResponse.body()?.success
                 } else {
