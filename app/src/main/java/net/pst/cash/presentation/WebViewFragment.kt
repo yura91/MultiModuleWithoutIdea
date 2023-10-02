@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import net.pst.cash.R
 import net.pst.cash.databinding.FragmentWebViewBinding
 import net.pst.cash.presentation.viewmodels.WebViewViewModel
 
@@ -23,7 +24,9 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_webViewFragment_to_getAcquaintedFragment)
+        }
         val args: WebViewFragmentArgs by navArgs()
         val loadUrl = args.link
         binding?.webView?.settings?.javaScriptEnabled = true
@@ -39,7 +42,7 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebViewBind
                     val code = uri.getQueryParameter("code")
 
                     // Делайте что угодно с кодом
-                    viewModel.sendTokenToBackend(code?.trim())
+                    viewModel.sendCodeToBackend(code?.trim())
 //                 true // Это остановит загрузку URL
                 }
 

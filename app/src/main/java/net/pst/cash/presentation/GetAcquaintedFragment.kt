@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.addCallback
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
@@ -63,6 +64,10 @@ class GetAcquaintedFragment :
                     binding?.birthDate?.text.toString()
                 )
             it.findNavController().navigate(action)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_getAcquaintedFragment_to_signInFragment)
         }
     }
 }
