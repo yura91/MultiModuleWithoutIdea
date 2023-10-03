@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.ui.theme.MyApp
 
 class SignInFragment : Fragment() {
@@ -78,7 +79,9 @@ class SignInFragment : Fragment() {
 
                 Button(
                     colors = mainButtonColor,
-                    onClick = { },
+                    onClick = {
+                        findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
+                    },
                     modifier = Modifier
                         .constrainAs(signApple) {
                             bottom.linkTo(signGoogle.top, 8.dp)

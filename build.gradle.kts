@@ -4,6 +4,7 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply false
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
+    id("androidx.navigation.safeargs") version "2.6.0" apply false
 }
 
 allprojects {

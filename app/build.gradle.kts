@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -33,7 +34,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4.5"
     }
     packaging {
         resources {
@@ -45,6 +46,8 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation("com.google.dagger:hilt-android:2.44")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     kapt("com.google.dagger:hilt-android-compiler:2.44")
