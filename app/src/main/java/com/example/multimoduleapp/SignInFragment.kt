@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
@@ -80,7 +81,7 @@ class SignInFragment : Fragment() {
                     onClick = { },
                     modifier = Modifier
                         .constrainAs(signApple) {
-                            bottom.linkTo(signGoogle.top)
+                            bottom.linkTo(signGoogle.top, 8.dp)
                             start.linkTo(parent.start, margin = 40.dp)
                             end.linkTo(parent.end, margin = 40.dp)
                             width = Dimension.fillToConstraints
@@ -96,7 +97,11 @@ class SignInFragment : Fragment() {
                             contentDescription = null
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Sign in with Apple", Modifier.padding(0.dp))
+                        Text(
+                            text = "Sign in with Apple",
+                            modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
+                            fontSize = 16.sp
+                        )
                     }
                 }
 
@@ -121,12 +126,16 @@ class SignInFragment : Fragment() {
                             contentDescription = null
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Sign in with Google", Modifier.padding(0.dp))
+                        Text(
+                            text = "Sign in with Google",
+                            modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
+                            fontSize = 16.sp
+                        )
                     }
                 }
 
-                Text("By registering, you agree to our\n" +
-                        "Privacy Policy and Terms of use",
+                Text(
+                    "By registering, you agree to our\n" + "Privacy Policy and Terms of use",
                     modifier = Modifier
                         .wrapContentSize()
                         .constrainAs(text) {
@@ -134,7 +143,9 @@ class SignInFragment : Fragment() {
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
                             width = Dimension.fillToConstraints
-                        })
+                        },
+                    lineHeight = 12.sp, fontSize = 12.sp
+                )
             }
         }
     }
