@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,11 +30,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,6 +72,7 @@ class GetAcquaintedFragment : Fragment() {
         var lastName by remember { mutableStateOf("") }
         var birthDate by remember { mutableStateOf("") }
         val dialogShowState = remember { mutableStateOf(false) }
+        val focusRequester = remember { FocusRequester() }
 
         if (dialogShowState.value) {
             val calendar = Calendar.getInstance()
@@ -134,7 +139,8 @@ class GetAcquaintedFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, top = 28.dp)
                     .fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                label = { Text("First name") }
+                label = { Text("First name") },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
 
             TextField(
@@ -144,7 +150,11 @@ class GetAcquaintedFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, top = 28.dp)
                     .fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                label = { Text("Last name") }
+                label = { Text("Last name") },
+                keyboardActions = KeyboardActions(onNext = {
+                    dialogShowState.value = true
+                }),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
 
             TextField(
@@ -163,7 +173,7 @@ class GetAcquaintedFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, top = 28.dp)
                     .fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                label = { Text("Birth date") }
+                label = { Text("Birth date") },
             )
             Spacer(Modifier.weight(1f))
             Button(
