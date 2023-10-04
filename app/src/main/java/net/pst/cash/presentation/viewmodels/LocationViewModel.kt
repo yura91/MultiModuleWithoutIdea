@@ -18,19 +18,23 @@ class LocationViewModel @Inject constructor(
     private val verificationInteractor: VerificationInteractor
 ) : ViewModel() {
     private val bannedCountries = listOf(
+        "Afghanistan",
         "Belarus",
-        "Burma",
         "Burundi",
         "Central African",
         "Cuba",
         "Republic of the Congo",
+        "The Democratic Republic Of The Congo",
+        "Côte d`Ivoire",
         "Hong Kong",
         "Islamic Republic of Iran",
         "Iraq",
         "Lebanon",
-        "Libya",
+        "Liberia",
+        "Libyan Arab Jamahiriya",
+        "Myanmar",
         "Nicaragua",
-        "North Korea",
+        "Democratic People's Republic of Korea",
         "Russian Federation",
         "Somalia",
         "Sudan",
@@ -41,7 +45,6 @@ class LocationViewModel @Inject constructor(
         "Venezuela",
         "Yemen",
         "Zimbabwe",
-        "USA"
     )
     var selectedItem: CountryModel? = null
         set(country) {
