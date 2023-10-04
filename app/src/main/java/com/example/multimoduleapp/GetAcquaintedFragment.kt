@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -182,7 +183,9 @@ class GetAcquaintedFragment : Fragment() {
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
                 colors = mainButtonColor,
-                onClick = {}
+                onClick = {
+                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+                }
             ) {
                 Text(
                     text = stringResource(R.string.next),

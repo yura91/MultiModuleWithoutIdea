@@ -11,4 +11,7 @@
     <string name="let_s_get_acquainted">Let\'s get\nacquainted</string>
     <string name="dd_mm_yyyy">dd.MM.yyyy</string>
     <string name="privacy_policy">By registering, you agree to our\nPrivacy Policy and Terms of use</string>
+    <string name="where_are_you_located">Where are you\nlocated?</string>
+    <string name="address_approve_conditions">Address approve conditions</string>
+    <string name="we_can_not_approve">We cannot approve your account\nif you are in Russia or 15 other countries</string>
 </resources>

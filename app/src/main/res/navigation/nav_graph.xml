@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/getAcquaintedFragment"
         android:name="com.example.multimoduleapp.GetAcquaintedFragment"
-        android:label="fragment_get_acquainted"
-        tools:layout="@layout/fragment_get_acquainted" />
+        android:label="fragment_get_acquainted">
+        <action
+            android:id="@+id/action_getAcquaintedFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.multimoduleapp.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in">
+        android:label="fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.multimoduleapp.LocationFragment"
+        android:label="LocationFragment" />
 </navigation>
