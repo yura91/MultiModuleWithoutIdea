@@ -1,0 +1,51 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1dp"
+    android:height="1dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#fff"
+        android:pathData="M256,256m-256,0a256,256 0,1 1,512 0a256,256 0,1 1,-512 0" />
+    <path
+        android:fillColor="#d80027"
+        android:pathData="M0,0h512v512H0z" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M256,64m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M64,256m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M448,256m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M256,448m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M352,400m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M400,352m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M352,112m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M400,160m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M160,112m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M112,160m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M112,352m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M160,400m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="m256,60l-103,52l20,61l-61,-20l-52,103l52,103l61,-20l-20,61l103,52l103,-52l-20,-61l61,20l52,-103l-52,-103l-61,20l20,-61zM256,96l64,32l-32,96l96,-32l32,64l-32,64l-96,-32l32,96l-64,32l-64,-32l32,-96l-96,32l-32,-64l32,-64l96,32l-32,-96z" />
+</vector>

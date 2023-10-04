@@ -12,7 +12,7 @@ class CountriesListInteractorImpl @Inject constructor(private val countriesRepos
             val countriesModels = mutableListOf<CountryModel>()
             countriesList.forEach { country ->
                 country.title?.let {
-                    countriesModels.add(CountryModel(country.id, it))
+                    countriesModels.add(CountryModel(country.id, it, country.iso2?.lowercase()))
                 }
             }
             return countriesModels

@@ -25,7 +25,7 @@ class CountriesAdapter(context: Context, private val countries: List<CountryMode
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.select_country_item, parent, false)
             viewHolder = ViewHolder()
-            viewHolder.flagImageView = view.findViewById(R.id.logoView)
+            viewHolder.flagImageView = view.findViewById(R.id.flagView)
             viewHolder.countryTextView = view.findViewById(R.id.countryName)
             view.tag = viewHolder
         } else {
@@ -33,12 +33,23 @@ class CountriesAdapter(context: Context, private val countries: List<CountryMode
         }
         val countryItem = getItem(position)
         viewHolder.countryTextView.text = countryItem?.title
+        viewHolder.flagImageView.setImageResource(
+            getDrawableIntByFileName(
+                context,
+                countryItem?.iso2
+            )
+        )
 
         return view!!;
     }
 
     override fun getFilter(): Filter {
         return countryFilter
+    }
+
+
+    private fun getDrawableIntByFileName(context: Context, fileName: String?): Int {
+        return context.resources.getIdentifier(fileName, "drawable", context.packageName)
     }
 
     private val countryFilter: Filter = object : Filter() {

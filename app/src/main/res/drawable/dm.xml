@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1dp"
+    android:height="1dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#fff"
+        android:pathData="M256,256m-256,0a256,256 0,1 1,512 0a256,256 0,1 1,-512 0" />
+    <path
+        android:fillColor="#496e2d"
+        android:pathData="M0,0h208l48,32l48,-32h208v208l-32,48l32,48v208H304l-48,-32l-48,32H0V304l32,-48l-32,-48Z" />
+    <path
+        android:fillColor="#333"
+        android:pathData="M512,240v32l-256,32L0,272v-32l256,-32z" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M512,208v32H0v-32z" />
+    <path
+        android:fillColor="#333"
+        android:pathData="M240,0h32l32,256l-32,256h-32l-32,-256Z" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="M208,0h32v512h-32z" />
+    <path
+        android:fillColor="#eee"
+        android:pathData="M272,0h32v512h-32z" />
+    <path
+        android:fillColor="#eee"
+        android:pathData="M512,272v32H0v-32z" />
+    <path
+        android:fillColor="#d80027"
+        android:pathData="M256,256m-122.4,0a122.4,122.4 0,1 1,244.8 0a122.4,122.4 0,1 1,-244.8 0" />
+    <path
+        android:fillColor="#496e2d"
+        android:pathData="M284,270c-9,-19 -21,-37 -21,-37v-13a14,14 0,0 0,-27 -2a11,11 0,0 0,-4 21a16,16 0,0 1,9 -9a14,14 0,0 0,2 2h2s-7,19 -7,29c0,27 19,36 19,36l-10,9h19v-18l9,9s17,-11 9,-27zM256,156l4,13h14l-11,8l4,12l-11,-8l-11,8l4,-12l-11,-8h14ZM197,175l11,8l11,-8l-4,13l11,8h-14l-4,12l-4,-12h-14l11,-8zM161,225h13l4,-13l4,13h14l-11,8l4,13l-11,-8l-11,8l5,-13zM161,287l11,-8l-5,-13l11,8l11,-8l-4,13l11,8h-14l-4,13l-4,-13ZM197,337l4,-13l-11,-8h14l4,-12l4,12h13l-10,8l4,13l-11,-8zM256,356l-4,-13h-14l11,-8l-4,-12l11,8l11,-8l-4,12l11,9h-14ZM315,337l-11,-8l-11,8l4,-13l-10,-8h13l4,-12l4,12h14l-11,8zM351,287h-13l-4,13l-4,-13h-14l11,-8l-4,-13l11,8l11,-8l-5,13zM351,225l-11,8l5,13l-11,-8l-11,8l4,-13l-11,-8h14l4,-13l4,13zM315,175l-4,13l11,8h-14l-4,12l-4,-12h-14l11,-8l-4,-13l11,8z" />
+</vector>

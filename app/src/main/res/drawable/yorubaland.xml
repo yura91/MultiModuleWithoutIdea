@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1dp"
+    android:height="1dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path
+        android:fillColor="#fff"
+        android:pathData="M256,256m-256,0a256,256 0,1 1,512 0a256,256 0,1 1,-512 0" />
+    <path
+        android:fillColor="#eee"
+        android:pathData="M384,0h128v128L352,352L128,512H0V384l160,-224Z" />
+    <path
+        android:fillColor="#338af3"
+        android:pathData="M0,384L384,0H0Z" />
+    <path
+        android:fillColor="#6da544"
+        android:pathData="M512,128L128,512h384z" />
+    <path
+        android:fillColor="#ffda44"
+        android:pathData="m432,234l-6,11h-13l6,11l-6,11h13l6,11l6,-11h13l-6,-11l6,-11h-13zM418,166l-6,11h-13l6,11l-6,10h13l6,12l6,-12h13l-6,-10l6,-11h-12zM381,110l-7,11h-12l6,11l-6,10h12l7,12l6,-12h13l-7,-10l7,-11h-13zM325,72l-7,11h-12l6,11l-6,11h12l7,11l6,-11h13l-7,-11l7,-11h-13zM256,58l-6,11h-13l6,11l-6,11h13l6,11l6,-11h13l-6,-11l6,-11h-13zM188,72l-7,11h-13l7,11l-6,11h12l7,11l6,-11h13l-7,-11l7,-11h-13zM132,110l-7,11h-13l7,11l-7,10h13l7,12l6,-12h13l-7,-10l7,-11h-13zM94,166l-7,11L75,177l6,11l-6,10h12l7,12l6,-12h13l-7,-10l7,-11h-13zM80,234l-6,11L61,245l6,11l-6,11h13l6,11l6,-11h13l-6,-11l6,-11L86,245ZM94,303l-7,11L75,314l6,11l-6,10h12l7,11l6,-11h13l-7,-11l7,-10h-13zM132,359l-7,11h-13l7,11l-7,10h13l7,11l6,-11h13l-7,-11l7,-10h-13zM188,396l-7,11h-13l7,11l-6,11h12l7,11l6,-11h13l-7,-11l7,-11h-13zM256,410l-6,11h-13l6,11l-6,11h13l6,11l6,-11h13l-6,-11l6,-11h-13zM325,396l-7,11h-12l6,11l-6,11h12l7,11l6,-11h13l-7,-11l7,-11h-13zM381,359l-7,11h-12l6,11l-6,10h12l7,11l6,-11h13l-7,-11l7,-10h-13zM418,303l-6,11h-13l6,11l-6,10h13l6,11l6,-11h13l-6,-11l6,-10h-13zM256,165c-3,0 -6,3 -6,6v20a38,28 0,0 0,-32 28a38,28 0,0 0,1 5l3,23a34,54 0,0 0,17 47v22h34v-22a34,54 0,0 0,17 -47l3,-23a38,28 0,0 0,1 -5a38,28 0,0 0,-32 -28v-20c0,-3 -3,-6 -6,-6z" />
+    <path
+        android:fillColor="#d80027"
+        android:pathData="M199,199a80,80 0,1 0,114 0l-17,17a56,56 0,0 1,16 40a56,56 0,0 1,-56 56a56,56 0,0 1,-56 -56a56,56 0,0 1,16 -40l-17,-17z" />
+</vector>
