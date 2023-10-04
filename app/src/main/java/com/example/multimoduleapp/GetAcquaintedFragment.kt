@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,11 +52,6 @@ import java.util.Calendar
 import java.util.Locale
 
 class GetAcquaintedFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,15 +80,17 @@ class GetAcquaintedFragment : Fragment() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            // Создаем DatePickerDialog
             val datePickerDialog = DatePickerDialog(
-                LocalContext.current, // Получаем текущий контекст
+                LocalContext.current,
                 { _, year, month, dayOfMonth ->
                     val date = Calendar.getInstance().apply {
                         set(year, month, dayOfMonth)
                     }
                     birthDate =
-                        SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date.time)
+                        SimpleDateFormat(
+                            getString(R.string.dd_mm_yyyy),
+                            Locale.getDefault()
+                        ).format(date.time)
                     dialogShowState.value = false
                 },
                 year,
@@ -104,12 +102,10 @@ class GetAcquaintedFragment : Fragment() {
                 dialogShowState.value = false
             }
 
-            // Отображаем DatePickerDialog
             LaunchedEffect(Unit) {
                 val imm =
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 hideKeyBoard(imm, requireView(), datePickerDialog)
-//                datePickerDialog.show()
             }
         }
 
@@ -134,8 +130,7 @@ class GetAcquaintedFragment : Fragment() {
             )
 
             Text(
-                "Let's get\n" +
-                        "acquainted", fontSize = 34.sp,
+                stringResource(R.string.let_s_get_acquainted), fontSize = 34.sp,
                 modifier = Modifier.padding(start = 16.dp), fontWeight = FontWeight.Bold
             )
 
@@ -146,7 +141,7 @@ class GetAcquaintedFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, top = 28.dp)
                     .fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                label = { Text("First name") },
+                label = { Text(stringResource(R.string.first_name)) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
 
@@ -157,7 +152,7 @@ class GetAcquaintedFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, top = 28.dp)
                     .fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                label = { Text("Last name") },
+                label = { Text(stringResource(R.string.last_name)) },
                 keyboardActions = KeyboardActions(onNext = {
                     dialogShowState.value = true
                 }),
@@ -171,7 +166,7 @@ class GetAcquaintedFragment : Fragment() {
                         dialogShowState.value = true
                     }) {
                     Icon(painterResource(R.drawable.calendar), contentDescription = null)
-                    Spacer(Modifier.width(4.dp)) // Отступ между иконкой и текстом
+                    Spacer(Modifier.width(4.dp))
                     Text(birthDate)
                 }
 
@@ -190,7 +185,7 @@ class GetAcquaintedFragment : Fragment() {
                 onClick = {}
             ) {
                 Text(
-                    text = "Continue",
+                    text = stringResource(R.string.next),
                     modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
                     fontSize = 16.sp
                 )

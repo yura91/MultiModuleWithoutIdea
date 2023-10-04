@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,7 +102,7 @@ class SignInFragment : Fragment() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Sign in with Apple",
+                            text = stringResource(R.string.sign_in_with_apple),
                             modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
                             fontSize = 16.sp
                         )
@@ -130,7 +131,7 @@ class SignInFragment : Fragment() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Sign in with Google",
+                            text = stringResource(R.string.sign_in_with_google),
                             modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
                             fontSize = 16.sp
                         )
@@ -138,7 +139,7 @@ class SignInFragment : Fragment() {
                 }
 
                 Text(
-                    "By registering, you agree to our\n" + "Privacy Policy and Terms of use",
+                    stringResource(R.string.privacy_policy),
                     modifier = Modifier
                         .wrapContentSize()
                         .constrainAs(text) {
