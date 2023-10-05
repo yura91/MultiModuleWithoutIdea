@@ -5,4 +5,5 @@
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_34">34dp</dimen>
+    <dimen name="seekbar_height">30dp</dimen>
 </resources>

@@ -14,14 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -31,7 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.rtugeek.android.colorseekbar.ColorSeekBar
 
 
 class CardPaletteFragment : Fragment() {
@@ -66,11 +63,9 @@ class CardPaletteFragment : Fragment() {
                     .padding(start = 4.dp, end = 4.dp, top = 4.dp),
                 contentScale = ContentScale.FillBounds
             )
+
             Spacer(modifier = Modifier.height(16.dp))
-            ColorSeekBar(
-                colors = listOf(Color.Red, Color.Green, Color.Blue),
-                onColorChanged = { color -> println("Selected color: $color") }
-            )
+            ColorSeekBar(0) {}
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 modifier = Modifier
@@ -89,34 +84,27 @@ class CardPaletteFragment : Fragment() {
         }
     }
 
-
     @Composable
     fun ColorSeekBar(
-        colors: List<Color>,
-        onColorChanged: (Color) -> Unit
+        progress: Int,
+        onProgressChanged: (Int) -> Unit
     ) {
-        var selectedColor by remember { mutableStateOf(colors.first()) }
-        Slider(
-            modifier = Modifier.height(100.dp),
-            value = colors.indexOf(selectedColor).toFloat(),
-            onValueChange = { newValue ->
-                selectedColor = colors[newValue.toInt()]
-                onColorChanged(selectedColor)
-            },
-            valueRange = 0f..(colors.size - 1).toFloat(),
-            steps = colors.size - 1,
-            colors = SliderDefaults.colors(
-                thumbColor = selectedColor
-            )
+        val colorSeekBar =
+            this.layoutInflater.inflate(R.layout.widget_color_seekbar, null) as ColorSeekBar
+        val colors: IntArray = intArrayOf(
+            ContextCompat.getColor(requireContext(), R.color.red_gr_color),
+            ContextCompat.getColor(requireContext(), R.color.third_gr_color),
+            ContextCompat.getColor(requireContext(), R.color.fourth_gr_color),
+            ContextCompat.getColor(requireContext(), R.color.fifth_gr_color),
+            ContextCompat.getColor(requireContext(), R.color.red_gr_color)
         )
-    }
 
-    @Preview
-    @Composable
-    fun PreviewColorSeekBar() {
-        ColorSeekBar(
-            colors = listOf(Color.Red, Color.Green, Color.Blue),
-            onColorChanged = { color -> println("Selected color: $color") }
+        colorSeekBar.setColorSeeds(colors)
+        AndroidView(
+            factory = { colorSeekBar },
+            update = { view ->
+                colorSeekBar.setProgress(progress)
+            }
         )
     }
 }
