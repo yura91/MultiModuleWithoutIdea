@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.background
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,22 +13,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 
 
@@ -48,6 +56,10 @@ class LocationFragment : Fragment() {
     @Preview
     @Composable
     fun LocationLayout() {
+        val mainButtonColor = ButtonDefaults.buttonColors(
+            containerColor = Color.Black,
+            contentColor = MaterialTheme.colorScheme.surface
+        )
         Column(
             Modifier.fillMaxSize()
         ) {
@@ -70,9 +82,11 @@ class LocationFragment : Fragment() {
 
             Card(
                 shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFF1F2F4)
+                ),
                 modifier = Modifier
-                    .background(Color.White)
-                    .padding(start = 20.dp, top = 20.dp, end = 20.dp)
+                    .padding(start = 16.dp, top = 20.dp, end = 16.dp)
                     .fillMaxWidth()
             ) {
                 Text(
@@ -85,7 +99,78 @@ class LocationFragment : Fragment() {
                     modifier = Modifier.padding(start = 20.dp, bottom = 20.dp, end = 20.dp)
                 )
             }
+            Spacer(modifier = Modifier.height(40.dp))
+
+            AutoCompleteTextViewCompose()
+
+            Spacer(Modifier.weight(1f))
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                colors = mainButtonColor,
+                onClick = {
+                }
+            ) {
+                Text(
+                    text = stringResource(R.string.next),
+                    modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
+                    fontSize = 16.sp
+                )
+            }
         }
+    }
+
+    @Composable
+    fun AutoCompleteTextViewCompose() {
+        val context = LocalContext.current // получаем текущий контекст
+
+        val autoCompleteTextView = remember {
+            AutoCompleteTextView(context).apply {
+                val countries = arrayOf(
+                    "Afghanistan",
+                    "Belarus",
+                    "Burundi",
+                    "Central African",
+                    "Cuba",
+                    "Republic of the Congo",
+                    "The Democratic Republic Of The Congo",
+                    "Côte d`Ivoire",
+                    "Hong Kong",
+                    "Islamic Republic of Iran",
+                    "Iraq",
+                    "Lebanon",
+                    "Liberia",
+                    "Libyan Arab Jamahiriya",
+                    "Myanmar",
+                    "Nicaragua",
+                    "Democratic People's Republic of Korea",
+                    "Russian Federation",
+                    "Somalia",
+                    "Sudan",
+                    "South Sudan",
+                    "Syrian Arab Republic",
+                    "Ukraine",
+                    "United States",
+                    "Venezuela",
+                    "Yemen",
+                    "Zimbabwe",
+                )
+                val adapter: ArrayAdapter<String> = ArrayAdapter(
+                    context,
+                    android.R.layout.simple_dropdown_item_1line, countries
+                )
+                setAdapter(adapter)
+            }
+        }
+
+        AndroidView(
+            factory = { autoCompleteTextView },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+            update = {}
+        )
     }
 }
 
