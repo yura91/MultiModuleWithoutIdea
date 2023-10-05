@@ -120,6 +120,14 @@ class GetAcquaintedFragment : Fragment() {
         ) {
             TopAppBar(
                 title = {},
+                navigationIcon = {
+                    IconButton(onClick = { findNavController().navigateUp() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.back_button),
+                            contentDescription = null
+                        )
+                    }
+                },
                 actions = {
                     IconButton(onClick = { /* doSomething() */ }) {
                         Icon(

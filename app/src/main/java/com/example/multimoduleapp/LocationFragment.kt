@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -25,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -37,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 
 class LocationFragment : Fragment() {
@@ -65,6 +69,14 @@ class LocationFragment : Fragment() {
         ) {
             TopAppBar(
                 title = {},
+                navigationIcon = {
+                    IconButton(onClick = { findNavController().navigateUp() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.back_button),
+                            contentDescription = null
+                        )
+                    }
+                },
                 actions = {
                     IconButton(onClick = { /* doSomething() */ }) {
                         Icon(
@@ -86,16 +98,25 @@ class LocationFragment : Fragment() {
                     containerColor = Color(0xFFF1F2F4)
                 ),
                 modifier = Modifier
-                    .padding(start = 16.dp, top = 20.dp, end = 16.dp)
+                    .padding(start = 16.dp, top = 28.dp, end = 16.dp)
                     .fillMaxWidth()
             ) {
-                Text(
-                    text = stringResource(R.string.address_approve_conditions),
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(start = 20.dp, top = 20.dp, end = 20.dp)
-                )
+                ) {
+                    Icon(painterResource(R.drawable.map_pin), contentDescription = null)
+                    Spacer(Modifier.width(12.dp))
+                    Text(
+                        text = stringResource(R.string.address_approve_conditions),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(R.string.we_can_not_approve),
+                    fontSize = 14.sp,
                     modifier = Modifier.padding(start = 20.dp, bottom = 20.dp, end = 20.dp)
                 )
             }
@@ -123,7 +144,7 @@ class LocationFragment : Fragment() {
 
     @Composable
     fun AutoCompleteTextViewCompose() {
-        val context = LocalContext.current // получаем текущий контекст
+        val context = LocalContext.current
 
         val autoCompleteTextView = remember {
             AutoCompleteTextView(context).apply {
@@ -156,6 +177,7 @@ class LocationFragment : Fragment() {
                     "Yemen",
                     "Zimbabwe",
                 )
+                threshold = 1
                 val adapter: ArrayAdapter<String> = ArrayAdapter(
                     context,
                     android.R.layout.simple_dropdown_item_1line, countries
