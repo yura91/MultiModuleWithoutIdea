@@ -23,5 +23,13 @@
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.multimoduleapp.LocationFragment"
-        android:label="LocationFragment" />
+        android:label="LocationFragment">
+        <action
+            android:id="@+id/action_locationFragment_to_cardPaletteFragment"
+            app:destination="@id/cardPaletteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardPaletteFragment"
+        android:name="com.example.multimoduleapp.CardPaletteFragment"
+        android:label="fragment_blank" />
 </navigation>

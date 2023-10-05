@@ -131,6 +131,7 @@ class LocationFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
                 colors = mainButtonColor,
                 onClick = {
+                    findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
                 }
             ) {
                 Text(
