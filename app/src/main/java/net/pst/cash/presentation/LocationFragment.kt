@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentLocationBinding
@@ -48,6 +49,14 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
                     viewModel.selectedItem = parent?.adapter?.getItem(position) as? CountryModel
                 }
             }
+        }
+
+        viewModel.snackBarVerificationErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+        }
+
+        viewModel.snackBarCountriesErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
         viewModel.banned.observe(viewLifecycleOwner) {

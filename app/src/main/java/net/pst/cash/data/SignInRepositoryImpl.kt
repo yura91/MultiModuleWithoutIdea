@@ -1,7 +1,9 @@
 package net.pst.cash.data
 
 import android.content.Context
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -10,6 +12,12 @@ class SignInRepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val context: Context
 ) : SignInRepository {
+
+    override val errorMessage: LiveData<String>
+        get() = _errorMessage
+
+    private val _errorMessage: MutableLiveData<String> = MutableLiveData()
+
     override suspend fun signInGoogle(googleToken: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
@@ -24,7 +32,10 @@ class SignInRepositoryImpl @Inject constructor(
                     }
                     true
                 } else {
-                    Log.d("TAG", "Failure")
+                    val errorBody = signInResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
                     false
                 }
             } catch (e: Exception) {
@@ -42,6 +53,10 @@ class SignInRepositoryImpl @Inject constructor(
                     val appleUrl = linkResponse.body()?.data?.appleUrl
                     appleUrl
                 } else {
+                    val errorBody = linkResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
                     null
                 }
             } catch (e: Exception) {
@@ -64,7 +79,10 @@ class SignInRepositoryImpl @Inject constructor(
                     }
                     true
                 } else {
-                    Log.d("TAG", "Failure")
+                    val errorBody = signInAppleResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
                     false
                 }
             } catch (e: Exception) {

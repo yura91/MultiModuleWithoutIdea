@@ -12,6 +12,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentWebViewBinding
@@ -24,6 +25,11 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+        }
+
         viewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_webViewFragment_to_getAcquaintedFragment)
         }

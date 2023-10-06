@@ -17,6 +17,8 @@ class LocationViewModel @Inject constructor(
     private val countriesInteractor: CountriesListInteractor,
     private val verificationInteractor: VerificationInteractor
 ) : ViewModel() {
+    val snackBarVerificationErrorMessage = verificationInteractor.errorMessage
+    val snackBarCountriesErrorMessage = countriesInteractor.errorMessage
     private var canGoNext = false
     private val bannedCountries = listOf(
         "Afghanistan",

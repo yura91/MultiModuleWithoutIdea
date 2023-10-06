@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSignInBinding
@@ -40,13 +41,17 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             activityResultLauncher.launch(request)
         }
 
+        signInViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+        }
+
         signInViewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
 
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
-                val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(link)
-                findNavController().navigate(action)
+            val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(link)
+            findNavController().navigate(action)
         }
 
         binding?.signWithGoogle?.setOnClickListener {

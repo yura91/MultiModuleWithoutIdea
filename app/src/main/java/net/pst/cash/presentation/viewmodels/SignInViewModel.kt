@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val application: Application,
-    private val interactor: SignInInteractor,
+    private val signInInteractor: SignInInteractor,
     private val verifyInteractor: VerificationInteractor
 ) : AndroidViewModel(application) {
     private val oneTapClient = Identity.getSignInClient(application)
@@ -47,6 +47,8 @@ class SignInViewModel @Inject constructor(
     private val _appleLink = SingleLiveEvent<String>()
     val appleLink: LiveData<String> get() = _appleLink
 
+    val snackBarErrorMessage = signInInteractor.errorMessage
+
     fun startSignIn() {
         oneTapClient.beginSignIn(signUpRequest)
             .addOnSuccessListener { result ->
@@ -61,7 +63,7 @@ class SignInViewModel @Inject constructor(
 
     private fun sendGoogleTokenToBackend(googleToken: String) {
         viewModelScope.launch {
-            val isGoogleSuccess = interactor.signInGoogle(googleToken)
+            val isGoogleSuccess = signInInteractor.signInGoogle(googleToken)
             if (isGoogleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
@@ -76,7 +78,7 @@ class SignInViewModel @Inject constructor(
 
     fun getAppleLink() {
         viewModelScope.launch {
-            val link: String? = interactor.getAppleLink()
+            val link: String? = signInInteractor.getAppleLink()
             link?.let {
                 _appleLink.value = link
             }

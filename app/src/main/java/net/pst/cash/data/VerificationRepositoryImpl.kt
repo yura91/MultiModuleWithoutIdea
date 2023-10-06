@@ -1,5 +1,8 @@
 package net.pst.cash.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.pst.cash.domain.model.CountryModel
@@ -8,6 +11,11 @@ import javax.inject.Inject
 class VerificationRepositoryImpl @Inject constructor(
     private val api: ApiService
 ) : VerificationRepository {
+    override val errorMessage: LiveData<String>
+        get() = _errorMessage
+
+    private val _errorMessage: MutableLiveData<String> = MutableLiveData()
+
     override suspend fun isVerificationNeeded(token: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
@@ -17,6 +25,10 @@ class VerificationRepositoryImpl @Inject constructor(
                     true
 //                    step.isNullOrEmpty()
                 } else {
+                    val errorBody = verActualResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
                     false
                 }
             } catch (e: Exception) {
@@ -48,6 +60,10 @@ class VerificationRepositoryImpl @Inject constructor(
                 if (verifyResponse.isSuccessful) {
                     verifyResponse.body()?.success
                 } else {
+                    val errorBody = verifyResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
                     false
                 }
             } catch (e: Exception) {
