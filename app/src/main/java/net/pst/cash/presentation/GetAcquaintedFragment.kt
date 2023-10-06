@@ -38,7 +38,9 @@ class GetAcquaintedFragment :
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                getAcquaintedViewModel.setSelectedDate(year, month, dayOfMonth)
                 val formattedDate = formatDate(calendar)
+                getAcquaintedViewModel.formattedDate = formattedDate
                 binding?.birthDate?.text = formattedDate
             }
 
@@ -48,6 +50,9 @@ class GetAcquaintedFragment :
         binding?.birthDate?.setOnClickListener {
             datePickerDialog.show()
         }
+        getAcquaintedViewModel.formattedDate?.let {
+            binding?.birthDate?.text = getAcquaintedViewModel.formattedDate
+        }
 
         binding?.actionMore?.setOnClickListener {
             findNavController().navigate(R.id.action_getAcquaintedFragment_to_settings_nav_graph)
@@ -55,7 +60,7 @@ class GetAcquaintedFragment :
 
         getAcquaintedViewModel.errorFirstname.observe(viewLifecycleOwner) {
             if (it) {
-                binding?.firstNameField?.error = "Введите текст более 3 символов"
+                binding?.firstNameField?.error = getString(R.string.error_input_text)
             } else {
                 binding?.firstNameField?.error = null
             }
@@ -63,9 +68,21 @@ class GetAcquaintedFragment :
 
         getAcquaintedViewModel.errorLastName.observe(viewLifecycleOwner) {
             if (it) {
-                binding?.lastNameField?.error = "Введите текст более 3 символов"
+                binding?.lastNameField?.error = getString(R.string.error_input_text)
             } else {
                 binding?.lastNameField?.error = null
+            }
+        }
+
+        getAcquaintedViewModel.canGoNext.observe(viewLifecycleOwner) {
+            if (it) {
+                val action =
+                    GetAcquaintedFragmentDirections.actionGetAcquaintedFragmentToLocationFragment(
+                        binding?.firstNameField?.text.toString(),
+                        binding?.lastNameField?.text.toString(),
+                        binding?.birthDate?.text.toString()
+                    )
+                findNavController().navigate(action)
             }
         }
 
@@ -121,13 +138,10 @@ class GetAcquaintedFragment :
         }
 
         binding?.next?.setOnClickListener {
-            val action =
-                GetAcquaintedFragmentDirections.actionGetAcquaintedFragmentToLocationFragment(
-                    binding?.firstNameField?.text.toString(),
-                    binding?.lastNameField?.text.toString(),
-                    binding?.birthDate?.text.toString()
-                )
-            it.findNavController().navigate(action)
+            getAcquaintedViewModel.validate(
+                binding?.firstNameField?.text.toString(),
+                binding?.lastNameField?.text.toString()
+            )
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
