@@ -40,6 +40,7 @@ class SignInRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 false
             }
         }
@@ -61,6 +62,7 @@ class SignInRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 null
             }
         }
@@ -87,6 +89,7 @@ class SignInRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 false
             }
         }

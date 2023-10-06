@@ -46,12 +46,8 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
                 if (url.startsWith("https://vue3.pstage.net")) {
                     val uri = Uri.parse(url)
                     val code = uri.getQueryParameter("code")
-
-                    // Делайте что угодно с кодом
                     viewModel.sendAppleCodeToBackend(code?.trim())
-//                 true // Это остановит загрузку URL
                 }
-
                 return true
             }
         }

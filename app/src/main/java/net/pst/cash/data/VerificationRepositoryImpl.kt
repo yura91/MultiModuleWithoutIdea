@@ -33,6 +33,7 @@ class VerificationRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 false
             }
         }
@@ -68,6 +69,7 @@ class VerificationRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 false
             }
         }

@@ -30,6 +30,7 @@ class CountriesRepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 null
             }
         }
