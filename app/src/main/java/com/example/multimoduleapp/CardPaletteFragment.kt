@@ -1,10 +1,13 @@
 package com.example.multimoduleapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +19,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
@@ -28,10 +34,15 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.multimoduleapp.ui.viewmodels.CardPaletteViewModel
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 
 
+
 class CardPaletteFragment : Fragment() {
+    private val gradientOffset = 25.0F
+    private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +62,8 @@ class CardPaletteFragment : Fragment() {
             containerColor = Color.Black,
             contentColor = MaterialTheme.colorScheme.surface
         )
+        val startColor by cardPalleteViewModel.startColor.observeAsState()
+        val endColor by cardPalleteViewModel.selectedColor.observeAsState()
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -65,7 +78,18 @@ class CardPaletteFragment : Fragment() {
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            ColorSeekBar(0) {}
+            ColorSeekBar(0)
+            Box(
+                Modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(startColor, endColor) as List<Color>,
+                            startY = 0f,
+                            endY = Float.POSITIVE_INFINITY
+                        )
+                    )
+                    .fillMaxSize()
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 modifier = Modifier
@@ -84,10 +108,23 @@ class CardPaletteFragment : Fragment() {
         }
     }
 
+    private fun pickColor(colorSeekBar: ColorSeekBar, progress: Int): Int {
+        colorSeekBar.let { colorSeekBar ->
+            if (progress < 0) return Int.MAX_VALUE
+            if (progress > colorSeekBar.maxProgress) return Int.MAX_VALUE
+            return if (progress >= colorSeekBar.colors.size) Int.MAX_VALUE else colorSeekBar.colors[progress]
+        }
+        return Int.MAX_VALUE
+    }
+
+    fun Context.dpToPx(dp: Float): Float {
+        val scale = resources.displayMetrics.density
+        return dp * scale
+    }
+
     @Composable
     fun ColorSeekBar(
         progress: Int,
-        onProgressChanged: (Int) -> Unit
     ) {
         val colorSeekBar =
             this.layoutInflater.inflate(R.layout.widget_color_seekbar, null) as ColorSeekBar
@@ -100,6 +137,13 @@ class CardPaletteFragment : Fragment() {
         )
 
         colorSeekBar.setColorSeeds(colors)
+        colorSeekBar.setOnColorChangeListener { progress, color ->
+            val endColor = color
+            val colorPosition = progress - requireContext().dpToPx(gradientOffset)
+            val startColor = pickColor(colorSeekBar, colorPosition.toInt())
+            cardPalleteViewModel.setColors(Color(startColor), Color(endColor))
+        }
+
         AndroidView(
             factory = { colorSeekBar },
             update = { view ->
