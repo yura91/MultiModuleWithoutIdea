@@ -93,6 +93,7 @@
         android:layout_marginTop="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_16"
         android:completionThreshold="1"
+        android:singleLine="true"
         android:imeOptions="actionNext"
         android:inputType="text"
         android:drawableEnd="@drawable/ic_text_arrow_down"

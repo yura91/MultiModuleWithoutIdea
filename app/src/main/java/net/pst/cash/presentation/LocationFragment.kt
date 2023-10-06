@@ -51,8 +51,13 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         }
 
         viewModel.banned.observe(viewLifecycleOwner) {
-            binding?.location?.isVisible = it
-            binding?.next?.isVisible = !it
+            if (it == true) {
+                binding?.location?.isVisible = true
+                binding?.next?.isVisible = false
+            } else {
+                binding?.location?.isVisible = false
+                binding?.next?.isVisible = true
+            }
         }
 
         viewModel.verified.observe(viewLifecycleOwner) {
@@ -73,7 +78,12 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
         binding?.countries?.setOnEditorActionListener { v, actionId, event ->
             if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
-                v.findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
+                val sharedPref =
+                    requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                val token = sharedPref.getString("token", "")
+                viewModel.goNext(
+                    "Bearer $token"
+                )
             }
             false
         }
@@ -127,7 +137,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             token?.let { token ->
-                viewModel.verifyUser(
+                viewModel.goNext(
                     "Bearer $token"
                 )
             }
