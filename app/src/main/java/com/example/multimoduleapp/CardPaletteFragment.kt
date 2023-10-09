@@ -36,6 +36,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.ui.viewmodels.CardPaletteViewModel
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 
@@ -101,6 +102,7 @@ class CardPaletteFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
                 colors = mainButtonColor,
                 onClick = {
+                    findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
                 }
             ) {
                 Text(
