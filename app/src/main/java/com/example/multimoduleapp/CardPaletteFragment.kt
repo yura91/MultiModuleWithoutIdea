@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -37,7 +38,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.multimoduleapp.ui.viewmodels.CardPaletteViewModel
 import com.rtugeek.android.colorseekbar.ColorSeekBar
-
 
 
 class CardPaletteFragment : Fragment() {
@@ -64,6 +64,17 @@ class CardPaletteFragment : Fragment() {
         )
         val startColor by cardPalleteViewModel.startColor.observeAsState()
         val endColor by cardPalleteViewModel.selectedColor.observeAsState()
+
+        val gradientBrush = if (startColor != null && endColor != null) {
+            Brush.verticalGradient(
+                colors = listOf(startColor!!, endColor!!)
+            )
+        } else {
+            Brush.verticalGradient(
+                colors = listOf(Color.Transparent, Color.Transparent)
+            )
+        }
+
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -73,23 +84,16 @@ class CardPaletteFragment : Fragment() {
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-                    .padding(start = 4.dp, end = 4.dp, top = 4.dp),
+                    .padding(start = 4.dp, end = 4.dp, top = 4.dp)
+                    .clip(RoundedCornerShape(30.dp))
+                    .background(
+                        brush = gradientBrush
+                    ),
                 contentScale = ContentScale.FillBounds
             )
 
             Spacer(modifier = Modifier.height(16.dp))
             ColorSeekBar(0)
-            Box(
-                Modifier
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(startColor, endColor) as List<Color>,
-                            startY = 0f,
-                            endY = Float.POSITIVE_INFINITY
-                        )
-                    )
-                    .fillMaxSize()
-            )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 modifier = Modifier

@@ -10,6 +10,7 @@ class CardPaletteViewModel : ViewModel() {
     var startColor: MutableLiveData<Color> = MutableLiveData()
 
     fun setColors(startColor: Color, selectedColor: Color) {
-
+        this.startColor.value = startColor
+        this.selectedColor.value = selectedColor
     }
 }
