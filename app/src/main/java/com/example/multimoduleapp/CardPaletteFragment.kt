@@ -71,7 +71,7 @@ class CardPaletteFragment : Fragment() {
             )
         } else {
             Brush.verticalGradient(
-                colors = listOf(Color.Transparent, Color.Transparent)
+                colors = listOf(Color(2147483647), Color(-312545))
             )
         }
 
