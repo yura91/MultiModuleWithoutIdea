@@ -1,4 +1,4 @@
-package com.example.multimoduleapp
+package com.example.multimoduleapp.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.example.domain.TextUseCase

@@ -37,14 +37,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.ui.viewmodels.CardPaletteViewModel
+import com.example.multimoduleapp.ui.viewmodels.SharedViewModel
 import com.rtugeek.android.colorseekbar.ColorSeekBar
 
 
 class CardPaletteFragment : Fragment() {
     private val gradientOffset = 25.0F
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
-
+    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,12 +67,13 @@ class CardPaletteFragment : Fragment() {
         )
         val startColor by cardPalleteViewModel.startColor.observeAsState()
         val endColor by cardPalleteViewModel.selectedColor.observeAsState()
-
+        val count by cardPalleteViewModel.count.observeAsState(0)
         val gradientBrush = if (startColor != null && endColor != null) {
             Brush.verticalGradient(
                 colors = listOf(startColor!!, endColor!!)
             )
         } else {
+            cardPalleteViewModel.setColors(Color(2147483647), Color(-312545))
             Brush.verticalGradient(
                 colors = listOf(Color(2147483647), Color(-312545))
             )
@@ -94,7 +97,7 @@ class CardPaletteFragment : Fragment() {
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            ColorSeekBar(0)
+            ColorSeekBar(count)
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 modifier = Modifier
@@ -102,6 +105,8 @@ class CardPaletteFragment : Fragment() {
                     .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
                 colors = mainButtonColor,
                 onClick = {
+                    sharedViewModel.startColor.value = cardPalleteViewModel.startColor.value
+                    sharedViewModel.endColor.value = cardPalleteViewModel.selectedColor.value
                     findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
                 }
             ) {
@@ -148,6 +153,7 @@ class CardPaletteFragment : Fragment() {
             val colorPosition = progress - requireContext().dpToPx(gradientOffset)
             val startColor = pickColor(colorSeekBar, colorPosition.toInt())
             cardPalleteViewModel.setColors(Color(startColor), Color(endColor))
+            cardPalleteViewModel.updateCount(progress)
         }
 
         AndroidView(
