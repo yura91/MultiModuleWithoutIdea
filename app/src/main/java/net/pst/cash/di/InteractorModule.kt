@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import net.pst.cash.data.CountriesRepository
+import net.pst.cash.data.repos.CountriesRepository
 import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
 import net.pst.cash.domain.SignInInteractor

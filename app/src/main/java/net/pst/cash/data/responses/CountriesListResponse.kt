@@ -1,4 +1,4 @@
-package net.pst.cash.data
+package net.pst.cash.data.responses
 
 
 class CountriesListResponse {

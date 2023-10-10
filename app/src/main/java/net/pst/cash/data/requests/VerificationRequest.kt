@@ -1,4 +1,4 @@
-package net.pst.cash.data
+package net.pst.cash.data.requests
 
 import com.google.gson.annotations.SerializedName
 

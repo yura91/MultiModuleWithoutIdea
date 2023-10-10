@@ -1,7 +1,7 @@
 package net.pst.cash.domain
 
 import androidx.lifecycle.LiveData
-import net.pst.cash.data.SignInRepository
+import net.pst.cash.data.repos.SignInRepository
 import javax.inject.Inject
 
 class SignInInteractorImpl @Inject constructor(private val signInRepository: SignInRepository) :

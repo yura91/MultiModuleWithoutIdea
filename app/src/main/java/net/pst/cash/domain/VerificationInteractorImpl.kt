@@ -1,7 +1,7 @@
 package net.pst.cash.domain
 
 import androidx.lifecycle.LiveData
-import net.pst.cash.data.VerificationRepository
+import net.pst.cash.data.repos.VerificationRepository
 import net.pst.cash.domain.model.CountryModel
 import javax.inject.Inject
 
