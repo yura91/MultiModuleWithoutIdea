@@ -15,16 +15,11 @@ class EntryPointActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entry_point)
         val navController = findNavController(R.id.nav_host_fragment)
-        viewModel.successUserInfo.observe(this) {
-            if (!it) {
-                navController.navigate(R.id.signInFragment)
-            }
+        viewModel.navigateToLoginScreen.observe(this) {
+            navController.navigate(R.id.signInFragment)
         }
-        /*if (условие) {
-            navController.navigate(R.id.other_destination)
-        } else {
-            // Переход на start destination
-            navController.navigate(R.id.start_destination)
-        }*/
+        viewModel.navigateToGetAcquaintedScreen.observe(this) {
+            navController.navigate(R.id.getAcquaintedFragment)
+        }
     }
 }
