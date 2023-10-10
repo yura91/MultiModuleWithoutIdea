@@ -7,9 +7,7 @@ import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentGetAcquaintedBinding
@@ -26,7 +24,8 @@ class GetAcquaintedFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.toolbar?.setNavigationOnClickListener {
-            it.findNavController().popBackStack()
+//            it.findNavController().popBackStack()
+            requireActivity().onBackPressed()
         }
         val calendar = Calendar.getInstance()
         val year: Int = calendar.get(Calendar.YEAR)
@@ -144,9 +143,9 @@ class GetAcquaintedFragment :
             )
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_getAcquaintedFragment_to_signInFragment)
-        }
+        /* requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+             findNavController().navigate(R.id.action_getAcquaintedFragment_to_signInFragment)
+         }*/
     }
 }
 

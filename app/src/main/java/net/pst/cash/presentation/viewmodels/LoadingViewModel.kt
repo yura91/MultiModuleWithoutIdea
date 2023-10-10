@@ -13,7 +13,7 @@ import net.pst.cash.domain.VerificationInteractor
 import javax.inject.Inject
 
 @HiltViewModel
-class EntryPointViewModel @Inject constructor(
+class LoadingViewModel @Inject constructor(
     private val application: Application,
     userInfoInteractor: UserInfoInteractor,
     private val verificationInteractor: VerificationInteractor
