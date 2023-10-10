@@ -37,7 +37,7 @@ interface ApiService {
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/user/info")
-    suspend fun getUserInfo(): Response<UserInfoResponse>
+    suspend fun getUserInfo(@Header("Authorization") token: String): Response<UserInfoResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/verification/actual")

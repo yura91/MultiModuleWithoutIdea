@@ -10,6 +10,8 @@ import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.SignInInteractorImpl
+import net.pst.cash.domain.UserInfoIneractorimpl
+import net.pst.cash.domain.UserInfoInteractor
 import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.domain.VerificationInteractorImpl
 
@@ -21,6 +23,9 @@ interface InteractorModule {
 
     @Binds
     fun verifyInteractor(verifyInteractor: VerificationInteractorImpl): VerificationInteractor
+
+    @Binds
+    fun userInfoInteractor(userInfoInteractor: UserInfoIneractorimpl): UserInfoInteractor
 
     companion object {
         @Provides
