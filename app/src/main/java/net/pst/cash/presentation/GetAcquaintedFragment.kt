@@ -24,8 +24,7 @@ class GetAcquaintedFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.toolbar?.setNavigationOnClickListener {
-//            it.findNavController().popBackStack()
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         val calendar = Calendar.getInstance()
         val year: Int = calendar.get(Calendar.YEAR)
@@ -142,10 +141,6 @@ class GetAcquaintedFragment :
                 binding?.lastNameField?.text.toString()
             )
         }
-
-        /* requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-             findNavController().navigate(R.id.action_getAcquaintedFragment_to_signInFragment)
-         }*/
     }
 }
 
