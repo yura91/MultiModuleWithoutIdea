@@ -39,5 +39,13 @@
     <fragment
         android:id="@+id/cardIsReadyFragment"
         android:name="com.example.multimoduleapp.CardIsReadyFragment"
-        android:label="CardIsReadyFragment" />
+        android:label="CardIsReadyFragment">
+        <action
+            android:id="@+id/action_cardIsReadyFragment_to_flipCardFragment"
+            app:destination="@id/flipCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/flipCardFragment"
+        android:name="com.example.multimoduleapp.FlipCardFragment"
+        android:label="FlipCardFragment" />
 </navigation>

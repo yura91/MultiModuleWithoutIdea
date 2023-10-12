@@ -41,12 +41,14 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.multimoduleapp.ui.viewmodels.SharedViewModel
 
 
 class CardIsReadyFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -145,6 +147,7 @@ class CardIsReadyFragment : Fragment() {
                     },
                 colors = mainButtonColor,
                 onClick = {
+                    findNavController().navigate(R.id.action_cardIsReadyFragment_to_flipCardFragment)
                 }
             ) {
                 Text(

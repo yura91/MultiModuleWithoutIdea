@@ -49,6 +49,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("com.github.rtugeek:colorseekbar:2.0.3")
+    implementation("com.wajahatkarim:EasyFlipView:3.0.3")
     implementation(libs.appcompat)
     implementation(libs.material)
     kapt("com.google.dagger:hilt-android-compiler:2.44")
