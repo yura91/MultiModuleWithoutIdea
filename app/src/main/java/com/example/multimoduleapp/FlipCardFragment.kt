@@ -75,6 +75,7 @@ class FlipCardFragment : Fragment() {
                         ) {
                             Image(
                                 modifier = Modifier
+                                    .padding(start = 4.dp, end = 4.dp, top = 4.dp)
                                     .clip(RoundedCornerShape(30.dp))
                                     .clickable {
                                         cardFace = cardFace.next
@@ -125,6 +126,8 @@ class FlipCardFragment : Fragment() {
                                 .background(Color.White),
                         ) {
                             Image(
+                                modifier = Modifier
+                                    .padding(start = 4.dp, end = 4.dp, top = 4.dp),
                                 painter = painterResource(id = R.drawable.back_side_bg),
                                 contentDescription = null,
                                 contentScale = ContentScale.FillBounds
@@ -138,6 +141,7 @@ class FlipCardFragment : Fragment() {
                                 Button(modifier = Modifier
                                     .wrapContentSize()
                                     .align(Alignment.Center),
+                                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                                     onClick = {
                                         cardFace = cardFace.next
 //                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)

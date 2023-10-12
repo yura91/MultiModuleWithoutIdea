@@ -106,7 +106,6 @@ class CardIsReadyFragment : Fragment() {
                         // Используйте size и positionInWindow
                     }
                     .offset(y = (-0.4f * size.value.height / LocalDensity.current.density).dp)
-                    .padding(start = 4.dp, end = 4.dp)
                     .clip(RoundedCornerShape(30.dp))
                     .background(
                         brush = gradientBrush
