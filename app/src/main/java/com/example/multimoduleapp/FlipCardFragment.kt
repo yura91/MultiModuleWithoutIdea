@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.Fragment
 
 class FlipCardFragment : Fragment() {
@@ -46,18 +46,17 @@ class FlipCardFragment : Fragment() {
                     cardFace = cardFace,
                     onClick = { cardFace = cardFace.next },
                     modifier = Modifier
-                        .fillMaxWidth(.5f)
-                        .aspectRatio(1f),
+                        .fillMaxSize(),
                     front = {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(Color.Red),
-                            contentAlignment = Alignment.Center,
+                                .background(Color.White),
                         ) {
-                            Text(
-                                text = "Front",
-                                style = MaterialTheme.typography.headlineMedium,
+                            Image(
+                                painter = painterResource(id = R.drawable.card_palette_bg),
+                                contentDescription = null,
+                                contentScale = ContentScale.FillBounds
                             )
                         }
                     },
@@ -149,7 +148,6 @@ class FlipCardFragment : Fragment() {
             }
         }
     }
-
 }
 
 
