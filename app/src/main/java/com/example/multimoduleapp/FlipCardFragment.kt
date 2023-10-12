@@ -10,15 +10,18 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -70,6 +74,11 @@ class FlipCardFragment : Fragment() {
                                 .background(Color.White),
                         ) {
                             Image(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(30.dp))
+                                    .clickable {
+                                        cardFace = cardFace.next
+                                    },
                                 painter = painterResource(id = R.drawable.card_palette_bg),
                                 contentDescription = null,
                                 contentScale = ContentScale.FillBounds
@@ -110,16 +119,41 @@ class FlipCardFragment : Fragment() {
                         }
                     },
                     back = {
-                        Box(
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(Color.Blue),
-                            contentAlignment = Alignment.Center,
+                                .background(Color.White),
                         ) {
-                            Text(
-                                text = "Back",
-                                style = MaterialTheme.typography.headlineMedium,
+                            Image(
+                                painter = painterResource(id = R.drawable.back_side_bg),
+                                contentDescription = null,
+                                contentScale = ContentScale.FillBounds
                             )
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.White),
+                            ) {
+                                Button(modifier = Modifier
+                                    .wrapContentSize()
+                                    .align(Alignment.Center),
+                                    onClick = {
+                                        cardFace = cardFace.next
+//                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+                                    }) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.back),
+                                        modifier = Modifier.padding(
+                                            start = 22.dp,
+                                            end = 22.dp,
+                                            top = 22.dp,
+                                            bottom = 22.dp
+                                        ),
+                                        contentDescription = null
+                                    )
+                                }
+                            }
                         }
                     }
                 )
@@ -145,7 +179,7 @@ class FlipCardFragment : Fragment() {
         AxisY,
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
+
     @Composable
     fun FlipCard(
         cardFace: CardFace,
@@ -163,7 +197,7 @@ class FlipCardFragment : Fragment() {
             ), label = ""
         )
         Card(
-            onClick = { onClick(cardFace) },
+//            onClick = { onClick(cardFace) },
             modifier = modifier
                 .graphicsLayer {
                     if (axis == RotationAxis.AxisX) {
