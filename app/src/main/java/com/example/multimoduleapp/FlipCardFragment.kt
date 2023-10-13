@@ -61,17 +61,59 @@ class FlipCardFragment : Fragment() {
                                 .fillMaxSize()
                                 .background(Color.White),
                         ) {
-                            Image(
+                            Box(
                                 modifier = Modifier
-                                    .padding(start = 4.dp, end = 4.dp, top = 4.dp)
-                                    .clip(RoundedCornerShape(30.dp))
-                                    .clickable {
-                                        controller.flipToBack()
-                                    },
-                                painter = painterResource(id = R.drawable.card_palette_bg),
-                                contentDescription = null,
-                                contentScale = ContentScale.FillBounds
-                            )
+                                    .wrapContentHeight()
+                                    .background(Color.White),
+                            ) {
+                                Image(
+                                    modifier = Modifier
+                                        .padding(start = 4.dp, end = 4.dp, top = 4.dp)
+                                        .clip(RoundedCornerShape(30.dp))
+                                        .clickable {
+                                            controller.flipToBack()
+                                        },
+                                    painter = painterResource(id = R.drawable.front_side_bg),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "3466",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 32.dp, bottom = 64.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+
+                                Text(
+                                    text = "02/24",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 32.dp, bottom = 32.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+
+                                Text(
+                                    text = "JOHN DOE",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 32.dp, bottom = 64.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+
+                                Text(
+                                    text = "0,00 €",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 112.dp),
+                                    fontSize = 46.sp,
+                                    color = Color.White
+                                )
+                            }
 
                             Button(
                                 modifier = Modifier
