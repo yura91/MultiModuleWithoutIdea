@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,26 +17,22 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import com.wajahatkarim.flippable.FlipAnimationType
+import com.wajahatkarim.flippable.Flippable
+import com.wajahatkarim.flippable.rememberFlipController
 
 class FlipCardFragment : Fragment() {
 
@@ -50,9 +43,6 @@ class FlipCardFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
-                var cardFace by remember {
-                    mutableStateOf(CardFace.Front)
-                }
                 val mainButtonColor = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = MaterialTheme.colorScheme.surface
@@ -61,13 +51,10 @@ class FlipCardFragment : Fragment() {
                     containerColor = Color.White,
                     contentColor = MaterialTheme.colorScheme.surface
                 )
+                val controller = rememberFlipController()
 
-                FlipCard(
-                    cardFace = cardFace,
-                    onClick = { cardFace = cardFace.next },
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    front = {
+                Flippable(
+                    frontSide = {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -78,7 +65,7 @@ class FlipCardFragment : Fragment() {
                                     .padding(start = 4.dp, end = 4.dp, top = 4.dp)
                                     .clip(RoundedCornerShape(30.dp))
                                     .clickable {
-                                        cardFace = cardFace.next
+                                        controller.flipToBack()
                                     },
                                 painter = painterResource(id = R.drawable.card_palette_bg),
                                 contentDescription = null,
@@ -119,7 +106,8 @@ class FlipCardFragment : Fragment() {
                             }
                         }
                     },
-                    back = {
+
+                    backSide = {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -143,8 +131,8 @@ class FlipCardFragment : Fragment() {
                                     .align(Alignment.Center),
                                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                                     onClick = {
-                                        cardFace = cardFace.next
 //                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+                                        controller.flipToFront()
                                     }) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.back),
@@ -159,79 +147,31 @@ class FlipCardFragment : Fragment() {
                                 }
                             }
                         }
+                    },
+
+                    flipController = controller,
+
+                    modifier = Modifier,
+
+                    flipDurationMs = 400,
+
+                    flipOnTouch = false,
+
+                    flipEnabled = true,
+
+                    contentAlignment = Alignment.TopCenter,
+
+                    autoFlip = false,
+
+                    autoFlipDurationMs = 1000,
+
+                    flipAnimationType = FlipAnimationType.HORIZONTAL_CLOCKWISE,
+
+                    cameraDistance = 30.0F,
+
+                    onFlippedListener = { currentSide ->
                     }
                 )
-            }
-        }
-    }
-
-    enum class CardFace(val angle: Float) {
-        Front(0f) {
-            override val next: CardFace
-                get() = Back
-        },
-        Back(180f) {
-            override val next: CardFace
-                get() = Front
-        };
-
-        abstract val next: CardFace
-    }
-
-    enum class RotationAxis {
-        AxisX,
-        AxisY,
-    }
-
-
-    @Composable
-    fun FlipCard(
-        cardFace: CardFace,
-        onClick: (CardFace) -> Unit,
-        modifier: Modifier = Modifier,
-        axis: RotationAxis = RotationAxis.AxisY,
-        back: @Composable () -> Unit = {},
-        front: @Composable () -> Unit = {},
-    ) {
-        val rotation = animateFloatAsState(
-            targetValue = cardFace.angle,
-            animationSpec = tween(
-                durationMillis = 400,
-                easing = FastOutSlowInEasing,
-            ), label = ""
-        )
-        Card(
-//            onClick = { onClick(cardFace) },
-            modifier = modifier
-                .graphicsLayer {
-                    if (axis == RotationAxis.AxisX) {
-                        rotationX = rotation.value
-                    } else {
-                        rotationY = rotation.value
-                    }
-                    cameraDistance = 12f * density
-                },
-        ) {
-            if (rotation.value <= 90f) {
-                Box(
-                    Modifier.fillMaxSize()
-                ) {
-                    front()
-                }
-            } else {
-                Box(
-                    Modifier
-                        .fillMaxSize()
-                        .graphicsLayer {
-                            if (axis == RotationAxis.AxisX) {
-                                rotationX = 180f
-                            } else {
-                                rotationY = 180f
-                            }
-                        },
-                ) {
-                    back()
-                }
             }
         }
     }

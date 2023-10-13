@@ -45,6 +45,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation("com.wajahatkarim:flippable:1.0.6")
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
