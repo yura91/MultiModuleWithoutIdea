@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -113,22 +114,148 @@ class FlipCardFragment : Fragment() {
                                 .fillMaxSize()
                                 .background(Color.White),
                         ) {
-                            Image(
+                            Box(
                                 modifier = Modifier
-                                    .padding(start = 4.dp, end = 4.dp, top = 4.dp),
-                                painter = painterResource(id = R.drawable.back_side_bg),
-                                contentDescription = null,
-                                contentScale = ContentScale.FillBounds
-                            )
+                                    .wrapContentHeight()
+                                    .background(Color.White),
+                            ) {
+                                Image(
+                                    modifier = Modifier
+                                        .padding(start = 4.dp, end = 4.dp, top = 4.dp),
+                                    painter = painterResource(id = R.drawable.back_side_bg),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "02/24",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 28.dp),
+                                    fontSize = 22.sp,
+                                    color = Color.White
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 96.dp, bottom = 28.dp)
+                                        .clickable {
+//                                            controller.flipToBack()
+                                        },
+                                    painter = painterResource(id = R.drawable.copy),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "Expire date",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 60.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+                                Text(
+                                    text = "173",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 126.dp, bottom = 28.dp),
+                                    fontSize = 22.sp,
+                                    color = Color.White
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 92.dp, bottom = 28.dp)
+                                        .clickable {
+//                                            controller.flipToBack()
+                                        },
+                                    painter = painterResource(id = R.drawable.copy),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "CVV",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 129.dp, bottom = 60.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+
+                                Text(
+                                    text = "1234 5678 9012 3456",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 114.dp),
+                                    fontSize = 22.sp,
+                                    color = Color.White
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 73.dp, bottom = 114.dp)
+                                        .clickable {
+//                                            controller.flipToBack()
+                                        },
+                                    painter = painterResource(id = R.drawable.copy),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "Card number",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 146.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+
+                                Text(
+                                    text = "JOHN DOE",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 200.dp),
+                                    fontSize = 22.sp,
+                                    color = Color.White
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 149.dp, bottom = 200.dp)
+                                        .clickable {
+//                                            controller.flipToBack()
+                                        },
+                                    painter = painterResource(id = R.drawable.copy),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds
+                                )
+
+                                Text(
+                                    text = "Name",
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(start = 24.dp, bottom = 232.dp),
+                                    fontSize = 16.sp,
+                                    color = Color.White
+                                )
+                            }
 
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .background(Color.White),
                             ) {
-                                Button(modifier = Modifier
-                                    .wrapContentSize()
-                                    .align(Alignment.Center),
+                                Button(
+                                    modifier = Modifier
+                                        .wrapContentSize()
+                                        .align(Alignment.Center),
                                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                                     onClick = {
 //                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
