@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.rememberFlipController
@@ -137,7 +138,7 @@ class FlipCardFragment : Fragment() {
                                     .padding(start = 16.dp, end = 16.dp),
                                 colors = secondaryButtonColor,
                                 onClick = {
-//                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+                                    findNavController().navigate(R.id.action_flipCardFragment_to_paymentsFragment)
                                 }
                             ) {
                                 Text(
