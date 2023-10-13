@@ -13,21 +13,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.multimoduleapp.model.HistoryItem
 import com.example.multimoduleapp.model.HistoryPaymentModel
 
 class PaymentsFragment : Fragment() {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,9 +81,30 @@ class PaymentsFragment : Fragment() {
 
         return ComposeView(requireContext()).apply {
             setContent {
-                CategorizedLazyColumn(
-                    categories = historyPayments
-                )
+                Column {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = "Payments",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
+                            )
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = { findNavController().navigateUp() }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.back_button),
+                                    contentDescription = null
+                                )
+                            }
+                        }
+                    )
+                    CategorizedLazyColumn(
+                        categories = historyPayments
+                    )
+                }
             }
         }
     }
@@ -111,7 +139,7 @@ class PaymentsFragment : Fragment() {
                     fontSize = 14.sp,
                     modifier = modifier
                         .wrapContentSize()
-                        .background(MaterialTheme.colorScheme.background)
+                        .background(Color.White)
                         .padding(top = 16.dp, start = 16.dp)
                 )
                 Spacer(modifier = Modifier.weight(1f))
@@ -121,7 +149,7 @@ class PaymentsFragment : Fragment() {
                     fontSize = 14.sp,
                     modifier = modifier
                         .wrapContentSize()
-                        .background(MaterialTheme.colorScheme.background)
+                        .background(Color.White)
                         .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 )
             }
@@ -131,7 +159,7 @@ class PaymentsFragment : Fragment() {
                 fontSize = 14.sp,
                 modifier = modifier
                     .wrapContentSize()
-                    .background(MaterialTheme.colorScheme.background)
+                    .background(Color.White)
                     .padding(start = 16.dp)
             )
         }
