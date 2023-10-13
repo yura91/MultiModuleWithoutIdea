@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.Flippable
@@ -54,6 +55,14 @@ class FlipCardFragment : Fragment() {
                     contentColor = MaterialTheme.colorScheme.surface
                 )
                 val controller = rememberFlipController()
+
+                val navOptions =
+                    NavOptions.Builder()
+                        .setEnterAnim(R.anim.slide_in_top)
+                        .setExitAnim(R.anim.slide_out_top)
+                        .setPopEnterAnim(R.anim.slide_in_bottom)
+                        .setPopExitAnim(R.anim.slide_out_bottom)
+                        .build()
 
                 Flippable(
                     frontSide = {
@@ -138,7 +147,11 @@ class FlipCardFragment : Fragment() {
                                     .padding(start = 16.dp, end = 16.dp),
                                 colors = secondaryButtonColor,
                                 onClick = {
-                                    findNavController().navigate(R.id.action_flipCardFragment_to_paymentsFragment)
+                                    findNavController().navigate(
+                                        R.id.action_flipCardFragment_to_paymentsFragment,
+                                        null,
+                                        navOptions
+                                    )
                                 }
                             ) {
                                 Text(

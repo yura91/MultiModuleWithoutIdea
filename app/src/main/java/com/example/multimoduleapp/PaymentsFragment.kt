@@ -154,5 +154,4 @@ class PaymentsFragment : Fragment() {
             }
         }
     }
-
 }
