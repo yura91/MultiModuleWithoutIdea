@@ -21,9 +21,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
@@ -33,12 +36,14 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.example.multimoduleapp.ui.viewmodels.SharedViewModel
 import com.wajahatkarim.flippable.FlipAnimationType
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.rememberFlipController
 
 class FlipCardFragment : Fragment() {
-
+    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +51,19 @@ class FlipCardFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
+
+                val startColor by sharedViewModel.startColor.observeAsState()
+                val endColor by sharedViewModel.endColor.observeAsState()
+
+                val gradientBrush = if (startColor != null && endColor != null) {
+                    Brush.verticalGradient(
+                        colors = listOf(startColor!!, endColor!!)
+                    )
+                } else {
+                    Brush.verticalGradient(
+                        colors = listOf(Color.Transparent, Color.Transparent)
+                    )
+                }
                 val mainButtonColor = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = MaterialTheme.colorScheme.surface
@@ -80,6 +98,9 @@ class FlipCardFragment : Fragment() {
                                     modifier = Modifier
                                         .padding(start = 4.dp, end = 4.dp, top = 4.dp)
                                         .clip(RoundedCornerShape(30.dp))
+                                        .background(
+                                            brush = gradientBrush
+                                        )
                                         .clickable {
                                             controller.flipToBack()
                                         },
@@ -180,7 +201,11 @@ class FlipCardFragment : Fragment() {
                             ) {
                                 Image(
                                     modifier = Modifier
-                                        .padding(start = 4.dp, end = 4.dp, top = 4.dp),
+                                        .padding(start = 4.dp, end = 4.dp, top = 4.dp)
+                                        .clip(RoundedCornerShape(30.dp))
+                                        .background(
+                                            brush = gradientBrush
+                                        ),
                                     painter = painterResource(id = R.drawable.back_side_bg),
                                     contentDescription = null,
                                     contentScale = ContentScale.FillBounds
