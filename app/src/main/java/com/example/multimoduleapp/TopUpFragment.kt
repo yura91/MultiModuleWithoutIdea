@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -59,7 +58,6 @@ class TopUpFragment : Fragment() {
         }
     }
 
-    @OptIn(ExperimentalAnimationApi::class)
     @Preview
     @Composable
     fun TopUpLayout() {

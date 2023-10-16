@@ -78,7 +78,7 @@ class LocationFragment : Fragment() {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* doSomething() */ }) {
+                    IconButton(onClick = { findNavController().navigate(R.id.action_locationFragment_to_settingsFragment) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.more),
                             contentDescription = null

@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_getAcquaintedFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_getAcquaintedFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -27,6 +30,9 @@
         <action
             android:id="@+id/action_locationFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardPaletteFragment"
@@ -63,4 +69,8 @@
         android:id="@+id/topUpFragment"
         android:name="com.example.multimoduleapp.TopUpFragment"
         android:label="TopUpFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.multimoduleapp.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
