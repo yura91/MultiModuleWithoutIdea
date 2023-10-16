@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 class CardPaletteViewModel : ViewModel() {
     val selectedColor: MutableLiveData<Color> = MutableLiveData()
     val startColor: MutableLiveData<Color> = MutableLiveData()
-    private val _count = MutableLiveData(0)
-    val count: LiveData<Int> get() = _count
+    private val _progressValue = MutableLiveData(0)
+    val progressValue: LiveData<Int> get() = _progressValue
 
     fun setColors(startColor: Color, selectedColor: Color) {
         this.startColor.value = startColor
@@ -17,6 +17,6 @@ class CardPaletteViewModel : ViewModel() {
     }
 
     fun updateCount(newCount: Int) {
-        _count.value = newCount
+        _progressValue.value = newCount
     }
 }

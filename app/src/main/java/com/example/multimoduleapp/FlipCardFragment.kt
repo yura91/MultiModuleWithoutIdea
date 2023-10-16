@@ -131,7 +131,10 @@ class FlipCardFragment : Fragment() {
                                     .padding(start = 16.dp, end = 16.dp, top = 30.dp),
                                 colors = mainButtonColor,
                                 onClick = {
-//                                    findNavController().navigate(R.id.action_getAcquaintedFragment_to_locationFragment)
+                                    findNavController().navigate(
+                                        R.id.action_flipCardFragment_to_topUpFragment, null,
+                                        navOptions
+                                    )
                                 }
                             ) {
                                 Text(

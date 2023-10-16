@@ -51,9 +51,16 @@
         <action
             android:id="@+id/action_flipCardFragment_to_paymentsFragment"
             app:destination="@id/paymentsFragment" />
+        <action
+            android:id="@+id/action_flipCardFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentsFragment"
         android:name="com.example.multimoduleapp.PaymentsFragment"
         android:label="PaymentsFragment" />
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="com.example.multimoduleapp.TopUpFragment"
+        android:label="TopUpFragment" />
 </navigation>

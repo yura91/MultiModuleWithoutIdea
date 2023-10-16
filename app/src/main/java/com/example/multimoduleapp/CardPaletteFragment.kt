@@ -67,7 +67,7 @@ class CardPaletteFragment : Fragment() {
         )
         val startColor by cardPalleteViewModel.startColor.observeAsState()
         val endColor by cardPalleteViewModel.selectedColor.observeAsState()
-        val count by cardPalleteViewModel.count.observeAsState(0)
+        val count by cardPalleteViewModel.progressValue.observeAsState(0)
         val gradientBrush = if (startColor != null && endColor != null) {
             Brush.verticalGradient(
                 colors = listOf(startColor!!, endColor!!)
