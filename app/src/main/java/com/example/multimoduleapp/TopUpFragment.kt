@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -177,6 +178,11 @@ class TopUpFragment : Fragment() {
                 onClick = {
                 }
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.telegram),
+                    contentDescription = null
+                )
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Support",
                     textAlign = TextAlign.Center,
