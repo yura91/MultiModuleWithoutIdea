@@ -31,7 +31,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 
-class SettingsFragment : Fragment() {
+class HelpSupportFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -50,7 +50,7 @@ class SettingsFragment : Fragment() {
             TopAppBar(
                 title = {
                     Text(
-                        text = "More",
+                        text = "Help and support",
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         fontWeight = FontWeight.Bold,
@@ -71,22 +71,24 @@ class SettingsFragment : Fragment() {
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                 .clickable {
-                    findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
                 }) {
-                Image(painterResource(R.drawable.question), contentDescription = null)
+                Image(painterResource(R.drawable.tghelp), contentDescription = null)
                 Spacer(Modifier.width(18.dp))
-                Text("Help and support", fontSize = 16.sp)
+                Text("Telegram", fontSize = 16.sp)
+                Spacer(Modifier.weight(1f))
+                Image(painterResource(R.drawable.arrow_right), contentDescription = null)
             }
 
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 20.dp)
                 .clickable {
-                    findNavController().navigate(R.id.action_settingsFragment_to_legalInformationFragment)
                 }) {
-                Image(painterResource(R.drawable.info), contentDescription = null)
+                Image(painterResource(R.drawable.skype), contentDescription = null)
                 Spacer(Modifier.width(18.dp))
-                Text("Legal information", fontSize = 16.sp)
+                Text("Skype", fontSize = 16.sp)
+                Spacer(Modifier.weight(1f))
+                Image(painterResource(R.drawable.arrow_right), contentDescription = null)
             }
         }
     }

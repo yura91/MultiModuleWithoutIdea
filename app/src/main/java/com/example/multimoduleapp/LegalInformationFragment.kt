@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,7 +30,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 
-class SettingsFragment : Fragment() {
+class LegalInformationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -50,7 +49,7 @@ class SettingsFragment : Fragment() {
             TopAppBar(
                 title = {
                     Text(
-                        text = "More",
+                        text = "Legal information",
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         fontWeight = FontWeight.Bold,
@@ -71,22 +70,20 @@ class SettingsFragment : Fragment() {
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                 .clickable {
-                    findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
                 }) {
-                Image(painterResource(R.drawable.question), contentDescription = null)
-                Spacer(Modifier.width(18.dp))
-                Text("Help and support", fontSize = 16.sp)
+                Text("Terms of Service", fontSize = 16.sp)
+                Spacer(Modifier.weight(1f))
+                Image(painterResource(R.drawable.arrow_right), contentDescription = null)
             }
 
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 20.dp)
                 .clickable {
-                    findNavController().navigate(R.id.action_settingsFragment_to_legalInformationFragment)
                 }) {
-                Image(painterResource(R.drawable.info), contentDescription = null)
-                Spacer(Modifier.width(18.dp))
-                Text("Legal information", fontSize = 16.sp)
+                Text("Privacy Policy", fontSize = 16.sp)
+                Spacer(Modifier.weight(1f))
+                Image(painterResource(R.drawable.arrow_right), contentDescription = null)
             }
         }
     }

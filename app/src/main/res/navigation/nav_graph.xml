@@ -72,5 +72,20 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.multimoduleapp.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_helpSupportFragment"
+            app:destination="@id/helpSupportFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_legalInformationFragment"
+            app:destination="@id/legalInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/helpSupportFragment"
+        android:name="com.example.multimoduleapp.HelpSupportFragment"
+        android:label="HelpSupportFragment" />
+    <fragment
+        android:id="@+id/legalInformationFragment"
+        android:name="com.example.multimoduleapp.LegalInformationFragment"
+        android:label="LegalInformationFragment" />
 </navigation>
