@@ -19,6 +19,7 @@ android {
         minSdk = 24
         targetSdk = 33
         applicationId = "net.pst.cash"
+        versionCode = 2
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
