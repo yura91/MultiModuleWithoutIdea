@@ -136,10 +136,13 @@ class GetAcquaintedFragment :
         }
 
         binding?.next?.setOnClickListener {
-            getAcquaintedViewModel.validate(
-                binding?.firstNameField?.text.toString(),
-                binding?.lastNameField?.text.toString()
-            )
+            val action =
+                GetAcquaintedFragmentDirections.actionGetAcquaintedFragmentToLocationFragment(
+                    binding?.firstNameField?.text.toString(),
+                    binding?.lastNameField?.text.toString(),
+                    binding?.birthDate?.text.toString()
+                )
+            findNavController().navigate(action)
         }
     }
 }

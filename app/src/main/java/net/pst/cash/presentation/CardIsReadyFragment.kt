@@ -8,16 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardIsReadyBinding
 import net.pst.cash.presentation.model.dpToPx
+import net.pst.cash.presentation.viewmodels.CardIsReadyViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
+@AndroidEntryPoint
 class CardIsReadyFragment :
     BaseFragment<FragmentCardIsReadyBinding>(FragmentCardIsReadyBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
+    private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
@@ -48,7 +53,7 @@ class CardIsReadyFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
-
+        cardIsReadyViewModel
         binding?.cardIsReadyImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {

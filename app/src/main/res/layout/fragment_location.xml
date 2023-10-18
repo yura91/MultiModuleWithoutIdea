@@ -112,7 +112,6 @@
         android:layout_marginBottom="@dimen/margin_34"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/next_step"
-        android:visibility="gone"
         android:textColor="@color/white"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"

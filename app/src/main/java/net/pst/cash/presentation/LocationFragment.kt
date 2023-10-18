@@ -145,11 +145,12 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         binding?.next?.setOnClickListener {
             val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            token?.let { token ->
+            findNavController().navigate(R.id.action_locationFragment_to_design_nav_graph)
+            /*token?.let { token ->
                 viewModel.goNext(
                     "Bearer $token"
                 )
-            }
+            }*/
         }
     }
 }

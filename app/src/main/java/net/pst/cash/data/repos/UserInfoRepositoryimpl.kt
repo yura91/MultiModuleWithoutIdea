@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.pst.cash.data.ApiService
+import net.pst.cash.data.responses.ApiService
 import javax.inject.Inject
 
 class UserInfoRepositoryimpl @Inject constructor(
