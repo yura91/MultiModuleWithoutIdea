@@ -12,10 +12,10 @@ import javax.inject.Inject
 @HiltViewModel
 class CardIsReadyViewModel @Inject constructor(
     private val application: Application,
-    cardIsReadyInteractor: CardIsReadyInteractor
+    private val cardIsReadyInteractor: CardIsReadyInteractor
 ) : AndroidViewModel(application) {
 
-    init {
+    fun checkActiveCards() {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")

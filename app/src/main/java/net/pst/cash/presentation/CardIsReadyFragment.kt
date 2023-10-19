@@ -53,7 +53,7 @@ class CardIsReadyFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
-        cardIsReadyViewModel
+        cardIsReadyViewModel.checkActiveCards()
         binding?.cardIsReadyImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
