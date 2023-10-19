@@ -1,8 +1,16 @@
-package net.pst.cash.data.responses
+package net.pst.cash.data
 
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.requests.VerificationRequest
+import net.pst.cash.data.responses.AppleLinkResponse
+import net.pst.cash.data.responses.AppleSignInResponse
+import net.pst.cash.data.responses.CheckCardResponse
+import net.pst.cash.data.responses.CountriesListResponse
+import net.pst.cash.data.responses.GoogleSignInResponse
+import net.pst.cash.data.responses.UserInfoResponse
+import net.pst.cash.data.responses.VerificationNeedResponse
+import net.pst.cash.data.responses.VerificationResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
