@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import net.pst.cash.data.repos.CardInfoRepo
+import net.pst.cash.data.repos.CardInfoRepoImpl
 import net.pst.cash.data.repos.CardIsReadyRepo
 import net.pst.cash.data.repos.CardIsReadyRepoImpl
 import net.pst.cash.data.repos.CountriesRepository
@@ -20,6 +22,9 @@ import net.pst.cash.data.repos.VerificationRepositoryImpl
 interface RepositoryModule {
     @Binds
     fun bindSingInRepository(signInRepositoryImpl: SignInRepositoryImpl): SignInRepository
+
+    @Binds
+    fun bindCardInfoRepository(cardInfoRepositoryImpl: CardInfoRepoImpl): CardInfoRepo
 
     @Binds
     fun bindCountriesRepository(countriesRepository: CountriesRepositoryImpl): CountriesRepository

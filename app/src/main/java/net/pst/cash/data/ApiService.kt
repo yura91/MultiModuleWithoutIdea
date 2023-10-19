@@ -8,6 +8,7 @@ import net.pst.cash.data.responses.AppleSignInResponse
 import net.pst.cash.data.responses.CheckCardResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
+import net.pst.cash.data.responses.ShowPanResponse
 import net.pst.cash.data.responses.UserInfoResponse
 import net.pst.cash.data.responses.VerificationNeedResponse
 import net.pst.cash.data.responses.VerificationResponse
@@ -17,6 +18,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 interface ApiService {
@@ -47,6 +49,12 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/verification/actual")
     suspend fun isVerificationNeeded(@Header("Authorization") token: String): Response<VerificationNeedResponse>
+
+    @GET("/card/{id}/showpan")
+    suspend fun getCardInfo(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Response<ShowPanResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("/verification")

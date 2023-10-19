@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -18,12 +19,14 @@ import net.pst.cash.databinding.FullCardInfoBinding
 import net.pst.cash.databinding.RestrictedCardInfoBinding
 import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
+import net.pst.cash.presentation.viewmodels.CardInfoViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
     val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
+    private val cardInfoViewModel: CardInfoViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,7 +47,7 @@ class CardInfoFragment :
                 .setAllCorners(CornerFamily.ROUNDED, requireContext().dpToPx(30.0F))
                 .build()
         }
-
+//        cardInfoViewModel.getCardInfo()
         val backShapedImage = backBinding?.cardInfo
         backShapedImage?.let { imageview ->
             imageview.shapeAppearanceModel = imageview
