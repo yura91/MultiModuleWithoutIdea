@@ -3,6 +3,7 @@ package net.pst.cash.presentation
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -23,6 +25,7 @@ class CardIsReadyFragment :
     BaseFragment<FragmentCardIsReadyBinding>(FragmentCardIsReadyBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
+    private var cardId: Int = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
@@ -53,6 +56,11 @@ class CardIsReadyFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
+        cardIsReadyViewModel.cardId.observe(viewLifecycleOwner) {
+            Log.d("TAG", it.toString())
+            cardId = it
+            binding?.next?.isEnabled = true
+        }
         cardIsReadyViewModel.checkActiveCards()
         binding?.cardIsReadyImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -74,7 +82,9 @@ class CardIsReadyFragment :
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
         }
         binding?.next?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_cardInfoFragment)
+            val action =
+                CardIsReadyFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(cardId)
+            findNavController().navigate(action)
         }
     }
 }

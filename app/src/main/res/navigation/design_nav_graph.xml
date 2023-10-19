@@ -32,6 +32,9 @@
         android:name="net.pst.cash.presentation.CardInfoFragment"
         android:label="restricted_card_info"
         tools:layout="@layout/restricted_card_info">
+        <argument
+            android:name="cardId"
+            app:argType="integer" />
         <action
             android:id="@+id/action_cardInfoFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />

@@ -6,7 +6,12 @@ import javax.inject.Inject
 
 class CardIsReadyInteractorImpl @Inject constructor(private val cardIsReadyRepo: CardIsReadyRepo) :
     CardIsReadyInteractor {
-    override suspend fun checkActiveCard(token: String): List<CardResponseData>? {
-        return cardIsReadyRepo.checkActiveCard(token)
+    override suspend fun getActiveCardId(token: String): Int? {
+        val cardIsReadyResponse: List<CardResponseData>? = cardIsReadyRepo.checkActiveCard(token)
+        return if (!cardIsReadyResponse.isNullOrEmpty()) {
+            cardIsReadyResponse[0].id
+        } else {
+            null
+        }
     }
 }

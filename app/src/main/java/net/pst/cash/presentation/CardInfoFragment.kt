@@ -11,8 +11,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.shape.CornerFamily
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardInfoBinding
 import net.pst.cash.databinding.FullCardInfoBinding
@@ -22,11 +24,13 @@ import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardInfoViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
-
+@AndroidEntryPoint
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
     val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
+    private val args: CardInfoFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,6 +43,7 @@ class CardInfoFragment :
             }
         }
 
+        cardInfoViewModel.getCardInfo(args.cardId.toString())
         val frontShapedImage = frontBinding?.cardInfo
         frontShapedImage?.let { imageview ->
             imageview.shapeAppearanceModel = imageview
