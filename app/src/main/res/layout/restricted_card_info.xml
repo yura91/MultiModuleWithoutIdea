@@ -74,8 +74,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/cardInfo"
         app:layout_constraintEnd_toEndOf="@+id/cardInfo"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/cardInfo"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/actionMore"
@@ -112,28 +114,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
 
-    <TextView
-        android:id="@+id/cardHolderName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_34"
-        android:layout_marginBottom="@dimen/margin_56"
-        android:text="@string/john_doe"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_16"
-        app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
-        app:layout_constraintStart_toStartOf="@+id/cardInfo" />
 
     <TextView
         android:id="@+id/sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_24"
-        android:layout_marginBottom="@dimen/margin_24"
         android:text="@string/_0_00"
         android:textColor="@color/white"
         android:textSize="@dimen/text_46"
-        app:layout_constraintBottom_toTopOf="@+id/cardHolderName"
+        app:layout_constraintBottom_toBottomOf="@+id/cardNumTemp"
         app:layout_constraintStart_toStartOf="@+id/cardInfo" />
 
     <ImageView

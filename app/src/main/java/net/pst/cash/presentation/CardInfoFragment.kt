@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -66,7 +67,7 @@ class CardInfoFragment :
                 .setAllCorners(CornerFamily.ROUNDED, requireContext().dpToPx(30.0F))
                 .build()
         }
-//        cardInfoViewModel.getCardInfo()
+
         val backShapedImage = backBinding?.cardInfo
         backShapedImage?.let { imageview ->
             imageview.shapeAppearanceModel = imageview
@@ -114,20 +115,16 @@ class CardInfoFragment :
             Toast.makeText(requireContext(), "CVV is copied", Toast.LENGTH_SHORT).show()
         }
 
-        backBinding?.copyCardHolderName?.setOnClickListener {
-            Toast.makeText(requireContext(), "CardHolder name is copied", Toast.LENGTH_SHORT).show()
-        }
-
         backBinding?.copyExpDate?.setOnClickListener {
             Toast.makeText(requireContext(), "Exp date is copied", Toast.LENGTH_SHORT).show()
         }
 
-        /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (binding?.easyFlipView?.isBackSide == true) {
                 binding?.easyFlipView?.setFlipTypeFromBack()
                 binding?.easyFlipView?.flipTheView()
             }
-        }*/
+        }
     }
 
     private fun setGradient(
