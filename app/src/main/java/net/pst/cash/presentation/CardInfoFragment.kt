@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -44,6 +43,21 @@ class CardInfoFragment :
         }
 
         cardInfoViewModel.getCardInfo(args.cardId.toString())
+
+        cardInfoViewModel.cardInfoData.observe(viewLifecycleOwner) {
+            it.number?.let { number ->
+                val lastFourDigits = number.substring(number.length - 4)
+                frontBinding?.cardNumTemp?.text = lastFourDigits
+                backBinding?.cardNumber?.text = number
+            }
+
+
+            backBinding?.cvv?.text = it.cvx2
+            val expMonth = it.expMonth
+            val expYear = it.expYear
+            backBinding?.expDate?.text = "$expMonth/$expYear"
+            frontBinding?.expDate?.text = "$expMonth/$expYear"
+        }
         val frontShapedImage = frontBinding?.cardInfo
         frontShapedImage?.let { imageview ->
             imageview.shapeAppearanceModel = imageview
@@ -108,12 +122,12 @@ class CardInfoFragment :
             Toast.makeText(requireContext(), "Exp date is copied", Toast.LENGTH_SHORT).show()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (binding?.easyFlipView?.isBackSide == true) {
                 binding?.easyFlipView?.setFlipTypeFromBack()
                 binding?.easyFlipView?.flipTheView()
             }
-        }
+        }*/
     }
 
     private fun setGradient(
