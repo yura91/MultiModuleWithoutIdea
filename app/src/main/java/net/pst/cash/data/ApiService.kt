@@ -9,6 +9,7 @@ import net.pst.cash.data.responses.CheckCardResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
 import net.pst.cash.data.responses.ShowPanResponse
+import net.pst.cash.data.responses.TransactionsListResponse
 import net.pst.cash.data.responses.UserInfoResponse
 import net.pst.cash.data.responses.VerificationNeedResponse
 import net.pst.cash.data.responses.VerificationResponse
@@ -41,6 +42,10 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/dictionary/countries")
     suspend fun getCountriesList(): Response<CountriesListResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("/transactions-v2")
+    suspend fun getTransactionsList(): Response<TransactionsListResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/user/info")

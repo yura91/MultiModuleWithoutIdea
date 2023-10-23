@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class CardResponseData(
-
     @SerializedName("id") var id: Int? = null,
     @SerializedName("user_account_id") var userAccountId: Int? = null,
     @SerializedName("holder_name") var holderName: String? = null,
@@ -21,5 +20,4 @@ data class CardResponseData(
     @SerializedName("need_amount") var needAmount: String? = null,
     @SerializedName("limits_equals") var limitsEquals: Boolean? = null,
     @SerializedName("tags") var tags: ArrayList<Tags> = arrayListOf()
-
 )

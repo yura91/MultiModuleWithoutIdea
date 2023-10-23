@@ -52,7 +52,6 @@ class CardInfoFragment :
                 backBinding?.cardNumber?.text = number
             }
 
-
             backBinding?.cvv?.text = it.cvx2
             val expMonth = it.expMonth
             val expYear = it.expYear

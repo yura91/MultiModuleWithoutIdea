@@ -9,5 +9,4 @@ data class ShowPanData(
     @SerializedName("exp_month") var expMonth: String? = null,
     @SerializedName("exp_year") var expYear: String? = null,
     @SerializedName("password") var password: String? = null
-
 )

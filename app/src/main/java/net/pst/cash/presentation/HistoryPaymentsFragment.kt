@@ -10,10 +10,9 @@ import net.pst.cash.presentation.model.HistoryItem
 import net.pst.cash.presentation.model.HistoryPaymentModel
 
 
-class HistoryPaymentsFragment :
-    net.pst.cash.presentation.BaseFragment<FragmentHistoryPaymentsBinding>(
-        FragmentHistoryPaymentsBinding::inflate
-    ) {
+class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
+    FragmentHistoryPaymentsBinding::inflate
+) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val historyItems1: MutableList<HistoryItem> = mutableListOf()
