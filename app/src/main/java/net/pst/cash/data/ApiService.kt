@@ -45,7 +45,7 @@ interface ApiService {
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/transactions-v2")
-    suspend fun getTransactionsList(): Response<TransactionsListResponse>
+    suspend fun getTransactionsList(@Header("Authorization") token: String): Response<TransactionsListResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/user/info")

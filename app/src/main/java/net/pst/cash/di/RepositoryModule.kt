@@ -12,6 +12,8 @@ import net.pst.cash.data.repos.CountriesRepository
 import net.pst.cash.data.repos.CountriesRepositoryImpl
 import net.pst.cash.data.repos.SignInRepository
 import net.pst.cash.data.repos.SignInRepositoryImpl
+import net.pst.cash.data.repos.TransactionsListRepo
+import net.pst.cash.data.repos.TransactionsListRepoImpl
 import net.pst.cash.data.repos.UserInfoRepository
 import net.pst.cash.data.repos.UserInfoRepositoryimpl
 import net.pst.cash.data.repos.VerificationRepository
@@ -37,4 +39,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindUserInfoRepository(userInfoRepository: UserInfoRepositoryimpl): UserInfoRepository
+
+    @Binds
+    fun bindTransListRepository(transactionsListRepo: TransactionsListRepoImpl): TransactionsListRepo
 }
