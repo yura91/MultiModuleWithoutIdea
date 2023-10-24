@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 
 data class TransactionsListResponse(
-    @SerializedName("data") var data: ArrayList<TransactionsListData> = arrayListOf()
+    @SerializedName("data") var data: ArrayList<TransactionsData> = arrayListOf()
 )

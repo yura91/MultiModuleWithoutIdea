@@ -3,7 +3,7 @@ package net.pst.cash.data.responses
 import com.google.gson.annotations.SerializedName
 
 
-data class TransactionsListData(
+data class TransactionsData(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("amount_total") var amountTotal: String? = null,
     @SerializedName("subtransactions") var subtransactions: ArrayList<String> = arrayListOf(),
@@ -16,7 +16,7 @@ data class TransactionsListData(
     @SerializedName("card_id") var cardId: Int? = null,
     @SerializedName("card_mask") var cardMask: String? = null,
     @SerializedName("card_description") var cardDescription: String? = null,
-    @SerializedName("card_tariff") var cardTariff: ArrayList<CardTariff> = arrayListOf(),
+    @SerializedName("card_tariff") var cardTariff: CardTariff? = null,
     @SerializedName("currency_id") var currencyId: Int? = null,
     @SerializedName("amount_full") var amountFull: String? = null,
     @SerializedName("tax") var tax: String? = null,
