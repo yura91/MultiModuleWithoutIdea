@@ -1,7 +1,7 @@
 package net.pst.cash.data.repos
 
-import net.pst.cash.data.responses.TransactionsData
+import net.pst.cash.data.responses.TransactionsListData
 
 interface TransactionsListRepo {
-    suspend fun getTransactionList(token: String): List<TransactionsData>?
+    suspend fun getTransactionList(token: String): List<TransactionsListData>?
 }

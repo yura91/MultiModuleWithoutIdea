@@ -18,7 +18,7 @@ data class UserInfoResponse(
     @SerializedName("avatar") var avatar: ArrayList<Avatar> = arrayListOf(),
     @SerializedName("roles") var roles: ArrayList<String> = arrayListOf(),
     @SerializedName("is_verified") var isVerified: Boolean? = null,
-    @SerializedName("summary") var summary: Summary? = Summary(),
+    @SerializedName("summary") var summary: UserInfoSummary? = UserInfoSummary(),
     @SerializedName("registration_method") var registrationMethod: String? = null,
     @SerializedName("token_name") var tokenName: String? = null,
     @SerializedName("is_old_interface_available") var isOldInterfaceAvailable: Boolean? = null,

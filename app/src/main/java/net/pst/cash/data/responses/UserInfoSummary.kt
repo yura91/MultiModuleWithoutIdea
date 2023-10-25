@@ -3,7 +3,7 @@ package net.pst.cash.data.responses
 import com.google.gson.annotations.SerializedName
 
 
-data class Summary(
+data class UserInfoSummary(
     @SerializedName("cards_count") var cardsCount: Int? = null,
     @SerializedName("cards_count_active") var cardsCountActive: Int? = null,
     @SerializedName("cards_balance") var cardsBalance: String? = null,

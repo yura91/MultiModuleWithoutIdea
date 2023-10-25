@@ -19,5 +19,5 @@ data class CardResponseData(
     @SerializedName("tariff_id") var tariffId: Int? = null,
     @SerializedName("need_amount") var needAmount: String? = null,
     @SerializedName("limits_equals") var limitsEquals: Boolean? = null,
-    @SerializedName("tags") var tags: ArrayList<Tags> = arrayListOf()
+    @SerializedName("tags") var tags: ArrayList<CardTags> = arrayListOf()
 )
