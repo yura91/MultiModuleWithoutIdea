@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.domain.model.TransactionModel
 
-class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
+class HistoryPaymentsItemAdapter(private val dataSet: List<TransactionModel>) :
     RecyclerView.Adapter<HistoryPaymentsItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,9 +31,9 @@ class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.operationTypeTextView.text = dataSet[position].operationType
-        viewHolder.operationValueTextView.text = dataSet[position].operationValue
-        viewHolder.operationTimeTextView.text = dataSet[position].operationTime
+        viewHolder.operationTypeTextView.text = dataSet[position].description
+        viewHolder.operationValueTextView.text = dataSet[position].sum
+        viewHolder.operationTimeTextView.text = dataSet[position].timePart
     }
 
     override fun getItemCount() = dataSet.size
