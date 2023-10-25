@@ -21,7 +21,6 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
             binding?.historyPayments?.adapter = HistoryPaymentsAdapter(it)
         }
         transactionViewModel.getTransactionHistory()
-//        binding?.historyPayments?.adapter = HistoryPaymentsAdapter(historyPayments)
 
         requireActivity().onBackPressedDispatcher.addCallback {
             findNavController().popBackStack()

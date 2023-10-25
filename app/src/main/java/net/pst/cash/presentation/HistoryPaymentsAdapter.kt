@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.domain.model.TransactionModel
+import net.pst.cash.presentation.model.HistoryItem
 
 
-class HistoryPaymentsAdapter(private val dataSet: Map<String, List<TransactionModel>>) :
+class HistoryPaymentsAdapter(private val dataSet: Map<String, List<HistoryItem>>) :
     RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
