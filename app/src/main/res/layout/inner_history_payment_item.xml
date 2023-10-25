@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin_16">
+    android:layout_marginBottom="@dimen/margin_16">
 
     <TextView
         android:id="@+id/operationType"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/text_black"
         android:textSize="@dimen/text_16"
+        app:layout_constraintEnd_toStartOf="@+id/operationValue"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Top up" />
 
@@ -22,9 +24,19 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_black"
         android:textSize="@dimen/text_16"
+        android:gravity="end"
+        app:layout_constraintStart_toEndOf="@+id/operationType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="+ 100,00 €" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="operationType,operationValue" />
+
 
     <TextView
         android:id="@+id/operationTime"

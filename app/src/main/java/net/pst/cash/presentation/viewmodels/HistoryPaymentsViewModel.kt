@@ -30,7 +30,6 @@ class HistoryPaymentsViewModel @Inject constructor(
             val transactionMap = transactionListInteractor.getTransactionList("Bearer $token")
             for ((datePart, transactions) in transactionMap) {
                 val historyItems: MutableList<HistoryItem> = mutableListOf()
-
                 for (transaction in transactions) {
                     val historyItem = HistoryItem(
                         sum = transaction.sum,

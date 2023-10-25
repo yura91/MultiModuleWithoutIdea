@@ -1,7 +1,5 @@
 package net.pst.cash.domain.model
 
-
-
 data class ShowPanDataModel(
     var number: String? = null,
     var cvx2: String? = null,

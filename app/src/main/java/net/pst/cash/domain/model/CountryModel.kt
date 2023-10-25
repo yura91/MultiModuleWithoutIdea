@@ -5,7 +5,6 @@ data class CountryModel(
     val title: String,
     val iso2: String?
 ) {
-
     override fun toString(): String {
         return title
     }
