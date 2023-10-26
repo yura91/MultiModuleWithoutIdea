@@ -8,14 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import net.pst.cash.domain.TransactionListInteractor
+import net.pst.cash.domain.HistoryInteractor
 import net.pst.cash.presentation.model.HistoryItem
 import javax.inject.Inject
 
 @HiltViewModel
 class HistoryPaymentsViewModel @Inject constructor(
     private val application: Application,
-    private val transactionListInteractor: TransactionListInteractor,
+    private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
     private val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
     private val _transList = MutableLiveData<Map<String, List<HistoryItem>>>()
@@ -27,7 +27,7 @@ class HistoryPaymentsViewModel @Inject constructor(
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            val transactionMap = transactionListInteractor.getTransactionList("Bearer $token")
+            val transactionMap = historyInteractor.getTransactionList("Bearer $token")
             for ((datePart, transactions) in transactionMap) {
                 val historyItems: MutableList<HistoryItem> = mutableListOf()
                 for (transaction in transactions) {

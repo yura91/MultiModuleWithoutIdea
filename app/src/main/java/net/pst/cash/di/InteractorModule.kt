@@ -12,10 +12,10 @@ import net.pst.cash.domain.CardIsReadyInteractor
 import net.pst.cash.domain.CardIsReadyInteractorImpl
 import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
+import net.pst.cash.domain.HistoryInteractor
+import net.pst.cash.domain.HistoryInteractorImpl
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.SignInInteractorImpl
-import net.pst.cash.domain.TransactionListInteractor
-import net.pst.cash.domain.TransactionListInteractorImpl
 import net.pst.cash.domain.UserInfoIneractorimpl
 import net.pst.cash.domain.UserInfoInteractor
 import net.pst.cash.domain.VerificationInteractor
@@ -37,7 +37,7 @@ interface InteractorModule {
     fun cardIsReadyInteractor(cardIsReadyInteractor: CardIsReadyInteractorImpl): CardIsReadyInteractor
 
     @Binds
-    fun transListInteractor(transactionListInteractorImpl: TransactionListInteractorImpl): TransactionListInteractor
+    fun historyListInteractor(transactionListInteractorImpl: HistoryInteractorImpl): HistoryInteractor
 
     @Binds
     fun cardInfoInteractor(cardInfoInteractor: CardInfoInteractorImpl): CardInfoInteractor

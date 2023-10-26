@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MultiModuleApp"
+rootProject.name = "VirtualCards"
 include(":app")

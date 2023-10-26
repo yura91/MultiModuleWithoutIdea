@@ -1,15 +1,15 @@
 package net.pst.cash.domain
 
-import net.pst.cash.data.repos.TransactionsListRepo
+import net.pst.cash.data.repos.HistoryListRepo
 import net.pst.cash.domain.model.TransactionModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
 
-class TransactionListInteractorImpl @Inject constructor(private val transactionsListRepo: TransactionsListRepo) :
-    TransactionListInteractor {
+class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
+    HistoryInteractor {
     override suspend fun getTransactionList(token: String): Map<String, List<TransactionModel>> {
-        val transactionListData = transactionsListRepo.getTransactionList(token)
+        val transactionListData = historyListRepo.getTransactionList(token)
         val transactionModels: MutableList<TransactionModel> = mutableListOf()
         transactionListData?.forEach {
             val transModel = TransactionModel()
