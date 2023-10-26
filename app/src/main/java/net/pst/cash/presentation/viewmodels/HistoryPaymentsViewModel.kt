@@ -44,4 +44,26 @@ class HistoryPaymentsViewModel @Inject constructor(
             }
         }
     }
+
+    fun getMoreTransactions() {
+        viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
+            for ((datePart, transactions) in transactionMap) {
+                val historyItems: MutableList<HistoryItem> = mutableListOf()
+                for (transaction in transactions) {
+                    val historyItem = HistoryItem(
+                        sum = transaction.sum,
+                        description = transaction.description,
+                        timePart = transaction.timePart
+                    )
+                    historyItems.add(historyItem)
+                }
+
+                historyItemsMap[datePart] = historyItems
+                _transList.value = historyItemsMap
+            }
+        }
+    }
 }

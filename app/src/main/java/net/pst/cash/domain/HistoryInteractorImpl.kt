@@ -32,6 +32,31 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         }
     }
 
+    override suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>> {
+        val transactionListData = historyListRepo.loadMoreTransactions(token)
+        val transactionModels: MutableList<TransactionModel> = mutableListOf()
+        transactionListData?.forEach {
+            val transModel = TransactionModel()
+            it.amountTotal?.let { amount ->
+                transModel.sum = amount
+            }
+
+            it.description?.let { description ->
+                transModel.description = description
+            }
+
+            it.processedAt?.let { processedAt ->
+                setDateAndTime(transModel, processedAt)
+            }
+            transactionModels.add(transModel)
+        }
+
+        return transactionModels.groupBy {
+            it.datePart
+        }
+    }
+
+
     private fun setDateAndTime(transactionModel: TransactionModel, processedAt: String) {
         // Форматируем строку даты и времени
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")

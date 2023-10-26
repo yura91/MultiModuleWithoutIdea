@@ -20,6 +20,7 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 
 interface ApiService {
@@ -46,6 +47,13 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/transactions-v2")
     suspend fun getTransactionsList(@Header("Authorization") token: String): Response<TransactionsListResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET
+    suspend fun getMoreTransactions(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<TransactionsListResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/user/info")
