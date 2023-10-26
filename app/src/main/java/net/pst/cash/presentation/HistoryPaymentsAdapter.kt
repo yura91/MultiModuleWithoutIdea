@@ -9,7 +9,10 @@ import net.pst.cash.R
 import net.pst.cash.presentation.model.HistoryItem
 
 
-class HistoryPaymentsAdapter(private val dataSet: Map<String, List<HistoryItem>>) :
+class HistoryPaymentsAdapter(
+    private val dataSet: Map<String, List<HistoryItem>>,
+    private var onLoadMoreListener: OnLoadMoreListener
+) :
     RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -29,10 +32,14 @@ class HistoryPaymentsAdapter(private val dataSet: Map<String, List<HistoryItem>>
         return ViewHolder(view)
     }
 
+
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val datePart = dataSet.keys.toList()[position]
         viewHolder.textView.text = datePart
         viewHolder.historyItems.adapter = dataSet[datePart]?.let { HistoryPaymentsItemAdapter(it) }
+        if (position >= dataSet.size - 5) {
+            onLoadMoreListener.onLoadMore()
+        }
     }
 
     override fun getItemCount() = dataSet.size

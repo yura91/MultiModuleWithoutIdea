@@ -30,7 +30,14 @@ class HistoryListRepoImpl @Inject constructor(
     }
 
     override suspend fun loadMoreTransactions(token: String): List<TransactionsListData>? {
-        nextLink?.let { return api.getMoreTransactions(token, it).body()?.data }
-        return null
+        return withContext(Dispatchers.IO) {
+            nextLink?.let {
+                val replacedLink = it.replace("http", "https")
+                val listTransDataResp = api.getMoreTransactions(token, replacedLink).body()
+                nextLink = listTransDataResp?.links?.next
+                return@withContext listTransDataResp?.data
+            }
+            return@withContext null
+        }
     }
 }

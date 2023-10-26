@@ -17,14 +17,17 @@ class HistoryPaymentsViewModel @Inject constructor(
     private val application: Application,
     private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
-    private val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
     private val _transList = MutableLiveData<Map<String, List<HistoryItem>>>()
     val transList: LiveData<Map<String, List<HistoryItem>>>
         get() = _transList
 
+    private val _transMoreList = MutableLiveData<Map<String, List<HistoryItem>>>()
+    val transMoreList: LiveData<Map<String, List<HistoryItem>>>
+        get() = _transMoreList
 
     fun getTransactionHistory() {
         viewModelScope.launch {
+            val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.getTransactionList("Bearer $token")
@@ -47,6 +50,7 @@ class HistoryPaymentsViewModel @Inject constructor(
 
     fun getMoreTransactions() {
         viewModelScope.launch {
+            val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
@@ -62,7 +66,7 @@ class HistoryPaymentsViewModel @Inject constructor(
                 }
 
                 historyItemsMap[datePart] = historyItems
-                _transList.value = historyItemsMap
+                _transMoreList.value = historyItemsMap
             }
         }
     }
