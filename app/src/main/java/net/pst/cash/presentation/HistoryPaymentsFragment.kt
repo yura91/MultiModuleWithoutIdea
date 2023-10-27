@@ -15,13 +15,16 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     FragmentHistoryPaymentsBinding::inflate
 ), OnLoadMoreListener {
     private val historyViewModel: HistoryPaymentsViewModel by viewModels()
+    private val historyAdapter = HistoryPaymentsAdapter(mutableListOf(), this)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding?.historyPayments?.adapter = historyAdapter
 
         historyViewModel.transList.observe(viewLifecycleOwner) {
-            binding?.historyPayments?.adapter = HistoryPaymentsAdapter(it, this)
+            historyAdapter.addHistoryItems(it)
         }
 
         historyViewModel.transMoreList.observe(viewLifecycleOwner) {
+            historyAdapter.addHistoryItems(it)
         }
 
         historyViewModel.getTransactionHistory()
