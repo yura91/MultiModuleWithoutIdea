@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.HistoryInteractor
 import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.presentation.model.RowHistoryItems
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,17 +18,17 @@ class HistoryPaymentsViewModel @Inject constructor(
     private val application: Application,
     private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
-    private val _transList = MutableLiveData<Map<String, List<HistoryItem>>>()
-    val transList: LiveData<Map<String, List<HistoryItem>>>
+    val tableHistoryItems = mutableListOf<RowHistoryItems>()
+    private val _transList = MutableLiveData<List<RowHistoryItems>>()
+    val transList: LiveData<List<RowHistoryItems>>
         get() = _transList
 
-    private val _transMoreList = MutableLiveData<Map<String, List<HistoryItem>>>()
-    val transMoreList: LiveData<Map<String, List<HistoryItem>>>
+    private val _transMoreList = MutableLiveData<List<RowHistoryItems>>()
+    val transMoreList: LiveData<List<RowHistoryItems>>
         get() = _transMoreList
 
     fun getTransactionHistory() {
         viewModelScope.launch {
-            val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.getTransactionList("Bearer $token")
@@ -42,15 +43,15 @@ class HistoryPaymentsViewModel @Inject constructor(
                     historyItems.add(historyItem)
                 }
 
-                historyItemsMap[datePart] = historyItems
-                _transList.value = historyItemsMap
+                val rowHistoryItems = RowHistoryItems(datePart, historyItems)
+                tableHistoryItems.add(rowHistoryItems)
+                _transList.value = tableHistoryItems
             }
         }
     }
 
     fun getMoreTransactions() {
         viewModelScope.launch {
-            val historyItemsMap: MutableMap<String, List<HistoryItem>> = mutableMapOf()
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
@@ -64,9 +65,17 @@ class HistoryPaymentsViewModel @Inject constructor(
                     )
                     historyItems.add(historyItem)
                 }
-
-                historyItemsMap[datePart] = historyItems
-                _transMoreList.value = historyItemsMap
+                try {
+                    val rowHistoryItems =
+                        tableHistoryItems.first {
+                            it.date == datePart
+                        }
+                    rowHistoryItems.elements.addAll(historyItems)
+                } catch (e: NoSuchElementException) {
+                    val rowHistoryItems = RowHistoryItems(datePart, historyItems)
+                    tableHistoryItems.add(rowHistoryItems)
+                }
+                _transMoreList.value = tableHistoryItems
             }
         }
     }

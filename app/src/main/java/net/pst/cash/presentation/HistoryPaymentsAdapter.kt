@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.presentation.model.RowHistoryItems
 
 
 class HistoryPaymentsAdapter(
-    private var dataSet: List<Map<String, List<HistoryItem>>>,
+    private var dataSet: List<RowHistoryItems>,
     private var onLoadMoreListener: OnLoadMoreListener
 ) :
     RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {
@@ -32,9 +32,9 @@ class HistoryPaymentsAdapter(
         return ViewHolder(view)
     }
 
-    fun addHistoryItems(dataSet: Map<String, List<HistoryItem>>) {
+    fun addHistoryItems(dataSet: List<RowHistoryItems>) {
         val mutableList = this.dataSet.toMutableList()
-        mutableList.add(dataSet)
+        mutableList.addAll(dataSet)
         val oldSize = this.dataSet.size
         val newSize = dataSet.size
         this.dataSet = mutableList
@@ -43,11 +43,10 @@ class HistoryPaymentsAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val historyMap: Map<String, List<HistoryItem>> = dataSet[position]
-        val datePart = historyMap.keys.toList()[0]
+        val datePart = dataSet[position].date
         viewHolder.textView.text = datePart
         viewHolder.historyItems.adapter =
-            historyMap[datePart]?.let { HistoryPaymentsItemAdapter(it) }
+            HistoryPaymentsItemAdapter(dataSet[position].elements)
         if (position >= dataSet.size - 1) {
             onLoadMoreListener.onLoadMore()
         }
