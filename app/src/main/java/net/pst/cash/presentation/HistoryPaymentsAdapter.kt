@@ -12,8 +12,7 @@ import net.pst.cash.presentation.model.RowHistoryItems
 class HistoryPaymentsAdapter(
     private var dataSet: List<RowHistoryItems>,
     private var onLoadMoreListener: OnLoadMoreListener
-) :
-    RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HistoryPaymentsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView

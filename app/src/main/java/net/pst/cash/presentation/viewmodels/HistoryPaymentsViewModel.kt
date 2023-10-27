@@ -18,7 +18,6 @@ class HistoryPaymentsViewModel @Inject constructor(
     private val application: Application,
     private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
-    val tableHistoryItems = mutableListOf<RowHistoryItems>()
     private val _transList = MutableLiveData<List<RowHistoryItems>>()
     val transList: LiveData<List<RowHistoryItems>>
         get() = _transList
@@ -42,7 +41,7 @@ class HistoryPaymentsViewModel @Inject constructor(
                     )
                     historyItems.add(historyItem)
                 }
-
+                val tableHistoryItems = mutableListOf<RowHistoryItems>()
                 val rowHistoryItems = RowHistoryItems(datePart, historyItems)
                 tableHistoryItems.add(rowHistoryItems)
                 _transList.value = tableHistoryItems
@@ -57,6 +56,7 @@ class HistoryPaymentsViewModel @Inject constructor(
             val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
             for ((datePart, transactions) in transactionMap) {
                 val historyItems: MutableList<HistoryItem> = mutableListOf()
+                val tableHistoryItems = mutableListOf<RowHistoryItems>()
                 for (transaction in transactions) {
                     val historyItem = HistoryItem(
                         sum = transaction.sum,
@@ -72,6 +72,7 @@ class HistoryPaymentsViewModel @Inject constructor(
                         }
                     rowHistoryItems.elements.addAll(historyItems)
                 } catch (e: NoSuchElementException) {
+
                     val rowHistoryItems = RowHistoryItems(datePart, historyItems)
                     tableHistoryItems.add(rowHistoryItems)
                 }
