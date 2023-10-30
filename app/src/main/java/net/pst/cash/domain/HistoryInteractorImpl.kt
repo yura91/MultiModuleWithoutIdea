@@ -85,7 +85,10 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         transModels.add(transModel39)
     }
 
-    override fun getTransactionList(token: String): Map<String, List<TransactionModel>> {
+    override fun getTransactionList(token: String): Map<String, List<TransactionModel>>? {
+        if (transModels.size == 0) {
+            return null
+        }
         val transactionModels = transModels.subList(index, 5)
         index += 5
         Log.d("COLLECTION_LIST", transactionModels.toString())

@@ -34,25 +34,27 @@ class HistoryPaymentsViewModel @Inject constructor(
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
         val transactionMap = historyInteractor.getTransactionList("Bearer $token")
-        Log.d("COLLECTION_LIST", transactionMap.toString())
-        val tableHistoryItems = mutableListOf<RowHistoryItems>()
-        for ((datePart, transactions) in transactionMap) {
-            val historyItems: MutableList<HistoryItem> = mutableListOf()
-            for (transaction in transactions) {
-                val historyItem = HistoryItem(
-                    sum = transaction.sum,
-                    description = transaction.description,
-                    timePart = transaction.timePart
-                )
-                historyItems.add(historyItem)
-            }
-            date = datePart
+        if (transactionMap != null) {
+            Log.d("COLLECTION_LIST", transactionMap.toString())
+            val tableHistoryItems = mutableListOf<RowHistoryItems>()
+            for ((datePart, transactions) in transactionMap) {
+                val historyItems: MutableList<HistoryItem> = mutableListOf()
+                for (transaction in transactions) {
+                    val historyItem = HistoryItem(
+                        sum = transaction.sum,
+                        description = transaction.description,
+                        timePart = transaction.timePart
+                    )
+                    historyItems.add(historyItem)
+                }
+                date = datePart
 
-            val rowHistoryItems = RowHistoryItems(datePart, historyItems)
-            tableHistoryItems.add(rowHistoryItems)
-            Log.d("COLLECTION_LIST", tableHistoryItems.toString())
+                val rowHistoryItems = RowHistoryItems(datePart, historyItems)
+                tableHistoryItems.add(rowHistoryItems)
+                Log.d("COLLECTION_LIST", tableHistoryItems.toString())
+            }
+            _transList.value = tableHistoryItems
         }
-        _transList.value = tableHistoryItems
 //        }
     }
 
