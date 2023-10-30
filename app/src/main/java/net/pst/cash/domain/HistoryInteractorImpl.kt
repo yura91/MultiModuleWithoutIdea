@@ -86,23 +86,6 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
     }
 
     override fun getTransactionList(token: String): Map<String, List<TransactionModel>> {
-        /*  val transactionListData = historyListRepo.getTransactionList(token)
-          val transactionModels: MutableList<TransactionModel> = mutableListOf()
-          transactionListData?.forEach {
-              val transModel = TransactionModel()
-              it.amountTotal?.let { amount ->
-                  transModel.sum = amount
-              }
-
-              it.description?.let { description ->
-                  transModel.description = description
-              }
-
-              it.processedAt?.let { processedAt ->
-                  setDateAndTime(transModel, processedAt)
-              }
-              transactionModels.add(transModel)
-          }*/
         val transactionModels = transModels.subList(index, 5)
         index += 5
         Log.d("COLLECTION_LIST", transactionModels.toString())
@@ -112,24 +95,6 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
     }
 
     override suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>>? {
-        /* val transactionListData = historyListRepo.loadMoreTransactions(token)
-         val transactionModels: MutableList<TransactionModel> = mutableListOf()
-         transactionListData?.forEach {
-             val transModel = TransactionModel()
-             it.amountTotal?.let { amount ->
-                 transModel.sum = amount
-             }
-
-             it.description?.let { description ->
-                 transModel.description = description
-             }
-
-             it.processedAt?.let { processedAt ->
-                 setDateAndTime(transModel, processedAt)
-             }
-             transactionModels.add(transModel)
-         }
- */
         if (!endReached) {
             delay(2000)
             val toIndex = index + 5
