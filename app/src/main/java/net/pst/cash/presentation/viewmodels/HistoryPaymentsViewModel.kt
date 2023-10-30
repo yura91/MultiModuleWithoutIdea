@@ -34,9 +34,9 @@ class HistoryPaymentsViewModel @Inject constructor(
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.getTransactionList("Bearer $token")
-            Log.d("COLLECTION_LIST", transactionMap.toString())
-            val tableHistoryItems = mutableListOf<RowHistoryItems>()
             if (transactionMap != null) {
+                Log.d("COLLECTION_LIST", transactionMap.toString())
+                val tableHistoryItems = mutableListOf<RowHistoryItems>()
                 for ((datePart, transactions) in transactionMap) {
                     val historyItems: MutableList<HistoryItem> = mutableListOf()
                     for (transaction in transactions) {
