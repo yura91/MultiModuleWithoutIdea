@@ -19,11 +19,17 @@ class HistoryListRepoImpl @Inject constructor(
 
     override suspend fun getTransactionList(token: String): List<TransactionsListData>? {
         return withContext(Dispatchers.IO) {
-            val transactionsListResponse = api.getTransactionsList(token)
-            if (transactionsListResponse.isSuccessful) {
-                nextLink = transactionsListResponse.body()?.links?.next
-                transactionsListResponse.body()?.data
-            } else {
+            try {
+                val transactionsListResponse = api.getTransactionsList(token)
+                if (transactionsListResponse.isSuccessful) {
+                    nextLink = transactionsListResponse.body()?.links?.next
+                    transactionsListResponse.body()?.data
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
                 null
             }
         }
@@ -31,13 +37,19 @@ class HistoryListRepoImpl @Inject constructor(
 
     override suspend fun loadMoreTransactions(token: String): List<TransactionsListData>? {
         return withContext(Dispatchers.IO) {
-            nextLink?.let {
-                val replacedLink = it.replace("http", "https")
-                val listTransDataResp = api.getMoreTransactions(token, replacedLink).body()
-                nextLink = listTransDataResp?.links?.next
-                return@withContext listTransDataResp?.data
+            try {
+                nextLink?.let {
+                    val replacedLink = it.replace("http", "https")
+                    val listTransDataResp = api.getMoreTransactions(token, replacedLink).body()
+                    nextLink = listTransDataResp?.links?.next
+                    return@withContext listTransDataResp?.data
+                }
+                return@withContext null
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
+                null
             }
-            return@withContext null
         }
     }
 }
