@@ -9,49 +9,57 @@ import javax.inject.Inject
 class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
     HistoryInteractor {
 
-    override suspend fun getTransactionList(token: String): Map<String, List<TransactionModel>> {
+    override suspend fun getTransactionList(token: String): Map<String, List<TransactionModel>>? {
         val transactionListData = historyListRepo.getTransactionList(token)
-        val transactionModels: MutableList<TransactionModel> = mutableListOf()
-        transactionListData?.forEach {
-            val transModel = TransactionModel()
-            it.amountTotal?.let { amount ->
-                transModel.sum = amount
-            }
+        if (transactionListData != null) {
+            val transactionModels: MutableList<TransactionModel> = mutableListOf()
+            transactionListData.forEach {
+                val transModel = TransactionModel()
+                it.amountTotal?.let { amount ->
+                    transModel.sum = amount
+                }
 
-            it.description?.let { description ->
-                transModel.description = description
-            }
+                it.description?.let { description ->
+                    transModel.description = description
+                }
 
-              it.processedAt?.let { processedAt ->
-                  setDateAndTime(transModel, processedAt)
-              }
-              transactionModels.add(transModel)
-        }
-        return transactionModels.groupBy {
-            it.datePart
+                it.processedAt?.let { processedAt ->
+                    setDateAndTime(transModel, processedAt)
+                }
+                transactionModels.add(transModel)
+            }
+            return transactionModels.groupBy {
+                it.datePart
+            }
+        } else {
+            return null
         }
     }
 
     override suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>>? {
         val transactionListData = historyListRepo.loadMoreTransactions(token)
-        val transactionModels: MutableList<TransactionModel> = mutableListOf()
-         transactionListData?.forEach {
-             val transModel = TransactionModel()
-             it.amountTotal?.let { amount ->
-                 transModel.sum = amount
-             }
+        if (transactionListData != null) {
+            val transactionModels: MutableList<TransactionModel> = mutableListOf()
+            transactionListData.forEach {
+                val transModel = TransactionModel()
+                it.amountTotal?.let { amount ->
+                    transModel.sum = amount
+                }
 
-             it.description?.let { description ->
-                 transModel.description = description
-             }
+                it.description?.let { description ->
+                    transModel.description = description
+                }
 
-             it.processedAt?.let { processedAt ->
-                 setDateAndTime(transModel, processedAt)
-             }
-             transactionModels.add(transModel)
-         }
-        return transactionModels.groupBy {
-            it.datePart
+                it.processedAt?.let { processedAt ->
+                    setDateAndTime(transModel, processedAt)
+                }
+                transactionModels.add(transModel)
+            }
+            return transactionModels.groupBy {
+                it.datePart
+            }
+        } else {
+            return null
         }
     }
 
