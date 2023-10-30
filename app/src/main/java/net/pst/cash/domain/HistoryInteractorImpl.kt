@@ -73,7 +73,7 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         val transModel36 = TransactionModel("30", "ff", "24.10.2023", "15:05:33")
         val transModel37 = TransactionModel("30", "ffdfsdf", "24.10.2023", "15:05:33")
         val transModel38 = TransactionModel("30", "ffd", "24.10.2023", "15:05:33")
-        val transModel39 = TransactionModel("30", "ffdfsdf", "24.10.2023", "15:05:33")
+        val transModel39 = TransactionModel("30", "ffdfsdf", "25.10.2023", "15:05:33")
 
         transModels.add(transModel32)
         transModels.add(transModel33)
