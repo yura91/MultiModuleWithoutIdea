@@ -16,7 +16,7 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     FragmentHistoryPaymentsBinding::inflate
 ), OnLoadMoreListener {
     private val historyViewModel: HistoryPaymentsViewModel by viewModels()
-    private val historyAdapter = HistoryPaymentsAdapter(mutableListOf(), this)
+    private val historyAdapter = HistoryPaymentsAdapter(this)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.historyPayments?.adapter = historyAdapter
 
@@ -24,13 +24,13 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
 
         historyViewModel.transList.observe(viewLifecycleOwner) {
             val position = layoutManager.findFirstVisibleItemPosition()
-            historyAdapter.updateEmployeeListItems(it)
+            historyAdapter.submitList(it)
             layoutManager.scrollToPosition(position)
         }
 
         historyViewModel.transMoreList.observe(viewLifecycleOwner) {
             val position = layoutManager.findFirstVisibleItemPosition()
-            historyAdapter.updateEmployeeListItems(it)
+            historyAdapter.submitList(it.toMutableList())
             layoutManager.scrollToPosition(position)
         }
 
