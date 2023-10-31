@@ -105,10 +105,14 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         val transModel48 = TransactionModel("10", "ffdfsdf", "25.10.2024", "16:05:33")
         val transModel50 = TransactionModel("10", "ffdfsdf", "25.10.2024", "16:05:33")
         val transModel49 = TransactionModel("10", "ffd", "25.11.2024", "16:05:33")
+        val transModel51 = TransactionModel("10", "ff", "25.10.2024", "16:05:33")
+        val transModel52 = TransactionModel("10", "ffd", "25.10.2024", "16:05:33")
 
         transModels.add(transModel48)
         transModels.add(transModel49)
         transModels.add(transModel50)
+        transModels.add(transModel51)
+        transModels.add(transModel52)
     }
 
     override fun getTransactionList(token: String): Map<String, List<TransactionModel>>? {

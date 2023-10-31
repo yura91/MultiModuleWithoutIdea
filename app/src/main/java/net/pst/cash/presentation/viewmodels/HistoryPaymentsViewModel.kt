@@ -27,6 +27,7 @@ class HistoryPaymentsViewModel @Inject constructor(
     val transMoreList: LiveData<List<RowHistoryItems>>
         get() = _transMoreList
 
+    private val tableHistoryItems = mutableListOf<RowHistoryItems>()
     private var date = ""
 
     fun getTransactionHistory() {
@@ -36,7 +37,6 @@ class HistoryPaymentsViewModel @Inject constructor(
         val transactionMap = historyInteractor.getTransactionList("Bearer $token")
         if (transactionMap != null) {
             Log.d("COLLECTION_LIST", transactionMap.toString())
-            val tableHistoryItems = mutableListOf<RowHistoryItems>()
             for ((datePart, transactions) in transactionMap) {
                 val historyItems: MutableList<HistoryItem> = mutableListOf()
                 for (transaction in transactions) {
@@ -63,7 +63,6 @@ class HistoryPaymentsViewModel @Inject constructor(
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
-            val tableHistoryItems = mutableListOf<RowHistoryItems>()
             if (transactionMap != null) {
                 for ((datePart, transactions) in transactionMap) {
                     val historyItems: MutableList<HistoryItem> = mutableListOf()
