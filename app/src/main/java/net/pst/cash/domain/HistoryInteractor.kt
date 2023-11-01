@@ -1,9 +1,11 @@
 package net.pst.cash.domain
 
-import net.pst.cash.domain.model.TransactionModel
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+import net.pst.cash.data.paging.TransactionModel
 
 interface HistoryInteractor {
-    suspend fun getTransactionList(token: String): Map<String, List<TransactionModel>>?
+    suspend fun getTransactionList(token: String): Flow<PagingData<TransactionModel>>
 
     suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>>?
 }

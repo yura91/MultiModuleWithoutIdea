@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.responses.TransactionsListData
-import net.pst.cash.domain.model.TransactionModel
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -45,8 +44,8 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
             }
             PagingSource.LoadResult.Page(
                 data = transactionModels,
-                prevKey = if (currentPage == 1) null else -1,
-                nextKey = currentPage.plus(1)
+                prevKey = null,
+                nextKey = null
             )
         } catch (e: Exception) {
             PagingSource.LoadResult.Error(e)

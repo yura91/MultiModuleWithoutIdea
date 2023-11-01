@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import net.pst.cash.databinding.FragmentHistoryPaymentsBinding
 import net.pst.cash.presentation.viewmodels.HistoryPaymentsViewModel
 
@@ -19,15 +21,18 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.historyPayments?.adapter = historyAdapter
 
-        historyViewModel.transList.observe(viewLifecycleOwner) {
-            historyAdapter.addHistoryItems(it)
-        }
+        /* historyViewModel.transList.observe(viewLifecycleOwner) {
+             historyAdapter.addHistoryItems(it)
+         }
 
-        historyViewModel.transMoreList.observe(viewLifecycleOwner) {
-            historyAdapter.addHistoryItems(it)
+         historyViewModel.transMoreList.observe(viewLifecycleOwner) {
+             historyAdapter.addHistoryItems(it)
+         }*/
+        lifecycleScope.launch {
+            historyViewModel.getTransactionHistory().collect {
+                historyAdapter.submitData(it)
+            }
         }
-
-        historyViewModel.getTransactionHistory()
 
         requireActivity().onBackPressedDispatcher.addCallback {
             findNavController().popBackStack()
