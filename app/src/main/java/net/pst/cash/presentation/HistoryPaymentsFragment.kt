@@ -6,7 +6,6 @@ import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.databinding.FragmentHistoryPaymentsBinding
 import net.pst.cash.presentation.viewmodels.HistoryPaymentsViewModel
@@ -20,18 +19,12 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.historyPayments?.adapter = historyAdapter
 
-        val layoutManager = binding?.historyPayments?.layoutManager as LinearLayoutManager
-
         historyViewModel.transList.observe(viewLifecycleOwner) {
-            val position = layoutManager.findFirstVisibleItemPosition()
-            historyAdapter.submitList(it)
-            layoutManager.scrollToPosition(position)
+            historyAdapter.submitList(it.toMutableList())
         }
 
         historyViewModel.transMoreList.observe(viewLifecycleOwner) {
-            val position = layoutManager.findFirstVisibleItemPosition()
             historyAdapter.submitList(it.toMutableList())
-            layoutManager.scrollToPosition(position)
         }
 
         historyViewModel.getTransactionHistory()

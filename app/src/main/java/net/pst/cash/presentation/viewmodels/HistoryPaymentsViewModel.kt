@@ -36,11 +36,13 @@ class HistoryPaymentsViewModel @Inject constructor(
         val token = sharedPref.getString("token", "")
         val transactionMap = historyInteractor.getTransactionList("Bearer $token")
         if (transactionMap != null) {
+        val tableHistoryItemsLocal = mutableListOf<RowHistoryItems>()
             Log.d("COLLECTION_LIST", transactionMap.toString())
             for ((datePart, transactions) in transactionMap) {
                 val historyItems: MutableList<HistoryItem> = mutableListOf()
                 for (transaction in transactions) {
                     val historyItem = HistoryItem(
+                        id = transaction.id,
                         sum = transaction.sum,
                         description = transaction.description,
                         timePart = transaction.timePart
@@ -53,7 +55,8 @@ class HistoryPaymentsViewModel @Inject constructor(
                 tableHistoryItems.add(rowHistoryItems)
                 Log.d("COLLECTION_LIST", tableHistoryItems.toString())
             }
-            _transList.value = tableHistoryItems
+            tableHistoryItemsLocal.addAll(tableHistoryItems)
+            _transList.value = tableHistoryItemsLocal
         }
 //        }
     }
@@ -64,10 +67,12 @@ class HistoryPaymentsViewModel @Inject constructor(
             val token = sharedPref.getString("token", "")
             val transactionMap = historyInteractor.loadMoreTransactions("Bearer $token")
             if (transactionMap != null) {
+                val tableHistoryItemsLocal = mutableListOf<RowHistoryItems>()
                 for ((datePart, transactions) in transactionMap) {
                     val historyItems: MutableList<HistoryItem> = mutableListOf()
                     for (transaction in transactions) {
                         val historyItem = HistoryItem(
+                            id = transaction.id,
                             sum = transaction.sum,
                             description = transaction.description,
                             timePart = transaction.timePart
@@ -92,7 +97,8 @@ class HistoryPaymentsViewModel @Inject constructor(
 
                     }
                 }
-                _transMoreList.value = tableHistoryItems
+                tableHistoryItemsLocal.addAll(tableHistoryItems)
+                _transMoreList.value = tableHistoryItemsLocal
             }
         }
     }

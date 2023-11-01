@@ -53,8 +53,8 @@ class HistoryPaymentsAdapter(
 
 private class RowHistoryDiffCallBack : DiffUtil.ItemCallback<RowHistoryItems>() {
     override fun areItemsTheSame(oldItem: RowHistoryItems, newItem: RowHistoryItems): Boolean =
-        false
+        oldItem.date == newItem.date
 
     override fun areContentsTheSame(oldItem: RowHistoryItems, newItem: RowHistoryItems): Boolean =
-        oldItem == newItem
+        oldItem.elements == newItem.elements
 }
