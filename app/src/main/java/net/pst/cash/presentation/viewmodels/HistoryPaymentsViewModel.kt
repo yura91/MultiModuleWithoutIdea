@@ -17,12 +17,9 @@ class HistoryPaymentsViewModel @Inject constructor(
     private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
 
-    private var date = ""
-
     suspend fun getTransactionHistory(): Flow<PagingData<RowHistoryItems>> {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
         return historyInteractor.getTransactionList("Bearer $token")
-
     }
 }
