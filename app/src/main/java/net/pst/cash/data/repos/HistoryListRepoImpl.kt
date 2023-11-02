@@ -5,15 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.paging.HistoryDataPagingSource
 import net.pst.cash.data.paging.TransactionModel
-import net.pst.cash.data.responses.TransactionsListData
-
 import javax.inject.Inject
 
 class HistoryListRepoImpl @Inject constructor(
@@ -31,23 +26,5 @@ class HistoryListRepoImpl @Inject constructor(
 
         }.flow
         return listData
-    }
-
-    override suspend fun loadMoreTransactions(token: String): List<TransactionsListData>? {
-        return withContext(Dispatchers.IO) {
-            try {
-                nextLink?.let {
-                    val replacedLink = it.replace("http", "https")
-                    val listTransDataResp = api.getMoreTransactions(token, replacedLink).body()
-                    nextLink = listTransDataResp?.links?.next
-                    return@withContext listTransDataResp?.data
-                }
-                return@withContext null
-            } catch (e: Exception) {
-                e.printStackTrace()
-                _errorMessage.postValue(e.message)
-                null
-            }
-        }
     }
 }

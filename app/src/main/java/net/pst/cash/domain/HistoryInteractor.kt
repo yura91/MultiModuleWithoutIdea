@@ -6,6 +6,4 @@ import net.pst.cash.data.paging.TransactionModel
 
 interface HistoryInteractor {
     suspend fun getTransactionList(token: String): Flow<PagingData<TransactionModel>>
-
-    suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>>?
 }

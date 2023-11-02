@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorInt
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.flow.first
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -87,7 +87,7 @@ suspend fun <T : Any> PagingData<T>.toList(): List<T> {
     val flow = PagingData::class.java.getDeclaredField("flow").apply {
         isAccessible = true
     }.get(this) as Flow<Any?>
-    val pageEventInsert = flow.single()
+    val pageEventInsert = flow.first()
     val pageEventInsertClass = Class.forName("androidx.paging.PageEvent\$Insert")
     val pagesField = pageEventInsertClass.getDeclaredField("pages").apply {
         isAccessible = true

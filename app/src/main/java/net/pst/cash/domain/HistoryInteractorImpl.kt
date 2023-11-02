@@ -15,33 +15,6 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         return historyListRepo.getTransactionList(token)
     }
 
-    override suspend fun loadMoreTransactions(token: String): Map<String, List<TransactionModel>>? {
-        val transactionListData = historyListRepo.loadMoreTransactions(token)
-        if (transactionListData != null) {
-            val transactionModels: MutableList<TransactionModel> = mutableListOf()
-            transactionListData.forEach {
-                val transModel = TransactionModel()
-                it.amountTotal?.let { amount ->
-                    transModel.sum = amount
-                }
-
-                it.description?.let { description ->
-                    transModel.description = description
-                }
-
-                it.processedAt?.let { processedAt ->
-                    setDateAndTime(transModel, processedAt)
-                }
-                transactionModels.add(transModel)
-            }
-            return transactionModels.groupBy {
-                it.datePart
-            }
-        } else {
-            return null
-        }
-    }
-
 
     private fun setDateAndTime(transactionModel: TransactionModel, processedAt: String) {
         // Форматируем строку даты и времени

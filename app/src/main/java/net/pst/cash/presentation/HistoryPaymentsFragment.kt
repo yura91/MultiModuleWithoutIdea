@@ -15,19 +15,12 @@ import net.pst.cash.presentation.viewmodels.HistoryPaymentsViewModel
 @AndroidEntryPoint
 class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     FragmentHistoryPaymentsBinding::inflate
-), OnLoadMoreListener {
+) {
     private val historyViewModel: HistoryPaymentsViewModel by viewModels()
-    private val historyAdapter = HistoryPaymentsAdapter(mutableListOf(), this)
+    private val historyAdapter = HistoryPaymentsAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.historyPayments?.adapter = historyAdapter
 
-        /* historyViewModel.transList.observe(viewLifecycleOwner) {
-             historyAdapter.addHistoryItems(it)
-         }
-
-         historyViewModel.transMoreList.observe(viewLifecycleOwner) {
-             historyAdapter.addHistoryItems(it)
-         }*/
         lifecycleScope.launch {
             historyViewModel.getTransactionHistory().collect {
                 historyAdapter.submitData(it)
@@ -42,13 +35,5 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
             it.findNavController().popBackStack()
         }
     }
-
-    override fun onLoadMore() {
-        historyViewModel.getMoreTransactions()
-    }
 }
 
-
-interface OnLoadMoreListener {
-    fun onLoadMore()
-}
