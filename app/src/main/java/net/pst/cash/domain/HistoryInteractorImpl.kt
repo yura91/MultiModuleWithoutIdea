@@ -4,12 +4,9 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import net.pst.cash.data.paging.TransactionModel
 import net.pst.cash.data.repos.HistoryListRepo
 import net.pst.cash.domain.model.HistoryItem
 import net.pst.cash.domain.model.RowHistoryItems
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
 
 class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
@@ -32,21 +29,5 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
                 RowHistoryItems(it.date, historyItems)
             }
         }
-    }
-
-
-    private fun setDateAndTime(transactionModel: TransactionModel, processedAt: String) {
-        // Форматируем строку даты и времени
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
-        val outputFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
-        val date: Date = inputFormat.parse(processedAt)
-        val formattedDateTime: String = outputFormat.format(date)
-
-        // Выделяем дату и время
-        val splitDateTime = formattedDateTime.split(" ")
-        val datePart = splitDateTime[0]
-        val timePart = splitDateTime[1]
-        transactionModel.datePart = datePart
-        transactionModel.timePart = timePart
     }
 }
