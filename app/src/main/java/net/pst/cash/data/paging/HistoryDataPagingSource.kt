@@ -105,6 +105,9 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
         val transModel50 = TransactionModel("10", "ff", "25.10.2024", "16:05:33")
         val transModel51 = TransactionModel("10", "ffd", "25.10.2024", "16:05:33")
         val transModel52 = TransactionModel("10", "ffd", "25.11.2024", "16:05:33")
+        val transModel53 = TransactionModel("10", "ffd", "22.12.2024", "16:05:33")
+        val transModel54 = TransactionModel("10", "ffds", "22.12.2024", "16:05:33")
+        val transModel55 = TransactionModel("10", "ffde", "22.12.2024", "16:05:33")
 
 
         transModels.add(transModel48)
@@ -112,6 +115,9 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
         transModels.add(transModel50)
         transModels.add(transModel51)
         transModels.add(transModel52)
+        transModels.add(transModel53)
+        transModels.add(transModel54)
+        transModels.add(transModel55)
     }
 
     override fun getRefreshKey(state: PagingState<Int, RowHistoryItems>): Int? {
