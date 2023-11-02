@@ -38,8 +38,8 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                         dateTime = getDateAndTime(it.processedAt)
                     }
                     var sum = ""
-                    if (it.processedAt != null) {
-                        sum = it.processedAt
+                    if (it.amount != null) {
+                        sum = it.amount
                     }
                     var description = ""
                     if (it.description != null) {
@@ -67,8 +67,8 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                             dateTime = getDateAndTime(transactionListData.processedAt)
                         }
                         var sum = ""
-                        if (transactionListData.processedAt != null) {
-                            sum = transactionListData.processedAt
+                        if (transactionListData.amount != null) {
+                            sum = transactionListData.amount
                         }
                         var description = ""
                         if (transactionListData.description != null) {

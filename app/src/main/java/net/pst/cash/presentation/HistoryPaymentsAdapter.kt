@@ -13,14 +13,17 @@ import net.pst.cash.data.paging.TransactionModel
 
 class HistoryPaymentsAdapter :
     PagingDataAdapter<TransactionModel, HistoryPaymentsAdapter.ViewHolder>(diffCallback) {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-        val historyItems: RecyclerView
+        val tittle: TextView
+        val description: TextView
+        val operationValue: TextView
+        val operationTime: TextView
 
         init {
-            textView = view.findViewById(R.id.title)
-            historyItems = view.findViewById(R.id.historyItems)
+            tittle = view.findViewById(R.id.title)
+            description = view.findViewById(R.id.operationType)
+            operationValue = view.findViewById(R.id.operationValue)
+            operationTime = view.findViewById(R.id.operationTime)
         }
     }
 
@@ -52,7 +55,11 @@ class HistoryPaymentsAdapter :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currItem = getItem(position)
         val datePart = currItem?.datePart
-        viewHolder.textView.text = datePart
+        viewHolder.tittle.text = datePart
+
+        viewHolder.description.text = currItem?.description
+        viewHolder.operationValue.text = currItem?.sum
+        viewHolder.operationTime.text = currItem?.timePart
         /*viewHolder.historyItems.adapter =
             HistoryPaymentsItemAdapter(dataSet[position].elements)*/
     }
