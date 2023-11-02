@@ -8,12 +8,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import net.pst.cash.data.paging.TransactionModel
 import net.pst.cash.domain.HistoryInteractor
@@ -37,16 +35,10 @@ class HistoryPaymentsViewModel @Inject constructor(
 
     private var date = ""
 
-    suspend fun getTransactionHistory(): Flow<PagingData<RowHistoryItems>> {
+    suspend fun getTransactionHistory(): Flow<PagingData<TransactionModel>> {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
-        val transactionData = historyInteractor.getTransactionList("Bearer $token").onEach {
-            it.map {
-                Log.d("PAGINGDATA", it.toString())
-            }
-
-        }
-        return transformData(transactionData)
+        return historyInteractor.getTransactionList("Bearer $token")
 
     }
 

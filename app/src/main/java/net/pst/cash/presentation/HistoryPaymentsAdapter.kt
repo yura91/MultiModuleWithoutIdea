@@ -8,13 +8,13 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.presentation.model.RowHistoryItems
+import net.pst.cash.data.paging.TransactionModel
 
 
 class HistoryPaymentsAdapter(
-    private var dataSet: List<RowHistoryItems>,
+    private var dataSet: List<TransactionModel>,
     private var onLoadMoreListener: OnLoadMoreListener
-) : PagingDataAdapter<RowHistoryItems, HistoryPaymentsAdapter.ViewHolder>(diffCallback) {
+) : PagingDataAdapter<TransactionModel, HistoryPaymentsAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
@@ -27,19 +27,19 @@ class HistoryPaymentsAdapter(
     }
 
     companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<RowHistoryItems>() {
+        val diffCallback = object : DiffUtil.ItemCallback<TransactionModel>() {
             override fun areItemsTheSame(
-                oldItem: RowHistoryItems,
-                newItem: RowHistoryItems
+                oldItem: TransactionModel,
+                newItem: TransactionModel
             ): Boolean {
-                return oldItem.date == newItem.date
+                return false
             }
 
             override fun areContentsTheSame(
-                oldItem: RowHistoryItems,
-                newItem: RowHistoryItems
+                oldItem: TransactionModel,
+                newItem: TransactionModel
             ): Boolean {
-                return oldItem.elements == newItem.elements
+                return false
             }
         }
     }
@@ -62,10 +62,11 @@ class HistoryPaymentsAdapter(
     }*/
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val datePart = dataSet[position].date
+        val currItem = getItem(position)
+        val datePart = currItem?.datePart
         viewHolder.textView.text = datePart
-        viewHolder.historyItems.adapter =
-            HistoryPaymentsItemAdapter(dataSet[position].elements)
+        /*viewHolder.historyItems.adapter =
+            HistoryPaymentsItemAdapter(dataSet[position].elements)*/
         /* if (position >= dataSet.size - 1) {
              onLoadMoreListener.onLoadMore()
          }*/
