@@ -9,15 +9,15 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 class HistoryDataPagingSource(private val apiService: ApiService, private val token: String) :
-    PagingSource<Int, TransactionModel>() {
+    PagingSource<Int, RowHistoryItems>() {
     private var nextLink: String? = null
-    override fun getRefreshKey(state: PagingState<Int, TransactionModel>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, RowHistoryItems>): Int? {
         return null
     }
 
 
     override suspend fun load(params: LoadParams<Int>):
-            PagingSource.LoadResult<Int, TransactionModel> {
+            PagingSource.LoadResult<Int, RowHistoryItems> {
 
         return try {
             val currentPage = params.key ?: 1
@@ -79,8 +79,25 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                 }
             }
 
+            val rowHistoryitems = mutableListOf<RowHistoryItems>()
+
+            transactionModels.map {
+                val datepart = it.datePart
+                try {
+                    val rowHistoryItem = rowHistoryitems.first { rowHistItems ->
+                        rowHistItems.date == datepart
+                    }
+                    val historyItem = HistoryItem(it.sum, it.description, it.timePart)
+                    rowHistoryItem.elements.add(historyItem)
+                } catch (e: NoSuchElementException) {
+                    val historyItems = mutableListOf<HistoryItem>()
+                    historyItems.add(HistoryItem(it.sum, it.description, it.timePart))
+                    rowHistoryitems.add(RowHistoryItems(datepart, historyItems))
+                }
+            }
+
             PagingSource.LoadResult.Page(
-                data = transactionModels,
+                data = rowHistoryitems,
                 prevKey = null,
                 nextKey = if (nextLink != null) currentPage.plus(1) else null
             )

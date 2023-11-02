@@ -8,37 +8,33 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.data.paging.TransactionModel
+import net.pst.cash.data.paging.RowHistoryItems
 
 
 class HistoryPaymentsAdapter :
-    PagingDataAdapter<TransactionModel, HistoryPaymentsAdapter.ViewHolder>(diffCallback) {
+    PagingDataAdapter<RowHistoryItems, HistoryPaymentsAdapter.ViewHolder>(diffCallback) {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tittle: TextView
-        val description: TextView
-        val operationValue: TextView
-        val operationTime: TextView
+        val historyItems: RecyclerView
 
         init {
             tittle = view.findViewById(R.id.title)
-            description = view.findViewById(R.id.operationType)
-            operationValue = view.findViewById(R.id.operationValue)
-            operationTime = view.findViewById(R.id.operationTime)
+            historyItems = view.findViewById(R.id.historyItems)
         }
     }
 
     companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<TransactionModel>() {
+        val diffCallback = object : DiffUtil.ItemCallback<RowHistoryItems>() {
             override fun areItemsTheSame(
-                oldItem: TransactionModel,
-                newItem: TransactionModel
+                oldItem: RowHistoryItems,
+                newItem: RowHistoryItems
             ): Boolean {
                 return false
             }
 
             override fun areContentsTheSame(
-                oldItem: TransactionModel,
-                newItem: TransactionModel
+                oldItem: RowHistoryItems,
+                newItem: RowHistoryItems
             ): Boolean {
                 return false
             }
@@ -54,13 +50,13 @@ class HistoryPaymentsAdapter :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currItem = getItem(position)
-        val datePart = currItem?.datePart
+        val datePart = currItem?.date
         viewHolder.tittle.text = datePart
 
-        viewHolder.description.text = currItem?.description
+        /*viewHolder.description.text = currItem?.description
         viewHolder.operationValue.text = currItem?.sum
-        viewHolder.operationTime.text = currItem?.timePart
-        /*viewHolder.historyItems.adapter =
-            HistoryPaymentsItemAdapter(dataSet[position].elements)*/
+        viewHolder.operationTime.text = currItem?.timePart*/
+        viewHolder.historyItems.adapter =
+            currItem?.elements?.let { HistoryPaymentsItemAdapter(it) }
     }
 }

@@ -2,6 +2,7 @@ package net.pst.cash.domain
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
+import net.pst.cash.data.paging.RowHistoryItems
 import net.pst.cash.data.paging.TransactionModel
 import net.pst.cash.data.repos.HistoryListRepo
 import java.text.SimpleDateFormat
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
     HistoryInteractor {
 
-    override suspend fun getTransactionList(token: String): Flow<PagingData<TransactionModel>> {
+    override suspend fun getTransactionList(token: String): Flow<PagingData<RowHistoryItems>> {
         return historyListRepo.getTransactionList(token)
     }
 

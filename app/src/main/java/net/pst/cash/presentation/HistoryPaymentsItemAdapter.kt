@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.data.paging.HistoryItem
+
 
 class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
     RecyclerView.Adapter<HistoryPaymentsItemAdapter.ViewHolder>() {
