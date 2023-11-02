@@ -6,8 +6,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.paging.PagingData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import net.pst.cash.data.paging.RowHistoryItems
+
 import net.pst.cash.domain.HistoryInteractor
+import net.pst.cash.domain.model.RowHistoryItems
 import javax.inject.Inject
 
 @HiltViewModel

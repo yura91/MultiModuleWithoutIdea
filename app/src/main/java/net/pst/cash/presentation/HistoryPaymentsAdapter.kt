@@ -8,7 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
-import net.pst.cash.data.paging.RowHistoryItems
+import net.pst.cash.domain.model.RowHistoryItems
 
 
 class HistoryPaymentsAdapter :
