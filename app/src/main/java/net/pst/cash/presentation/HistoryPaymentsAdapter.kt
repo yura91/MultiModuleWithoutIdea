@@ -29,14 +29,14 @@ class HistoryPaymentsAdapter :
                 oldItem: RowHistoryItems,
                 newItem: RowHistoryItems
             ): Boolean {
-                return false
+                return oldItem.date == newItem.date
             }
 
             override fun areContentsTheSame(
                 oldItem: RowHistoryItems,
                 newItem: RowHistoryItems
             ): Boolean {
-                return false
+                return oldItem.elements == newItem.elements
             }
         }
     }

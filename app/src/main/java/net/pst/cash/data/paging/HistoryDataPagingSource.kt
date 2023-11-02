@@ -117,13 +117,11 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
     }
 
     private fun getDateAndTime(processedAt: String): Pair<String, String> {
-        // Форматируем строку даты и времени
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
         val outputFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
         val date: Date = inputFormat.parse(processedAt)
         val formattedDateTime: String = outputFormat.format(date)
 
-        // Выделяем дату и время
         val splitDateTime = formattedDateTime.split(" ")
         val datePart = splitDateTime[0]
         val timePart = splitDateTime[1]
