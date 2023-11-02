@@ -11,6 +11,8 @@ import java.util.Date
 class HistoryDataPagingSource(private val apiService: ApiService, private val token: String) :
     PagingSource<Int, RowHistoryItems>() {
     private var nextLink: String? = null
+    private var date = ""
+
     override fun getRefreshKey(state: PagingState<Int, RowHistoryItems>): Int? {
         return null
     }
@@ -93,6 +95,14 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                     val historyItems = mutableListOf<HistoryItem>()
                     historyItems.add(HistoryItem(it.sum, it.description, it.timePart))
                     rowHistoryitems.add(RowHistoryItems(datepart, historyItems))
+                }
+            }
+
+            rowHistoryitems.forEach {
+                if (it.date == date) {
+                    it.date = ""
+                } else {
+                    date = it.date
                 }
             }
 
