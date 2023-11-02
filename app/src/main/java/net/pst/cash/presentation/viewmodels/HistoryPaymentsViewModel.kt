@@ -4,11 +4,16 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.paging.PagingData
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 import net.pst.cash.domain.HistoryInteractor
-import net.pst.cash.domain.model.RowHistoryItems
+import net.pst.cash.presentation.model.HistoryItem
+
+import net.pst.cash.presentation.model.RowHistoryItems
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +25,21 @@ class HistoryPaymentsViewModel @Inject constructor(
     suspend fun getTransactionHistory(): Flow<PagingData<RowHistoryItems>> {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
-        return historyInteractor.getTransactionList("Bearer $token")
+        val transactionList = historyInteractor.getTransactionList("Bearer $token")
+        return transactionList.map { pagingData ->
+            pagingData.map {
+                val historyItems = mutableListOf<HistoryItem>()
+                it.elements.forEach { historyItem ->
+                    historyItems.add(
+                        HistoryItem(
+                            historyItem.sum,
+                            historyItem.description,
+                            historyItem.timePart
+                        )
+                    )
+                }
+                RowHistoryItems(it.date, historyItems)
+            }
+        }
     }
 }
