@@ -44,11 +44,11 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.logging.interceptor)
+    implementation(libs.play.services.auth)
+    implementation(libs.androidx.paging.runtime)
     implementation(libs.daggerhilt)
     kapt(libs.compilerhilt)
     implementation(libs.retrofit2)
