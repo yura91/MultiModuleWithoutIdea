@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +52,13 @@ class HistoryPaymentsAdapter :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currItem = getItem(position)
         val datePart = currItem?.date
-        viewHolder.tittle.text = datePart
+        if (datePart != "") {
+            viewHolder.tittle.isVisible = true
+            viewHolder.tittle.text = datePart
+        } else {
+            viewHolder.tittle.isVisible = false
+            viewHolder.tittle.text = ""
+        }
 
         viewHolder.historyItems.adapter =
             currItem?.elements?.let { HistoryPaymentsItemAdapter(it) }

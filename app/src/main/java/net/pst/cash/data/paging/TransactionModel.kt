@@ -4,5 +4,6 @@ data class TransactionModel(
     var sum: String = "",
     var description: String = "",
     var datePart: String = "",
-    var timePart: String = ""
+    var timePart: String = "",
+    var status: Int = 0
 )

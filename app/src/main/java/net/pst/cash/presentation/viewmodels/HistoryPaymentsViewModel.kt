@@ -34,7 +34,8 @@ class HistoryPaymentsViewModel @Inject constructor(
                         HistoryItem(
                             historyItem.sum,
                             historyItem.description,
-                            historyItem.timePart
+                            historyItem.timePart,
+                            historyItem.status
                         )
                     )
                 }

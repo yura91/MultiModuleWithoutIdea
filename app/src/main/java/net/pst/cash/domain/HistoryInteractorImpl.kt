@@ -22,7 +22,8 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
                         HistoryItem(
                             historyItem.sum,
                             historyItem.description,
-                            historyItem.timePart
+                            historyItem.timePart,
+                            historyItem.status
                         )
                     )
                 }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
 import net.pst.cash.presentation.model.HistoryItem
@@ -33,6 +34,17 @@ class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.operationTypeTextView.text = dataSet[position].description
+        if (dataSet[position].status == 35) {
+            val redColor = ContextCompat.getColor(
+                viewHolder.operationTypeTextView.context,
+                R.color.text_red_color
+            )
+            viewHolder.operationValueTextView.setTextColor(redColor)
+        } else {
+            val blackColor =
+                ContextCompat.getColor(viewHolder.operationTypeTextView.context, R.color.text_black)
+            viewHolder.operationValueTextView.setTextColor(blackColor)
+        }
         viewHolder.operationValueTextView.text = dataSet[position].sum
         viewHolder.operationTimeTextView.text = dataSet[position].timePart
     }

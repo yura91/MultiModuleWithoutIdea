@@ -47,7 +47,11 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                     if (it.description != null) {
                         description = it.description
                     }
-                    TransactionModel(sum, description, dateTime.first, dateTime.second)
+                    var status: Int = 0
+                    if (it.status != null) {
+                        status = it.status
+                    }
+                    TransactionModel(sum, description, dateTime.first, dateTime.second, status)
                 }
             } else {
                 Log.d("NEXTLINK", "currentPage $nextLink")
@@ -76,7 +80,11 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                         if (transactionListData.description != null) {
                             description = transactionListData.description
                         }
-                        TransactionModel(sum, description, dateTime.first, dateTime.second)
+                        var status: Int = 0
+                        if (transactionListData.status != null) {
+                            status = transactionListData.status
+                        }
+                        TransactionModel(sum, description, dateTime.first, dateTime.second, status)
                     }
                 }
             }
@@ -89,11 +97,11 @@ class HistoryDataPagingSource(private val apiService: ApiService, private val to
                     val rowHistoryItem = rowHistoryitems.first { rowHistItems ->
                         rowHistItems.date == datepart
                     }
-                    val historyItem = HistoryItem(it.sum, it.description, it.timePart)
+                    val historyItem = HistoryItem(it.sum, it.description, it.timePart, it.status)
                     rowHistoryItem.elements.add(historyItem)
                 } catch (e: NoSuchElementException) {
                     val historyItems = mutableListOf<HistoryItem>()
-                    historyItems.add(HistoryItem(it.sum, it.description, it.timePart))
+                    historyItems.add(HistoryItem(it.sum, it.description, it.timePart, it.status))
                     rowHistoryitems.add(RowHistoryItems(datepart, historyItems))
                 }
             }
