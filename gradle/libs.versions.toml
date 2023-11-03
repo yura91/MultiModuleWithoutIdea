@@ -24,9 +24,11 @@ play-services-auth = "20.7.0"
 retrofit2 = "2.9.0"
 gsonconverter = "2.9.0"
 easyflipview = "3.0.3"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging-runtime" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

@@ -20,6 +20,14 @@ class HistoryPaymentsFragment : BaseFragment<FragmentHistoryPaymentsBinding>(
     private val historyAdapter = HistoryPaymentsAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.historyPayments?.adapter = historyAdapter
+        binding?.swipeContainer?.setOnRefreshListener {
+            lifecycleScope.launch {
+                historyViewModel.getTransactionHistory().collect {
+                    binding?.swipeContainer?.isRefreshing = false
+                    historyAdapter.submitData(it)
+                }
+            }
+        }
 
         lifecycleScope.launch {
             historyViewModel.getTransactionHistory().collect {
