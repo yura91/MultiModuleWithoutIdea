@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.view.ViewTreeObserver
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -75,7 +75,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
 
         binding?.countries?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
+                OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     val height = height
 

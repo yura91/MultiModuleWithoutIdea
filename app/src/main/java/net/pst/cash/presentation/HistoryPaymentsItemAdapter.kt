@@ -12,7 +12,6 @@ import net.pst.cash.presentation.model.HistoryItem
 
 class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
     RecyclerView.Adapter<HistoryPaymentsItemAdapter.ViewHolder>() {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val operationTypeTextView: TextView
         val operationValueTextView: TextView
@@ -34,7 +33,7 @@ class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.operationTypeTextView.text = dataSet[position].description
-        if (dataSet[position].status == 35) {
+        if (dataSet[position].status == STATUS) {
             val redColor = ContextCompat.getColor(
                 viewHolder.operationTypeTextView.context,
                 R.color.text_red_color
@@ -50,5 +49,9 @@ class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
     }
 
     override fun getItemCount() = dataSet.size
+
+    companion object {
+        private const val STATUS = 35
+    }
 
 }
