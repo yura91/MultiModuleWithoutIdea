@@ -17,9 +17,9 @@ class CardIsReadyViewModel @Inject constructor(
     private val application: Application,
     private val cardIsReadyInteractor: CardIsReadyInteractor
 ) : AndroidViewModel(application) {
-    private val _cardId = MutableLiveData<CardModel>()
-    val cardId: LiveData<CardModel>
-        get() = _cardId
+    private val _cardModel = MutableLiveData<CardModel>()
+    val cardModel: LiveData<CardModel>
+        get() = _cardModel
 
     fun checkActiveCards() {
         viewModelScope.launch {
@@ -28,7 +28,7 @@ class CardIsReadyViewModel @Inject constructor(
             val activeCard = cardIsReadyInteractor.getActiveCardModel("Bearer $token")
             activeCard?.let {
                 val cardModel = CardModel(it.id, it.balance)
-                _cardId.value = cardModel
+                _cardModel.value = cardModel
             }
         }
     }

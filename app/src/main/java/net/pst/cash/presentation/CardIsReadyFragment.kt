@@ -57,7 +57,7 @@ class CardIsReadyFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
-        cardIsReadyViewModel.cardId.observe(viewLifecycleOwner) {
+        cardIsReadyViewModel.cardModel.observe(viewLifecycleOwner) {
             Log.d("TAG", it.toString())
             it?.id?.let { idCard ->
                 cardId = idCard
