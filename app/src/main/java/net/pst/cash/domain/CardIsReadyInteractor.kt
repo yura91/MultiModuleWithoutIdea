@@ -1,5 +1,7 @@
 package net.pst.cash.domain
 
+import net.pst.cash.domain.model.CardModel
+
 interface CardIsReadyInteractor {
-    suspend fun getActiveCardId(token: String): Int?
+    suspend fun getActiveCardModel(token: String): CardModel?
 }

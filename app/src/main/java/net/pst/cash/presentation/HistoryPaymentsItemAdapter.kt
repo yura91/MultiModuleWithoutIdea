@@ -53,5 +53,4 @@ class HistoryPaymentsItemAdapter(private val dataSet: List<HistoryItem>) :
     companion object {
         private const val STATUS = 35
     }
-
 }

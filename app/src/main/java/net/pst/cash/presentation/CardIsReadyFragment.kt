@@ -26,6 +26,7 @@ class CardIsReadyFragment :
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
     private var cardId: Int = 0
+    private var balance: String = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
@@ -58,7 +59,12 @@ class CardIsReadyFragment :
         }
         cardIsReadyViewModel.cardId.observe(viewLifecycleOwner) {
             Log.d("TAG", it.toString())
-            cardId = it
+            it?.id?.let { idCard ->
+                cardId = idCard
+            }
+            it?.balance?.let { cardBalance ->
+                balance = cardBalance
+            }
             binding?.next?.isEnabled = true
         }
         cardIsReadyViewModel.checkActiveCards()
@@ -83,7 +89,10 @@ class CardIsReadyFragment :
         }
         binding?.next?.setOnClickListener {
             val action =
-                CardIsReadyFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(cardId)
+                CardIsReadyFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(
+                    cardId,
+                    balance
+                )
             findNavController().navigate(action)
         }
     }
