@@ -4,6 +4,7 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="privacy_policy_label">By registering, you agree to our\n%1$s</string>
     <string name="terms_of_use_label">&#160;and %1$s.</string>
+    <string name="balance">%1$s %2$s</string>
     <string name="next_step">Continue</string>
     <string name="terms_of_use">Terms of use</string>
     <string name="acquainted">Let\'s get\nacquainted</string>

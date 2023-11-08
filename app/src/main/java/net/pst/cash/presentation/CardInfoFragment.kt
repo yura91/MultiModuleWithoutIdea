@@ -105,8 +105,9 @@ class CardInfoFragment :
             binding?.easyFlipView?.setFlipTypeFromFront()
             binding?.easyFlipView?.flipTheView()
         }
-
-        frontBinding?.sum?.text = args.balance
+        val balance = args.balance
+        val currencyType = args.currencyType
+        frontBinding?.sum?.text = getString(R.string.balance, balance, currencyType)
 
         backBinding?.copyCardNumber?.setOnClickListener {
             Toast.makeText(requireContext(), "Card number is copied", Toast.LENGTH_SHORT).show()

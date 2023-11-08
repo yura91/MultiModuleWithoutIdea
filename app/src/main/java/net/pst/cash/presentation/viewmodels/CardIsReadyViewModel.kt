@@ -27,9 +27,22 @@ class CardIsReadyViewModel @Inject constructor(
             val token = sharedPref.getString("token", "")
             val activeCard = cardIsReadyInteractor.getActiveCardModel("Bearer $token")
             activeCard?.let {
-                val cardModel = CardModel(it.id, it.balance)
+                val currencyType: String = when (it.currencyId) {
+                    DOLLAR -> "$"
+                    EURO -> "€"
+                    else -> {
+                        ""
+                    }
+                }
+
+                val cardModel = CardModel(it.id, currencyType, it.balance)
                 _cardModel.value = cardModel
             }
         }
+    }
+
+    companion object {
+        private const val DOLLAR = 2
+        private const val EURO = 3
     }
 }

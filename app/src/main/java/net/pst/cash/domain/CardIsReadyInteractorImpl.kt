@@ -10,7 +10,11 @@ class CardIsReadyInteractorImpl @Inject constructor(private val cardIsReadyRepo:
     override suspend fun getActiveCardModel(token: String): CardModel? {
         val cardIsReadyResponse: List<CardResponseData>? = cardIsReadyRepo.checkActiveCard(token)
         return if (!cardIsReadyResponse.isNullOrEmpty()) {
-            CardModel(cardIsReadyResponse[0].id, cardIsReadyResponse[0].account?.balance)
+            CardModel(
+                cardIsReadyResponse[0].id,
+                cardIsReadyResponse[0].account?.currencyId,
+                cardIsReadyResponse[0].account?.balance
+            )
         } else {
             null
         }

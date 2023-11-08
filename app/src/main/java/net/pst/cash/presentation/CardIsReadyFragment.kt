@@ -27,6 +27,7 @@ class CardIsReadyFragment :
     private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
     private var cardId: Int = 0
     private var balance: String = ""
+    private var currencyType: String = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
@@ -62,6 +63,11 @@ class CardIsReadyFragment :
             it?.id?.let { idCard ->
                 cardId = idCard
             }
+
+            it?.currencyType?.let { currencyType ->
+                this.currencyType = currencyType
+            }
+
             it?.balance?.let { cardBalance ->
                 balance = cardBalance
             }
@@ -91,7 +97,8 @@ class CardIsReadyFragment :
             val action =
                 CardIsReadyFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(
                     cardId,
-                    balance
+                    balance,
+                    currencyType
                 )
             findNavController().navigate(action)
         }

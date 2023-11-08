@@ -38,6 +38,9 @@
         <argument
             android:name="balance"
             app:argType="string" />
+        <argument
+            android:name="currencyType"
+            app:argType="string" />
         <action
             android:id="@+id/action_cardInfoFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />

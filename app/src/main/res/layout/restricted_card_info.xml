@@ -120,10 +120,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_24"
+        android:layout_marginBottom="@dimen/margin_24"
         android:text="@string/_0_00"
         android:textColor="@color/white"
         android:textSize="@dimen/text_46"
-        app:layout_constraintBottom_toBottomOf="@+id/cardNumTemp"
+        app:layout_constraintBottom_toTopOf="@+id/cardNumTemp"
         app:layout_constraintStart_toStartOf="@+id/cardInfo" />
 
     <ImageView
