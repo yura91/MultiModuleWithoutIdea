@@ -42,6 +42,22 @@ class CardInfoFragment :
                 setGradient(gradientData, frontBinding, backBinding)
             }
         }
+        frontBinding?.swipeContainer?.setOnRefreshListener {
+            cardInfoViewModel.getActiveBalance()
+        }
+
+        cardInfoViewModel.cardModel.observe(viewLifecycleOwner) {
+            var amount = ""
+            it?.balance?.let { cardBalance ->
+                amount = cardBalance
+            }
+            var currencySign = ""
+            it?.currencyType?.let { currencyType ->
+                currencySign = currencyType
+            }
+            frontBinding?.swipeContainer?.isRefreshing = false
+            frontBinding?.sum?.text = getString(R.string.balance, amount, currencySign)
+        }
 
         cardInfoViewModel.getCardInfo(args.cardId.toString())
 

@@ -5,8 +5,8 @@ import net.pst.cash.data.responses.CardResponseData
 import net.pst.cash.domain.model.CardModel
 import javax.inject.Inject
 
-class CardIsReadyInteractorImpl @Inject constructor(private val cardIsReadyRepo: CardIsReadyRepo) :
-    CardIsReadyInteractor {
+class ActiveCardInteractorImpl @Inject constructor(private val cardIsReadyRepo: CardIsReadyRepo) :
+    ActiveCardInteractor {
     override suspend fun getActiveCardModel(token: String): CardModel? {
         val cardIsReadyResponse: List<CardResponseData>? = cardIsReadyRepo.checkActiveCard(token)
         return if (!cardIsReadyResponse.isNullOrEmpty()) {

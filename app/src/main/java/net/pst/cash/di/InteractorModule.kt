@@ -6,10 +6,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import net.pst.cash.data.repos.CountriesRepository
+import net.pst.cash.domain.ActiveCardInteractor
+import net.pst.cash.domain.ActiveCardInteractorImpl
 import net.pst.cash.domain.CardInfoInteractor
 import net.pst.cash.domain.CardInfoInteractorImpl
-import net.pst.cash.domain.CardIsReadyInteractor
-import net.pst.cash.domain.CardIsReadyInteractorImpl
 import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
 import net.pst.cash.domain.HistoryInteractor
@@ -34,7 +34,7 @@ interface InteractorModule {
     fun userInfoInteractor(userInfoInteractor: UserInfoIneractorimpl): UserInfoInteractor
 
     @Binds
-    fun cardIsReadyInteractor(cardIsReadyInteractor: CardIsReadyInteractorImpl): CardIsReadyInteractor
+    fun activeCardInteractor(cardIsReadyInteractor: ActiveCardInteractorImpl): ActiveCardInteractor
 
     @Binds
     fun historyListInteractor(transactionListInteractorImpl: HistoryInteractorImpl): HistoryInteractor
