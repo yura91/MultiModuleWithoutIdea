@@ -21,6 +21,9 @@ class CardIsReadyViewModel @Inject constructor(
     private val _cardModel = MutableLiveData<CardModel>()
     val cardModel: LiveData<CardModel>
         get() = _cardModel
+    var cardId: Int = 0
+    var balance: String = ""
+    var currencyType: String = ""
 
     fun checkActiveCards() {
         viewModelScope.launch {

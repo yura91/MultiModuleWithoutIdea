@@ -34,10 +34,7 @@ class CountriesAdapter(context: Context, private val countries: List<CountryMode
         val countryItem = getItem(position)
         viewHolder.countryTextView.text = countryItem?.title
         viewHolder.flagImageView.setImageResource(
-            getDrawableIntByFileName(
-                context,
-                countryItem?.iso2
-            )
+            context.resources.getIdentifier(countryItem?.iso2, "drawable", context.packageName)
         )
 
         return view!!;
@@ -45,11 +42,6 @@ class CountriesAdapter(context: Context, private val countries: List<CountryMode
 
     override fun getFilter(): Filter {
         return countryFilter
-    }
-
-
-    private fun getDrawableIntByFileName(context: Context, fileName: String?): Int {
-        return context.resources.getIdentifier(fileName, "drawable", context.packageName)
     }
 
     private val countryFilter: Filter = object : Filter() {

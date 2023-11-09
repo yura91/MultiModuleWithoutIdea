@@ -11,7 +11,7 @@ import net.pst.cash.presentation.viewmodels.LoadingViewModel
 
 @AndroidEntryPoint
 class LoadingFragment : BaseFragment<FragmentLoadingBinding>(FragmentLoadingBinding::inflate) {
-    val viewModel by viewModels<LoadingViewModel>()
+    private val viewModel by viewModels<LoadingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
