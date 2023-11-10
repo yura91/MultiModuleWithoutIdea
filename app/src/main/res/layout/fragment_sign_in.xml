@@ -46,10 +46,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_34"
         android:text="@string/card_exp_date"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/margin_8"
         android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
@@ -93,9 +93,9 @@
         android:text="@string/sign_in_with_google"
         android:textColor="@color/white"
         app:backgroundTint="@null"
-        app:iconTint="@null"
         app:icon="@drawable/ic_google"
         app:iconGravity="textStart"
+        app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@id/textPrivacyPolicy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

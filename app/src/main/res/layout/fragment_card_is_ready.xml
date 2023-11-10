@@ -84,10 +84,10 @@
         android:text="@string/billed_annually"
         android:textColor="@color/black"
         android:textSize="@dimen/text_16"
-        app:layout_constraintTop_toBottomOf="@+id/billedMonthly"
         app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/billedMonthly" />
 
     <TextView
         android:id="@+id/billedMonthly"
@@ -101,11 +101,11 @@
         android:text="@string/billed_monthly"
         android:textColor="@color/black"
         android:textSize="@dimen/text_16"
-        app:layout_constraintTop_toBottomOf="@+id/cardIsReadyImage"
         app:layout_constraintBottom_toTopOf="@+id/billedAnnually"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardIsReadyImage"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/cardIsReadyImage"

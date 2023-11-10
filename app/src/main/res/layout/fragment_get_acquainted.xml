@@ -81,9 +81,9 @@
             android:id="@+id/lastNameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:background="@color/white"
             tools:text="Doe" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -10,10 +10,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_22"
         android:layout_marginTop="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_24"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_22"
         android:textStyle="bold"
         tools:text="Today" />
 
