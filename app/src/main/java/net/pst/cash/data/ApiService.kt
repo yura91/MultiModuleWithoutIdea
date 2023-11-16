@@ -3,6 +3,7 @@ package net.pst.cash.data
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.requests.VerificationRequest
+import net.pst.cash.data.responses.AccountsResponse
 import net.pst.cash.data.responses.AppleLinkResponse
 import net.pst.cash.data.responses.AppleSignInResponse
 import net.pst.cash.data.responses.CheckCardResponse
@@ -68,6 +69,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): Response<ShowPanResponse>
+
+    @GET("/account")
+    suspend fun getAccounts(
+        @Header("Authorization") token: String
+    ): Response<AccountsResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("/verification")

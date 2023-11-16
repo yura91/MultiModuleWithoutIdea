@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import net.pst.cash.data.repos.AccountsRepo
+import net.pst.cash.data.repos.AccountsRepoImpl
 import net.pst.cash.data.repos.CardInfoRepo
 import net.pst.cash.data.repos.CardInfoRepoImpl
 import net.pst.cash.data.repos.CardIsReadyRepo
@@ -42,4 +44,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindHistoryListRepository(transactionsListRepo: HistoryListRepoImpl): HistoryListRepo
+
+    @Binds
+    fun bindAccountsRepository(accountsRepo: AccountsRepoImpl): AccountsRepo
 }
