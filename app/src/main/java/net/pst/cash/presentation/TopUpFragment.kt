@@ -99,7 +99,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
             val shareBody = binding?.copyQr?.text.toString()
             val sharingIntent = Intent(Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Address")
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             requireContext().startActivity(Intent.createChooser(sharingIntent, "Share via"))
         }

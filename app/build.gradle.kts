@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.zxing.core)
     implementation(libs.zxing.android.embedded)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.kotlinx.coroutines.core)
