@@ -39,16 +39,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
             val countriesAdapter = CountriesAdapter(requireContext(), it)
             binding?.countries?.setAdapter(countriesAdapter)
 
-            binding?.countries?.onItemClickListener = object : AdapterView.OnItemClickListener {
-                override fun onItemClick(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
+            binding?.countries?.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
                     viewModel.selectedItem = parent?.adapter?.getItem(position) as? CountryModel
                 }
-            }
         }
 
         viewModel.snackBarVerificationErrorMessage.observe(viewLifecycleOwner) {

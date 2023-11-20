@@ -31,6 +31,13 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
         super.onViewCreated(view, savedInstanceState)
         accountsViewModel.addresses.observe(viewLifecycleOwner) {
             Log.d("ADDRESSES", it.toString())
+            val address = it[0]
+            binding?.copyQr?.text = address
+            accountsViewModel.generateQrCodeInBackground(address)
+        }
+
+        accountsViewModel.qrCodeLiveData.observe(viewLifecycleOwner) {
+            binding?.qrCode?.setImageBitmap(it)
         }
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
