@@ -125,7 +125,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/copyQr"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_16"
@@ -136,6 +136,7 @@
         android:paddingBottom="@dimen/padding_10"
         android:text="@string/copy_qr_text"
         android:textAllCaps="false"
+        android:visibility="gone"
         app:backgroundTint="@null"
         app:icon="@drawable/copy"
         app:iconGravity="textEnd"
@@ -153,6 +154,7 @@
         android:layout_height="@dimen/size_zero"
         android:layout_marginStart="@dimen/margin_8"
         android:background="@drawable/rounded_corner_gray_bg"
+        android:visibility="gone"
         app:backgroundTint="@null"
         app:icon="@drawable/share"
         app:iconGravity="textStart"

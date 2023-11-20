@@ -3,7 +3,6 @@ package net.pst.cash.presentation
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -30,15 +30,17 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         accountsViewModel.addresses.observe(viewLifecycleOwner) {
-            Log.d("ADDRESSES", it.toString())
             val address = it[0]
             binding?.copyQr?.text = address
+            binding?.copyQr?.isVisible = true
+            binding?.share?.isVisible = true
             accountsViewModel.generateQrCodeInBackground(address)
         }
 
         accountsViewModel.qrCodeLiveData.observe(viewLifecycleOwner) {
             binding?.qrCode?.setImageBitmap(it)
         }
+
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 val gradientDrawable = GradientDrawable(
@@ -57,6 +59,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
                 binding?.cardInfo?.background = layerDrawable
             }
         }
+
         binding?.cardInfo?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {

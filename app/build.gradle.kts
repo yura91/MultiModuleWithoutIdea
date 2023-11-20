@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation(libs.zxing.android.embedded)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
