@@ -1,6 +1,8 @@
 package net.pst.cash.presentation.viewmodels
 
 import android.app.Application
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -50,6 +52,12 @@ class AccountsViewModel @Inject constructor(
         }
     }
 
+    fun copyToClipBoard(text: String) {
+        val clipboardManager =
+            application.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("label", text)
+        clipboardManager.setPrimaryClip(clipData)
+    }
 
     private fun createQrCode(encryptedString: String): Bitmap? {
         try {

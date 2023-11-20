@@ -90,6 +90,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
 
         binding?.copyQr?.setOnClickListener {
             Toast.makeText(requireContext(), "QR is copied", Toast.LENGTH_SHORT).show()
+            accountsViewModel.copyToClipBoard(binding?.copyQr?.text.toString())
         }
         binding?.share?.setOnClickListener {
             Toast.makeText(requireContext(), "Share is clicked", Toast.LENGTH_SHORT).show()
