@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class AccountsViewModel @Inject constructor(
+class TopUpViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
 ) : AndroidViewModel(application) {
