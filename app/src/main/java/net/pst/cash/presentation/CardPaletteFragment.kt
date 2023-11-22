@@ -46,7 +46,7 @@ class CardPaletteFragment :
             setGradient()
         }
         binding?.next?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardIsReadyFragment)
+            it.findNavController().navigate(R.id.action_cardPaletteFragment_to_issueCardFragment)
         }
 
         binding?.actionMore?.setOnClickListener {

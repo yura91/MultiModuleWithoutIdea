@@ -10,11 +10,11 @@
         android:name="net.pst.cash.presentation.CardPaletteFragment"
         android:label="CardPaletteFragment">
         <action
-            android:id="@+id/action_cardPaletteFragment_to_cardIsReadyFragment"
-            app:destination="@id/cardIsReadyFragment" />
-        <action
             android:id="@+id/action_cardPaletteFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_issueCardFragment"
+            app:destination="@id/issueCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardIsReadyFragment"
@@ -62,5 +62,13 @@
         android:label="fragment_history_payments"
         tools:layout="@layout/fragment_history_payments" />
     <include app:graph="@navigation/settings_nav_graph" />
+    <fragment
+        android:id="@+id/issueCardFragment"
+        android:name="net.pst.cash.presentation.IssueCardFragment"
+        android:label="IssueCardFragment">
+        <action
+            android:id="@+id/action_issueCardFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+    </fragment>
 
 </navigation>

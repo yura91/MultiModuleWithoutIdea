@@ -52,4 +52,7 @@
     <string name="you_are_not_logged_out">You are not logged out</string>
     <string name="web_client_id">364290209629-2i1of6u99o36vna3qrvabj2a3kjvhm28.apps.googleusercontent.com</string>
     <string name="error_input_text">Введите текст более 3 символов</string>
+    <string name="_60_00_usdt">60,00 USDT</string>
+    <string name="account_balance">Account balance</string>
+    <string name="issue_card">Issue card</string>
 </resources>
