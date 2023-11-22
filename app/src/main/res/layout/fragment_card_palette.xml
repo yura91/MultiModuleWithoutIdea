@@ -10,22 +10,41 @@
     android:paddingEnd="@dimen/padding_4"
     tools:context=".presentation.SignInFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back">
+
+        <ImageView
+            android:id="@+id/actionMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:src="@drawable/ic_more" />
+    </androidx.appcompat.widget.Toolbar>
+
     <ImageView
         android:id="@+id/cardDesign"
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
-        android:layout_marginBottom="@dimen/margin_44"
+        android:layout_marginBottom="22dp"
         android:background="@drawable/card_design_bg"
         app:layout_constraintBottom_toTopOf="@id/colorSeekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:layout_width="@dimen/size_58"
         android:layout_height="@dimen/size_68"
         android:layout_marginStart="@dimen/margin_216"
-        android:layout_marginTop="@dimen/margin_108"
+        android:layout_marginTop="@dimen/margin_152"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_card_chip"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,16 +83,6 @@
         android:textSize="@dimen/text_16"
         app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
         app:layout_constraintStart_toStartOf="@+id/cardDesign" />
-
-    <ImageView
-        android:id="@+id/actionMore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
-        android:src="@drawable/ic_on_card_more"
-        app:layout_constraintEnd_toEndOf="@+id/cardDesign"
-        app:layout_constraintTop_toTopOf="@+id/cardDesign" />
 
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSeekBar"

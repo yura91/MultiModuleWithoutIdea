@@ -53,6 +53,10 @@ class CardPaletteFragment :
             findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
         }
 
+        binding?.toolbar?.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         binding?.colorSeekBar?.setOnColorChangeListener { progress, color ->
             cardPalleteViewModel.colorProgress = progress
             setGradient(progress, color)

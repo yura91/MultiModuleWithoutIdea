@@ -46,5 +46,6 @@
     <dimen name="size_56">56dp</dimen>
     <dimen name="size_54">54dp</dimen>
     <dimen name="size_24">24dp</dimen>
+    <dimen name="margin_152">152dp</dimen>
     <item name="corner_radius" format="float" type="dimen">30.0</item>
 </resources>
