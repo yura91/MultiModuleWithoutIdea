@@ -35,9 +35,12 @@
     <string name="log_out">Log out</string>
     <string name="telegram">Telegram</string>
     <string name="skype">Skype</string>
-    <string name="log_out_dialog_title">Are you sure you want \n to log out?</string>
+    <string name="close_card_dialog_title">Are you sure you want to \nclose the card? All remaining \nfunds will be forfeited.</string>
+    <string name="log_out_dialog_title">Are you sure you want \nto log out?</string>
     <string name="log_out_positive">Log out</string>
+    <string name="close_card_positive">Close card</string>
     <string name="log_out_negative">No</string>
+    <string name="close_card_negative">No</string>
     <string name="card_num_holder">• • • • 0000</string>
     <string name="card_exp_date">02/24</string>
     <string name="john_doe">JOHN DOE</string>

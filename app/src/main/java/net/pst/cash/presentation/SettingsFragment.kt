@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
@@ -31,37 +30,50 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             findNavController().popBackStack()
         }
 
+        binding?.closeCard?.setOnClickListener {
+            showDialog(
+                R.string.close_card_dialog_title,
+                R.string.close_card_positive,
+                R.string.close_card_negative,
+                {
+                    Toast.makeText(
+                        requireContext(),
+                        "Card is closed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                {
+                    Toast.makeText(
+                        requireContext(),
+                        "Card is not closed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            )
+        }
+
+        binding?.redesign?.setOnClickListener {
+//           findNavController().navigate(R.id.action_settingsFragment_to_design_nav_graph)
+        }
+
         binding?.logOut?.setOnClickListener {
-            val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(
-                requireContext()
-            );
-
-            alertDialogBuilder.setTitle(
-                getString(R.string.log_out_dialog_title)
-            );
-
-            alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton(
-                    getString(R.string.log_out_positive)
-                ) { dialog, which ->
+            showDialog(
+                R.string.log_out_dialog_title, R.string.log_out_positive, R.string.log_out_negative,
+                {
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.you_are_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-                .setNegativeButton(
-                    getString(R.string.log_out_negative)
-                ) { dialog, which ->
+                },
+                {
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.you_are_not_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            val alertDialog: AlertDialog = alertDialogBuilder.create();
-            alertDialog.show()
+            )
         }
     }
 }
