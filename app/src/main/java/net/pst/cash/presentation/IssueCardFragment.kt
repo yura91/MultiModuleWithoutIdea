@@ -26,7 +26,12 @@ class IssueCardFragment :
         }
 
         binding?.actionMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_issueCardFragment_to_settings_nav_graph)
+            val bundle = Bundle()
+            bundle.putBoolean("showAdditionalItems", true)
+            findNavController().navigate(
+                R.id.action_issueCardFragment_to_settings_nav_graph,
+                bundle
+            )
         }
     }
 

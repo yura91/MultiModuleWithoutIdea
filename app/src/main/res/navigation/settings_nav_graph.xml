@@ -9,12 +9,22 @@
         android:name="net.pst.cash.presentation.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
+        <argument
+            android:name="showAdditionalItems"
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_settingsFragment_to_helpSupportFragment"
             app:destination="@id/helpSupportFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_legalInformationFragment"
             app:destination="@id/legalInformationFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_cardPaletteFragment"
+            app:destination="@id/cardPaletteFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/design_nav_graph"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment

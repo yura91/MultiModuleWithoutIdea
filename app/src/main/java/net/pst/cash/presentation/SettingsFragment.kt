@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
@@ -13,6 +14,17 @@ import net.pst.cash.databinding.FragmentSettingsBinding
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val args = arguments
+        val showItems = args?.getBoolean("showAdditionalItems")
+
+        if (showItems != null && showItems == false) {
+            binding?.redesign?.isVisible = false
+            binding?.closeCard?.isVisible = false
+        } else {
+            binding?.redesign?.isVisible = true
+            binding?.closeCard?.isVisible = true
+        }
         binding?.helpSupport?.setOnClickListener {
             it.findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
         }
@@ -53,7 +65,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding?.redesign?.setOnClickListener {
-//           findNavController().navigate(R.id.action_settingsFragment_to_design_nav_graph)
+            findNavController().navigate(R.id.action_settingsFragment_to_cardPaletteFragment)
         }
 
         binding?.logOut?.setOnClickListener {

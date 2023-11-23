@@ -58,4 +58,6 @@
     <string name="_60_00_usdt">60,00 USDT</string>
     <string name="account_balance">Account balance</string>
     <string name="issue_card">Issue card</string>
+    <string name="redesign_card">Redesign card</string>
+    <string name="close_card">Close card</string>
 </resources>
