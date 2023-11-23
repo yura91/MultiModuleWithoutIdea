@@ -9,6 +9,10 @@
         android:id="@+id/cardPaletteFragment"
         android:name="net.pst.cash.presentation.CardPaletteFragment"
         android:label="CardPaletteFragment">
+        <argument
+            android:name="clearBackStack"
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_cardPaletteFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />

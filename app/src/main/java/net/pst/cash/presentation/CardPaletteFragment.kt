@@ -5,6 +5,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.viewModels
@@ -29,6 +30,8 @@ class CardPaletteFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args = arguments
+        val clearBackStack = args?.getBoolean("clearBackStack")
 
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
@@ -51,6 +54,14 @@ class CardPaletteFragment :
 
         binding?.actionMore?.setOnClickListener {
             findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (clearBackStack != null && clearBackStack == true) {
+                requireActivity().finish()
+            } else {
+                findNavController().popBackStack()
+            }
         }
 
         binding?.toolbar?.setNavigationOnClickListener {

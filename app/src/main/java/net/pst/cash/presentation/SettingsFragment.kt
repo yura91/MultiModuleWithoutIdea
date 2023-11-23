@@ -65,7 +65,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding?.redesign?.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_cardPaletteFragment)
+            val bundle = Bundle()
+            bundle.putBoolean("clearBackStack", true)
+            findNavController().navigate(
+                R.id.action_settingsFragment_to_cardPaletteFragment,
+                bundle
+            )
         }
 
         binding?.logOut?.setOnClickListener {
