@@ -60,4 +60,7 @@
     <string name="issue_card">Issue card</string>
     <string name="redesign_card">Redesign card</string>
     <string name="close_card">Close card</string>
+    <string name="_50">50 $</string>
+    <string name="balance_card">balance card</string>
+    <string name="cost">cost</string>
 </resources>

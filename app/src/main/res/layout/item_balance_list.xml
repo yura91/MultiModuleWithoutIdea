@@ -17,7 +17,7 @@
             android:id="@+id/balanceAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50 $"
+            android:text="@string/_50"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16"
             android:textStyle="bold" />
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="balance card"
+            android:text="@string/balance_card"
             android:textColor="@color/black"
             android:textSize="@dimen/text_12" />
     </LinearLayout>
@@ -42,7 +42,7 @@
             android:id="@+id/usdt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60,00 USDT"
+            android:text="@string/_60_00_usdt"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16" />
 
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="cost"
+            android:text="@string/cost"
             android:textColor="@color/black"
             android:textSize="@dimen/text_12" />
     </LinearLayout>

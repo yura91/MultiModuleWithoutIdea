@@ -100,7 +100,7 @@ class SelectBalanceFragment :
             })
         }
 
-        binding?.actionMore?.setOnClickListener {
+        binding?.toolbar?.actionMore?.setOnClickListener {
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
         }
         binding?.next?.setOnClickListener {

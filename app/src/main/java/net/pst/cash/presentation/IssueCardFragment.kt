@@ -25,7 +25,7 @@ class IssueCardFragment :
             }
         }
 
-        binding?.actionMore?.setOnClickListener {
+        binding?.toolbar?.actionMore?.setOnClickListener {
             findNavController().navigate(R.id.action_issueCardFragment_to_settings_nav_graph)
         }
 

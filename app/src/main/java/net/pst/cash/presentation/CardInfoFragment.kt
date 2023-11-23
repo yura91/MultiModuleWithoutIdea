@@ -36,6 +36,8 @@ class CardInfoFragment :
 
         val frontBinding = binding?.restrictedCardInfo
         val backBinding = binding?.fullCardInfo
+        val toolbarBinding = binding?.toolbar
+
         val navController = findNavController()
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
@@ -46,7 +48,7 @@ class CardInfoFragment :
             cardInfoViewModel.getActiveBalance()
         }
 
-        binding?.actionMore?.setOnClickListener {
+        toolbarBinding?.actionMore?.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("showAdditionalItems", true)
             findNavController().navigate(
