@@ -15,14 +15,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
-import net.pst.cash.databinding.FragmentCardIsReadyBinding
+import net.pst.cash.databinding.FragmentSelectBalanceBinding
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardIsReadyViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 @AndroidEntryPoint
-class CardIsReadyFragment :
-    BaseFragment<FragmentCardIsReadyBinding>(FragmentCardIsReadyBinding::inflate) {
+class SelectBalanceFragment :
+    BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
 
@@ -77,7 +77,7 @@ class CardIsReadyFragment :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     val height = height
-                    val negativeMargin = (height * 0.3).toInt()
+                    val negativeMargin = (height * 0.5).toInt()
 
                     val layoutParams = layoutParams as ViewGroup.MarginLayoutParams
                     layoutParams.topMargin = -negativeMargin
@@ -93,7 +93,7 @@ class CardIsReadyFragment :
         }
         binding?.next?.setOnClickListener {
             val action =
-                CardIsReadyFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(
+                SelectBalanceFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(
                     cardIsReadyViewModel.cardId,
                     cardIsReadyViewModel.balance,
                     cardIsReadyViewModel.currencyType

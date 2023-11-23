@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardIsReadyFragment"
-        android:name="net.pst.cash.presentation.CardIsReadyFragment"
+        android:name="net.pst.cash.presentation.SelectBalanceFragment"
         android:label="CardIsReadyFragment">
         <action
             android:id="@+id/action_cardIsReadyFragment_to_cardInfoFragment"
@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_issueCardFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_issueCardFragment_to_cardIsReadyFragment"
+            app:destination="@id/cardIsReadyFragment" />
     </fragment>
 
 </navigation>

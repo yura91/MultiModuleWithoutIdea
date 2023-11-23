@@ -33,6 +33,10 @@ class IssueCardFragment :
                 bundle
             )
         }
+
+        binding?.next?.setOnClickListener {
+            findNavController().navigate(R.id.action_issueCardFragment_to_cardIsReadyFragment)
+        }
     }
 
     private fun setGradient(
