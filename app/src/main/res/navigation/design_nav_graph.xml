@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_cardInfoFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph2"
+            app:destination="@id/settings_nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/topUpFragment"

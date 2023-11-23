@@ -46,6 +46,15 @@ class CardInfoFragment :
             cardInfoViewModel.getActiveBalance()
         }
 
+        binding?.actionMore?.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean("showAdditionalItems", true)
+            findNavController().navigate(
+                R.id.action_cardInfoFragment_to_settings_nav_graph,
+                bundle
+            )
+        }
+
         cardInfoViewModel.cardModel.observe(viewLifecycleOwner) {
             var amount = ""
             it?.balance?.let { cardBalance ->
@@ -102,10 +111,6 @@ class CardInfoFragment :
 
         frontBinding?.topUpButton?.setOnClickListener {
             navController.navigate(R.id.topUpFragment, null, navOptions)
-        }
-
-        frontBinding?.actionMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_cardInfoFragment_to_settings_nav_graph)
         }
 
         frontBinding?.payments?.setOnClickListener {
