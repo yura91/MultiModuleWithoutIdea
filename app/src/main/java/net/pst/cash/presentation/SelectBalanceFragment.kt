@@ -16,6 +16,7 @@ import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
+import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardIsReadyViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
@@ -28,6 +29,17 @@ class SelectBalanceFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        val balanceList = listOf(
+            BalanceItemModel("500.00 $", "550.00 USDT"),
+            BalanceItemModel("250.00 $", "280.00 USDT"),
+            BalanceItemModel("100.00 $", "115.00 USDT"),
+            BalanceItemModel("50.00 $", "60.00 USDT")
+        )
+        val balanceListAdapter = BalanceListAdapter(balanceList)
+        binding?.balanceList?.adapter = balanceListAdapter
+
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 val gradientDrawable = GradientDrawable(

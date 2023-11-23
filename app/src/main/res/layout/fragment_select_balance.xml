@@ -28,6 +28,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="@string/_60_00_usdt"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_18" />
@@ -74,18 +75,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="@dimen/margin_26"
-            android:src="@drawable/select_card_balance"
-            app:layout_constraintBottom_toBottomOf="@+id/cardIsReadyImage"
-            app:layout_constraintEnd_toEndOf="@+id/cardIsReadyImage"
-            app:layout_constraintStart_toStartOf="@+id/cardIsReadyImage" />
+            android:layout_marginBottom="@dimen/margin_40"
+            android:src="@drawable/select_card_balance" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:src="@drawable/arrow_down" />
 
     </FrameLayout>
 
-    <View
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/balanceList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/next"
