@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/padding_4"
-    android:paddingTop="@dimen/padding_4"
-    android:paddingEnd="@dimen/padding_4">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@android:color/transparent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -61,36 +56,43 @@
             android:src="@drawable/ic_more" />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/next"
-        android:layout_width="@dimen/size_zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
-        android:layout_marginBottom="@dimen/margin_40"
-        android:background="@drawable/rounded_corner_black_bg"
-        android:text="@string/issue_card"
-        android:textColor="@color/white"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/cardIsReadyImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_zero"
-        android:layout_marginBottom="@dimen/margin_40"
-        android:background="@drawable/card_background_bg"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_4"
+        android:paddingEnd="@dimen/padding_4">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_26"
-        android:src="@drawable/select_card_balance"
-        app:layout_constraintBottom_toBottomOf="@+id/cardIsReadyImage"
-        app:layout_constraintEnd_toEndOf="@+id/cardIsReadyImage"
-        app:layout_constraintStart_toStartOf="@+id/cardIsReadyImage" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next"
+            android:layout_width="@dimen/size_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_40"
+            android:background="@drawable/rounded_corner_black_bg"
+            android:text="@string/issue_card"
+            android:textColor="@color/white"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/cardIsReadyImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_zero"
+            android:background="@drawable/card_background_bg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_26"
+            android:src="@drawable/select_card_balance"
+            app:layout_constraintBottom_toBottomOf="@+id/cardIsReadyImage"
+            app:layout_constraintEnd_toEndOf="@+id/cardIsReadyImage"
+            app:layout_constraintStart_toStartOf="@+id/cardIsReadyImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
