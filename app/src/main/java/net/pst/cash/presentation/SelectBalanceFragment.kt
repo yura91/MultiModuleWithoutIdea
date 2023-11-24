@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -18,14 +20,21 @@ import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
 import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.dpToPx
-import net.pst.cash.presentation.viewmodels.CardIsReadyViewModel
+import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 @AndroidEntryPoint
 class SelectBalanceFragment :
     BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
-    private val cardIsReadyViewModel: CardIsReadyViewModel by viewModels()
+    private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
+    private val navOptions =
+        NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in_top)
+            .setExitAnim(R.anim.slide_out_top)
+            .setPopEnterAnim(R.anim.slide_in_bottom)
+            .setPopExitAnim(R.anim.slide_out_bottom)
+            .build()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,9 +47,13 @@ class SelectBalanceFragment :
             BalanceItemModel("50.00 $", "60.00 USDT")
         )
         val balanceListAdapter = BalanceListAdapter(balanceList, {
-            binding?.next?.text = "ISSUE CARD"
+            binding?.next?.text = getString(R.string.issue_card)
+            binding?.next?.isVisible = true
+            selectBalanceViewModel.enouphMoney = true
         }, {
-            binding?.next?.text = "TOP UP ACCOUNT"
+            binding?.next?.text = getString(R.string.top_up_card)
+            binding?.next?.isVisible = true
+            selectBalanceViewModel.enouphMoney = false
         })
         binding?.balanceList?.adapter = balanceListAdapter
 
@@ -72,22 +85,22 @@ class SelectBalanceFragment :
                 binding?.cardIsReadyImage?.background = layerDrawable
             }
         }
-        cardIsReadyViewModel.cardModel.observe(viewLifecycleOwner) {
+        selectBalanceViewModel.cardModel.observe(viewLifecycleOwner) {
             Log.d("TAG", it.toString())
             it?.id?.let { idCard ->
-                cardIsReadyViewModel.cardId = idCard
+                selectBalanceViewModel.cardId = idCard
             }
 
             it?.currencyType?.let { currencyType ->
-                cardIsReadyViewModel.currencyType = currencyType
+                selectBalanceViewModel.currencyType = currencyType
             }
 
             it?.balance?.let { cardBalance ->
-                cardIsReadyViewModel.balance = cardBalance
+                selectBalanceViewModel.balance = cardBalance
             }
             binding?.next?.isEnabled = true
         }
-        cardIsReadyViewModel.checkActiveCards()
+        selectBalanceViewModel.checkActiveCards()
         binding?.cardIsReadyImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
@@ -108,13 +121,21 @@ class SelectBalanceFragment :
             it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
         }
         binding?.next?.setOnClickListener {
-            val action =
-                SelectBalanceFragmentDirections.actionCardIsReadyFragmentToCardInfoFragment(
-                    cardIsReadyViewModel.cardId,
-                    cardIsReadyViewModel.balance,
-                    cardIsReadyViewModel.currencyType
+            if (selectBalanceViewModel.enouphMoney) {
+                val action =
+                    SelectBalanceFragmentDirections.actionSelectBalanceFragmentToCardInfoFragment(
+                        selectBalanceViewModel.cardId,
+                        selectBalanceViewModel.balance,
+                        selectBalanceViewModel.currencyType
+                    )
+                findNavController().navigate(action)
+            } else {
+                findNavController().navigate(
+                    R.id.action_selectBalanceFragment_to_topUpFragment,
+                    null,
+                    navOptions
                 )
-            findNavController().navigate(action)
+            }
         }
     }
 }

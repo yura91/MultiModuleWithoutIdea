@@ -55,6 +55,7 @@
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_40"
+        android:visibility="gone"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/issue_card"
         android:textColor="@color/white"

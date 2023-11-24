@@ -14,7 +14,7 @@ import net.pst.cash.presentation.model.Сurrency
 import javax.inject.Inject
 
 @HiltViewModel
-class CardIsReadyViewModel @Inject constructor(
+class SelectBalanceViewModel @Inject constructor(
     private val application: Application,
     private val activeCardInteractor: ActiveCardInteractor
 ) : AndroidViewModel(application) {
@@ -24,6 +24,7 @@ class CardIsReadyViewModel @Inject constructor(
     var cardId: Int = 0
     var balance: String = ""
     var currencyType: String = ""
+    var enouphMoney: Boolean = false
 
     fun checkActiveCards() {
         viewModelScope.launch {
