@@ -37,7 +37,11 @@ class SelectBalanceFragment :
             BalanceItemModel("100.00 $", "115.00 USDT"),
             BalanceItemModel("50.00 $", "60.00 USDT")
         )
-        val balanceListAdapter = BalanceListAdapter(balanceList)
+        val balanceListAdapter = BalanceListAdapter(balanceList, {
+            binding?.next?.text = "ISSUE CARD"
+        }, {
+            binding?.next?.text = "TOP UP ACCOUNT"
+        })
         binding?.balanceList?.adapter = balanceListAdapter
 
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
