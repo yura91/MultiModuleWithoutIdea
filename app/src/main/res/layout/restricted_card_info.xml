@@ -29,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payments"
-                android:textSize="@dimen/text_22"
                 android:textColor="@color/black"
+                android:textSize="@dimen/text_22"
                 android:textStyle="bold" />
 
             <View
@@ -61,17 +61,80 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/cardInfo"
-            android:layout_width="@dimen/size_zero"
+        <FrameLayout
+            android:id="@+id/cardInfoFrame"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/size_zero"
-            android:layout_marginBottom="@dimen/margin_10"
-            android:background="@drawable/card_background_bg"
             app:layout_constraintBottom_toTopOf="@+id/paymentsLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cardInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:background="@drawable/card_background_bg" />
+
+            <TextView
+                android:id="@+id/cardNumTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="@dimen/margin_34"
+                android:layout_marginBottom="@dimen/margin_60"
+                android:text="@string/card_num_holder"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/expDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="@dimen/margin_34"
+                android:layout_marginBottom="@dimen/margin_34"
+                android:text="@string/card_exp_date"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_16" />
+
+
+            <TextView
+                android:id="@+id/card_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/margin_26"
+                android:layout_marginBottom="110dp"
+                android:text="@string/_0_00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_46" />
+
+            <ImageView
+                android:layout_width="@dimen/size_52"
+                android:layout_height="@dimen/size_68"
+                android:layout_marginStart="@dimen/margin_218"
+                android:layout_marginTop="@dimen/margin_118"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_card_chip" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_26"
+                android:layout_marginTop="@dimen/margin_24"
+                android:src="@drawable/ic_visa" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/rotate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/cardInfoFrame"
+            app:layout_constraintEnd_toEndOf="@+id/cardInfoFrame"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/cardInfoFrame"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -79,75 +142,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.1"
-            app:layout_constraintTop_toTopOf="@+id/cardInfo" />
-
-        <View
-            android:id="@+id/rotate"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/cardInfo"
-            app:layout_constraintEnd_toEndOf="@+id/cardInfo"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/cardInfo"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:layout_constraintVertical_bias="1.0" />
-
-
-        <TextView
-            android:id="@+id/cardNumTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_34"
-            android:layout_marginBottom="@dimen/margin_56"
-            android:text="@string/card_num_holder"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16"
-            app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
-            app:layout_constraintEnd_toEndOf="@+id/cardInfo" />
-
-        <TextView
-            android:id="@+id/expDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_34"
-            android:text="@string/card_exp_date"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
-
-
-        <TextView
-            android:id="@+id/card_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_24"
-            android:layout_marginBottom="@dimen/margin_24"
-            android:text="@string/_0_00"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_46"
-            app:layout_constraintBottom_toTopOf="@+id/cardNumTemp"
-            app:layout_constraintStart_toStartOf="@+id/cardInfo" />
-
-        <ImageView
-            android:layout_width="@dimen/size_52"
-            android:layout_height="@dimen/size_68"
-            android:layout_marginStart="@dimen/margin_218"
-            android:layout_marginTop="@dimen/margin_118"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_card_chip"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_26"
-            android:layout_marginTop="@dimen/margin_24"
-            android:src="@drawable/ic_visa"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="@+id/cardInfoFrame" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
