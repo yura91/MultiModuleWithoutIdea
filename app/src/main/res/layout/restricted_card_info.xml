@@ -13,33 +13,58 @@
         android:paddingTop="@dimen/padding_4"
         tools:context=".presentation.CardInfoFragment">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/payments"
-            android:layout_width="@dimen/size_zero"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/paymentsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginEnd="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_40"
-            android:backgroundTint="@color/white"
-            android:stateListAnimator="@null"
-            android:text="@string/payments"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            app:icon="@drawable/payments"
-            app:iconGravity="textStart"
-            app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/simple_payment_list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payments"
+                android:textSize="@dimen/text_22"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/payments"
+                style="@style/Widget.MaterialComponents.Button.IconOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner_gray_bg"
+                android:text="View all"
+                android:textColor="@color/black"
+                app:backgroundTint="@null"
+                app:iconGravity="textStart" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/simple_payment_list"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/cardInfo"
             android:layout_width="@dimen/size_zero"
             android:layout_height="@dimen/size_zero"
-            android:layout_marginBottom="@dimen/margin_60"
+            android:layout_marginBottom="@dimen/margin_10"
             android:background="@drawable/card_background_bg"
-            app:layout_constraintBottom_toTopOf="@+id/payments"
+            app:layout_constraintBottom_toTopOf="@+id/paymentsLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
