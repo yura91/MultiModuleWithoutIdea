@@ -32,26 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/topUpButton"
-            android:layout_width="@dimen/size_zero"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_10"
-            android:background="@drawable/rounded_corner_black_bg"
-            android:text="@string/top_up_card"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:backgroundTint="@null"
-            app:icon="@drawable/add"
-            app:iconGravity="textStart"
-            app:iconTint="@null"
-            app:layout_constraintBottom_toTopOf="@+id/payments"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_goneMarginBottom="@dimen/margin_10" />
-
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/cardInfo"
@@ -59,7 +39,7 @@
             android:layout_height="@dimen/size_zero"
             android:layout_marginBottom="@dimen/margin_60"
             android:background="@drawable/card_background_bg"
-            app:layout_constraintBottom_toTopOf="@+id/topUpButton"
+            app:layout_constraintBottom_toTopOf="@+id/payments"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

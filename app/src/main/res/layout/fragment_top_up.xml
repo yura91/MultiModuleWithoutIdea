@@ -6,25 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.TopUpFragment">
 
-    <FrameLayout
-        android:id="@+id/cardInfo"
-        android:layout_width="@dimen/size_zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_4"
-        android:layout_marginEnd="@dimen/margin_4"
-        android:layout_marginBottom="@dimen/margin_60"
-        android:background="@drawable/card_background_bg"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:src="@drawable/arrow_down" />
-    </FrameLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout" />
 
 
     <androidx.cardview.widget.CardView
@@ -38,7 +22,7 @@
         app:cardCornerRadius="@dimen/radius_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardInfo">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"

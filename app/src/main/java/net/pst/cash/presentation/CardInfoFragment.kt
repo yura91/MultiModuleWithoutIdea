@@ -111,10 +111,6 @@ class CardInfoFragment :
                 .setPopExitAnim(R.anim.slide_out_bottom)
                 .build()
 
-        frontBinding?.topUpButton?.setOnClickListener {
-            navController.navigate(R.id.topUpFragment, null, navOptions)
-        }
-
         frontBinding?.payments?.setOnClickListener {
             navController.navigate(R.id.historyPaymentsFragment, null, navOptions)
         }
