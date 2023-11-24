@@ -19,6 +19,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_10"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/simple_payment_list"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +43,7 @@
                 style="@style/Widget.MaterialComponents.Button.IconOnly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_4"
                 android:background="@drawable/rounded_corner_gray_bg"
                 android:text="View all"
                 android:textColor="@color/black"
@@ -53,7 +55,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/simple_payment_list"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/size_120"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent" />
 
