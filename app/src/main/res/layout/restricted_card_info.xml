@@ -56,6 +56,8 @@
             android:id="@+id/simple_payment_list"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_120"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent" />
 

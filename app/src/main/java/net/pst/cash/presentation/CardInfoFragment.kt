@@ -9,17 +9,22 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
+import androidx.paging.PagingData
 import com.google.android.material.shape.CornerFamily
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardInfoBinding
 import net.pst.cash.databinding.FullCardInfoBinding
 import net.pst.cash.databinding.RestrictedCardInfoBinding
 import net.pst.cash.presentation.model.GradientModel
+import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.presentation.model.RowHistoryItems
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardInfoViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
@@ -30,6 +35,7 @@ class CardInfoFragment :
     val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
     private val args: CardInfoFragmentArgs by navArgs()
+    private val historyAdapter = HistoryPaymentsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +45,27 @@ class CardInfoFragment :
         val toolbarBinding = binding?.toolbar
 
         val navController = findNavController()
+        val historyItems = mutableListOf<HistoryItem>()
+        val historyItem1 = HistoryItem("100", "Netfix", "23:55")
+        val historyItem2 = HistoryItem("200", "Netfix", "23:55")
+        val historyItem3 = HistoryItem("300", "Netfix", "00:56")
+        val historyItem4 = HistoryItem("400", "Netfix", "00:55")
+
+        historyItems.add(historyItem1)
+        historyItems.add(historyItem2)
+        historyItems.add(historyItem3)
+        historyItems.add(historyItem4)
+
+        val rowHistoryItems = mutableListOf<RowHistoryItems>()
+        val rohHistoryItem = RowHistoryItems("23.11.04", historyItems)
+        rowHistoryItems.add(rohHistoryItem)
+
+        frontBinding?.simplePaymentList?.adapter = historyAdapter
+
+        lifecycleScope.launch {
+            historyAdapter.submitData(PagingData.from(rowHistoryItems))
+        }
+
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 setGradient(gradientData, frontBinding, backBinding)
