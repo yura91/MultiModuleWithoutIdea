@@ -25,13 +25,14 @@ class CardPaletteFragment :
     private val gradientOffset = 25.0F
     private val initialProgress = 0
     private val initialColor = -312545
+    private val argsKey = "clearBackStack"
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = arguments
-        val clearBackStack = args?.getBoolean("clearBackStack")
+        val clearBackStack = args?.getBoolean(argsKey)
 
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),

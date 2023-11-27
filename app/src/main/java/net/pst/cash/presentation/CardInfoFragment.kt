@@ -36,6 +36,7 @@ class CardInfoFragment :
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
     private val args: CardInfoFragmentArgs by navArgs()
     private val historyAdapter = HistoryPaymentsAdapter()
+    private val argsTag = "showAdditionalItems"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,7 +78,7 @@ class CardInfoFragment :
 
         toolbarBinding?.actionMore?.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("showAdditionalItems", true)
+            bundle.putBoolean(argsTag, true)
             findNavController().navigate(
                 R.id.action_cardInfoFragment_to_settings_nav_graph,
                 bundle

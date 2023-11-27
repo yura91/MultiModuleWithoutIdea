@@ -12,11 +12,12 @@ import net.pst.cash.databinding.FragmentSettingsBinding
 
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
-
+    private val argsKey = "showAdditionalItems"
+    private val argsTag = "clearBackStack"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val args = arguments
-        val showItems = args?.getBoolean("showAdditionalItems")
+        val showItems = args?.getBoolean(argsKey)
 
         if (showItems != null && showItems == false) {
             binding?.redesign?.isVisible = false
@@ -66,7 +67,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
 
         binding?.redesign?.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("clearBackStack", true)
+            bundle.putBoolean(argsTag, true)
             findNavController().navigate(
                 R.id.action_settingsFragment_to_cardPaletteFragment,
                 bundle
