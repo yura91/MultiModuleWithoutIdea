@@ -5,6 +5,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -28,7 +29,9 @@ class IssueCardFragment :
         binding?.toolbar?.actionMore?.setOnClickListener {
             findNavController().navigate(R.id.action_issueCardFragment_to_settings_nav_graph)
         }
-
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
+        }
         binding?.next?.setOnClickListener {
             findNavController().navigate(R.id.action_issueCardFragment_to_cardIsReadyFragment)
         }

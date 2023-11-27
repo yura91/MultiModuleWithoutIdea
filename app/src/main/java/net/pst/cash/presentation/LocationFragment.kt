@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -43,6 +44,10 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
                 AdapterView.OnItemClickListener { parent, view, position, id ->
                     viewModel.selectedItem = parent?.adapter?.getItem(position) as? CountryModel
                 }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
         }
 
         viewModel.snackBarVerificationErrorMessage.observe(viewLifecycleOwner) {

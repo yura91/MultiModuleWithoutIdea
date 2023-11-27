@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -93,6 +94,10 @@ class SelectBalanceFragment :
                     viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             })
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            findNavController().popBackStack()
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {

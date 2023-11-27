@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
@@ -44,6 +45,10 @@ class GetAcquaintedFragment :
 
         val datePickerDialog =
             DatePickerDialog(requireContext(), dateSetListener, year, month, dayOfMonth);
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            requireActivity().finish()
+        }
 
         binding?.birthDate?.setOnClickListener {
             datePickerDialog.show()
