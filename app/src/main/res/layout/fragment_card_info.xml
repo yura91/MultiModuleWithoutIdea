@@ -8,8 +8,7 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
-    <com.wajahatkarim3.easyflipview.EasyFlipView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.wajahatkarim3.easyflipview.EasyFlipView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/easyFlipView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

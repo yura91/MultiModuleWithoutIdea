@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
 import net.pst.cash.presentation.model.BalanceItemModel
+import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
@@ -59,30 +60,7 @@ class SelectBalanceFragment :
 
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
-                val gradientDrawable = GradientDrawable(
-                    GradientDrawable.Orientation.TOP_BOTTOM,
-                    intArrayOf(gradientData.startColor, gradientData.endColor)
-                )
-                val outValue = TypedValue()
-                resources.getValue(R.dimen.corner_radius, outValue, true)
-                val cornerRadius = outValue.float
-                val radii = floatArrayOf(
-                    0f,
-                    0f,
-                    0f,
-                    0f,
-                    requireContext().dpToPx(cornerRadius),
-                    requireContext().dpToPx(cornerRadius),
-                    requireContext().dpToPx(cornerRadius),
-                    requireContext().dpToPx(cornerRadius)
-                )
-                gradientDrawable.cornerRadii = radii
-                val layer1 = gradientDrawable
-                val layer2 =
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
-                val layers = arrayOf(layer1, layer2)
-                val layerDrawable = LayerDrawable(layers)
-                binding?.cardIsReadyImage?.background = layerDrawable
+                setGradient(gradientData)
             }
         }
         selectBalanceViewModel.cardModel.observe(viewLifecycleOwner) {
@@ -137,5 +115,32 @@ class SelectBalanceFragment :
                 )
             }
         }
+    }
+
+    private fun setGradient(gradientData: GradientModel) {
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(gradientData.startColor, gradientData.endColor)
+        )
+        val outValue = TypedValue()
+        resources.getValue(R.dimen.corner_radius, outValue, true)
+        val cornerRadius = outValue.float
+        val radii = floatArrayOf(
+            0f,
+            0f,
+            0f,
+            0f,
+            requireContext().dpToPx(cornerRadius),
+            requireContext().dpToPx(cornerRadius),
+            requireContext().dpToPx(cornerRadius),
+            requireContext().dpToPx(cornerRadius)
+        )
+        gradientDrawable.cornerRadii = radii
+        val layer1 = gradientDrawable
+        val layer2 =
+            AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
+        val layers = arrayOf(layer1, layer2)
+        val layerDrawable = LayerDrawable(layers)
+        binding?.cardIsReadyImage?.background = layerDrawable
     }
 }
