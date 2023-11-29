@@ -58,8 +58,8 @@ class CardInfoFragment :
         historyItems.add(historyItem4)
 
         val rowHistoryItems = mutableListOf<RowHistoryItems>()
-        val rohHistoryItem = RowHistoryItems("23.11.04", historyItems)
-        rowHistoryItems.add(rohHistoryItem)
+        val rowHistoryItem = RowHistoryItems("23.11.04", historyItems)
+        rowHistoryItems.add(rowHistoryItem)
 
         frontBinding?.simplePaymentList?.adapter = historyAdapter
 

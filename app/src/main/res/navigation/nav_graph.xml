@@ -14,8 +14,8 @@
             android:id="@+id/action_signInFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment" />
         <action
-            android:id="@+id/action_signInFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            android:id="@+id/action_signInFragment_to_apple_webViewFragment"
+            app:destination="@id/appleWebViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/getAcquaintedFragment"
@@ -53,7 +53,7 @@
     <include app:graph="@navigation/settings_nav_graph" />
     <include app:graph="@navigation/design_nav_graph" />
     <fragment
-        android:id="@+id/webViewFragment"
+        android:id="@+id/appleWebViewFragment"
         android:name="net.pst.cash.presentation.AppleWebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view">
@@ -63,7 +63,7 @@
         <action
             android:id="@+id/action_webViewFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment"
-            app:popUpTo="@id/webViewFragment"
+            app:popUpTo="@id/appleWebViewFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

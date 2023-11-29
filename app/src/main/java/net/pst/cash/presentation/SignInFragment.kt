@@ -26,7 +26,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         registerForActivityResult(
             ActivityResultContracts.StartIntentSenderForResult()
         ) { result ->
-            signInViewModel.handleSignInResult(result)
+            signInViewModel.handleSignInGoogleResult(result)
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         binding?.textPrivacyPolicy?.text = agreementSpan
         binding?.textPrivacyPolicy?.movementMethod = LinkMovementMethod.getInstance()
 
-        signInViewModel.signInRequest.observe(viewLifecycleOwner) { request ->
+        signInViewModel.signInGoogleRequest.observe(viewLifecycleOwner) { request ->
             activityResultLauncher.launch(request)
         }
 
@@ -50,12 +50,12 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         }
 
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
-            val action = SignInFragmentDirections.actionSignInFragmentToWebViewFragment(link)
+            val action = SignInFragmentDirections.actionSignInFragmentToAppleWebViewFragment(link)
             findNavController().navigate(action)
         }
 
         binding?.signWithGoogle?.setOnClickListener {
-            signInViewModel.startSignIn()
+            signInViewModel.signInWithGoogle()
         }
 
         binding?.signWithApple?.setOnClickListener {

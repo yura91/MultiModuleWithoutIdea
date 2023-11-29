@@ -41,20 +41,20 @@ class SignInViewModel @Inject constructor(
     private val _isVerificationNeeded = SingleLiveEvent<Boolean>()
     val isVerificationNeeded = _isVerificationNeeded
 
-    private val _signInRequest = MutableLiveData<IntentSenderRequest>()
-    val signInRequest: LiveData<IntentSenderRequest> get() = _signInRequest
+    private val _signInGoogleRequest = MutableLiveData<IntentSenderRequest>()
+    val signInGoogleRequest: LiveData<IntentSenderRequest> get() = _signInGoogleRequest
 
     private val _appleLink = SingleLiveEvent<String>()
     val appleLink: LiveData<String> get() = _appleLink
 
     val snackBarErrorMessage = signInInteractor.errorMessage
 
-    fun startSignIn() {
+    fun signInWithGoogle() {
         oneTapClient.beginSignIn(signUpRequest)
             .addOnSuccessListener { result ->
                 val intentSenderRequest: IntentSenderRequest =
                     IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
-                _signInRequest.value = intentSenderRequest
+                _signInGoogleRequest.value = intentSenderRequest
             }
             .addOnFailureListener { e ->
                 e.localizedMessage?.let { Log.d("TAG", it) }
@@ -85,7 +85,7 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    fun handleSignInResult(result: ActivityResult?) {
+    fun handleSignInGoogleResult(result: ActivityResult?) {
         if (result?.resultCode == Activity.RESULT_OK) {
             try {
                 val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
