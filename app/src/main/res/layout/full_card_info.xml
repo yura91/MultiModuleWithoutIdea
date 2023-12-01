@@ -157,5 +157,4 @@
         android:textSize="@dimen/text_16"
         app:layout_constraintBottom_toTopOf="@+id/copyCardNumber"
         app:layout_constraintStart_toStartOf="@+id/cardInfo" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

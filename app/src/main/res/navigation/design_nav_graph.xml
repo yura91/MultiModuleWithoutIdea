@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/design_nav_graph"
     app:startDestination="@id/cardPaletteFragment">
-
     <fragment
         android:id="@+id/cardPaletteFragment"
         android:name="net.pst.cash.presentation.CardPaletteFragment"
@@ -80,5 +79,4 @@
             android:id="@+id/action_issueCardFragment_to_cardIsReadyFragment"
             app:destination="@id/selectBalanceFragment" />
     </fragment>
-
 </navigation>

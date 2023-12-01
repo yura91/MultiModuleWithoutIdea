@@ -37,7 +37,6 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="operationType,operationValue" />
 
-
     <TextView
         android:id="@+id/operationTime"
         android:layout_width="wrap_content"

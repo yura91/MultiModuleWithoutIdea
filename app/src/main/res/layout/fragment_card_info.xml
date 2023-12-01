@@ -26,6 +26,5 @@
         <include
             android:id="@+id/restricted_card_info"
             layout="@layout/restricted_card_info" />
-
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 </LinearLayout>

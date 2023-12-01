@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loadingFragment">
-
     <fragment
         android:id="@+id/signInFragment"
         android:name="net.pst.cash.presentation.SignInFragment"
@@ -42,7 +41,6 @@
         <argument
             android:name="birthDate"
             app:argType="string" />
-
         <action
             android:id="@+id/action_locationFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
@@ -82,5 +80,4 @@
             app:popUpTo="@id/loadingFragment"
             app:popUpToInclusive="true" />
     </fragment>
-
 </navigation>
