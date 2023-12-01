@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import net.pst.cash.R
@@ -33,7 +34,18 @@ class IssueCardFragment :
             findNavController().popBackStack()
         }
         binding?.next?.setOnClickListener {
-            findNavController().navigate(R.id.action_issueCardFragment_to_cardIsReadyFragment)
+            val navOptions =
+                NavOptions.Builder()
+                    .setEnterAnim(R.anim.slide_in_top)
+                    .setExitAnim(R.anim.slide_out_top)
+                    .setPopEnterAnim(R.anim.slide_in_bottom)
+                    .setPopExitAnim(R.anim.slide_out_bottom)
+                    .build()
+            findNavController().navigate(
+                R.id.action_issueCardFragment_to_cardIsReadyFragment,
+                null,
+                navOptions
+            )
         }
     }
 

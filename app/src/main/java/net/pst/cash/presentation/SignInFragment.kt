@@ -60,7 +60,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
         binding?.signWithApple?.setOnClickListener {
             signInViewModel.getAppleLink()
-//            it.findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
     }
 
