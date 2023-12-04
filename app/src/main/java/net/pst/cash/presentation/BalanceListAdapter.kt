@@ -10,6 +10,7 @@ import net.pst.cash.presentation.model.BalanceItemModel
 
 
 class BalanceListAdapter(
+    private val userBalance: String,
     private val dataSet: List<BalanceItemModel>,
     private val enoughMoneyAction: () -> Unit,
     private val notEnoughMoneyAction: () -> Unit
@@ -51,7 +52,7 @@ class BalanceListAdapter(
             notifyItemChanged(selectedPos);
             val cost = dataSet[holder.layoutPosition].usdt
             val costParts = cost.split(" ")
-            if ((USER_BALANCE - costParts[0].toDouble()) < 0) {
+            if ((userBalance.toDouble() - costParts[0].toDouble()) < 0) {
                 notEnoughMoneyAction()
             } else {
                 enoughMoneyAction()

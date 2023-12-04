@@ -6,10 +6,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import net.pst.cash.data.repos.AccountsRepo
 import net.pst.cash.data.repos.AccountsRepoImpl
+import net.pst.cash.data.repos.ActiveCardsRepo
+import net.pst.cash.data.repos.ActiveCardsRepoImpl
 import net.pst.cash.data.repos.CardInfoRepo
 import net.pst.cash.data.repos.CardInfoRepoImpl
-import net.pst.cash.data.repos.CardIsReadyRepo
-import net.pst.cash.data.repos.CardIsReadyRepoImpl
 import net.pst.cash.data.repos.CountriesRepository
 import net.pst.cash.data.repos.CountriesRepositoryImpl
 import net.pst.cash.data.repos.HistoryListRepo
@@ -34,7 +34,7 @@ interface RepositoryModule {
     fun bindCountriesRepository(countriesRepository: CountriesRepositoryImpl): CountriesRepository
 
     @Binds
-    fun bindCardIsReadyRepository(cardIsReadyRepository: CardIsReadyRepoImpl): CardIsReadyRepo
+    fun bindCardIsReadyRepository(cardIsReadyRepository: ActiveCardsRepoImpl): ActiveCardsRepo
 
     @Binds
     fun bindVerificationRepository(verificationRepository: VerificationRepositoryImpl): VerificationRepository

@@ -155,7 +155,7 @@ class CardInfoFragment :
         val balance = args.balance
         val currencyType = args.currencyType
         frontBinding?.cardBalance?.text = getString(R.string.balance, balance, currencyType)
-
+        binding?.toolbar?.cardBalance?.text = "$balance USDT"
         backBinding?.copyCardNumber?.setOnClickListener {
             Toast.makeText(requireContext(), "Card number is copied", Toast.LENGTH_SHORT).show()
         }

@@ -17,8 +17,12 @@ import net.pst.cash.presentation.viewmodels.TopUpViewModel
 @AndroidEntryPoint
 class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
     private val topUpViewModel: TopUpViewModel by viewModels()
+    private val balanceKey = "balance"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args = arguments
+        val balance = args?.getString(balanceKey)
+        binding?.toolbar?.cardBalance?.text = "$balance USDT"
         topUpViewModel.addresses.observe(viewLifecycleOwner) {
             val address = it[0]
             binding?.copyQr?.text = address

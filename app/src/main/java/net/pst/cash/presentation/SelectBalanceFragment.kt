@@ -3,7 +3,6 @@ package net.pst.cash.presentation
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +29,8 @@ class SelectBalanceFragment :
     BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
+    private val balanceKey = "balance"
+    private val currencyKey = "currency"
     private val navOptions =
         NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_top)
@@ -41,6 +42,17 @@ class SelectBalanceFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val args = arguments
+        val balance = args?.getString(balanceKey)
+        val currency = args?.getString(currencyKey)
+        binding?.toolbar?.cardBalance?.text = "$balance USDT"
+        balance?.let {
+            selectBalanceViewModel.balance = it
+        }
+        currency?.let {
+            selectBalanceViewModel.currencyType = it
+        }
+
 
         val balanceList = listOf(
             BalanceItemModel("500.00 $", "550.00 USDT"),
@@ -48,38 +60,26 @@ class SelectBalanceFragment :
             BalanceItemModel("100.00 $", "115.00 USDT"),
             BalanceItemModel("50.00 $", "60.00 USDT")
         )
-        val balanceListAdapter = BalanceListAdapter(balanceList, {
-            binding?.next?.text = getString(R.string.issue_card)
-            binding?.next?.isVisible = true
-            selectBalanceViewModel.enouphMoney = true
-        }, {
-            binding?.next?.text = getString(R.string.top_up_card)
-            binding?.next?.isVisible = true
-            selectBalanceViewModel.enouphMoney = false
-        })
-        binding?.balanceList?.adapter = balanceListAdapter
+        
+        balance?.let { cardBalance ->
+            val balanceListAdapter = BalanceListAdapter(cardBalance, balanceList, {
+                binding?.next?.text = getString(R.string.issue_card)
+                binding?.next?.isVisible = true
+                selectBalanceViewModel.enouphMoney = true
+            }, {
+                binding?.next?.text = getString(R.string.top_up_card)
+                binding?.next?.isVisible = true
+                selectBalanceViewModel.enouphMoney = false
+            })
+            binding?.balanceList?.adapter = balanceListAdapter
+        }
 
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 setGradient(gradientData)
             }
         }
-        selectBalanceViewModel.cardModel.observe(viewLifecycleOwner) {
-            Log.d("TAG", it.toString())
-            it?.id?.let { idCard ->
-                selectBalanceViewModel.cardId = idCard
-            }
 
-            it?.currencyType?.let { currencyType ->
-                selectBalanceViewModel.currencyType = currencyType
-            }
-
-            it?.balance?.let { cardBalance ->
-                selectBalanceViewModel.balance = cardBalance
-            }
-            binding?.next?.isEnabled = true
-        }
-        selectBalanceViewModel.checkActiveCards()
         binding?.cardIsReadyImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
@@ -113,9 +113,11 @@ class SelectBalanceFragment :
                     )
                 findNavController().navigate(action)
             } else {
+                val bundle = Bundle()
+                bundle.putString(balanceKey, selectBalanceViewModel.balance)
                 findNavController().navigate(
                     R.id.action_selectBalanceFragment_to_topUpFragment,
-                    null,
+                    bundle,
                     navOptions
                 )
             }

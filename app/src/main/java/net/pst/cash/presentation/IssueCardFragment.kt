@@ -7,24 +7,45 @@ import android.util.TypedValue
 import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentIssueCardBinding
 import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
+import net.pst.cash.presentation.viewmodels.IssueCardViewModel
 import net.pst.cash.presentation.viewmodels.SharedViewModel
 
+@AndroidEntryPoint
 class IssueCardFragment :
     BaseFragment<FragmentIssueCardBinding>(FragmentIssueCardBinding::inflate) {
     val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
+    private val issueCardViewModel: IssueCardViewModel by viewModels()
+    private val balanceTag = "balance"
+    private val currencyTag = "currency"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        issueCardViewModel.getActiveBalance()
+
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
             if (gradientData != null) {
                 setGradient(gradientData)
             }
+        }
+
+        issueCardViewModel.cardModel.observe(viewLifecycleOwner) {
+            var amount = ""
+            it?.balance?.let { cardBalance ->
+                amount = cardBalance
+            }
+            var currencySign = ""
+            it?.currencyType?.let { currencyType ->
+                currencySign = currencyType
+            }
+            binding?.toolbar?.cardBalance?.text = "$amount USDT"
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
@@ -41,9 +62,12 @@ class IssueCardFragment :
                     .setPopEnterAnim(R.anim.slide_in_bottom)
                     .setPopExitAnim(R.anim.slide_out_bottom)
                     .build()
+            val bundle = Bundle()
+            bundle.putString(balanceTag, issueCardViewModel.getCardBalance())
+            bundle.putString(currencyTag, issueCardViewModel.getCurrency())
             findNavController().navigate(
-                R.id.action_issueCardFragment_to_cardIsReadyFragment,
-                null,
+                R.id.action_issueCardFragment_to_selectBalanceFragment,
+                bundle,
                 navOptions
             )
         }
