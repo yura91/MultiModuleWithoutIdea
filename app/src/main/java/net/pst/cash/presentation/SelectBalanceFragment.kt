@@ -45,7 +45,7 @@ class SelectBalanceFragment :
         val args = arguments
         val balance = args?.getString(balanceKey)
         val currency = args?.getString(currencyKey)
-        binding?.toolbar?.cardBalance?.text = "$balance USDT"
+        binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, balance)
         balance?.let {
             selectBalanceViewModel.balance = it
         }

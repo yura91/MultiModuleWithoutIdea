@@ -22,7 +22,7 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
         super.onViewCreated(view, savedInstanceState)
         val args = arguments
         val balance = args?.getString(balanceKey)
-        binding?.toolbar?.cardBalance?.text = "$balance USDT"
+        binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, balance)
         topUpViewModel.addresses.observe(viewLifecycleOwner) {
             val address = it[0]
             binding?.copyQr?.text = address

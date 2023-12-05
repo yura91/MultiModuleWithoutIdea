@@ -45,7 +45,7 @@ class IssueCardFragment :
             it?.currencyType?.let { currencyType ->
                 currencySign = currencyType
             }
-            binding?.toolbar?.cardBalance?.text = "$amount USDT"
+            binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, amount)
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
