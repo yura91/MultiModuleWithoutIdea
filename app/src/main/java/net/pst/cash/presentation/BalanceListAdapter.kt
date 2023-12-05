@@ -12,12 +12,11 @@ import net.pst.cash.presentation.model.BalanceItemModel
 class BalanceListAdapter(
     private val userBalance: String,
     private val dataSet: List<BalanceItemModel>,
-    private val enoughMoneyAction: () -> Unit,
+    private val enoughMoneyAction: (remainedFunds: Double, cardBalanceAmount: Double) -> Unit,
     private val notEnoughMoneyAction: () -> Unit
 ) :
     RecyclerView.Adapter<BalanceListAdapter.ViewHolder>() {
     private var selectedPos = RecyclerView.NO_POSITION
-    private val USER_BALANCE = 60.00
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val amountBalanceTextView: TextView
@@ -44,7 +43,8 @@ class BalanceListAdapter(
             holder.amountBalanceTextView.setTextColor(holder.itemView.context.getColor(R.color.black))
             holder.usdtTextView.setTextColor(holder.itemView.context.getColor(R.color.black))
         }
-        holder.amountBalanceTextView.text = dataSet[holder.layoutPosition].balanceAmount
+        val cardBalanceAmount = dataSet[holder.layoutPosition].balanceAmount
+        holder.amountBalanceTextView.text = cardBalanceAmount
         holder.usdtTextView.text = dataSet[holder.layoutPosition].usdt
         holder.itemView.setOnClickListener {
             notifyItemChanged(selectedPos);
@@ -52,10 +52,12 @@ class BalanceListAdapter(
             notifyItemChanged(selectedPos);
             val cost = dataSet[holder.layoutPosition].usdt
             val costParts = cost.split(" ")
-            if ((userBalance.toDouble() - costParts[0].toDouble()) < 0) {
+            val remainedFunds = userBalance.toDouble() - costParts[0].toDouble()
+            if (remainedFunds < 0) {
                 notEnoughMoneyAction()
             } else {
-                enoughMoneyAction()
+                val amountParts = cardBalanceAmount.split(" ")
+                enoughMoneyAction(remainedFunds, amountParts[0].toDouble())
             }
         }
     }

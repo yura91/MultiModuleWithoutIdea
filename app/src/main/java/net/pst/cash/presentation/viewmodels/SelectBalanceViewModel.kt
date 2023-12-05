@@ -15,4 +15,6 @@ class SelectBalanceViewModel @Inject constructor(
     var balance: String = ""
     var currencyType: String = ""
     var enouphMoney: Boolean = false
+    var remainedFunds: String = ""
+    var cardBalanceAmount: String = ""
 }

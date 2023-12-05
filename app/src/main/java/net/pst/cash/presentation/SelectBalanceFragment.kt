@@ -60,17 +60,20 @@ class SelectBalanceFragment :
             BalanceItemModel("100.00 $", "115.00 USDT"),
             BalanceItemModel("50.00 $", "60.00 USDT")
         )
-        
+
         balance?.let { cardBalance ->
-            val balanceListAdapter = BalanceListAdapter(cardBalance, balanceList, {
-                binding?.next?.text = getString(R.string.issue_card)
-                binding?.next?.isVisible = true
-                selectBalanceViewModel.enouphMoney = true
-            }, {
-                binding?.next?.text = getString(R.string.top_up_card)
-                binding?.next?.isVisible = true
-                selectBalanceViewModel.enouphMoney = false
-            })
+            val balanceListAdapter =
+                BalanceListAdapter(cardBalance, balanceList, { remainedFunds, cardBalanceAmount ->
+                    binding?.next?.text = getString(R.string.issue_card)
+                    binding?.next?.isVisible = true
+                    selectBalanceViewModel.enouphMoney = true
+                    selectBalanceViewModel.remainedFunds = remainedFunds.toString()
+                    selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
+                }, {
+                    binding?.next?.text = getString(R.string.top_up_card)
+                    binding?.next?.isVisible = true
+                    selectBalanceViewModel.enouphMoney = false
+                })
             binding?.balanceList?.adapter = balanceListAdapter
         }
 
@@ -108,8 +111,9 @@ class SelectBalanceFragment :
                 val action =
                     SelectBalanceFragmentDirections.actionSelectBalanceFragmentToCardInfoFragment(
                         selectBalanceViewModel.cardId,
-                        selectBalanceViewModel.balance,
-                        selectBalanceViewModel.currencyType
+                        selectBalanceViewModel.cardBalanceAmount,
+                        selectBalanceViewModel.currencyType,
+                        selectBalanceViewModel.remainedFunds
                     )
                 findNavController().navigate(action)
             } else {
