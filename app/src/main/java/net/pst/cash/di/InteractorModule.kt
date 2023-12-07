@@ -12,6 +12,8 @@ import net.pst.cash.domain.ActiveCardInteractor
 import net.pst.cash.domain.ActiveCardInteractorImpl
 import net.pst.cash.domain.CardInfoInteractor
 import net.pst.cash.domain.CardInfoInteractorImpl
+import net.pst.cash.domain.ConfigInteractor
+import net.pst.cash.domain.ConfigInteractorImpl
 import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
 import net.pst.cash.domain.HistoryInteractor
@@ -22,6 +24,7 @@ import net.pst.cash.domain.UserInfoIneractorimpl
 import net.pst.cash.domain.UserInfoInteractor
 import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.domain.VerificationInteractorImpl
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,6 +43,10 @@ interface InteractorModule {
 
     @Binds
     fun historyListInteractor(transactionListInteractorImpl: HistoryInteractorImpl): HistoryInteractor
+
+    @Binds
+    @Singleton
+    fun configInteractor(configInteractorImpl: ConfigInteractorImpl): ConfigInteractor
 
     @Binds
     fun cardInfoInteractor(cardInfoInteractor: CardInfoInteractorImpl): CardInfoInteractor

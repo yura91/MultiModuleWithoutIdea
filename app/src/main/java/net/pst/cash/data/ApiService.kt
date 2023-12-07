@@ -7,6 +7,7 @@ import net.pst.cash.data.responses.AccountsResponse
 import net.pst.cash.data.responses.AppleLinkResponse
 import net.pst.cash.data.responses.AppleSignInResponse
 import net.pst.cash.data.responses.CheckCardResponse
+import net.pst.cash.data.responses.ConfigResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
 import net.pst.cash.data.responses.ShowPanResponse
@@ -74,6 +75,9 @@ interface ApiService {
     suspend fun getAccounts(
         @Header("Authorization") token: String
     ): Response<AccountsResponse>
+
+    @GET("https://vue3.pstage.net/appconf.json")
+    suspend fun getConfig(): Response<ConfigResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("/verification")

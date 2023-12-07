@@ -3,6 +3,7 @@ package net.pst.cash.presentation
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,9 @@ class SelectBalanceFragment :
             selectBalanceViewModel.currencyType = it
         }
 
-
+        selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
+            Log.d("TARRIFS", it.toString())
+        }
         val balanceList = listOf(
             BalanceItemModel("500.00 $", "550.00 USDT"),
             BalanceItemModel("250.00 $", "280.00 USDT"),

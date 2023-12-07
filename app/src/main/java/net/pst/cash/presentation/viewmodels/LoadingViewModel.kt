@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.UserInfoInteractor
 import net.pst.cash.domain.VerificationInteractor
 import javax.inject.Inject
@@ -15,8 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class LoadingViewModel @Inject constructor(
     private val application: Application,
-    userInfoInteractor: UserInfoInteractor,
-    private val verificationInteractor: VerificationInteractor
+    private val userInfoInteractor: UserInfoInteractor,
+    private val verificationInteractor: VerificationInteractor,
+    private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
 
     val userInfoError: LiveData<String> = userInfoInteractor.errorMessage
@@ -32,6 +34,7 @@ class LoadingViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            configInteractor.getConfig()
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             token?.let {
