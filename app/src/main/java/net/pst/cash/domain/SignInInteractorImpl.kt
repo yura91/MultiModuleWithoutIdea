@@ -8,8 +8,8 @@ class SignInInteractorImpl @Inject constructor(private val signInRepository: Sig
     SignInInteractor {
     override val errorMessage: LiveData<String> = signInRepository.errorMessage
 
-    override suspend fun signInGoogle(googleToken: String): Boolean =
-        signInRepository.signInGoogle(googleToken)
+    override suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean =
+        signInRepository.signInGoogle(registerHash, googleToken)
 
     override suspend fun signInApple(code: String?) = signInRepository.signInApple(code)
 

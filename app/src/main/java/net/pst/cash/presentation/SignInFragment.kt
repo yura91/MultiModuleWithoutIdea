@@ -41,6 +41,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             activityResultLauncher.launch(request)
         }
 
+        signInViewModel.configData.observe(viewLifecycleOwner) {
+            signInViewModel.registerHash = it?.registerHash
+        }
+
         signInViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }

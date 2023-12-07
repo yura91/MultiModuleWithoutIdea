@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GoogleSignInRequest(
     @SerializedName("id_token")
-    val idToken: String
+    val idToken: String,
+    @SerializedName("master_hash")
+    val masterHash: String
 )

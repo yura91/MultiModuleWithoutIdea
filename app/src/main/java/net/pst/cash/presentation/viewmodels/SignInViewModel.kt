@@ -16,6 +16,7 @@ import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.R
+import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.presentation.SingleLiveEvent
@@ -25,7 +26,8 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     private val application: Application,
     private val signInInteractor: SignInInteractor,
-    private val verifyInteractor: VerificationInteractor
+    private val verifyInteractor: VerificationInteractor,
+    private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
     private val oneTapClient = Identity.getSignInClient(application)
     private var signUpRequest: BeginSignInRequest = BeginSignInRequest.builder()
@@ -47,7 +49,11 @@ class SignInViewModel @Inject constructor(
     private val _appleLink = SingleLiveEvent<String>()
     val appleLink: LiveData<String> get() = _appleLink
 
+    var registerHash: String? = null
+
     val snackBarErrorMessage = signInInteractor.errorMessage
+
+    val configData = configInteractor.configData
 
     fun signInWithGoogle() {
         oneTapClient.beginSignIn(signUpRequest)
@@ -61,9 +67,9 @@ class SignInViewModel @Inject constructor(
             }
     }
 
-    private fun sendGoogleTokenToBackend(googleToken: String) {
+    private fun sendGoogleTokenToBackend(registerHash: String, googleToken: String) {
         viewModelScope.launch {
-            val isGoogleSuccess = signInInteractor.signInGoogle(googleToken)
+            val isGoogleSuccess = signInInteractor.signInGoogle(registerHash, googleToken)
             if (isGoogleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
@@ -92,7 +98,9 @@ class SignInViewModel @Inject constructor(
                 val idToken = credential.googleIdToken
                 when {
                     idToken != null -> {
-                        sendGoogleTokenToBackend(idToken)
+                        registerHash?.let {
+                            sendGoogleTokenToBackend(it, idToken)
+                        }
                     }
 
                     else -> {

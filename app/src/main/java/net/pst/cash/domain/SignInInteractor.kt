@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 interface SignInInteractor {
     val errorMessage: LiveData<String>
 
-    suspend fun signInGoogle(googleToken: String): Boolean
+    suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean
 
     suspend fun signInApple(code: String?): Boolean
 

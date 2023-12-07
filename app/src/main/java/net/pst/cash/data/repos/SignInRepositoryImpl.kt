@@ -22,10 +22,11 @@ class SignInRepositoryImpl @Inject constructor(
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
 
-    override suspend fun signInGoogle(googleToken: String): Boolean {
+    override suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val signInResponse = api.signInGoogle(GoogleSignInRequest(googleToken))
+                val signInResponse =
+                    api.signInGoogle(GoogleSignInRequest(googleToken, registerHash))
                 if (signInResponse.isSuccessful) {
                     val responseData = signInResponse.body()
                     val token: String? = responseData?.data?.token
