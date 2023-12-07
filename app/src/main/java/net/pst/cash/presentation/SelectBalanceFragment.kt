@@ -3,7 +3,6 @@ package net.pst.cash.presentation
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
-import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
@@ -55,29 +53,21 @@ class SelectBalanceFragment :
         }
 
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
-            Log.d("TARRIFS", it.toString())
-        }
-        val balanceList = listOf(
-            BalanceItemModel("500.00 $", "550.00 USDT"),
-            BalanceItemModel("250.00 $", "280.00 USDT"),
-            BalanceItemModel("100.00 $", "115.00 USDT"),
-            BalanceItemModel("50.00 $", "60.00 USDT")
-        )
-
-        balance?.let { cardBalance ->
-            val balanceListAdapter =
-                BalanceListAdapter(cardBalance, balanceList, { remainedFunds, cardBalanceAmount ->
-                    binding?.next?.text = getString(R.string.issue_card)
-                    binding?.next?.isVisible = true
-                    selectBalanceViewModel.enouphMoney = true
-                    selectBalanceViewModel.remainedFunds = remainedFunds.toString()
-                    selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
-                }, {
-                    binding?.next?.text = getString(R.string.top_up_card)
-                    binding?.next?.isVisible = true
-                    selectBalanceViewModel.enouphMoney = false
-                })
-            binding?.balanceList?.adapter = balanceListAdapter
+            it?.let {
+                val balanceListAdapter =
+                    BalanceListAdapter("150", it, { remainedFunds, cardBalanceAmount ->
+                        binding?.next?.text = getString(R.string.issue_card)
+                        binding?.next?.isVisible = true
+                        selectBalanceViewModel.enouphMoney = true
+                        selectBalanceViewModel.remainedFunds = remainedFunds.toString()
+                        selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
+                    }, {
+                        binding?.next?.text = getString(R.string.top_up_card)
+                        binding?.next?.isVisible = true
+                        selectBalanceViewModel.enouphMoney = false
+                    })
+                binding?.balanceList?.adapter = balanceListAdapter
+            }
         }
 
         sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->

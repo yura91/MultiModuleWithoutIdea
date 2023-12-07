@@ -7,7 +7,7 @@ import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import net.pst.cash.domain.ActiveCardInteractor
 import net.pst.cash.domain.ConfigInteractor
-import net.pst.cash.domain.model.Tariff
+import net.pst.cash.presentation.model.BalanceItemModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +23,16 @@ class SelectBalanceViewModel @Inject constructor(
     var remainedFunds: String = ""
     var cardBalanceAmount: String = ""
 
-    val configData: LiveData<List<Tariff>?> = configInteractor.configData.map {
-        it?.tariffs
+    val configData: LiveData<List<BalanceItemModel>?> = configInteractor.configData.map {
+        val tariffs = it?.tariffs
+        val balanceItemModels = mutableListOf<BalanceItemModel>()
+        tariffs?.forEach { tariff ->
+            val balanceModel = BalanceItemModel(
+                tariff.balance.toString() + " $",
+                tariff.price.toString() + " USDT"
+            )
+            balanceItemModels.add(balanceModel)
+        }
+        balanceItemModels
     }
 }
