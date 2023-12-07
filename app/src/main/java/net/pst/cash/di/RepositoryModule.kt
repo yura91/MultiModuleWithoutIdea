@@ -34,7 +34,7 @@ interface RepositoryModule {
     fun bindCountriesRepository(countriesRepository: CountriesRepositoryImpl): CountriesRepository
 
     @Binds
-    fun bindCardIsReadyRepository(cardIsReadyRepository: ActiveCardsRepoImpl): ActiveCardsRepo
+    fun bindActiveCardsRepository(activeCardsRepository: ActiveCardsRepoImpl): ActiveCardsRepo
 
     @Binds
     fun bindVerificationRepository(verificationRepository: VerificationRepositoryImpl): VerificationRepository

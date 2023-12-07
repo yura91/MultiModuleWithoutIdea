@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/cardIsReadyImage"
+            android:id="@+id/selectBalanceImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/card_background_bg"

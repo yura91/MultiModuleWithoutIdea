@@ -83,7 +83,7 @@ class SelectBalanceFragment :
             }
         }
 
-        binding?.cardIsReadyImage?.apply {
+        binding?.selectBalanceImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
@@ -152,6 +152,6 @@ class SelectBalanceFragment :
             AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
         val layers = arrayOf(layer1, layer2)
         val layerDrawable = LayerDrawable(layers)
-        binding?.cardIsReadyImage?.background = layerDrawable
+        binding?.selectBalanceImage?.background = layerDrawable
     }
 }

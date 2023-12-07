@@ -23,9 +23,6 @@
         android:id="@+id/selectBalanceFragment"
         android:name="net.pst.cash.presentation.SelectBalanceFragment"
         android:label="SelectBalanceFragment">
-        <argument
-            android:name="balance"
-            app:argType="string" />
         <action
             android:id="@+id/action_selectBalanceFragment_to_cardInfoFragment"
             app:destination="@id/cardInfoFragment" />

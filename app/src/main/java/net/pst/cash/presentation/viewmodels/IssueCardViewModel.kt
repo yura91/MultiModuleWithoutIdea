@@ -43,7 +43,7 @@ class IssueCardViewModel @Inject constructor(
         }
     }
 
-    fun getCardBalance() = _cardModel.value?.balance
+    fun getCardBalance(): String? = _cardModel.value?.balance
 
-    fun getCurrency() = _cardModel.value?.currencyType
+    fun getCurrency(): String? = _cardModel.value?.currencyType
 }
