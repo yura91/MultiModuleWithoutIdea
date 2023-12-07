@@ -11,7 +11,8 @@ class SignInInteractorImpl @Inject constructor(private val signInRepository: Sig
     override suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean =
         signInRepository.signInGoogle(registerHash, googleToken)
 
-    override suspend fun signInApple(code: String?) = signInRepository.signInApple(code)
+    override suspend fun signInApple(code: String?, registerHash: String?) =
+        signInRepository.signInApple(code, registerHash)
 
     override suspend fun getAppleLink() = signInRepository.getAppleLink()
 

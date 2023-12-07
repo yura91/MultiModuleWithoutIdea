@@ -7,7 +7,7 @@ interface SignInInteractor {
 
     suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean
 
-    suspend fun signInApple(code: String?): Boolean
+    suspend fun signInApple(code: String?, registerHash: String?): Boolean
 
     suspend fun getAppleLink(): String?
 }

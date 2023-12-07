@@ -9,5 +9,5 @@ interface SignInRepository {
 
     suspend fun getAppleLink(): String?
 
-    suspend fun signInApple(code: String?): Boolean
+    suspend fun signInApple(code: String?, registerHash: String?): Boolean
 }

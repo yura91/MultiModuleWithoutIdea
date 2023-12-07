@@ -73,10 +73,10 @@ class SignInRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signInApple(code: String?): Boolean {
+    override suspend fun signInApple(code: String?, registerHash: String?): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val signInAppleResponse = api.signInApple(AppleSignInRequest(code))
+                val signInAppleResponse = api.signInApple(AppleSignInRequest(code, registerHash))
                 if (signInAppleResponse.isSuccessful) {
                     val token = signInAppleResponse.body()?.data?.token
                     val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)

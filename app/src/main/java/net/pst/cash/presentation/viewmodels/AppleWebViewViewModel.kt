@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.presentation.SingleLiveEvent
@@ -15,15 +16,17 @@ import javax.inject.Inject
 class AppleWebViewViewModel @Inject constructor(
     private val application: Application,
     private val signInInteractor: SignInInteractor,
+    private val configInteractor: ConfigInteractor,
     private val verifyInteractor: VerificationInteractor
 ) : AndroidViewModel(application) {
     private val _isVerificationNeeded = SingleLiveEvent<Unit?>()
     val isVerificationNeeded = _isVerificationNeeded
     val snackBarErrorMessage = signInInteractor.errorMessage
-
+    val configData = configInteractor.configData
+    var registerHash: String? = null
     fun sendAppleCodeToBackend(code: String?) {
         viewModelScope.launch {
-            val isAppleSuccess = signInInteractor.signInApple(code)
+            val isAppleSuccess = signInInteractor.signInApple(code, registerHash)
             if (isAppleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")

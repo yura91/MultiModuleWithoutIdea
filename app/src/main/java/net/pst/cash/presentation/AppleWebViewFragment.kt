@@ -33,6 +33,10 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
         viewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_webViewFragment_to_getAcquaintedFragment)
         }
+
+        viewModel.configData.observe(viewLifecycleOwner) {
+            viewModel.registerHash = it?.registerHash
+        }
         val args: AppleWebViewFragmentArgs by navArgs()
         val loadUrl = args.link
         binding?.webView?.settings?.javaScriptEnabled = true
