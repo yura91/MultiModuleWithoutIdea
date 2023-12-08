@@ -89,10 +89,13 @@ class CardPaletteFragment :
         val colorPosition = progress - requireContext().dpToPx(gradientOffset)
         val startColor = pickColor(colorPosition.toInt())
         val gradientDrawable = endColor?.let {
-            val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val sharedPref = requireContext().getSharedPreferences(
+                getString(R.string.myprefs),
+                Context.MODE_PRIVATE
+            )
             with(sharedPref.edit()) {
-                putInt("startColor", startColor)
-                putInt("endColor", it)
+                putInt(getString(R.string.startcolor), startColor)
+                putInt(getString(R.string.endcolor), it)
                 apply()
             }
             GradientDrawable(
@@ -116,9 +119,10 @@ class CardPaletteFragment :
     }
 
     private fun setGradient() {
-        val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt("startColor", -1)
-        val endColor = sharedPref.getInt("endColor", -1)
+        val sharedPref =
+            requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
+        val startColor = sharedPref.getInt(getString(R.string.startcolor), -1)
+        val endColor = sharedPref.getInt(getString(R.string.endcolor), -1)
         if (startColor != -1 && endColor != -1) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
