@@ -45,11 +45,91 @@
             android:id="@+id/action_locationFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
         <action
-            android:id="@+id/action_locationFragment_to_design_nav_graph"
-            app:destination="@id/design_nav_graph" />
+            android:id="@+id/action_locationFragment_to_cardPaletteFragment"
+            app:destination="@id/cardPaletteFragment" />
     </fragment>
     <include app:graph="@navigation/settings_nav_graph" />
-    <include app:graph="@navigation/design_nav_graph" />
+    <fragment
+        android:id="@+id/cardPaletteFragment"
+        android:name="net.pst.cash.presentation.CardPaletteFragment"
+        android:label="CardPaletteFragment">
+        <argument
+            android:name="clearBackStack"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_cardPaletteFragment_to_issueCardFragment"
+            app:destination="@id/issueCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectBalanceFragment"
+        android:name="net.pst.cash.presentation.SelectBalanceFragment"
+        android:label="SelectBalanceFragment">
+        <action
+            android:id="@+id/action_selectBalanceFragment_to_cardInfoFragment"
+            app:destination="@id/cardInfoFragment" />
+        <action
+            android:id="@+id/action_cardIsReadyFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_selectBalanceFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardInfoFragment"
+        android:name="net.pst.cash.presentation.CardInfoFragment"
+        android:label="restricted_card_info"
+        tools:layout="@layout/restricted_card_info">
+        <argument
+            android:name="cardId"
+            app:argType="integer" />
+        <argument
+            android:name="balance"
+            app:argType="string" />
+        <argument
+            android:name="currencyType"
+            app:argType="string" />
+        <argument
+            android:name="remainingFunds"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_historyPaymentsFragment"
+            app:destination="@id/historyPaymentsFragment" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph2"
+            app:destination="@id/settings_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/topUpFragment"
+        android:name="net.pst.cash.presentation.TopUpFragment"
+        android:label="fragment_top_up"
+        tools:layout="@layout/fragment_top_up">
+        <argument
+            android:name="balance"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyPaymentsFragment"
+        android:name="net.pst.cash.presentation.HistoryPaymentsFragment"
+        android:label="fragment_history_payments"
+        tools:layout="@layout/fragment_history_payments" />
+    <fragment
+        android:id="@+id/issueCardFragment"
+        android:name="net.pst.cash.presentation.IssueCardFragment"
+        android:label="IssueCardFragment">
+        <action
+            android:id="@+id/action_issueCardFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
+        <action
+            android:id="@+id/action_issueCardFragment_to_selectBalanceFragment"
+            app:destination="@id/selectBalanceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/appleWebViewFragment"
         android:name="net.pst.cash.presentation.AppleWebViewFragment"
@@ -79,5 +159,8 @@
             app:destination="@id/getAcquaintedFragment"
             app:popUpTo="@id/loadingFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loadingFragment_to_issueCardFragment"
+            app:destination="@id/issueCardFragment" />
     </fragment>
 </navigation>
