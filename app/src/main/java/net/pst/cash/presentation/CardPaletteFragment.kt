@@ -1,5 +1,6 @@
 package net.pst.cash.presentation
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -11,13 +12,10 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardPaletteBinding
-import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardPaletteViewModel
-import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 
 class CardPaletteFragment :
@@ -27,7 +25,6 @@ class CardPaletteFragment :
     private val initialColor = -312545
     private val argsKey = "clearBackStack"
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
-    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,8 +89,12 @@ class CardPaletteFragment :
         val colorPosition = progress - requireContext().dpToPx(gradientOffset)
         val startColor = pickColor(colorPosition.toInt())
         val gradientDrawable = endColor?.let {
-            val gradientData = GradientModel(startColor, it)
-            sharedViewModel.setGradientData(gradientData)
+            val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putInt("startColor", startColor)
+                putInt("endColor", it)
+                apply()
+            }
             GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, it)
@@ -115,9 +116,10 @@ class CardPaletteFragment :
     }
 
     private fun setGradient() {
-        val startColor = sharedViewModel.gradientData.value?.startColor
-        val endColor = sharedViewModel.gradientData.value?.endColor
-        if (startColor != null && endColor != null) {
+        val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val startColor = sharedPref.getInt("startColor", -1)
+        val endColor = sharedPref.getInt("endColor", -1)
+        if (startColor != -1 && endColor != -1) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)

@@ -1,5 +1,6 @@
 package net.pst.cash.presentation
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navGraphViewModels
 import androidx.paging.PagingData
 import com.google.android.material.shape.CornerFamily
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,17 +22,14 @@ import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardInfoBinding
 import net.pst.cash.databinding.FullCardInfoBinding
 import net.pst.cash.databinding.RestrictedCardInfoBinding
-import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.HistoryItem
 import net.pst.cash.presentation.model.RowHistoryItems
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardInfoViewModel
-import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 @AndroidEntryPoint
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
-    val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
     private val args: CardInfoFragmentArgs by navArgs()
     private val historyAdapter = HistoryPaymentsAdapter()
@@ -67,11 +64,8 @@ class CardInfoFragment :
             historyAdapter.submitData(PagingData.from(rowHistoryItems))
         }
 
-        sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
-            if (gradientData != null) {
-                setGradient(gradientData, frontBinding, backBinding)
-            }
-        }
+        setGradient(frontBinding, backBinding)
+
         frontBinding?.swipeContainer?.setOnRefreshListener {
             cardInfoViewModel.getActiveBalance()
         }
@@ -179,24 +173,28 @@ class CardInfoFragment :
     }
 
     private fun setGradient(
-        gradientData: GradientModel,
         frontBinding: RestrictedCardInfoBinding?,
         backBinding: FullCardInfoBinding?
     ) {
-        val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(gradientData.startColor, gradientData.endColor)
-        )
-        val outValue = TypedValue()
-        resources.getValue(R.dimen.corner_radius, outValue, true)
-        val cornerRadius = outValue.float
-        gradientDrawable.cornerRadius = requireContext().dpToPx(cornerRadius)
-        val layer1 = gradientDrawable
-        val layer2 =
-            AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
-        val layers = arrayOf(layer1, layer2)
-        val layerDrawable = LayerDrawable(layers)
-        frontBinding?.cardInfo?.background = layerDrawable
-        backBinding?.cardInfo?.background = layerDrawable
+        val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val startColor = sharedPref.getInt("startColor", -1)
+        val endColor = sharedPref.getInt("endColor", -1)
+        if (startColor != -1 && endColor != -1) {
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(startColor, endColor)
+            )
+            val outValue = TypedValue()
+            resources.getValue(R.dimen.corner_radius, outValue, true)
+            val cornerRadius = outValue.float
+            gradientDrawable.cornerRadius = requireContext().dpToPx(cornerRadius)
+            val layer1 = gradientDrawable
+            val layer2 =
+                AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
+            val layers = arrayOf(layer1, layer2)
+            val layerDrawable = LayerDrawable(layers)
+            frontBinding?.cardInfo?.background = layerDrawable
+            backBinding?.cardInfo?.background = layerDrawable
+        }
     }
 }

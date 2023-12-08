@@ -1,5 +1,6 @@
 package net.pst.cash.presentation
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -14,19 +15,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
-import net.pst.cash.presentation.model.GradientModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
-import net.pst.cash.presentation.viewmodels.SharedViewModel
 
 @AndroidEntryPoint
 class SelectBalanceFragment :
     BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
-    private val sharedViewModel: SharedViewModel by navGraphViewModels(R.id.design_nav_graph)
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
     private val balanceKey = "balance"
     private val currencyKey = "currency"
@@ -69,12 +66,7 @@ class SelectBalanceFragment :
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
-
-        sharedViewModel.gradientData.observe(viewLifecycleOwner) { gradientData ->
-            if (gradientData != null) {
-                setGradient(gradientData)
-            }
-        }
+        setGradient()
 
         binding?.selectBalanceImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -121,30 +113,36 @@ class SelectBalanceFragment :
         }
     }
 
-    private fun setGradient(gradientData: GradientModel) {
-        val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(gradientData.startColor, gradientData.endColor)
-        )
-        val outValue = TypedValue()
-        resources.getValue(R.dimen.corner_radius, outValue, true)
-        val cornerRadius = outValue.float
-        val radii = floatArrayOf(
-            0f,
-            0f,
-            0f,
-            0f,
-            requireContext().dpToPx(cornerRadius),
-            requireContext().dpToPx(cornerRadius),
-            requireContext().dpToPx(cornerRadius),
-            requireContext().dpToPx(cornerRadius)
-        )
-        gradientDrawable.cornerRadii = radii
-        val layer1 = gradientDrawable
-        val layer2 =
-            AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
-        val layers = arrayOf(layer1, layer2)
-        val layerDrawable = LayerDrawable(layers)
-        binding?.selectBalanceImage?.background = layerDrawable
+    private fun setGradient() {
+        val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val startColor = sharedPref.getInt("startColor", -1)
+        val endColor = sharedPref.getInt("endColor", -1)
+
+        if (startColor != -1 && endColor != -1) {
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(startColor, endColor)
+            )
+            val outValue = TypedValue()
+            resources.getValue(R.dimen.corner_radius, outValue, true)
+            val cornerRadius = outValue.float
+            val radii = floatArrayOf(
+                0f,
+                0f,
+                0f,
+                0f,
+                requireContext().dpToPx(cornerRadius),
+                requireContext().dpToPx(cornerRadius),
+                requireContext().dpToPx(cornerRadius),
+                requireContext().dpToPx(cornerRadius)
+            )
+            gradientDrawable.cornerRadii = radii
+            val layer1 = gradientDrawable
+            val layer2 =
+                AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
+            val layers = arrayOf(layer1, layer2)
+            val layerDrawable = LayerDrawable(layers)
+            binding?.selectBalanceImage?.background = layerDrawable
+        }
     }
 }

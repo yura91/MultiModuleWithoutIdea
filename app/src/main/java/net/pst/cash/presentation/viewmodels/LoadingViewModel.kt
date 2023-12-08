@@ -30,6 +30,7 @@ class LoadingViewModel @Inject constructor(
 
     val navigateToGetAcquaintedScreen: LiveData<Unit>
         get() = _navigateToGetAcquaintedScreen
+
     private val _navigateToGetAcquaintedScreen = MutableLiveData<Unit>()
 
     init {
