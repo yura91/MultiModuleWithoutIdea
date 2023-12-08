@@ -72,7 +72,7 @@
             android:id="@+id/action_selectBalanceFragment_to_cardInfoFragment"
             app:destination="@id/cardInfoFragment" />
         <action
-            android:id="@+id/action_cardIsReadyFragment_to_settings_nav_graph"
+            android:id="@+id/action_selectBalanceFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
         <action
             android:id="@+id/action_selectBalanceFragment_to_topUpFragment"

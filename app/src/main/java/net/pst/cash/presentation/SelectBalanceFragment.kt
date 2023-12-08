@@ -13,7 +13,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -27,6 +26,7 @@ class SelectBalanceFragment :
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
     private val balanceKey = "balance"
     private val currencyKey = "currency"
+    private val argsTag = "showAdditionalItems"
     private val navOptions =
         NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_top)
@@ -89,7 +89,12 @@ class SelectBalanceFragment :
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_cardIsReadyFragment_to_settings_nav_graph)
+            val bundle = Bundle()
+            bundle.putBoolean(argsTag, true)
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_settings_nav_graph,
+                bundle
+            )
         }
         binding?.next?.setOnClickListener {
             if (selectBalanceViewModel.enouphMoney) {

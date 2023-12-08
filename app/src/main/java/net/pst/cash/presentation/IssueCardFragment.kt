@@ -23,6 +23,7 @@ class IssueCardFragment :
     private val issueCardViewModel: IssueCardViewModel by viewModels()
     private val balanceTag = "balance"
     private val currencyTag = "currency"
+    private val argsTag = "showAdditionalItems"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         issueCardViewModel.getActiveBalance()
@@ -42,7 +43,12 @@ class IssueCardFragment :
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_issueCardFragment_to_settings_nav_graph)
+            val bundle = Bundle()
+            bundle.putBoolean(argsTag, true)
+            findNavController().navigate(
+                R.id.action_issueCardFragment_to_settings_nav_graph,
+                bundle
+            )
         }
         requireActivity().onBackPressedDispatcher.addCallback {
             findNavController().popBackStack()
