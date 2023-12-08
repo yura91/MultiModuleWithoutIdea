@@ -51,7 +51,7 @@ class IssueCardFragment :
             )
         }
         requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().popBackStack()
+                requireActivity().finish();
         }
         binding?.next?.setOnClickListener {
             val navOptions =
