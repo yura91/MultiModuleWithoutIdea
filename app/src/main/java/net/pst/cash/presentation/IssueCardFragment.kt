@@ -21,9 +21,7 @@ import net.pst.cash.presentation.viewmodels.IssueCardViewModel
 class IssueCardFragment :
     BaseFragment<FragmentIssueCardBinding>(FragmentIssueCardBinding::inflate) {
     private val issueCardViewModel: IssueCardViewModel by viewModels()
-    private val balanceTag = "balance"
-    private val currencyTag = "currency"
-    private val argsTag = "showAdditionalItems"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         issueCardViewModel.getActiveBalance()
@@ -75,10 +73,10 @@ class IssueCardFragment :
     private fun setGradient() {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), -1)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), -1)
+        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
 
-        if (startColor != -1 && endColor != -1) {
+        if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
@@ -94,5 +92,12 @@ class IssueCardFragment :
             val layerDrawable = LayerDrawable(layers)
             binding?.cardImage?.background = layerDrawable
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
+        private const val balanceTag = "balance"
+        private const val currencyTag = "currency"
+        private const val argsTag = "showAdditionalItems"
     }
 }

@@ -33,7 +33,6 @@ class CardInfoFragment :
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
     private val args: CardInfoFragmentArgs by navArgs()
     private val historyAdapter = HistoryPaymentsAdapter()
-    private val argsTag = "showAdditionalItems"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -178,9 +177,9 @@ class CardInfoFragment :
     ) {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), -1)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), -1)
-        if (startColor != -1 && endColor != -1) {
+        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
+        if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
@@ -197,5 +196,10 @@ class CardInfoFragment :
             frontBinding?.cardInfo?.background = layerDrawable
             backBinding?.cardInfo?.background = layerDrawable
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
+        private const val argsTag = "showAdditionalItems"
     }
 }

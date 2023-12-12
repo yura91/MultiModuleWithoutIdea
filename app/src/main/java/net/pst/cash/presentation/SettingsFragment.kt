@@ -19,12 +19,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         val args = arguments
         val showItems = args?.getBoolean(argsKey)
 
-        if (showItems != null && showItems == false) {
-            binding?.redesign?.isVisible = false
-            binding?.closeCard?.isVisible = false
-        } else {
+        if (showItems != null && showItems == true) {
             binding?.redesign?.isVisible = true
             binding?.closeCard?.isVisible = true
+        } else {
+            binding?.redesign?.isVisible = false
+            binding?.closeCard?.isVisible = false
         }
         binding?.helpSupport?.setOnClickListener {
             it.findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
@@ -51,14 +51,14 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 {
                     Toast.makeText(
                         requireContext(),
-                        "Card is closed",
+                        getString(R.string.card_is_closed),
                         Toast.LENGTH_SHORT
                     ).show()
                 },
                 {
                     Toast.makeText(
                         requireContext(),
-                        "Card is not closed",
+                        getString(R.string.card_is_not_closed),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

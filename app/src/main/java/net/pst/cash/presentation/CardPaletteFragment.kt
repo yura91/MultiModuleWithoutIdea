@@ -23,7 +23,6 @@ class CardPaletteFragment :
     private val gradientOffset = 25.0F
     private val initialProgress = 0
     private val initialColor = -312545
-    private val argsKey = "clearBackStack"
     private val cardPalleteViewModel by viewModels<CardPaletteViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,9 +120,9 @@ class CardPaletteFragment :
     private fun setGradient() {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), -1)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), -1)
-        if (startColor != -1 && endColor != -1) {
+        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
+        if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
@@ -139,5 +138,10 @@ class CardPaletteFragment :
             val layerDrawable = LayerDrawable(layers)
             binding?.cardDesign?.background = layerDrawable
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
+        private const val argsKey = "clearBackStack"
     }
 }

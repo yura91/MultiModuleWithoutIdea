@@ -24,9 +24,6 @@ import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 class SelectBalanceFragment :
     BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
-    private val balanceKey = "balance"
-    private val currencyKey = "currency"
-    private val argsTag = "showAdditionalItems"
     private val navOptions =
         NavOptions.Builder()
             .setEnterAnim(R.anim.slide_in_top)
@@ -121,10 +118,10 @@ class SelectBalanceFragment :
     private fun setGradient() {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), -1)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), -1)
+        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
 
-        if (startColor != -1 && endColor != -1) {
+        if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, endColor)
@@ -150,5 +147,12 @@ class SelectBalanceFragment :
             val layerDrawable = LayerDrawable(layers)
             binding?.selectBalanceImage?.background = layerDrawable
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
+        private const val balanceKey = "balance"
+        private const val currencyKey: String = "currency"
+        private const val argsTag = "showAdditionalItems"
     }
 }
