@@ -28,10 +28,10 @@ class LoadingViewModel @Inject constructor(
 
     private val _navigateToLoginScreen = MutableLiveData<Unit>()
 
-    val navigateToGetAcquaintedScreen: LiveData<Unit>
-        get() = _navigateToGetAcquaintedScreen
+    val navigateToReadyScreen: LiveData<Unit>
+        get() = _navigateToReadyScreen
 
-    private val _navigateToGetAcquaintedScreen = MutableLiveData<Unit>()
+    private val _navigateToReadyScreen = MutableLiveData<Unit>()
 
     init {
         viewModelScope.launch {
@@ -56,7 +56,7 @@ class LoadingViewModel @Inject constructor(
             token?.let {
                 val isVerificationNeeded = verificationInteractor.isVerificationNeeded("Bearer $it")
                 if (isVerificationNeeded) {
-                    _navigateToGetAcquaintedScreen.value = Unit
+                    _navigateToReadyScreen.value = Unit
                 }
             }
         }
