@@ -30,8 +30,12 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
-        viewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
+        viewModel.navigateToGetAquintedScreen.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_webViewFragment_to_getAcquaintedFragment)
+        }
+
+        viewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_appleWebViewFragment_to_issueCardFragment)
         }
 
         viewModel.configData.observe(viewLifecycleOwner) {

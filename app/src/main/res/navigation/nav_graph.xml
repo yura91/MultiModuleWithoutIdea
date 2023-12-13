@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_signInFragment_to_apple_webViewFragment"
             app:destination="@id/appleWebViewFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_issueCardFragment"
+            app:destination="@id/issueCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/getAcquaintedFragment"
@@ -143,6 +146,9 @@
             app:destination="@id/getAcquaintedFragment"
             app:popUpTo="@id/appleWebViewFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_appleWebViewFragment_to_issueCardFragment"
+            app:destination="@id/issueCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -157,5 +163,8 @@
         <action
             android:id="@+id/action_loadingFragment_to_issueCardFragment"
             app:destination="@id/issueCardFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_getAcquaintedFragment"
+            app:destination="@id/getAcquaintedFragment" />
     </fragment>
 </navigation>

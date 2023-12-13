@@ -40,8 +40,13 @@ class SignInViewModel @Inject constructor(
         )
         .build()
 
-    private val _isVerificationNeeded = SingleLiveEvent<Boolean>()
-    val isVerificationNeeded = _isVerificationNeeded
+    private val _navigateToGetAcquaintedScreen = SingleLiveEvent<Boolean>()
+    val navigateToGetAcquaintedScreen = _navigateToGetAcquaintedScreen
+
+    val navigateToReadyScreen: LiveData<Unit>
+        get() = _navigateToReadyScreen
+
+    private val _navigateToReadyScreen = SingleLiveEvent<Unit>()
 
     private val _signInGoogleRequest = MutableLiveData<IntentSenderRequest>()
     val signInGoogleRequest: LiveData<IntentSenderRequest> get() = _signInGoogleRequest
@@ -75,8 +80,10 @@ class SignInViewModel @Inject constructor(
                 val token = sharedPref.getString("token", "")
 
                 val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
-                if (isVerificationNeeded) {
-                    _isVerificationNeeded.value = true
+                if (isVerificationNeeded == true) {
+                    _navigateToGetAcquaintedScreen.value = true
+                } else if (isVerificationNeeded == false) {
+                    _navigateToReadyScreen.value = Unit
                 }
             }
         }
@@ -86,7 +93,7 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             val link: String? = signInInteractor.getAppleLink()
             link?.let {
-                _appleLink.value = link
+                _appleLink.value = it
             }
         }
     }

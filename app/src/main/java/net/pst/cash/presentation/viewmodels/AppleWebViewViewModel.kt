@@ -3,6 +3,7 @@ package net.pst.cash.presentation.viewmodels
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,10 +20,14 @@ class AppleWebViewViewModel @Inject constructor(
     private val configInteractor: ConfigInteractor,
     private val verifyInteractor: VerificationInteractor
 ) : AndroidViewModel(application) {
-    private val _isVerificationNeeded = SingleLiveEvent<Unit?>()
-    val isVerificationNeeded = _isVerificationNeeded
+    private val _navigateToGetAquintedScreen = SingleLiveEvent<Unit?>()
+    val navigateToGetAquintedScreen = _navigateToGetAquintedScreen
     val snackBarErrorMessage = signInInteractor.errorMessage
     val configData = configInteractor.configData
+    val navigateToReadyScreen: LiveData<Unit>
+        get() = _navigateToReadyScreen
+
+    private val _navigateToReadyScreen = SingleLiveEvent<Unit>()
     var registerHash: String? = null
     fun sendAppleCodeToBackend(code: String?) {
         viewModelScope.launch {
@@ -32,8 +37,10 @@ class AppleWebViewViewModel @Inject constructor(
                 val token = sharedPref.getString("token", "")
 
                 val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
-                if (isVerificationNeeded) {
-                    _isVerificationNeeded.call()
+                if (isVerificationNeeded == true) {
+                    _navigateToGetAquintedScreen.call()
+                } else if (isVerificationNeeded == false) {
+                    _navigateToReadyScreen.call()
                 }
             }
         }

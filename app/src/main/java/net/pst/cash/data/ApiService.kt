@@ -63,7 +63,7 @@ interface ApiService {
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/verification/actual")
-    suspend fun isVerificationNeeded(@Header("Authorization") token: String): Response<VerificationNeedResponse>
+    suspend fun isVerificationActual(@Header("Authorization") token: String): Response<VerificationNeedResponse>
 
     @GET("/card/{id}/showpan")
     suspend fun getCardInfo(

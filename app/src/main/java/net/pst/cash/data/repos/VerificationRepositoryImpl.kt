@@ -19,25 +19,24 @@ class VerificationRepositoryImpl @Inject constructor(
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
 
-    override suspend fun isVerificationNeeded(token: String): Boolean {
+    override suspend fun isVerificationNeeded(token: String): Boolean? {
         return withContext(Dispatchers.IO) {
             try {
-                val verActualResponse = api.isVerificationNeeded(token)
+                val verActualResponse = api.isVerificationActual(token)
                 if (verActualResponse.isSuccessful) {
                     val step = verActualResponse.body()?.data?.step
-                    true
-//                    step.isNullOrEmpty()
+                    step.isNullOrEmpty()
                 } else {
                     val errorBody = verActualResponse.errorBody()?.string()
                     val gson = Gson()
                     val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
                     _errorMessage.postValue(errorResponse.message)
-                    false
+                    null
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 _errorMessage.postValue(e.message)
-                false
+                null
             }
         }
     }

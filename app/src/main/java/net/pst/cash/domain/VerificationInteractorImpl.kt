@@ -9,7 +9,7 @@ class VerificationInteractorImpl @Inject constructor(private val verificationRep
     VerificationInteractor {
     override val errorMessage: LiveData<String> = verificationRepository.errorMessage
 
-    override suspend fun isVerificationNeeded(token: String): Boolean =
+    override suspend fun isVerificationNeeded(token: String): Boolean? =
         verificationRepository.isVerificationNeeded(token)
 
     override suspend fun verifyUser(

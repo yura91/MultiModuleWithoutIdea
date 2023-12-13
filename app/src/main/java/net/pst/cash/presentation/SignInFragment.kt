@@ -49,10 +49,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
-        signInViewModel.isVerificationNeeded.observe(viewLifecycleOwner) {
+        signInViewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
 
+        signInViewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInFragment_to_issueCardFragment)
+        }
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
             val action = SignInFragmentDirections.actionSignInFragmentToAppleWebViewFragment(link)
             findNavController().navigate(action)

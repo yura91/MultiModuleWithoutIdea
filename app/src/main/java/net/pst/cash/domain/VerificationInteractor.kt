@@ -6,7 +6,7 @@ import net.pst.cash.domain.model.CountryModel
 interface VerificationInteractor {
     val errorMessage: LiveData<String>
 
-    suspend fun isVerificationNeeded(token: String): Boolean
+    suspend fun isVerificationNeeded(token: String): Boolean?
 
     suspend fun verifyUser(
         token: String,
