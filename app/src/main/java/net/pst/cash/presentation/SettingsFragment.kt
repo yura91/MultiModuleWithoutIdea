@@ -1,5 +1,6 @@
 package net.pst.cash.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -75,6 +76,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding?.logOut?.setOnClickListener {
+            val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.remove("token")
+            editor.apply();
             showDialog(
                 R.string.log_out_dialog_title, R.string.log_out_positive, R.string.log_out_negative,
                 {
@@ -83,6 +88,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                         getString(R.string.you_are_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
+                    requireActivity().finish()
                 },
                 {
                     Toast.makeText(
