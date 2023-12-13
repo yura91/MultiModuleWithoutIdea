@@ -177,8 +177,9 @@ class CardInfoFragment :
     ) {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
+        val userId = sharedPref.getString("userId", "")
+        val startColor = sharedPref.getInt(userId + getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(userId + getString(R.string.endcolor), defColorValue)
         if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,

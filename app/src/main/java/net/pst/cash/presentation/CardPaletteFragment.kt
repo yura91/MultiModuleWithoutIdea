@@ -17,7 +17,6 @@ import net.pst.cash.databinding.FragmentCardPaletteBinding
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardPaletteViewModel
 
-
 class CardPaletteFragment :
     BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
     private val gradientOffset = 25.0F
@@ -92,9 +91,10 @@ class CardPaletteFragment :
                 getString(R.string.myprefs),
                 Context.MODE_PRIVATE
             )
+            val userId = sharedPref.getString("userId", "")
             with(sharedPref.edit()) {
-                putInt(getString(R.string.startcolor), startColor)
-                putInt(getString(R.string.endcolor), it)
+                putInt(userId + getString(R.string.startcolor), startColor)
+                putInt(userId + getString(R.string.endcolor), it)
                 apply()
             }
             GradientDrawable(
@@ -120,8 +120,9 @@ class CardPaletteFragment :
     private fun setGradient() {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val startColor = sharedPref.getInt(getString(R.string.startcolor), defColorValue)
-        val endColor = sharedPref.getInt(getString(R.string.endcolor), defColorValue)
+        val userId = sharedPref.getString("userId", "")
+        val startColor = sharedPref.getInt(userId + getString(R.string.startcolor), defColorValue)
+        val endColor = sharedPref.getInt(userId + getString(R.string.endcolor), defColorValue)
         if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
