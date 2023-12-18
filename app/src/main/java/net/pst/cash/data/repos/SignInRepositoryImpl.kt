@@ -10,6 +10,7 @@ import net.pst.cash.data.ApiService
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.responses.ErrorResponse
+import net.pst.cash.data.responses.UserInfoResponse
 import javax.inject.Inject
 
 class SignInRepositoryImpl @Inject constructor(
@@ -34,6 +35,17 @@ class SignInRepositoryImpl @Inject constructor(
                     with(sharedPref.edit()) {
                         putString("token", token)
                         apply()
+                    }
+                    token?.let {
+                        val userInfoResponse = api.getUserInfo("Bearer $it")
+                        val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
+                        val userId = userInfoResponseBody?.data?.userId
+                        val sharedPref =
+                            context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                        with(sharedPref.edit()) {
+                            putString("userId", userId)
+                            apply()
+                        }
                     }
                     true
                 } else {
@@ -83,6 +95,17 @@ class SignInRepositoryImpl @Inject constructor(
                     with(sharedPref.edit()) {
                         putString("token", token)
                         apply()
+                    }
+                    token?.let {
+                        val userInfoResponse = api.getUserInfo("Bearer $it")
+                        val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
+                        val userId = userInfoResponseBody?.data?.userId
+                        val sharedPref =
+                            context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                        with(sharedPref.edit()) {
+                            putString("userId", userId)
+                            apply()
+                        }
                     }
                     true
                 } else {

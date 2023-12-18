@@ -19,7 +19,7 @@ import net.pst.cash.data.repos.HistoryListRepoImpl
 import net.pst.cash.data.repos.SignInRepository
 import net.pst.cash.data.repos.SignInRepositoryImpl
 import net.pst.cash.data.repos.UserInfoRepository
-import net.pst.cash.data.repos.UserInfoRepositoryimpl
+import net.pst.cash.data.repos.UserInfoRepositoryImpl
 import net.pst.cash.data.repos.VerificationRepository
 import net.pst.cash.data.repos.VerificationRepositoryImpl
 import javax.inject.Singleton
@@ -43,7 +43,7 @@ interface RepositoryModule {
     fun bindVerificationRepository(verificationRepository: VerificationRepositoryImpl): VerificationRepository
 
     @Binds
-    fun bindUserInfoRepository(userInfoRepository: UserInfoRepositoryimpl): UserInfoRepository
+    fun bindUserInfoRepository(userInfoRepository: UserInfoRepositoryImpl): UserInfoRepository
 
     @Binds
     fun bindHistoryListRepository(transactionsListRepo: HistoryListRepoImpl): HistoryListRepo

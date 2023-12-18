@@ -20,7 +20,7 @@ import net.pst.cash.domain.HistoryInteractor
 import net.pst.cash.domain.HistoryInteractorImpl
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.SignInInteractorImpl
-import net.pst.cash.domain.UserInfoIneractorimpl
+import net.pst.cash.domain.UserInfoIneractorImpl
 import net.pst.cash.domain.UserInfoInteractor
 import net.pst.cash.domain.VerificationInteractor
 import net.pst.cash.domain.VerificationInteractorImpl
@@ -36,7 +36,7 @@ interface InteractorModule {
     fun verifyInteractor(verifyInteractor: VerificationInteractorImpl): VerificationInteractor
 
     @Binds
-    fun userInfoInteractor(userInfoInteractor: UserInfoIneractorimpl): UserInfoInteractor
+    fun userInfoInteractor(userInfoInteractor: UserInfoIneractorImpl): UserInfoInteractor
 
     @Binds
     fun activeCardInteractor(cardIsReadyInteractor: ActiveCardInteractorImpl): ActiveCardInteractor

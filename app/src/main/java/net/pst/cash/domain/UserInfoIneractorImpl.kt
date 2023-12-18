@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import net.pst.cash.data.repos.UserInfoRepository
 import javax.inject.Inject
 
-class UserInfoIneractorimpl @Inject constructor(private val userInfoRepository: UserInfoRepository) :
+class UserInfoIneractorImpl @Inject constructor(private val userInfoRepository: UserInfoRepository) :
     UserInfoInteractor {
     override val errorMessage: LiveData<String> = userInfoRepository.errorMessage
 

@@ -45,6 +45,16 @@ class CardPaletteFragment :
             setGradient()
         }
         binding?.next?.setOnClickListener {
+            val sharedPref = requireContext().getSharedPreferences(
+                getString(R.string.myprefs),
+                Context.MODE_PRIVATE
+            )
+            val userId = sharedPref.getString("userId", "")
+            with(sharedPref.edit()) {
+                putInt(userId + getString(R.string.startcolor), cardPalleteViewModel.startColor)
+                putInt(userId + getString(R.string.endcolor), cardPalleteViewModel.endColor)
+                apply()
+            }
             it.findNavController().navigate(R.id.action_cardPaletteFragment_to_issueCardFragment)
         }
 
@@ -87,16 +97,8 @@ class CardPaletteFragment :
         val colorPosition = progress - requireContext().dpToPx(gradientOffset)
         val startColor = pickColor(colorPosition.toInt())
         val gradientDrawable = endColor?.let {
-            val sharedPref = requireContext().getSharedPreferences(
-                getString(R.string.myprefs),
-                Context.MODE_PRIVATE
-            )
-            val userId = sharedPref.getString("userId", "")
-            with(sharedPref.edit()) {
-                putInt(userId + getString(R.string.startcolor), startColor)
-                putInt(userId + getString(R.string.endcolor), it)
-                apply()
-            }
+            cardPalleteViewModel.startColor = startColor
+            cardPalleteViewModel.endColor = it
             GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(startColor, it)
