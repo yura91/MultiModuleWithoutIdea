@@ -25,5 +25,9 @@ class LoadingFragment : BaseFragment<FragmentLoadingBinding>(FragmentLoadingBind
         viewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_loadingFragment_to_getAcquaintedFragment)
         }
+
+        viewModel.navigateToCardPaletteScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_loadingFragment_to_cardPaletteFragment)
+        }
     }
 }

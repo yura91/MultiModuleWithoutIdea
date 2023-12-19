@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import net.pst.cash.R
 import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.VerificationInteractor
@@ -27,6 +28,11 @@ class AppleWebViewViewModel @Inject constructor(
     val navigateToReadyScreen: LiveData<Unit>
         get() = _navigateToReadyScreen
 
+    val navigateToCardPaletteScreen: LiveData<Unit>
+        get() = _navigateToCardPaletteScreen
+
+    private val _navigateToCardPaletteScreen = SingleLiveEvent<Unit>()
+
     private val _navigateToReadyScreen = SingleLiveEvent<Unit>()
     var registerHash: String? = null
     fun sendAppleCodeToBackend(code: String?) {
@@ -35,14 +41,30 @@ class AppleWebViewViewModel @Inject constructor(
             if (isAppleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
-
+                val userId = sharedPref.getString("userId", "")
                 val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
                 if (isVerificationNeeded == true) {
                     _navigateToGetAquintedScreen.call()
                 } else if (isVerificationNeeded == false) {
-                    _navigateToReadyScreen.call()
+                    val startColor = sharedPref.getInt(
+                        userId + application.getString(R.string.startcolor),
+                        defColorValue
+                    )
+                    val endColor = sharedPref.getInt(
+                        userId + application.getString(R.string.endcolor),
+                        defColorValue
+                    )
+                    if (startColor != defColorValue && endColor != defColorValue) {
+                        _navigateToReadyScreen.value = Unit
+                    } else {
+                        _navigateToCardPaletteScreen.value = Unit
+                    }
                 }
             }
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
     }
 }

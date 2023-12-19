@@ -43,6 +43,11 @@ class SignInViewModel @Inject constructor(
     private val _navigateToGetAcquaintedScreen = SingleLiveEvent<Boolean>()
     val navigateToGetAcquaintedScreen = _navigateToGetAcquaintedScreen
 
+    val navigateToCardPaletteScreen: LiveData<Unit>
+        get() = _navigateToCardPaletteScreen
+
+    private val _navigateToCardPaletteScreen = SingleLiveEvent<Unit>()
+
     val navigateToReadyScreen: LiveData<Unit>
         get() = _navigateToReadyScreen
 
@@ -78,12 +83,24 @@ class SignInViewModel @Inject constructor(
             if (isGoogleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
-
+                val userId = sharedPref.getString("userId", "")
                 val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
                 if (isVerificationNeeded == true) {
                     _navigateToGetAcquaintedScreen.value = true
                 } else if (isVerificationNeeded == false) {
-                    _navigateToReadyScreen.value = Unit
+                    val startColor = sharedPref.getInt(
+                        userId + application.getString(R.string.startcolor),
+                        defColorValue
+                    )
+                    val endColor = sharedPref.getInt(
+                        userId + application.getString(R.string.endcolor),
+                        defColorValue
+                    )
+                    if (startColor != defColorValue && endColor != defColorValue) {
+                        _navigateToReadyScreen.value = Unit
+                    } else {
+                        _navigateToCardPaletteScreen.value = Unit
+                    }
                 }
             }
         }
@@ -116,5 +133,9 @@ class SignInViewModel @Inject constructor(
             } catch (e: ApiException) {
             }
         }
+    }
+
+    companion object {
+        const val defColorValue = -1
     }
 }

@@ -53,6 +53,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             findNavController().navigate(R.id.action_signInFragment_to_getAcquaintedFragment)
         }
 
+        signInViewModel.navigateToCardPaletteScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInFragment_to_cardPaletteFragment)
+        }
+
         signInViewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_signInFragment_to_issueCardFragment)
         }

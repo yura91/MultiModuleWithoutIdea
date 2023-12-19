@@ -41,6 +41,11 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
         viewModel.configData.observe(viewLifecycleOwner) {
             viewModel.registerHash = it?.registerHash
         }
+
+        viewModel.navigateToCardPaletteScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_appleWebViewFragment_to_cardPaletteFragment)
+        }
+
         val args: AppleWebViewFragmentArgs by navArgs()
         val loadUrl = args.link
         binding?.webView?.settings?.javaScriptEnabled = true

@@ -66,7 +66,6 @@ class CardPaletteFragment :
             if (clearBackStack != null && clearBackStack == true) {
                 requireActivity().finish()
             } else {
-                findNavController().popBackStack()
             }
         }
 
@@ -123,8 +122,17 @@ class CardPaletteFragment :
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
         val userId = sharedPref.getString("userId", "")
-        val startColor = sharedPref.getInt(userId + getString(R.string.startcolor), defColorValue)
-        val endColor = sharedPref.getInt(userId + getString(R.string.endcolor), defColorValue)
+        val startColor = if (cardPalleteViewModel.startColor != defColorValue) {
+            cardPalleteViewModel.startColor
+        } else {
+            sharedPref.getInt(userId + getString(R.string.startcolor), defColorValue)
+        }
+
+        val endColor = if (cardPalleteViewModel.startColor != defColorValue) {
+            cardPalleteViewModel.endColor
+        } else {
+            sharedPref.getInt(userId + getString(R.string.endcolor), defColorValue)
+        }
         if (startColor != defColorValue && endColor != defColorValue) {
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,

@@ -37,7 +37,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         }
 
         binding?.toolbar?.setNavigationOnClickListener {
-            it.findNavController().popBackStack()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
