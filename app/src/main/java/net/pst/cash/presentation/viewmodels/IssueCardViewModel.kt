@@ -8,15 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import net.pst.cash.domain.ActiveCardInteractor
+import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.presentation.model.CardModel
-import net.pst.cash.presentation.model.Сurrency
 import javax.inject.Inject
 
 @HiltViewModel
 class IssueCardViewModel @Inject constructor(
     private val application: Application,
-    private val activeCardInteractor: ActiveCardInteractor
+    private val accountsInteractor: AccountsInteractor
 ) : AndroidViewModel(application) {
 
     private val _cardModel = MutableLiveData<CardModel>()
@@ -27,19 +26,8 @@ class IssueCardViewModel @Inject constructor(
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            val activeCard = activeCardInteractor.getActiveCardModel("Bearer $token")
-            activeCard?.let {
-                val currencyType: String = when (it.currencyId) {
-                    Сurrency.DOLAR.currencyCode -> "$"
-                    Сurrency.EURO.currencyCode -> "€"
-                    else -> {
-                        ""
-                    }
-                }
+            val account = accountsInteractor.getAccounts("Bearer $token")
 
-                val cardModel = CardModel(it.id, currencyType, it.balance)
-                _cardModel.value = cardModel
-            }
         }
     }
 
