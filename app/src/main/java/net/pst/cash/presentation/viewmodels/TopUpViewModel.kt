@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.pst.cash.domain.AccountsInteractor
+import net.pst.cash.domain.model.Account
 import javax.inject.Inject
 
 
@@ -34,14 +35,9 @@ class TopUpViewModel @Inject constructor(
     val qrCodeLiveData: LiveData<Bitmap?>
         get() = _qrCodeLiveData
 
-    init {
-        viewModelScope.launch {
-            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-            val token = sharedPref.getString("token", "")
-            /*val addresses = accountsInteractor.getAccounts("Bearer $token")
-            _addresses.value = addresses*/
-        }
-    }
+    private val _account = accountsInteractor.account
+    val account: LiveData<Account?>
+        get() = _account
 
     fun generateQrCodeInBackground(data: String) {
         viewModelScope.launch {

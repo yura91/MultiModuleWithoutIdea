@@ -63,6 +63,11 @@ class SelectBalanceFragment :
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
+
+        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
+            binding?.toolbar?.cardBalance?.text = it
+        }
+
         setGradient()
 
         binding?.selectBalanceImage?.apply {

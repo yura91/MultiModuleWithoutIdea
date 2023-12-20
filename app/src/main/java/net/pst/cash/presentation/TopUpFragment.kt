@@ -20,15 +20,16 @@ class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::i
     private val balanceKey = "balance"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args = arguments
-        val balance = args?.getString(balanceKey)
-        binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, balance)
-        topUpViewModel.addresses.observe(viewLifecycleOwner) {
-            val address = it[0]
-            binding?.copyQr?.text = address
+
+        topUpViewModel.account.observe(viewLifecycleOwner) {
+            val address = it?.address
+            binding?.copyQr?.text = address.toString()
             binding?.copyQr?.isVisible = true
             binding?.share?.isVisible = true
-            topUpViewModel.generateQrCodeInBackground(address)
+            binding?.toolbar?.cardBalance?.text = it?.balance
+            address?.let { address ->
+                topUpViewModel.generateQrCodeInBackground(address)
+            }
         }
 
         topUpViewModel.qrCodeLiveData.observe(viewLifecycleOwner) {

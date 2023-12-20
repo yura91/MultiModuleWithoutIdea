@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import dagger.hilt.android.lifecycle.HiltViewModel
+import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.presentation.model.BalanceItemModel
 import javax.inject.Inject
@@ -12,6 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SelectBalanceViewModel @Inject constructor(
     private val application: Application,
+    private val accountsInteractor: AccountsInteractor,
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
     var cardId: Int = 0
@@ -20,6 +22,12 @@ class SelectBalanceViewModel @Inject constructor(
     var enouphMoney: Boolean = false
     var remainedFunds: String = ""
     var cardBalanceAmount: String = ""
+
+    private val _account = accountsInteractor.account.map {
+        it?.balance
+    }
+    val account: LiveData<String?>
+        get() = _account
 
     val configData: LiveData<List<BalanceItemModel>?> = configInteractor.configData.map {
         val tariffs = it?.tariffs
