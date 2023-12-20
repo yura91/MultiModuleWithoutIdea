@@ -1,7 +1,10 @@
 package net.pst.cash.domain
 
+import androidx.lifecycle.LiveData
 import net.pst.cash.domain.model.Account
 
 interface AccountsInteractor {
-    suspend fun getAccounts(token: String): Account?
+
+    val account: LiveData<Account?>
+    suspend fun getAccounts(token: String)
 }

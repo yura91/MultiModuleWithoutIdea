@@ -52,6 +52,7 @@ interface InteractorModule {
     fun cardInfoInteractor(cardInfoInteractor: CardInfoInteractorImpl): CardInfoInteractor
 
     @Binds
+    @Singleton
     fun accountsInteractor(accountsInteractor: AccountsInteractorImpl): AccountsInteractor
 
     companion object {

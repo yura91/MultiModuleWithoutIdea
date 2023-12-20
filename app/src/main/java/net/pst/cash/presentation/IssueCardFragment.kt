@@ -28,16 +28,8 @@ class IssueCardFragment :
 
         setGradient()
 
-        issueCardViewModel.cardModel.observe(viewLifecycleOwner) {
-            var amount = ""
-            it?.balance?.let { cardBalance ->
-                amount = cardBalance
-            }
-            var currencySign = ""
-            it?.currencyType?.let { currencyType ->
-                currencySign = currencyType
-            }
-            binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, amount)
+        issueCardViewModel.account.observe(viewLifecycleOwner) {
+            binding?.toolbar?.cardBalance?.text = it
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
@@ -59,12 +51,9 @@ class IssueCardFragment :
                     .setPopEnterAnim(R.anim.slide_in_bottom)
                     .setPopExitAnim(R.anim.slide_out_bottom)
                     .build()
-            val bundle = Bundle()
-            bundle.putString(balanceTag, issueCardViewModel.getCardBalance())
-            bundle.putString(currencyTag, issueCardViewModel.getCurrency())
             findNavController().navigate(
                 R.id.action_issueCardFragment_to_selectBalanceFragment,
-                bundle,
+                null,
                 navOptions
             )
         }

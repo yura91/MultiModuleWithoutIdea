@@ -38,8 +38,8 @@ class TopUpViewModel @Inject constructor(
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            val addresses = accountsInteractor.getAccounts("Bearer $token")
-            _addresses.value = addresses
+            /*val addresses = accountsInteractor.getAccounts("Bearer $token")
+            _addresses.value = addresses*/
         }
     }
 
