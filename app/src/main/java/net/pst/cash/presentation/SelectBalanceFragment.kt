@@ -35,38 +35,34 @@ class SelectBalanceFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args = arguments
-        val balance = args?.getString(balanceKey)
-        val currency = args?.getString(currencyKey)
-        binding?.toolbar?.cardBalance?.text = getString(R.string.usdt, balance)
-        balance?.let {
-            selectBalanceViewModel.balance = it
-        }
-        currency?.let {
-            selectBalanceViewModel.currencyType = it
+        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
+            selectBalanceViewModel.balance = it.toString()
+            binding?.toolbar?.cardBalance?.text = it
         }
 
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             it?.let {
                 val balanceListAdapter =
-                    BalanceListAdapter("150", it, { remainedFunds, cardBalanceAmount ->
-                        binding?.next?.text = getString(R.string.issue_card)
-                        binding?.next?.isVisible = true
-                        selectBalanceViewModel.enouphMoney = true
-                        selectBalanceViewModel.remainedFunds = remainedFunds.toString()
-                        selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
-                    }, {
-                        binding?.next?.text = getString(R.string.top_up_card)
-                        binding?.next?.isVisible = true
-                        selectBalanceViewModel.enouphMoney = false
-                    })
+                    BalanceListAdapter(
+                        selectBalanceViewModel.balance,
+                        it,
+                        { remainedFunds, cardBalanceAmount ->
+                            binding?.next?.text = getString(R.string.issue_card)
+                            binding?.next?.isVisible = true
+                            selectBalanceViewModel.enouphMoney = true
+                            selectBalanceViewModel.remainedFunds = remainedFunds.toString()
+                            selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
+                        },
+                        {
+                            binding?.next?.text = getString(R.string.top_up_card)
+                            binding?.next?.isVisible = true
+                            selectBalanceViewModel.enouphMoney = false
+                        })
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
 
-        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
-            binding?.toolbar?.cardBalance?.text = it
-        }
+
 
         setGradient()
 

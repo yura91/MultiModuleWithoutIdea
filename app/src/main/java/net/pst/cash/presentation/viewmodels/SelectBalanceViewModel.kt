@@ -24,7 +24,7 @@ class SelectBalanceViewModel @Inject constructor(
     var cardBalanceAmount: String = ""
 
     private val _account = accountsInteractor.account.map {
-        it?.balance
+        it?.balance?.split(" ")?.get(0)
     }
     val account: LiveData<String?>
         get() = _account
