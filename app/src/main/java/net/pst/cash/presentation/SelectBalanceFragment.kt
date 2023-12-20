@@ -36,6 +36,7 @@ class SelectBalanceFragment :
         super.onViewCreated(view, savedInstanceState)
 
         selectBalanceViewModel.mediatorLiveData.observe(viewLifecycleOwner) {
+            binding?.swipeContainer?.isRefreshing = false
             val balanceItemModels: List<BalanceItemModel>? = it?.balanceItemModels
             val balance = it?.account
             binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
@@ -43,6 +44,10 @@ class SelectBalanceFragment :
                 val balanceListAdapter = BalanceListAdapter(balanceItemModels)
                 binding?.balanceList?.adapter = balanceListAdapter
             }
+        }
+
+        binding?.swipeContainer?.setOnRefreshListener {
+            selectBalanceViewModel.getActiveBalance()
         }
 
         setGradient()

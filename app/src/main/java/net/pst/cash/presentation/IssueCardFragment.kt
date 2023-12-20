@@ -30,6 +30,7 @@ class IssueCardFragment :
 
         issueCardViewModel.account.observe(viewLifecycleOwner) {
             binding?.toolbar?.cardBalance?.text = getString(R.string.usd, it)
+            binding?.swipeContainer?.isRefreshing = false
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
@@ -40,8 +41,12 @@ class IssueCardFragment :
                 bundle
             )
         }
+        binding?.swipeContainer?.setOnRefreshListener {
+            issueCardViewModel.getActiveBalance()
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback {
-                requireActivity().finish();
+            requireActivity().finish();
         }
         binding?.next?.setOnClickListener {
             val navOptions =
