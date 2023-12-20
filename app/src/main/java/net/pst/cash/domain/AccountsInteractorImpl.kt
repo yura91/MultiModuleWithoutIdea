@@ -14,8 +14,8 @@ class AccountsInteractorImpl @Inject constructor(private val accountsRepo: Accou
             it.currencyId == 15
         }
         if (account?.addresses?.get(0)?.address != null && account.balance != null) {
-            val account = Account(account.addresses[0].address!!, account.balance!!)
-            _account.value = account
+            val accountValue = Account(account.addresses[0].address!!, account.balance!!)
+            _account.value = accountValue
         } else {
             _account.value = null
         }

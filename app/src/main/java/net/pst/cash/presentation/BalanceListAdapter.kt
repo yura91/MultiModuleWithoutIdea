@@ -10,10 +10,7 @@ import net.pst.cash.presentation.model.BalanceItemModel
 
 
 class BalanceListAdapter(
-    private val userBalance: String,
     private val dataSet: List<BalanceItemModel>,
-    private val enoughMoneyAction: (remainedFunds: Double, cardBalanceAmount: Double) -> Unit,
-    private val notEnoughMoneyAction: () -> Unit
 ) :
     RecyclerView.Adapter<BalanceListAdapter.ViewHolder>() {
     private var selectedPos = RecyclerView.NO_POSITION
@@ -50,15 +47,6 @@ class BalanceListAdapter(
             notifyItemChanged(selectedPos);
             selectedPos = holder.layoutPosition;
             notifyItemChanged(selectedPos);
-            val cost = dataSet[holder.layoutPosition].usdt
-            val costParts = cost.split(" ")
-            val remainedFunds = userBalance.toDouble() - costParts[0].toDouble()
-            if (remainedFunds < 0) {
-                notEnoughMoneyAction()
-            } else {
-                val amountParts = cardBalanceAmount.split(" ")
-                enoughMoneyAction(remainedFunds, amountParts[0].toDouble())
-            }
         }
     }
 

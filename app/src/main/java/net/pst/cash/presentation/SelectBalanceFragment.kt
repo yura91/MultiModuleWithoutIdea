@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -41,22 +40,7 @@ class SelectBalanceFragment :
             val balance = it?.account
             binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
             if (!balanceItemModels.isNullOrEmpty() && balance != null) {
-                val balanceListAdapter =
-                    BalanceListAdapter(
-                        balance,
-                        balanceItemModels,
-                        { remainedFunds, cardBalanceAmount ->
-                            binding?.next?.text = getString(R.string.issue_card)
-                            binding?.next?.isVisible = true
-                            selectBalanceViewModel.enouphMoney = true
-                            selectBalanceViewModel.remainedFunds = remainedFunds.toString()
-                            selectBalanceViewModel.cardBalanceAmount = cardBalanceAmount.toString()
-                        },
-                        {
-                            binding?.next?.text = getString(R.string.top_up_card)
-                            binding?.next?.isVisible = true
-                            selectBalanceViewModel.enouphMoney = false
-                        })
+                val balanceListAdapter = BalanceListAdapter(balanceItemModels)
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }

@@ -27,10 +27,6 @@ class TopUpViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
 ) : AndroidViewModel(application) {
-    private val _addresses = MutableLiveData<List<String>>()
-    val addresses: LiveData<List<String>>
-        get() = _addresses
-
     private val _qrCodeLiveData = MutableLiveData<Bitmap?>()
     val qrCodeLiveData: LiveData<Bitmap?>
         get() = _qrCodeLiveData

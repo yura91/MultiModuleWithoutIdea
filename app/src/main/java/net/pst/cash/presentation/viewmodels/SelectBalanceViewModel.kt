@@ -67,7 +67,5 @@ class SelectBalanceViewModel @Inject constructor(
                 mediatorLiveData.setValue(null)
             }
         }
-
     }
-
 }
