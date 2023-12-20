@@ -29,7 +29,7 @@ class IssueCardFragment :
         setGradient()
 
         issueCardViewModel.account.observe(viewLifecycleOwner) {
-            binding?.toolbar?.cardBalance?.text = it
+            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, it)
         }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
@@ -86,8 +86,6 @@ class IssueCardFragment :
 
     companion object {
         const val defColorValue = -1
-        private const val balanceTag = "balance"
-        private const val currencyTag = "currency"
         private const val argsTag = "showAdditionalItems"
     }
 }

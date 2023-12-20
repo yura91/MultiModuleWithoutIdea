@@ -64,7 +64,7 @@
     <string name="balance_card">balance card</string>
     <string name="cost">cost</string>
     <string name="view_all">View all</string>
-    <string name="usdt">%1$s USDT</string>
+    <string name="usd">%1$s USD</string>
     <string name="myprefs">myPrefs</string>
     <string name="startcolor">startColor</string>
     <string name="endcolor">endColor</string>

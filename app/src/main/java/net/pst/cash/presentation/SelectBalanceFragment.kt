@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
+import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 
@@ -35,17 +36,15 @@ class SelectBalanceFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
-            selectBalanceViewModel.balance = it.toString()
-            binding?.toolbar?.cardBalance?.text = it
-        }
-
-        selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
-            it?.let {
+        selectBalanceViewModel.mediatorLiveData.observe(viewLifecycleOwner) {
+            val balanceItemModels: List<BalanceItemModel>? = it?.balanceItemModels
+            val balance = it?.account
+            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
+            if (!balanceItemModels.isNullOrEmpty() && balance != null) {
                 val balanceListAdapter =
                     BalanceListAdapter(
-                        selectBalanceViewModel.balance,
-                        it,
+                        balance,
+                        balanceItemModels,
                         { remainedFunds, cardBalanceAmount ->
                             binding?.next?.text = getString(R.string.issue_card)
                             binding?.next?.isVisible = true
@@ -61,8 +60,6 @@ class SelectBalanceFragment :
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
-
-
 
         setGradient()
 
@@ -154,7 +151,6 @@ class SelectBalanceFragment :
     companion object {
         const val defColorValue = -1
         private const val balanceKey = "balance"
-        private const val currencyKey: String = "currency"
         private const val argsTag = "showAdditionalItems"
     }
 }
