@@ -27,7 +27,7 @@ class BalanceListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_balance_list, viewGroup, false)
+            .inflate(R.layout.item_balance, viewGroup, false)
 
         return ViewHolder(view)
     }

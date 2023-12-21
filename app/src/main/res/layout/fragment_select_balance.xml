@@ -51,7 +51,10 @@
             android:id="@+id/balanceList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_40"
+            android:layout_marginEnd="@dimen/margin_40"
+            android:layout_marginBottom="@dimen/margin_34"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -65,7 +68,6 @@
             android:background="@drawable/rounded_corner_black_bg"
             android:text="@string/issue_card"
             android:textColor="@color/white"
-            android:visibility="gone"
             app:backgroundTint="@null" />
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
