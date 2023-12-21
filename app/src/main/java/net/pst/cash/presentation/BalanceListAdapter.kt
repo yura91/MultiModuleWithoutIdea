@@ -33,13 +33,6 @@ class BalanceListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (selectedPos == holder.layoutPosition) {
-            holder.amountBalanceTextView.setTextColor(holder.itemView.context.getColor(R.color.blue))
-            holder.usdtTextView.setTextColor(holder.itemView.context.getColor(R.color.blue))
-        } else {
-            holder.amountBalanceTextView.setTextColor(holder.itemView.context.getColor(R.color.black))
-            holder.usdtTextView.setTextColor(holder.itemView.context.getColor(R.color.black))
-        }
         val cardBalanceAmount = dataSet[holder.layoutPosition].balanceAmount
         holder.amountBalanceTextView.text = cardBalanceAmount
         holder.usdtTextView.text = dataSet[holder.layoutPosition].usdt
@@ -48,6 +41,7 @@ class BalanceListAdapter(
             selectedPos = holder.layoutPosition;
             notifyItemChanged(selectedPos);
         }
+        holder.itemView.setSelected(position == selectedPos)
     }
 
     override fun getItemCount() = dataSet.size
