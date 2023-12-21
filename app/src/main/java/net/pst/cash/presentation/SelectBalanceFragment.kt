@@ -35,6 +35,8 @@ class SelectBalanceFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.balanceList?.addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
+
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {

@@ -2,6 +2,7 @@ package net.pst.cash.presentation.model
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
@@ -66,6 +67,11 @@ fun String.getClickableSpan(
 fun Context.dpToPx(dp: Float): Float {
     val scale = resources.displayMetrics.density
     return dp * scale
+}
+
+fun Float.dpToPx(): Float {
+    val scale = Resources.getSystem().displayMetrics.density
+    return this * scale
 }
 
 fun Activity.hideKeyBoard(
