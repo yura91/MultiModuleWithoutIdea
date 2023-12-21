@@ -2,6 +2,7 @@ package net.pst.cash.data
 
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
+import net.pst.cash.data.requests.IssueCardRequest
 import net.pst.cash.data.requests.VerificationRequest
 import net.pst.cash.data.responses.AccountsResponse
 import net.pst.cash.data.responses.AppleLinkResponse
@@ -10,6 +11,7 @@ import net.pst.cash.data.responses.CheckCardResponse
 import net.pst.cash.data.responses.ConfigResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
+import net.pst.cash.data.responses.IssueCardResponse
 import net.pst.cash.data.responses.ShowPanResponse
 import net.pst.cash.data.responses.TransactionsListResponse
 import net.pst.cash.data.responses.UserInfoResponse
@@ -85,6 +87,13 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body requestBody: VerificationRequest
     ): Response<VerificationResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("/card/buy")
+    suspend fun issueCard(
+        @Header("Authorization") token: String,
+        @Body requestBody: IssueCardRequest
+    ): Response<IssueCardResponse>
 }
 
 

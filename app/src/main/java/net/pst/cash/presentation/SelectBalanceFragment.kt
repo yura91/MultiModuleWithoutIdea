@@ -60,10 +60,10 @@ class SelectBalanceFragment :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     val height = height
-                    val negativeMargin = (height * 0.5).toInt()
+                    val negativeMargin = -(height * 0.6).toInt()
 
                     val layoutParams = layoutParams as ViewGroup.MarginLayoutParams
-                    layoutParams.topMargin = -negativeMargin
+                    layoutParams.topMargin = negativeMargin
                     setLayoutParams(layoutParams)
 
                     viewTreeObserver.removeOnGlobalLayoutListener(this)
