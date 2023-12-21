@@ -18,6 +18,8 @@ import net.pst.cash.domain.CountriesListInteractor
 import net.pst.cash.domain.CountriesListInteractorImpl
 import net.pst.cash.domain.HistoryInteractor
 import net.pst.cash.domain.HistoryInteractorImpl
+import net.pst.cash.domain.IssueCardInteractor
+import net.pst.cash.domain.IssueCardInteractorImpl
 import net.pst.cash.domain.SignInInteractor
 import net.pst.cash.domain.SignInInteractorImpl
 import net.pst.cash.domain.UserInfoIneractorImpl
@@ -50,6 +52,9 @@ interface InteractorModule {
 
     @Binds
     fun cardInfoInteractor(cardInfoInteractor: CardInfoInteractorImpl): CardInfoInteractor
+
+    @Binds
+    fun issueCardInteractor(issueCardInteractor: IssueCardInteractorImpl): IssueCardInteractor
 
     @Binds
     @Singleton
