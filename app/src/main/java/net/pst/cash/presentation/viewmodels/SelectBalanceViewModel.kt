@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.presentation.model.BalanceItemModel
-import net.pst.cash.presentation.model.SelectedBalanceModel
 import javax.inject.Inject
 
 
@@ -28,8 +26,6 @@ class SelectBalanceViewModel @Inject constructor(
     var enouphMoney: Boolean = false
     var remainedFunds: String = ""
     var cardBalanceAmount: String = ""
-
-    val mediatorLiveData = MediatorLiveData<SelectedBalanceModel?>()
 
     private val _account = accountsInteractor.account.map {
         it?.balance?.split(" ")?.get(0)
@@ -48,28 +44,6 @@ class SelectBalanceViewModel @Inject constructor(
             balanceItemModels.add(balanceModel)
         }
         balanceItemModels
-    }
-
-    init {
-        mediatorLiveData.addSource<String>(account) { account: String? ->
-            val configItems: List<BalanceItemModel>? = configData.value
-            if (!configItems.isNullOrEmpty()) {
-                val selectedBalanceModel = SelectedBalanceModel(configItems, account)
-                mediatorLiveData.setValue(selectedBalanceModel)
-            } else {
-                mediatorLiveData.setValue(null)
-            }
-        }
-
-        mediatorLiveData.addSource<List<BalanceItemModel>?>(configData) { configData: List<BalanceItemModel>? ->
-            val account: String? = account.value
-            if (account != null) {
-                val selectedBalanceModel = SelectedBalanceModel(configData, account)
-                mediatorLiveData.setValue(selectedBalanceModel)
-            } else {
-                mediatorLiveData.setValue(null)
-            }
-        }
     }
 
     fun getActiveBalance() {

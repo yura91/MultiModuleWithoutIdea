@@ -13,7 +13,7 @@ class BalanceListAdapter(
     private val dataSet: List<BalanceItemModel>,
 ) :
     RecyclerView.Adapter<BalanceListAdapter.ViewHolder>() {
-    private var selectedPos = RecyclerView.NO_POSITION
+    private var selectedPos = 0
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val amountBalanceTextView: TextView

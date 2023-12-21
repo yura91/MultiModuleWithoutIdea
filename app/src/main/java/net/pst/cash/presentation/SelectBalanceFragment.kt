@@ -35,15 +35,18 @@ class SelectBalanceFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        selectBalanceViewModel.mediatorLiveData.observe(viewLifecycleOwner) {
-            binding?.swipeContainer?.isRefreshing = false
-            val balanceItemModels: List<BalanceItemModel>? = it?.balanceItemModels
-            val balance = it?.account
-            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
-            if (!balanceItemModels.isNullOrEmpty() && balance != null) {
+        selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
+            val balanceItemModels: List<BalanceItemModel>? = it
+            if (!balanceItemModels.isNullOrEmpty()) {
                 val balanceListAdapter = BalanceListAdapter(balanceItemModels)
                 binding?.balanceList?.adapter = balanceListAdapter
             }
+        }
+
+        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
+            binding?.swipeContainer?.isRefreshing = false
+            val balance = it
+            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
         }
 
         binding?.swipeContainer?.setOnRefreshListener {
