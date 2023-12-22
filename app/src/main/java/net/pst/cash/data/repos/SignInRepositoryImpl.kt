@@ -40,8 +40,6 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponse = api.getUserInfo("Bearer $it")
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
-                        val sharedPref =
-                            context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
                             putString("userId", userId)
                             apply()
@@ -100,8 +98,6 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponse = api.getUserInfo("Bearer $it")
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
-                        val sharedPref =
-                            context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
                             putString("userId", userId)
                             apply()
