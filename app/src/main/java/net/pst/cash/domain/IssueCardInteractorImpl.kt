@@ -8,7 +8,7 @@ class IssueCardInteractorImpl @Inject constructor(private val issueCardRepo: Iss
     IssueCardInteractor {
     override suspend fun issueCard(
         token: String,
-        accountId: String?,
+        accountId: Int?,
         startBalance: String?
     ): IssueCardResponse? {
         return issueCardRepo.issueCard(token, accountId, startBalance)

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class IssueCardRequest(
     @SerializedName("account_id")
-    val accountId: String?,
+    val accountId: Int?,
     @SerializedName("type")
     val type: String? = "sigma_no_limits",
     @SerializedName("start_balance")

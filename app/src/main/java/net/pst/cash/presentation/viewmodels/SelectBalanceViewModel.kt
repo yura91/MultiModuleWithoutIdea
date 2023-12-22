@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ConfigInteractor
+import net.pst.cash.domain.IssueCardInteractor
 import net.pst.cash.presentation.model.BalanceItemModel
 import javax.inject.Inject
 
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class SelectBalanceViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
+    private val issueCardInteractor: IssueCardInteractor,
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
     var cardId: Int = 0
@@ -26,8 +28,10 @@ class SelectBalanceViewModel @Inject constructor(
     var enouphMoney: Boolean = false
     var remainedFunds: String = ""
     var cardBalanceAmount: String = ""
+    private var accountId: Int? = null
 
     private val _account = accountsInteractor.account.map {
+        accountId = it?.accountId
         it?.balance?.split(" ")?.get(0)
     }
     val account: LiveData<String?>
@@ -51,6 +55,18 @@ class SelectBalanceViewModel @Inject constructor(
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             accountsInteractor.getAccounts("Bearer $token")
+        }
+    }
+
+    fun issueCard(startBalance: String?) {
+        viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            token?.let { tokenValue ->
+                accountId?.let { accountId ->
+                    issueCardInteractor.issueCard(tokenValue, accountId, startBalance)
+                }
+            }
         }
     }
 }

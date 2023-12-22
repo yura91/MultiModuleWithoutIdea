@@ -27,11 +27,12 @@ class AccountsInteractorImpl @Inject constructor(private val accountsRepo: Accou
                     }
                     val accAddress = account?.addresses?.get(0)?.address
                     val accBalance = account?.balance
+                    val accountId = account?.id
 
-                    if (accAddress != null && accBalance != null) {
+                    if (accAddress != null && accBalance != null && accountId != null) {
                         val roundedBalance = roundOffDecimal(accBalance.toDouble())
                         val accountValue =
-                            Account(accAddress, roundedBalance.toString())
+                            Account(accountId, accAddress, roundedBalance.toString())
                         _account.postValue(accountValue)
                     } else {
                         _account.postValue(null)
@@ -41,7 +42,7 @@ class AccountsInteractorImpl @Inject constructor(private val accountsRepo: Accou
         }, 0, 60000)
     }
 
-    fun roundOffDecimal(number: Double): Double? {
+    fun roundOffDecimal(number: Double): Double {
         val df = DecimalFormat("#.##")
         df.roundingMode = RoundingMode.FLOOR
         return df.format(number).toDouble()
