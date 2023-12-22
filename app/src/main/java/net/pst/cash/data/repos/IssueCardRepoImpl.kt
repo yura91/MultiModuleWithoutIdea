@@ -10,10 +10,11 @@ class IssueCardRepoImpl @Inject constructor(
 ) : IssueCardRepo {
     override suspend fun issueCard(
         token: String,
-        accountId: Int?,
-        startBalance: String?
+        accountId: Int,
+        cardBalance: String
     ): IssueCardResponse? {
-        val issueCardRequest = IssueCardRequest(accountId = accountId, startBalance = startBalance)
+        val cardBalance = cardBalance.split(" ")[0]
+        val issueCardRequest = IssueCardRequest(accountId = accountId, startBalance = cardBalance)
         return api.issueCard(token, issueCardRequest).body()
     }
 }

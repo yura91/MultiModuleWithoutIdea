@@ -47,6 +47,7 @@ class SelectBalanceViewModel @Inject constructor(
             )
             balanceItemModels.add(balanceModel)
         }
+        balance = balanceItemModels[0].balanceAmount
         balanceItemModels
     }
 
@@ -58,13 +59,13 @@ class SelectBalanceViewModel @Inject constructor(
         }
     }
 
-    fun issueCard(startBalance: String?) {
+    fun issueCard() {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             token?.let { tokenValue ->
                 accountId?.let { accountId ->
-                    issueCardInteractor.issueCard(tokenValue, accountId, startBalance)
+                    issueCardInteractor.issueCard("Bearer $token", accountId, balance)
                 }
             }
         }

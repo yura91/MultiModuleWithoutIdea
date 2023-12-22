@@ -40,7 +40,9 @@ class SelectBalanceFragment :
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {
-                val balanceListAdapter = BalanceListAdapter(balanceItemModels)
+                val balanceListAdapter = BalanceListAdapter(balanceItemModels) { balanceCard ->
+                    selectBalanceViewModel.balance = balanceCard
+                }
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
@@ -86,24 +88,7 @@ class SelectBalanceFragment :
             )
         }
         binding?.next?.setOnClickListener {
-            if (selectBalanceViewModel.enouphMoney) {
-                val action =
-                    SelectBalanceFragmentDirections.actionSelectBalanceFragmentToCardInfoFragment(
-                        selectBalanceViewModel.cardId,
-                        selectBalanceViewModel.cardBalanceAmount,
-                        selectBalanceViewModel.currencyType,
-                        selectBalanceViewModel.remainedFunds
-                    )
-                findNavController().navigate(action)
-            } else {
-                val bundle = Bundle()
-                bundle.putString(balanceKey, selectBalanceViewModel.balance)
-                findNavController().navigate(
-                    R.id.action_selectBalanceFragment_to_topUpFragment,
-                    bundle,
-                    navOptions
-                )
-            }
+            selectBalanceViewModel.issueCard()
         }
     }
 
