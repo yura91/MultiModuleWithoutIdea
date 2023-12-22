@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSelectBalanceBinding
@@ -45,6 +46,10 @@ class SelectBalanceFragment :
                 }
                 binding?.balanceList?.adapter = balanceListAdapter
             }
+        }
+
+        selectBalanceViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
         selectBalanceViewModel.account.observe(viewLifecycleOwner) {

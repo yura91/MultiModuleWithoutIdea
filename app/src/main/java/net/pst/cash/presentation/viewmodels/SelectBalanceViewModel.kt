@@ -30,6 +30,8 @@ class SelectBalanceViewModel @Inject constructor(
     var cardBalanceAmount: String = ""
     private var accountId: Int? = null
 
+    val snackBarErrorMessage = issueCardInteractor.errorMessage
+
     private val _account = accountsInteractor.account.map {
         accountId = it?.accountId
         it?.balance?.split(" ")?.get(0)
