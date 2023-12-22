@@ -20,15 +20,23 @@ class UserInfoRepositoryImpl @Inject constructor(
 
     override suspend fun getUserInfo(authToken: String): Boolean {
         return withContext(Dispatchers.IO) {
-            val userInfoResponse = api.getUserInfo(authToken)
-            val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
-            val userId = userInfoResponseBody?.data?.userId
-            val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-            with(sharedPref.edit()) {
-                putString("userId", userId)
-                apply()
+            try {
+                val userInfoResponse = api.getUserInfo(authToken)
+                if (userInfoResponse.isSuccessful) {
+                    val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
+                    val userId = userInfoResponseBody?.data?.userId
+                    val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putString("userId", userId)
+                        apply()
+                    }
+                }
+                userInfoResponse.isSuccessful
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
+                false
             }
-            userInfoResponse.isSuccessful
         }
     }
 }
