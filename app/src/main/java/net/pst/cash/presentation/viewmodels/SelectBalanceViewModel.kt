@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.IssueCardInteractor
+import net.pst.cash.presentation.SingleLiveEvent
 import net.pst.cash.presentation.model.BalanceItemModel
 import javax.inject.Inject
 
@@ -31,6 +32,10 @@ class SelectBalanceViewModel @Inject constructor(
     private var accountId: Int? = null
 
     val snackBarErrorMessage = issueCardInteractor.errorMessage
+
+    private val _issueCardEvent = SingleLiveEvent<Unit>()
+    val issueCardEvent: LiveData<Unit>
+        get() = _issueCardEvent
 
     private val _account = accountsInteractor.account.map {
         accountId = it?.accountId
@@ -67,7 +72,11 @@ class SelectBalanceViewModel @Inject constructor(
             val token = sharedPref.getString("token", "")
             token?.let { tokenValue ->
                 accountId?.let { accountId ->
-                    issueCardInteractor.issueCard("Bearer $token", accountId, balance)
+                    val issueCardResponse =
+                        issueCardInteractor.issueCard("Bearer $token", accountId, balance)
+                    issueCardResponse?.let {
+                        _issueCardEvent.value = Unit
+                    }
                 }
             }
         }

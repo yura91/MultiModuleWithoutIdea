@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.google.android.material.shape.CornerFamily
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +30,6 @@ import net.pst.cash.presentation.viewmodels.CardInfoViewModel
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
     private val cardInfoViewModel: CardInfoViewModel by viewModels()
-    private val args: CardInfoFragmentArgs by navArgs()
     private val historyAdapter = HistoryPaymentsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,21 +89,6 @@ class CardInfoFragment :
             frontBinding?.cardBalance?.text = getString(R.string.balance, amount, currencySign)
         }
 
-        cardInfoViewModel.getCardInfo(args.cardId.toString())
-
-        cardInfoViewModel.cardInfoData.observe(viewLifecycleOwner) {
-            it.number?.let { number ->
-                val lastFourDigits = number.substring(number.length - 4)
-                frontBinding?.cardNumTemp?.text = lastFourDigits
-                backBinding?.cardNumber?.text = number
-            }
-
-            backBinding?.cvv?.text = it.cvx2
-            val expMonth = it.expMonth
-            val expYear = it.expYear
-            backBinding?.expDate?.text = "$expMonth/$expYear"
-            frontBinding?.expDate?.text = "$expMonth/$expYear"
-        }
         val frontShapedImage = frontBinding?.cardInfo
         frontShapedImage?.let { imageview ->
             imageview.shapeAppearanceModel = imageview
@@ -145,11 +128,6 @@ class CardInfoFragment :
             binding?.easyFlipView?.setFlipTypeFromFront()
             binding?.easyFlipView?.flipTheView()
         }
-        val balance = args.balance
-        val currencyType = args.currencyType
-        val remainingFunds = args.remainingFunds
-        frontBinding?.cardBalance?.text = getString(R.string.balance, balance, currencyType)
-        binding?.toolbar?.cardBalance?.text = getString(R.string.usd, remainingFunds)
 
         backBinding?.copyCardNumber?.setOnClickListener {
             Toast.makeText(requireContext(), "Card number is copied", Toast.LENGTH_SHORT).show()

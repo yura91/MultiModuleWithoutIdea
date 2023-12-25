@@ -58,6 +58,10 @@ class SelectBalanceFragment :
             binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
         }
 
+        selectBalanceViewModel.issueCardEvent.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_selectBalanceFragment_to_cardInfoFragment)
+        }
+
         binding?.swipeContainer?.setOnRefreshListener {
             selectBalanceViewModel.getActiveBalance()
         }
