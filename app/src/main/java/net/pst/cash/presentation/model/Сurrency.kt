@@ -1,5 +1,5 @@
 package net.pst.cash.presentation.model
 
-enum class Сurrency(val currencyCode: Int) {
+enum class Currency(val currencyCode: Int) {
     DOLAR(2), EURO(3)
 }

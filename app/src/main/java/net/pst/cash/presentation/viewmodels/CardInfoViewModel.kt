@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
 import net.pst.cash.presentation.model.CardModel
-import net.pst.cash.presentation.model.Сurrency
+import net.pst.cash.presentation.model.Currency
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,8 +42,8 @@ class CardInfoViewModel @Inject constructor(
             val activeCard = activeCardInteractor.getActiveCardModel("Bearer $token")
             activeCard?.let {
                 val currencyType: String = when (it.currencyId) {
-                    Сurrency.DOLAR.currencyCode -> "$"
-                    Сurrency.EURO.currencyCode -> "€"
+                    Currency.DOLAR.currencyCode -> "$"
+                    Currency.EURO.currencyCode -> "€"
                     else -> {
                         ""
                     }

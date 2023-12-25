@@ -44,6 +44,10 @@ class SelectBalanceFragment :
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
+        selectBalanceViewModel.notEnoughMoney.observe(viewLifecycleOwner) {
+            binding?.next?.text = getString(R.string.top_up_account)
+        }
+
         selectBalanceViewModel.account.observe(viewLifecycleOwner) {
             binding?.swipeContainer?.isRefreshing = false
             val balance = it

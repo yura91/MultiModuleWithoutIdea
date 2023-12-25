@@ -13,6 +13,7 @@ import net.pst.cash.domain.ConfigInteractor
 import net.pst.cash.domain.IssueCardInteractor
 import net.pst.cash.presentation.SingleLiveEvent
 import net.pst.cash.presentation.model.BalanceItemModel
+import net.pst.cash.presentation.model.ErrorType
 import javax.inject.Inject
 
 
@@ -26,7 +27,17 @@ class SelectBalanceViewModel @Inject constructor(
     var balance: String = ""
     private var accountId: Int? = null
 
-    val snackBarErrorMessage = issueCardInteractor.errorMessage
+    val notEnoughMoney: LiveData<Unit>
+        get() = _notEnoughMoney
+
+    private val _notEnoughMoney = SingleLiveEvent<Unit>()
+
+    val snackBarErrorMessage = issueCardInteractor.errorModel.map {
+        if (it.type == ErrorType.NOT_ENOUGH_MONEY.errorType) {
+            _notEnoughMoney.value = Unit
+        }
+        it.message
+    }
 
     private val _issueCardEvent = SingleLiveEvent<Unit>()
     val issueCardEvent: LiveData<Unit>

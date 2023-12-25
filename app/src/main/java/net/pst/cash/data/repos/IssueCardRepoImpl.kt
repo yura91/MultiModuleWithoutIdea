@@ -15,10 +15,13 @@ class IssueCardRepoImpl @Inject constructor(
     private val api: ApiService
 ) : IssueCardRepo {
 
-    override val errorMessage: LiveData<String>
-        get() = _errorMessage
+    override val errorResponse: LiveData<ErrorResponse>
+        get() = _errorResponse
+    private val _errorResponse: MutableLiveData<ErrorResponse> = MutableLiveData()
+    override val unknownError: LiveData<String>
+        get() = _unknownError
+    private val _unknownError: MutableLiveData<String> = MutableLiveData()
 
-    private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     override suspend fun issueCard(
         token: String,
         accountId: Int,
@@ -36,12 +39,12 @@ class IssueCardRepoImpl @Inject constructor(
                     val errorBody = apiResult.errorBody()?.string()
                     val gson = Gson()
                     val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
-                    _errorMessage.postValue(errorResponse.message)
+                    _errorResponse.postValue(errorResponse)
                     null
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                _errorMessage.postValue(e.message)
+                _unknownError.postValue(e.message)
                 null
             }
         }
