@@ -23,12 +23,7 @@ class SelectBalanceViewModel @Inject constructor(
     private val issueCardInteractor: IssueCardInteractor,
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
-    var cardId: Int = 0
     var balance: String = ""
-    var currencyType: String = ""
-    var enouphMoney: Boolean = false
-    var remainedFunds: String = ""
-    var cardBalanceAmount: String = ""
     private var accountId: Int? = null
 
     val snackBarErrorMessage = issueCardInteractor.errorMessage

@@ -63,6 +63,8 @@ class CardInfoFragment :
 
         setGradient(frontBinding, backBinding)
 
+        cardInfoViewModel.getActiveBalance()
+
         frontBinding?.swipeContainer?.setOnRefreshListener {
             cardInfoViewModel.getActiveBalance()
         }
@@ -87,6 +89,10 @@ class CardInfoFragment :
             }
             frontBinding?.swipeContainer?.isRefreshing = false
             frontBinding?.cardBalance?.text = getString(R.string.balance, amount, currencySign)
+        }
+
+        cardInfoViewModel.account.observe(viewLifecycleOwner) {
+            binding?.toolbar?.cardBalance?.text = it
         }
 
         val frontShapedImage = frontBinding?.cardInfo
