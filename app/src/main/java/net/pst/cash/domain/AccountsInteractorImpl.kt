@@ -5,8 +5,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.pst.cash.data.repos.AccountsRepo
 import net.pst.cash.domain.model.Account
-import java.math.RoundingMode
-import java.text.DecimalFormat
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
@@ -43,8 +41,6 @@ class AccountsInteractorImpl @Inject constructor(private val accountsRepo: Accou
     }
 
     fun roundOffDecimal(number: Double): Double {
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.FLOOR
-        return df.format(number).toDouble()
+        return Math.round(number * 100.0) / 100.0
     }
 }
