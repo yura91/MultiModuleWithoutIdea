@@ -33,9 +33,16 @@ class SelectBalanceFragment :
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {
-                val balanceListAdapter = BalanceListAdapter(balanceItemModels) { balanceCard ->
-                    selectBalanceViewModel.balance = balanceCard
-                }
+                val balanceListAdapter =
+                    BalanceListAdapter(balanceItemModels) { balanceCard, costCard ->
+                        selectBalanceViewModel.balanceCard = balanceCard
+                        val accountBalance = selectBalanceViewModel.accountBalance?.toDouble()
+                        if (accountBalance != null && (accountBalance - costCard) < 0) {
+                            binding?.next?.text = getString(R.string.top_up_account)
+                        } else {
+                            binding?.next?.text = getString(R.string.issue_card)
+                        }
+                    }
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }

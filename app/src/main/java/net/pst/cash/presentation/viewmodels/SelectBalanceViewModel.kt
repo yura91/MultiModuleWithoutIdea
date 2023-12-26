@@ -24,9 +24,9 @@ class SelectBalanceViewModel @Inject constructor(
     private val issueCardInteractor: IssueCardInteractor,
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
-    var balance: String = ""
+    var balanceCard: String = ""
     private var accountId: Int? = null
-
+    var accountBalance: String? = null
     val notEnoughMoney: LiveData<Unit>
         get() = _notEnoughMoney
 
@@ -45,6 +45,7 @@ class SelectBalanceViewModel @Inject constructor(
 
     private val _account = accountsInteractor.account.map {
         accountId = it?.accountId
+        accountBalance = it?.balance
         it?.balance?.split(" ")?.get(0)
     }
     val account: LiveData<String?>
@@ -60,7 +61,7 @@ class SelectBalanceViewModel @Inject constructor(
             )
             balanceItemModels.add(balanceModel)
         }
-        balance = balanceItemModels[0].balanceAmount
+        balanceCard = balanceItemModels[0].balanceAmount
         balanceItemModels
     }
 
@@ -79,7 +80,7 @@ class SelectBalanceViewModel @Inject constructor(
             token?.let { tokenValue ->
                 accountId?.let { accountId ->
                     val issueCardResponse =
-                        issueCardInteractor.issueCard("Bearer $token", accountId, balance)
+                        issueCardInteractor.issueCard("Bearer $token", accountId, balanceCard)
                     issueCardResponse?.let {
                         _issueCardEvent.value = Unit
                     }

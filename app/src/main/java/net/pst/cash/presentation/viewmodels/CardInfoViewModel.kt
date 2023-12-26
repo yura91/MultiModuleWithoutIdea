@@ -35,10 +35,12 @@ class CardInfoViewModel @Inject constructor(
     val account: LiveData<String?>
         get() = _account
 
+
     fun getActiveBalance() {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
+            accountsInteractor.getAccounts("Bearer $token")
             val activeCard = activeCardInteractor.getActiveCardModel("Bearer $token")
             activeCard?.let {
                 val currencyType: String = when (it.currencyId) {
