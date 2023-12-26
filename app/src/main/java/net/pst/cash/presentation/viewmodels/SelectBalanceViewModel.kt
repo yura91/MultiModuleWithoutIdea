@@ -32,6 +32,14 @@ class SelectBalanceViewModel @Inject constructor(
         it.message
     }
 
+    val buttonTopUpEvent: LiveData<Unit>
+        get() = _buttonTopUpEvent
+    private val _buttonTopUpEvent = SingleLiveEvent<Unit>()
+
+    val buttonIssueCardEvent: LiveData<Unit>
+        get() = _buttonIssueCardEvent
+    private val _buttonIssueCardEvent = SingleLiveEvent<Unit>()
+
     private val _issueCardEvent = SingleLiveEvent<Unit>()
     val issueCardEvent: LiveData<Unit>
         get() = _issueCardEvent
@@ -57,6 +65,16 @@ class SelectBalanceViewModel @Inject constructor(
         balanceCard = balanceItemModels[0].balanceAmount
         firstCardCost = balanceItemModels[0].usdt.split(" ")[0]
         balanceItemModels
+    }
+
+    fun calculateBalance() {
+        accountBalance?.let { accountBalance ->
+            if ((accountBalance.toDouble() - firstCardCost.toDouble()) < 0) {
+                _buttonTopUpEvent.value = Unit
+            } else {
+                _buttonIssueCardEvent.value = Unit
+            }
+        }
     }
 
     fun getActiveBalance() {

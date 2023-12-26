@@ -39,42 +39,37 @@ class SelectBalanceFragment :
 
         binding?.balanceList?.addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
 
+        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
+            binding?.swipeContainer?.isRefreshing = false
+            val balance = it
+            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
+        }
+
+        selectBalanceViewModel.buttonTopUpEvent.observe(viewLifecycleOwner) {
+            binding?.topUpCardButton?.isVisible = true
+            binding?.issueCardButton?.isVisible = false
+        }
+
+        selectBalanceViewModel.buttonIssueCardEvent.observe(viewLifecycleOwner) {
+            binding?.topUpCardButton?.isVisible = false
+            binding?.issueCardButton?.isVisible = true
+        }
+
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {
+                selectBalanceViewModel.calculateBalance()
                 val balanceListAdapter =
                     BalanceListAdapter(balanceItemModels) { balanceCard, costCard ->
                         selectBalanceViewModel.balanceCard = balanceCard
-                        val accountBalance = selectBalanceViewModel.accountBalance?.toDouble()
-                        if (accountBalance != null && (accountBalance - costCard) < 0) {
-                            binding?.topUpCardButton?.isVisible = true
-                            binding?.issueCardButton?.isVisible = false
-                        } else {
-                            binding?.topUpCardButton?.isVisible = false
-                            binding?.issueCardButton?.isVisible = true
-                        }
+                        selectBalanceViewModel.calculateBalance()
                     }
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
 
-        val accountBalance = selectBalanceViewModel.accountBalance?.toDouble()
-        if (accountBalance != null && (accountBalance - selectBalanceViewModel.firstCardCost.toDouble()) < 0) {
-            binding?.topUpCardButton?.isVisible = true
-            binding?.issueCardButton?.isVisible = false
-        } else {
-            binding?.topUpCardButton?.isVisible = false
-            binding?.issueCardButton?.isVisible = true
-        }
-
         selectBalanceViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
-        }
-
-        selectBalanceViewModel.account.observe(viewLifecycleOwner) {
-            binding?.swipeContainer?.isRefreshing = false
-            val balance = it
-            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
         }
 
         selectBalanceViewModel.issueCardEvent.observe(viewLifecycleOwner) {
