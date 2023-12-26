@@ -49,7 +49,7 @@ class CardPaletteFragment :
                 getString(R.string.myprefs),
                 Context.MODE_PRIVATE
             )
-            val userId = sharedPref.getString("userId", "")
+            val userId = sharedPref.getString(requireContext().getString(R.string.userid), "")
             with(sharedPref.edit()) {
                 putInt(userId + getString(R.string.startcolor), cardPalleteViewModel.startColor)
                 putInt(userId + getString(R.string.endcolor), cardPalleteViewModel.endColor)
@@ -121,7 +121,7 @@ class CardPaletteFragment :
     private fun setGradient() {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val userId = sharedPref.getString("userId", "")
+        val userId = sharedPref.getString(requireContext().getString(R.string.userid), "")
         val startColor = if (cardPalleteViewModel.startColor != defColorValue) {
             cardPalleteViewModel.startColor
         } else {

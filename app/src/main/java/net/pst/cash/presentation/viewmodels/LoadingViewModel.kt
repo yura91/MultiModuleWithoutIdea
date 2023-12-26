@@ -66,7 +66,7 @@ class LoadingViewModel @Inject constructor(
         viewModelScope.launch {
             token?.let {
                 val isVerificationNeeded = verificationInteractor.isVerificationNeeded("Bearer $it")
-                val userId = sharedPref.getString("userId", "")
+                val userId = sharedPref.getString(application.getString(R.string.userid), "")
                 if (isVerificationNeeded == false) {
                     val startColor = sharedPref.getInt(
                         userId + application.getString(R.string.startcolor),

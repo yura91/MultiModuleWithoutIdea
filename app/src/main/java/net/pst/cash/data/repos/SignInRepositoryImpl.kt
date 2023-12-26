@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import net.pst.cash.R
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
@@ -41,7 +42,7 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
                         with(sharedPref.edit()) {
-                            putString("userId", userId)
+                            putString(context.getString(R.string.userid), userId)
                             apply()
                         }
                     }
@@ -99,7 +100,7 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
                         with(sharedPref.edit()) {
-                            putString("userId", userId)
+                            putString(context.getString(R.string.userid), userId)
                             apply()
                         }
                     }

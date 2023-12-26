@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import net.pst.cash.R
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.responses.UserInfoResponse
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class UserInfoRepositoryImpl @Inject constructor(
                     val userId = userInfoResponseBody?.data?.userId
                     val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                     with(sharedPref.edit()) {
-                        putString("userId", userId)
+                        putString(context.getString(R.string.userid), userId)
                         apply()
                     }
                 }

@@ -161,7 +161,7 @@ class CardInfoFragment :
     ) {
         val sharedPref =
             requireContext().getSharedPreferences(getString(R.string.myprefs), Context.MODE_PRIVATE)
-        val userId = sharedPref.getString("userId", "")
+        val userId = sharedPref.getString(requireContext().getString(R.string.userid), "")
         val startColor = sharedPref.getInt(userId + getString(R.string.startcolor), defColorValue)
         val endColor = sharedPref.getInt(userId + getString(R.string.endcolor), defColorValue)
         if (startColor != defColorValue && endColor != defColorValue) {

@@ -41,7 +41,7 @@ class AppleWebViewViewModel @Inject constructor(
             if (isAppleSuccess) {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
-                val userId = sharedPref.getString("userId", "")
+                val userId = sharedPref.getString(application.getString(R.string.userid), "")
                 val isVerificationNeeded = verifyInteractor.isVerificationNeeded("Bearer $token")
                 if (isVerificationNeeded == true) {
                     _navigateToGetAquintedScreen.call()
