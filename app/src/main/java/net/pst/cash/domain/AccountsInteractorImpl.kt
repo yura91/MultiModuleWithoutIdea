@@ -1,5 +1,6 @@
 package net.pst.cash.domain
 
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -10,7 +11,10 @@ import java.util.TimerTask
 import javax.inject.Inject
 
 
-class AccountsInteractorImpl @Inject constructor(private val accountsRepo: AccountsRepo) :
+class AccountsInteractorImpl @Inject constructor(
+    private val sharedPreferences: SharedPreferences,
+    private val accountsRepo: AccountsRepo
+) :
     AccountsInteractor {
     private val _account = MutableLiveData<Account?>()
     override val account = _account
@@ -20,7 +24,8 @@ class AccountsInteractorImpl @Inject constructor(private val accountsRepo: Accou
         timer.schedule(object : TimerTask() {
             override fun run() {
                 GlobalScope.launch {
-                    val account = accountsRepo.getAccounts(token)?.accounts?.first {
+                    val tokenValue = sharedPreferences.getString("token", "")
+                    val account = accountsRepo.getAccounts("Bearer $tokenValue")?.accounts?.first {
                         it.currencyId == 15
                     }
                     val accAddress = account?.addresses?.get(0)?.address

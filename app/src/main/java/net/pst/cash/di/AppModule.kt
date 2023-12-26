@@ -1,6 +1,7 @@
 package net.pst.cash.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,4 +15,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideContext(@ApplicationContext appContext: Context): Context = appContext
+
+    @Provides
+    fun provideSharedPrefs(@ApplicationContext appContext: Context): SharedPreferences =
+        appContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
 }
