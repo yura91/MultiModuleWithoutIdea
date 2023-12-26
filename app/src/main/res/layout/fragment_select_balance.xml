@@ -64,15 +64,29 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/next"
+            android:id="@+id/issueCardButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/margin_40"
             android:layout_marginEnd="@dimen/margin_40"
             android:layout_marginBottom="@dimen/margin_20"
             android:background="@drawable/rounded_corner_black_bg"
             android:text="@string/issue_card"
             android:textColor="@color/white"
+            app:backgroundTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/topUpCardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_40"
+            android:layout_marginEnd="@dimen/margin_40"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:background="@drawable/rounded_corner_black_bg"
+            android:text="@string/top_up_account"
+            android:textColor="@color/white"
+            android:visibility="gone"
             app:backgroundTint="@null" />
     </LinearLayout>
 </FrameLayout>

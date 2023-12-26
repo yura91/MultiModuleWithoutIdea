@@ -25,6 +25,7 @@ class SelectBalanceViewModel @Inject constructor(
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
     var balanceCard: String = ""
+    var firstCardCost: String = ""
     private var accountId: Int? = null
     var accountBalance: String? = null
     val notEnoughMoney: LiveData<Unit>
@@ -62,6 +63,7 @@ class SelectBalanceViewModel @Inject constructor(
             balanceItemModels.add(balanceModel)
         }
         balanceCard = balanceItemModels[0].balanceAmount
+        firstCardCost = balanceItemModels[0].usdt.split(" ")[0]
         balanceItemModels
     }
 

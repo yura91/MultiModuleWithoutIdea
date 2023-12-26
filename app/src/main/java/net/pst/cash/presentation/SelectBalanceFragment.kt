@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +26,13 @@ import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 class SelectBalanceFragment :
     BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
+    private val navOptions =
+        NavOptions.Builder()
+            .setEnterAnim(R.anim.slide_in_top)
+            .setExitAnim(R.anim.slide_out_top)
+            .setPopEnterAnim(R.anim.slide_in_bottom)
+            .setPopExitAnim(R.anim.slide_out_bottom)
+            .build()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,21 +47,28 @@ class SelectBalanceFragment :
                         selectBalanceViewModel.balanceCard = balanceCard
                         val accountBalance = selectBalanceViewModel.accountBalance?.toDouble()
                         if (accountBalance != null && (accountBalance - costCard) < 0) {
-                            binding?.next?.text = getString(R.string.top_up_account)
+                            binding?.topUpCardButton?.isVisible = true
+                            binding?.issueCardButton?.isVisible = false
                         } else {
-                            binding?.next?.text = getString(R.string.issue_card)
+                            binding?.topUpCardButton?.isVisible = false
+                            binding?.issueCardButton?.isVisible = true
                         }
                     }
                 binding?.balanceList?.adapter = balanceListAdapter
             }
         }
 
-        selectBalanceViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+        val accountBalance = selectBalanceViewModel.accountBalance?.toDouble()
+        if (accountBalance != null && (accountBalance - selectBalanceViewModel.firstCardCost.toDouble()) < 0) {
+            binding?.topUpCardButton?.isVisible = true
+            binding?.issueCardButton?.isVisible = false
+        } else {
+            binding?.topUpCardButton?.isVisible = false
+            binding?.issueCardButton?.isVisible = true
         }
 
-        selectBalanceViewModel.notEnoughMoney.observe(viewLifecycleOwner) {
-            binding?.next?.text = getString(R.string.top_up_account)
+        selectBalanceViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
         }
 
         selectBalanceViewModel.account.observe(viewLifecycleOwner) {
@@ -99,8 +115,15 @@ class SelectBalanceFragment :
                 bundle
             )
         }
-        binding?.next?.setOnClickListener {
+        binding?.issueCardButton?.setOnClickListener {
             selectBalanceViewModel.issueCard()
+        }
+        binding?.topUpCardButton?.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_topUpFragment,
+                null,
+                navOptions
+            )
         }
     }
 
