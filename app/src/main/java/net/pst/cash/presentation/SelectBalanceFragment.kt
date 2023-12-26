@@ -58,7 +58,7 @@ class SelectBalanceFragment :
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {
-                selectBalanceViewModel.firstBalanceCalculate()
+                selectBalanceViewModel.calculateBalance()
                 val balanceListAdapter =
                     BalanceListAdapter(
                         balanceItemModels,
