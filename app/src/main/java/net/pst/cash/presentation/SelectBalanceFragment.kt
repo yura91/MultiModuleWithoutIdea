@@ -58,10 +58,11 @@ class SelectBalanceFragment :
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
             if (!balanceItemModels.isNullOrEmpty()) {
-                selectBalanceViewModel.calculateBalance()
+                selectBalanceViewModel.firstBalanceCalculate()
                 val balanceListAdapter =
                     BalanceListAdapter(balanceItemModels) { balanceCard, costCard ->
                         selectBalanceViewModel.balanceCard = balanceCard
+                        selectBalanceViewModel.costCard = costCard
                         selectBalanceViewModel.calculateBalance()
                     }
                 binding?.balanceList?.adapter = balanceListAdapter

@@ -24,6 +24,7 @@ class SelectBalanceViewModel @Inject constructor(
     private val configInteractor: ConfigInteractor
 ) : AndroidViewModel(application) {
     var balanceCard: String = ""
+    var costCard: Double = 0.0
     var firstCardCost: String = ""
     private var accountId: Int? = null
     var accountBalance: String? = null
@@ -67,9 +68,19 @@ class SelectBalanceViewModel @Inject constructor(
         balanceItemModels
     }
 
-    fun calculateBalance() {
+    fun firstBalanceCalculate() {
         accountBalance?.let { accountBalance ->
             if ((accountBalance.toDouble() - firstCardCost.toDouble()) < 0) {
+                _buttonTopUpEvent.value = Unit
+            } else {
+                _buttonIssueCardEvent.value = Unit
+            }
+        }
+    }
+
+    fun calculateBalance() {
+        accountBalance?.let { accountBalance ->
+            if ((accountBalance.toDouble() - costCard) < 0) {
                 _buttonTopUpEvent.value = Unit
             } else {
                 _buttonIssueCardEvent.value = Unit
