@@ -25,6 +25,7 @@ class SelectBalanceViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
     var balanceCard: String = ""
     var costCard: Double = 0.0
+    var selectedPos: Int = 0
     var firstCardCost: String = ""
     private var accountId: Int? = null
     var accountBalance: String? = null

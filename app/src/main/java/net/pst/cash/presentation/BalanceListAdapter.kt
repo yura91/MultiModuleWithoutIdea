@@ -11,9 +11,10 @@ import net.pst.cash.presentation.model.BalanceItemModel
 
 class BalanceListAdapter(
     private val dataSet: List<BalanceItemModel>,
-    private val clickAction: (String, Double) -> Unit,
+    private var selectedPos: Int = 0,
+    private val clickAction: (String, Double, Int) -> Unit
 ) : RecyclerView.Adapter<BalanceListAdapter.ViewHolder>() {
-    private var selectedPos = 0
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val amountBalanceTextView: TextView
@@ -41,7 +42,7 @@ class BalanceListAdapter(
             selectedPos = holder.layoutPosition;
             notifyItemChanged(selectedPos);
             val cardCost = dataSet[holder.layoutPosition].usdt.split(" ")[0].toDouble()
-            clickAction(dataSet[holder.layoutPosition].balanceAmount, cardCost)
+            clickAction(dataSet[holder.layoutPosition].balanceAmount, cardCost, selectedPos)
         }
         holder.itemView.setSelected(position == selectedPos)
     }

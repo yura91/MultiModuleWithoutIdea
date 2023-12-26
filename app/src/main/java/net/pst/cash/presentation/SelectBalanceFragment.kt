@@ -60,7 +60,11 @@ class SelectBalanceFragment :
             if (!balanceItemModels.isNullOrEmpty()) {
                 selectBalanceViewModel.firstBalanceCalculate()
                 val balanceListAdapter =
-                    BalanceListAdapter(balanceItemModels) { balanceCard, costCard ->
+                    BalanceListAdapter(
+                        balanceItemModels,
+                        selectBalanceViewModel.selectedPos
+                    ) { balanceCard, costCard, selectedPos ->
+                        selectBalanceViewModel.selectedPos = selectedPos
                         selectBalanceViewModel.balanceCard = balanceCard
                         selectBalanceViewModel.costCard = costCard
                         selectBalanceViewModel.calculateBalance()
