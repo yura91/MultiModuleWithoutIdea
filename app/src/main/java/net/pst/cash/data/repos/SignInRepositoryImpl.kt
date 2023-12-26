@@ -1,12 +1,11 @@
 package net.pst.cash.data.repos
 
-import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.pst.cash.R
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 class SignInRepositoryImpl @Inject constructor(
     private val api: ApiService,
-    private val context: Context
+    private val sharedPref: SharedPreferences
 ) : SignInRepository {
 
     override val errorMessage: LiveData<String>
@@ -32,9 +31,8 @@ class SignInRepositoryImpl @Inject constructor(
                 if (signInResponse.isSuccessful) {
                     val responseData = signInResponse.body()
                     val token: String? = responseData?.data?.token
-                    val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                     with(sharedPref.edit()) {
-                        putString("token", token)
+                        putString(Companion.token, token)
                         apply()
                     }
                     token?.let {
@@ -42,7 +40,7 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
                         with(sharedPref.edit()) {
-                            putString(context.getString(R.string.userid), userId)
+                            putString(Companion.userId, userId)
                             apply()
                         }
                     }
@@ -90,9 +88,8 @@ class SignInRepositoryImpl @Inject constructor(
                 val signInAppleResponse = api.signInApple(AppleSignInRequest(code, registerHash))
                 if (signInAppleResponse.isSuccessful) {
                     val token = signInAppleResponse.body()?.data?.token
-                    val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                     with(sharedPref.edit()) {
-                        putString("token", token)
+                        putString(token, token)
                         apply()
                     }
                     token?.let {
@@ -100,7 +97,7 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
                         with(sharedPref.edit()) {
-                            putString(context.getString(R.string.userid), userId)
+                            putString(userId, userId)
                             apply()
                         }
                     }
@@ -118,5 +115,10 @@ class SignInRepositoryImpl @Inject constructor(
                 false
             }
         }
+    }
+
+    companion object {
+        const val token = "token"
+        const val userId = "userId"
     }
 }
