@@ -6,5 +6,5 @@ import net.pst.cash.domain.model.Account
 interface AccountsInteractor {
 
     val account: LiveData<Account?>
-    suspend fun getAccounts(token: String)
+    suspend fun getAccounts()
 }

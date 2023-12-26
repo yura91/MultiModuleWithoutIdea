@@ -80,9 +80,7 @@ class SelectBalanceViewModel @Inject constructor(
 
     fun getActiveBalance() {
         viewModelScope.launch {
-            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-            val token = sharedPref.getString("token", "")
-            accountsInteractor.getAccounts("Bearer $token")
+            accountsInteractor.getAccounts()
         }
     }
 

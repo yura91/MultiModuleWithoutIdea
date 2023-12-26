@@ -20,11 +20,11 @@ class AccountsInteractorImpl @Inject constructor(
     override val account = _account
     private var timer = Timer()
 
-    override suspend fun getAccounts(token: String) {
+    override suspend fun getAccounts() {
         timer.schedule(object : TimerTask() {
             override fun run() {
                 GlobalScope.launch {
-                    val tokenValue = sharedPreferences.getString("token", "")
+                    val tokenValue = sharedPreferences.getString(token, "")
                     val account = accountsRepo.getAccounts("Bearer $tokenValue")?.accounts?.first {
                         it.currencyId == 15
                     }
@@ -47,5 +47,9 @@ class AccountsInteractorImpl @Inject constructor(
 
     fun roundOffDecimal(number: Double): Double {
         return Math.round(number * 100.0) / 100.0
+    }
+
+    companion object {
+        const val token = "token"
     }
 }
