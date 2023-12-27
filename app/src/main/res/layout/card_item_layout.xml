@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardInfoFrame"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="match_parent">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/cardInfo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_300"
+        android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/margin_10"
         android:background="@drawable/card_background_bg" />
 
