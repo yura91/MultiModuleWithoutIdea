@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardListBinding
+import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardListViewModel
 
 @AndroidEntryPoint
@@ -25,7 +26,8 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 bundle
             )
         }
-
+        binding?.cardList?.addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
+        binding?.cardList?.adapter = CardListAdapter()
         cardListViewModel.account.observe(viewLifecycleOwner) {
             binding?.toolbar?.cardBalance?.text = it
         }
