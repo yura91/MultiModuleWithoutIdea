@@ -27,9 +27,13 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             )
         }
         binding?.cardList?.addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
-        binding?.cardList?.adapter = CardListAdapter()
+
         cardListViewModel.account.observe(viewLifecycleOwner) {
             binding?.toolbar?.cardBalance?.text = it
+        }
+
+        cardListViewModel.cardList.observe(viewLifecycleOwner) {
+            binding?.cardList?.adapter = CardListAdapter(it)
         }
         binding?.swipeContainer?.setOnRefreshListener {
             binding?.swipeContainer?.isRefreshing = false
