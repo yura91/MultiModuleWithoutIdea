@@ -16,17 +16,16 @@ import net.pst.cash.presentation.model.Currency
 import javax.inject.Inject
 
 @HiltViewModel
-class CardInfoViewModel @Inject constructor(
+class CardListViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
     private val activeCardInteractor: ActiveCardInteractor
 ) : AndroidViewModel(application) {
     var balance: String = ""
-    private var accountId: Int? = null
 
-    private val _cardModel = MutableLiveData<CardModel>()
-    val cardModel: LiveData<CardModel>
-        get() = _cardModel
+    private val _cardList = MutableLiveData<List<CardModel>>()
+    val cardList: LiveData<List<CardModel>>
+        get() = _cardList
 
     private val _account = accountsInteractor.account.map {
         it?.balance?.split(" ")?.get(0)
@@ -35,25 +34,33 @@ class CardInfoViewModel @Inject constructor(
     val account: LiveData<String?>
         get() = _account
 
-
-    fun getActiveBalance() {
+    fun getAllCards() {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            accountsInteractor.getAccounts()
-            val activeCard = activeCardInteractor.getActiveCardModel("Bearer $token")
-            activeCard?.let {
-                val currencyType: String = when (it.currencyId) {
-                    Currency.DOLAR.currencyCode -> "$"
-                    Currency.EURO.currencyCode -> "€"
-                    else -> {
-                        ""
+            val cardList = activeCardInteractor.getActiveCardModel("Bearer $token")
+            val cards: MutableList<CardModel> = mutableListOf()
+            cardList?.let {
+                it.forEach { cardModel ->
+                    val currencyType: String = when (cardModel.currencyId) {
+                        Currency.DOLAR.currencyCode -> "$"
+                        Currency.EURO.currencyCode -> "€"
+                        else -> {
+                            ""
+                        }
                     }
+                    val card = CardModel(cardModel.id, currencyType, cardModel.balance)
+                    cards.add(card)
                 }
-
-                val cardModel = CardModel(it.id, currencyType, it.balance)
-                _cardModel.value = cardModel
             }
+
+            _cardList.value = cards
+        }
+    }
+
+    fun getActiveBalance() {
+        viewModelScope.launch {
+            accountsInteractor.getAccounts()
         }
     }
 }

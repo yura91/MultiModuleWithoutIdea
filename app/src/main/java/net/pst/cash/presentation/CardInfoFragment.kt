@@ -24,12 +24,12 @@ import net.pst.cash.databinding.RestrictedCardInfoBinding
 import net.pst.cash.presentation.model.HistoryItem
 import net.pst.cash.presentation.model.RowHistoryItems
 import net.pst.cash.presentation.model.dpToPx
-import net.pst.cash.presentation.viewmodels.CardInfoViewModel
+import net.pst.cash.presentation.viewmodels.CardListViewModel
 
 @AndroidEntryPoint
 class CardInfoFragment :
     BaseFragment<FragmentCardInfoBinding>(FragmentCardInfoBinding::inflate) {
-    private val cardInfoViewModel: CardInfoViewModel by viewModels()
+    private val cardInfoViewModel: CardListViewModel by viewModels()
     private val historyAdapter = HistoryPaymentsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,7 +78,7 @@ class CardInfoFragment :
             )
         }
 
-        cardInfoViewModel.cardModel.observe(viewLifecycleOwner) {
+        /*cardInfoViewModel.cardModel.observe(viewLifecycleOwner) {
             var amount = ""
             it?.balance?.let { cardBalance ->
                 amount = cardBalance
@@ -89,7 +89,7 @@ class CardInfoFragment :
             }
             frontBinding?.swipeContainer?.isRefreshing = false
             frontBinding?.cardBalance?.text = getString(R.string.balance, amount, currencySign)
-        }
+        }*/
 
         cardInfoViewModel.account.observe(viewLifecycleOwner) {
             binding?.toolbar?.cardBalance?.text = it

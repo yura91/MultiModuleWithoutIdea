@@ -7,14 +7,19 @@ import javax.inject.Inject
 
 class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: ActiveCardsRepo) :
     ActiveCardInteractor {
-    override suspend fun getActiveCardModel(token: String): CardModel? {
+    override suspend fun getActiveCardModel(token: String): List<CardModel>? {
         val activeCardsResponse: List<CardResponseData>? = activeCardsRepo.checkActiveCard(token)
         return if (!activeCardsResponse.isNullOrEmpty()) {
-            CardModel(
-                activeCardsResponse[0].id,
-                activeCardsResponse[0].account?.currencyId,
-                activeCardsResponse[0].account?.balance
-            )
+            val cardModels: MutableList<CardModel> = mutableListOf()
+            activeCardsResponse.forEach { cardDataModel ->
+                val cardModel = CardModel(
+                    cardDataModel.id,
+                    cardDataModel.account?.currencyId,
+                    cardDataModel.account?.balance
+                )
+                cardModels.add(cardModel)
+            }
+            return cardModels
         } else {
             null
         }

@@ -75,14 +75,14 @@
         android:name="net.pst.cash.presentation.SelectBalanceFragment"
         android:label="SelectBalanceFragment">
         <action
-            android:id="@+id/action_selectBalanceFragment_to_cardInfoFragment"
-            app:destination="@id/cardInfoFragment" />
-        <action
             android:id="@+id/action_selectBalanceFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
         <action
             android:id="@+id/action_selectBalanceFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />
+        <action
+            android:id="@+id/action_selectBalanceFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardInfoFragment"
@@ -163,5 +163,16 @@
         <action
             android:id="@+id/action_loadingFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardListFragment"
+        android:name="net.pst.cash.presentation.CardListFragment"
+        android:label="CardListFragment">
+        <action
+            android:id="@+id/action_cardListFragment_to_cardInfoFragment"
+            app:destination="@id/cardInfoFragment" />
+        <action
+            android:id="@+id/action_cardListFragment_to_settings_nav_graph"
+            app:destination="@id/settings_nav_graph" />
     </fragment>
 </navigation>

@@ -78,7 +78,7 @@ class SelectBalanceFragment :
         }
 
         selectBalanceViewModel.issueCardEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_selectBalanceFragment_to_cardInfoFragment)
+            findNavController().navigate(R.id.action_selectBalanceFragment_to_cardListFragment)
         }
 
         binding?.swipeContainer?.setOnRefreshListener {
