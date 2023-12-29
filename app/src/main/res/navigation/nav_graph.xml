@@ -163,6 +163,9 @@
         <action
             android:id="@+id/action_loadingFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardListFragment"

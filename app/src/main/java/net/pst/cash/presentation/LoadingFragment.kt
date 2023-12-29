@@ -19,7 +19,7 @@ class LoadingFragment : BaseFragment<FragmentLoadingBinding>(FragmentLoadingBind
             findNavController().navigate(R.id.action_loadingFragment_to_signInFragment)
         }
         viewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_loadingFragment_to_issueCardFragment)
+            findNavController().navigate(R.id.action_loadingFragment_to_cardListFragment)
         }
 
         viewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {
