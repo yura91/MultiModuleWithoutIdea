@@ -51,7 +51,7 @@
     <dimen name="margin_22">22dp</dimen>
     <dimen name="size_120">120dp</dimen>
     <dimen name="size_200">200dp</dimen>
-    <item name="corner_radius" format="float" type="dimen">30.0</item>
+    <item name="corner_radius" format="float" type="dimen">30</item>
     <dimen name="pageMargin">20dp</dimen>
     <dimen name="offset">20dp</dimen>
 </resources>
