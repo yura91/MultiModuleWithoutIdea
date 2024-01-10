@@ -52,4 +52,6 @@
     <dimen name="size_120">120dp</dimen>
     <dimen name="size_200">200dp</dimen>
     <item name="corner_radius" format="float" type="dimen">30.0</item>
+    <dimen name="pageMargin">30dp</dimen>
+    <dimen name="offset">30dp</dimen>
 </resources>
