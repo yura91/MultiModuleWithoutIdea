@@ -49,7 +49,12 @@ class CardListViewModel @Inject constructor(
                             ""
                         }
                     }
-                    val card = CardModel(cardModel.id, currencyType, cardModel.balance)
+                    val card = CardModel(
+                        cardModel.id,
+                        currencyType,
+                        cardModel.balance,
+                        cardModel.holderName
+                    )
                     cards.add(card)
                 }
             }

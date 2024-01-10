@@ -13,30 +13,36 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import net.pst.cash.R
 import net.pst.cash.presentation.CardsAdapter.CardViewHolder
+import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.dpToPx
 
-class CardsAdapter(private val context: Context) : RecyclerView.Adapter<CardViewHolder>() {
+class CardsAdapter(private val context: Context, private val cardModels: List<CardModel>) :
+    RecyclerView.Adapter<CardViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
         return CardViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.tvName.text = String.format("Row number  %d ", position)
         setGradient(holder)
+        holder.cardBalance.text = cardModels[position].balance
+        holder.cardHolder.text = cardModels[position].holderName
     }
 
     override fun getItemCount(): Int {
-        return 15
+        return cardModels.size
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView
-        var cardInfo: CardView
+        val cardInfo: CardView
+        val cardBalance: TextView
+        val cardHolder: TextView
 
         init {
-            tvName = itemView.findViewById(R.id.tvName)
             cardInfo = itemView.findViewById(R.id.cardInfo)
+            cardBalance = itemView.findViewById(R.id.cardBalance)
+            cardHolder = itemView.findViewById(R.id.cardHolder)
+
         }
     }
 

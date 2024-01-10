@@ -15,15 +15,43 @@
         android:background="@drawable/card_background_bg"
         app:cardCornerRadius="30dp">
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:text="Hello" />
+            android:layout_marginStart="@dimen/margin_26"
+            android:layout_marginTop="@dimen/margin_24"
+            android:src="@drawable/ic_visa" />
+
+        <ImageView
+            android:layout_width="@dimen/size_52"
+            android:layout_height="@dimen/size_68"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_118"
+            android:layout_marginEnd="@dimen/margin_40"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_card_chip" />
+
+        <TextView
+            android:id="@+id/cardBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/margin_26"
+            android:layout_marginBottom="110dp"
+            android:text="@string/_0_00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_46" />
+
+        <TextView
+            android:id="@+id/cardHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/margin_26"
+            android:layout_marginBottom="62dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16"
+            tools:text="Card Holder" />
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

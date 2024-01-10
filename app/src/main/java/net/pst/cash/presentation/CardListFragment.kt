@@ -32,26 +32,30 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             binding?.toolbar?.cardBalance?.text = it
         }
 
-        val cardsAdapter = CardsAdapter(requireContext())
-        binding?.cardCarousel?.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
-        binding?.cardCarousel?.setAdapter(cardsAdapter)
-        binding?.cardCarousel?.setOffscreenPageLimit(3)
+        cardListViewModel.cardList.observe(viewLifecycleOwner) {
+            val cardsAdapter = CardsAdapter(requireContext(), it)
+            binding?.cardCarousel?.adapter = cardsAdapter
+        }
 
-        val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
-        val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
-
-        binding?.cardCarousel?.setPageTransformer { page, position ->
-            val myOffset = position * -(2 * pageOffset + pageMargin)
-            if (binding?.cardCarousel?.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                if (ViewCompat.getLayoutDirection(binding?.cardCarousel!!) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                    page.translationX = -myOffset
+        binding?.cardCarousel?.apply {
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            offscreenPageLimit = 3
+            val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
+            val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
+            setPageTransformer { page, position ->
+                val myOffset = position * -(2 * pageOffset + pageMargin)
+                if (binding?.cardCarousel?.orientation == ViewPager2.ORIENTATION_HORIZONTAL) {
+                    if (ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                        page.translationX = -myOffset
+                    } else {
+                        page.translationX = myOffset
+                    }
                 } else {
-                    page.translationX = myOffset
+                    page.translationY = myOffset
                 }
-            } else {
-                page.translationY = myOffset
             }
         }
+
         cardListViewModel.getActiveBalance()
         cardListViewModel.getAllCards()
     }
