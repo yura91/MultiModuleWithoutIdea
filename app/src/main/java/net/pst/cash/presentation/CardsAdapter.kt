@@ -27,6 +27,8 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         setGradient(holder)
         holder.cardBalance.text = cardModels[position].balance
         holder.cardHolder.text = cardModels[position].holderName
+        holder.cardNumLastDigits.text = cardModels[position].lastCardDigits
+        holder.cardExpiryDate.text = cardModels[position].expireDate
     }
 
     override fun getItemCount(): Int {
@@ -37,12 +39,15 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         val cardInfo: CardView
         val cardBalance: TextView
         val cardHolder: TextView
+        val cardNumLastDigits: TextView
+        val cardExpiryDate: TextView
 
         init {
             cardInfo = itemView.findViewById(R.id.cardInfo)
             cardBalance = itemView.findViewById(R.id.cardBalance)
             cardHolder = itemView.findViewById(R.id.cardHolder)
-
+            cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
+            cardExpiryDate = itemView.findViewById(R.id.expDate)
         }
     }
 

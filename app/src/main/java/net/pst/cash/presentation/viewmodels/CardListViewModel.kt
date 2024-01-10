@@ -53,7 +53,9 @@ class CardListViewModel @Inject constructor(
                         cardModel.id,
                         currencyType,
                         cardModel.balance,
-                        cardModel.holderName
+                        cardModel.holderName,
+                        cardModel.lastCardDigits,
+                        cardModel.expireDate
                     )
                     cards.add(card)
                 }

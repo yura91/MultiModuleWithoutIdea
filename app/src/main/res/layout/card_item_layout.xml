@@ -53,5 +53,26 @@
             android:textSize="@dimen/text_16"
             tools:text="Card Holder" />
 
+        <TextView
+            android:id="@+id/cardNumLastDigits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/margin_34"
+            android:layout_marginBottom="@dimen/margin_60"
+            android:text="@string/card_num_holder"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/expDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/margin_34"
+            android:layout_marginBottom="@dimen/margin_34"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16"
+            tools:text="@string/card_exp_date" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
