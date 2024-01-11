@@ -20,48 +20,6 @@
             android:layout_height="@dimen/size_200" />
 
         <TextView
-            android:id="@+id/cardHolderTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginBottom="230dp"
-            android:text="@string/card_holder_tittle"
-            android:textColor="@color/hint_color"
-            android:textSize="@dimen/text_16"
-            app:layout_constraintBottom_toTopOf="@+id/copyCardNumber"
-            app:layout_constraintStart_toStartOf="@+id/cardInfo" />
-
-        <LinearLayout
-            android:id="@+id/cardHolderLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginBottom="200dp"
-            app:layout_constraintBottom_toTopOf="@+id/expDateTitle"
-            app:layout_constraintStart_toStartOf="@+id/cardInfo">
-
-            <TextView
-                android:id="@+id/cardHolderBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:text="JOHN DOE"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_22" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/margin_10"
-                android:src="@drawable/ic_copy"
-                app:layout_constraintBottom_toBottomOf="@+id/cardNumber"
-                app:layout_constraintStart_toEndOf="@+id/cardNumber"
-                app:layout_constraintTop_toTopOf="@+id/cardNumber" />
-        </LinearLayout>
-
-        <TextView
             android:id="@+id/expDateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

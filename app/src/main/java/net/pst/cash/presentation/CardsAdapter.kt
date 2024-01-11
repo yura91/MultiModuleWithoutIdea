@@ -20,14 +20,14 @@ import net.pst.cash.presentation.model.dpToPx
 class CardsAdapter(private val context: Context, private val cardModels: List<CardModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == cardType) {
+        return if (viewType == cardType) {
             val view =
                 LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
-            return CardViewHolder(view)
+            CardViewHolder(view)
         } else {
             val view =
                 LayoutInflater.from(context).inflate(R.layout.issue_card_item_layout, parent, false)
-            return IssueCardViewHolder(view)
+            IssueCardViewHolder(view)
         }
     }
 
@@ -36,8 +36,6 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             val cardViewHolder = holder as CardViewHolder
             cardViewHolder.setGradient()
             cardViewHolder.cardBalance.text = cardModels[position].balance
-            cardViewHolder.cardHolderFront.text = cardModels[position].holderName
-            cardViewHolder.cardHolderBack.text = cardModels[position].holderName
             cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
             cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
             cardViewHolder.cardInfoFront.setOnClickListener {
@@ -62,8 +60,6 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         val cardInfoFront: CardView
         val cardInfoBack: CardView
         val cardBalance: TextView
-        val cardHolderFront: TextView
-        val cardHolderBack: TextView
         val clickedArea: View
         val cardNumLastDigits: TextView
         val cardExpiryDate: TextView
@@ -74,8 +70,6 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
             cardInfoBack = itemView.findViewById(R.id.cardInfoBack)
             cardBalance = itemView.findViewById(R.id.cardBalance)
-            cardHolderFront = itemView.findViewById(R.id.cardHolderFront)
-            cardHolderBack = itemView.findViewById(R.id.cardHolderBack)
             clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)

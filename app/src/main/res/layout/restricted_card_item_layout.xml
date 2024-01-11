@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardItemRestrictedLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,17 +40,6 @@
             android:text="@string/_0_00"
             android:textColor="@color/white"
             android:textSize="@dimen/text_46" />
-
-        <TextView
-            android:id="@+id/cardHolderFront"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="@dimen/margin_26"
-            android:layout_marginBottom="62dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_16"
-            tools:text="Card Holder" />
 
         <TextView
             android:id="@+id/cardNumLastDigits"
