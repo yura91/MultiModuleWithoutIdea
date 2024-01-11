@@ -27,7 +27,8 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         setGradient(holder)
         holder.cardBalance.text = cardModels[position].balance
-        holder.cardHolder.text = cardModels[position].holderName
+        holder.cardHolderFront.text = cardModels[position].holderName
+        holder.cardHolderBack.text = cardModels[position].holderName
         holder.cardNumLastDigits.text = cardModels[position].lastCardDigits
         holder.cardExpiryDate.text = cardModels[position].expireDate
         holder.cardInfoFront.setOnClickListener {
@@ -48,7 +49,8 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         val cardInfoFront: CardView
         val cardInfoBack: CardView
         val cardBalance: TextView
-        val cardHolder: TextView
+        val cardHolderFront: TextView
+        val cardHolderBack: TextView
         val cardNumLastDigits: TextView
         val cardExpiryDate: TextView
         val easyFlipView: EasyFlipView
@@ -58,7 +60,8 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
             cardInfoBack = itemView.findViewById(R.id.cardInfoBack)
             cardBalance = itemView.findViewById(R.id.cardBalance)
-            cardHolder = itemView.findViewById(R.id.cardHolder)
+            cardHolderFront = itemView.findViewById(R.id.cardHolderFront)
+            cardHolderBack = itemView.findViewById(R.id.cardHolderBack)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
