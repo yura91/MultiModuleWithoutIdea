@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.wajahatkarim3.easyflipview.EasyFlipView
 import net.pst.cash.R
 import net.pst.cash.presentation.CardsAdapter.CardViewHolder
 import net.pst.cash.presentation.model.CardModel
@@ -29,6 +30,14 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         holder.cardHolder.text = cardModels[position].holderName
         holder.cardNumLastDigits.text = cardModels[position].lastCardDigits
         holder.cardExpiryDate.text = cardModels[position].expireDate
+        holder.cardInfoFront.setOnClickListener {
+            holder.easyFlipView.setFlipTypeFromFront()
+            holder.easyFlipView.flipTheView()
+        }
+        holder.cardInfoBack.setOnClickListener {
+            holder.easyFlipView.setFlipTypeFromBack()
+            holder.easyFlipView.flipTheView()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,18 +45,23 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cardInfo: CardView
+        val cardInfoFront: CardView
+        val cardInfoBack: CardView
         val cardBalance: TextView
         val cardHolder: TextView
         val cardNumLastDigits: TextView
         val cardExpiryDate: TextView
+        val easyFlipView: EasyFlipView
+
 
         init {
-            cardInfo = itemView.findViewById(R.id.cardInfo)
+            cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
+            cardInfoBack = itemView.findViewById(R.id.cardInfoBack)
             cardBalance = itemView.findViewById(R.id.cardBalance)
             cardHolder = itemView.findViewById(R.id.cardHolder)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)
+            easyFlipView = itemView.findViewById(R.id.easyFlipView)
         }
     }
 
@@ -84,7 +98,8 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
                 )
             val layers = arrayOf(layer1, layer2)
             val layerDrawable = LayerDrawable(layers)
-            holder.cardInfo.background = layerDrawable
+            holder.cardInfoFront.background = layerDrawable
+            holder.cardInfoBack.background = layerDrawable
         }
     }
 }
