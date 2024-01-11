@@ -54,4 +54,6 @@
     <item name="corner_radius" format="float" type="dimen">30</item>
     <dimen name="pageMargin">20dp</dimen>
     <dimen name="offset">20dp</dimen>
+    <dimen name="margin_148">148dp</dimen>
+    <dimen name="size_148">148dp</dimen>
 </resources>

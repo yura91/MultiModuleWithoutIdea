@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardItemLayout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:autoFlipBack="false"
         app:flipDuration="400"
         app:flipEnabled="true"
@@ -24,4 +26,9 @@
             android:id="@+id/restricted_card_layout"
             layout="@layout/restricted_card_item_layout" />
     </com.wajahatkarim3.easyflipview.EasyFlipView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_148" />
+</LinearLayout>

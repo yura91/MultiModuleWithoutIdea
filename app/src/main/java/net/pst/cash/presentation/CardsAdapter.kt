@@ -34,7 +34,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == 0) {
             val cardViewHolder = holder as CardViewHolder
-            setGradient(cardViewHolder)
+            cardViewHolder.setGradient()
             cardViewHolder.cardBalance.text = cardModels[position].balance
             cardViewHolder.cardHolderFront.text = cardModels[position].holderName
             cardViewHolder.cardHolderBack.text = cardModels[position].holderName
@@ -50,6 +50,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             }
         } else {
             val issueCardViewHolder = holder as IssueCardViewHolder
+            issueCardViewHolder.setGradient()
         }
     }
 
@@ -80,15 +81,90 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
         }
+
+        fun setGradient() {
+            val sharedPref =
+                itemView.context.getSharedPreferences(
+                    itemView.context.getString(R.string.myprefs),
+                    Context.MODE_PRIVATE
+                )
+            val userId = sharedPref.getString(itemView.context.getString(R.string.userid), "")
+            val startColor = sharedPref.getInt(
+                userId + itemView.context.getString(R.string.startcolor),
+                IssueCardFragment.defColorValue
+            )
+            val endColor = sharedPref.getInt(
+                userId + itemView.context.getString(R.string.endcolor),
+                IssueCardFragment.defColorValue
+            )
+
+            if (startColor != IssueCardFragment.defColorValue && endColor != IssueCardFragment.defColorValue) {
+                val gradientDrawable = GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    intArrayOf(startColor, endColor)
+                )
+                val outValue = TypedValue()
+                itemView.context.resources.getValue(R.dimen.corner_radius, outValue, true)
+                val cornerRadius = outValue.float
+                gradientDrawable.cornerRadius = itemView.context.dpToPx(cornerRadius)
+                val layer1 = gradientDrawable
+                val layer2 =
+                    AppCompatResources.getDrawable(
+                        itemView.context,
+                        R.drawable.card_background_bg
+                    )
+                val layers = arrayOf(layer1, layer2)
+                val layerDrawable = LayerDrawable(layers)
+                cardInfoFront.background = layerDrawable
+                cardInfoBack.background = layerDrawable
+            }
+        }
     }
 
     inner class IssueCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val issueCardButton: MaterialButton
+        val issueCardImage: CardView
 
         init {
             issueCardButton = itemView.findViewById(R.id.issueCard)
+            issueCardImage = itemView.findViewById(R.id.cardImage)
         }
+
+        fun setGradient() {
+            val sharedPref =
+                itemView.context.getSharedPreferences(
+                    itemView.context.getString(R.string.myprefs),
+                    Context.MODE_PRIVATE
+                )
+            val userId = sharedPref.getString(itemView.context.getString(R.string.userid), "")
+            val startColor = sharedPref.getInt(
+                userId + itemView.context.getString(R.string.startcolor),
+                IssueCardFragment.defColorValue
+            )
+            val endColor = sharedPref.getInt(
+                userId + itemView.context.getString(R.string.endcolor),
+                IssueCardFragment.defColorValue
+            )
+
+            if (startColor != IssueCardFragment.defColorValue && endColor != IssueCardFragment.defColorValue) {
+                val gradientDrawable = GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    intArrayOf(startColor, endColor)
+                )
+                val outValue = TypedValue()
+                itemView.context.resources.getValue(R.dimen.corner_radius, outValue, true)
+                val cornerRadius = outValue.float
+                gradientDrawable.cornerRadius = itemView.context.dpToPx(cornerRadius)
+                val layer1 = gradientDrawable
+                val layer2 =
+                    AppCompatResources.getDrawable(itemView.context, R.drawable.card_background_bg)
+                val layers = arrayOf(layer1, layer2)
+                val layerDrawable = LayerDrawable(layers)
+                issueCardImage.background = layerDrawable
+            }
+        }
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -99,41 +175,4 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         }
     }
 
-    private fun setGradient(holder: CardViewHolder) {
-        val sharedPref =
-            holder.itemView.context.getSharedPreferences(
-                holder.itemView.context.getString(R.string.myprefs),
-                Context.MODE_PRIVATE
-            )
-        val userId = sharedPref.getString(holder.itemView.context.getString(R.string.userid), "")
-        val startColor = sharedPref.getInt(
-            userId + holder.itemView.context.getString(R.string.startcolor),
-            IssueCardFragment.defColorValue
-        )
-        val endColor = sharedPref.getInt(
-            userId + holder.itemView.context.getString(R.string.endcolor),
-            IssueCardFragment.defColorValue
-        )
-
-        if (startColor != IssueCardFragment.defColorValue && endColor != IssueCardFragment.defColorValue) {
-            val gradientDrawable = GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM,
-                intArrayOf(startColor, endColor)
-            )
-            val outValue = TypedValue()
-            holder.itemView.context.resources.getValue(R.dimen.corner_radius, outValue, true)
-            val cornerRadius = outValue.float
-            gradientDrawable.cornerRadius = holder.itemView.context.dpToPx(cornerRadius)
-            val layer1 = gradientDrawable
-            val layer2 =
-                AppCompatResources.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.card_background_bg
-                )
-            val layers = arrayOf(layer1, layer2)
-            val layerDrawable = LayerDrawable(layers)
-            holder.cardInfoFront.background = layerDrawable
-            holder.cardInfoBack.background = layerDrawable
-        }
-    }
 }

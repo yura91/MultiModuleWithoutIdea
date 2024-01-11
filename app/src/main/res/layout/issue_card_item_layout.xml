@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/margin_40"
-    android:layout_marginEnd="@dimen/margin_40"
-    android:orientation="vertical"
-    android:paddingStart="@dimen/padding_4"
-    android:paddingTop="@dimen/padding_4"
-    android:paddingEnd="@dimen/padding_4"
-    tools:context=".presentation.SignInFragment">
+    android:layout_marginEnd="@dimen/margin_40">
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_26"
+        android:layout_marginTop="@dimen/margin_24"
+        android:src="@drawable/ic_visa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardImage"
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
-        android:layout_marginBottom="@dimen/margin_22"
-        android:background="@drawable/card_design_bg"
-        app:layout_constraintBottom_toTopOf="@id/issueCard"
+        android:background="@drawable/card_background_bg"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
-        android:layout_width="@dimen/size_58"
+        android:layout_width="@dimen/size_52"
         android:layout_height="@dimen/size_68"
-        android:layout_marginStart="@dimen/margin_216"
-        android:layout_marginTop="@dimen/margin_158"
-        android:adjustViewBounds="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/margin_118"
+        android:layout_marginEnd="@dimen/margin_40"
         android:src="@drawable/ic_card_chip"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/margin_148" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/issueCard"
