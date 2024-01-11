@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardItemLayout"
+    android:id="@+id/cardItemFullLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/margin_40"
@@ -14,6 +14,61 @@
         android:background="@drawable/card_background_bg"
         app:cardCornerRadius="30dp">
 
+        <TextView
+            android:id="@+id/expDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginBottom="58dp"
+            android:text="@string/expire_date"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintBottom_toTopOf="@+id/copyExpDate"
+            app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+        <TextView
+            android:id="@+id/cardNumberTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginBottom="148dp"
+            android:text="@string/card_number"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintBottom_toTopOf="@+id/copyCardNumber"
+            app:layout_constraintStart_toStartOf="@+id/cardInfo" />
+
+        <LinearLayout
+            android:id="@+id/copyCardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginBottom="@dimen/margin_118"
+            app:layout_constraintBottom_toTopOf="@+id/expDateTitle"
+            app:layout_constraintStart_toStartOf="@+id/cardInfo">
+
+            <TextView
+                android:id="@+id/cardNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/_1234_5678_9012_3456"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_22" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_10"
+                android:src="@drawable/ic_copy"
+                app:layout_constraintBottom_toBottomOf="@+id/cardNumber"
+                app:layout_constraintStart_toEndOf="@+id/cardNumber"
+                app:layout_constraintTop_toTopOf="@+id/cardNumber" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/copyExpDate"
             android:layout_width="wrap_content"
@@ -25,7 +80,7 @@
                 android:id="@+id/expDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginStart="@dimen/margin_16"
                 android:text="@string/card_exp_date"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_22" />
@@ -37,5 +92,39 @@
                 android:layout_marginStart="@dimen/margin_10"
                 android:src="@drawable/ic_copy" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="58dp"
+            android:text="@string/cvv"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/text_16" />
+
+        <LinearLayout
+            android:id="@+id/copyCvv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:layout_marginBottom="@dimen/margin_28">
+
+            <TextView
+                android:id="@+id/cvv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_173"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_22" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_10"
+                android:src="@drawable/ic_copy" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
