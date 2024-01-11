@@ -35,7 +35,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             holder.easyFlipView.setFlipTypeFromFront()
             holder.easyFlipView.flipTheView()
         }
-        holder.cardInfoBack.setOnClickListener {
+        holder.clickedArea.setOnClickListener {
             holder.easyFlipView.setFlipTypeFromBack()
             holder.easyFlipView.flipTheView()
         }
@@ -51,6 +51,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         val cardBalance: TextView
         val cardHolderFront: TextView
         val cardHolderBack: TextView
+        val clickedArea: View
         val cardNumLastDigits: TextView
         val cardExpiryDate: TextView
         val easyFlipView: EasyFlipView
@@ -62,6 +63,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             cardBalance = itemView.findViewById(R.id.cardBalance)
             cardHolderFront = itemView.findViewById(R.id.cardHolderFront)
             cardHolderBack = itemView.findViewById(R.id.cardHolderBack)
+            clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
