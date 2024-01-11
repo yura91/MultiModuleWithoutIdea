@@ -20,7 +20,7 @@ import net.pst.cash.presentation.model.dpToPx
 class CardsAdapter(private val context: Context, private val cardModels: List<CardModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == 0) {
+        if (viewType == cardType) {
             val view =
                 LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
             return CardViewHolder(view)
@@ -32,7 +32,7 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder.itemViewType == 0) {
+        if (holder.itemViewType == cardType) {
             val cardViewHolder = holder as CardViewHolder
             cardViewHolder.setGradient()
             cardViewHolder.cardBalance.text = cardModels[position].balance
@@ -164,15 +164,18 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
                 issueCardImage.background = layerDrawable
             }
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
         return if (cardModels[position].id != null) {
-            0
+            cardType
         } else {
-            1
+            issueType
         }
     }
 
+    companion object {
+        const val cardType = 0
+        const val issueType = 1
+    }
 }

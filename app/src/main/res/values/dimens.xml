@@ -56,4 +56,5 @@
     <dimen name="offset">20dp</dimen>
     <dimen name="margin_148">148dp</dimen>
     <dimen name="size_148">148dp</dimen>
+    <dimen name="margin_52">52dp</dimen>
 </resources>

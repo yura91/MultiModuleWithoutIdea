@@ -6,15 +6,6 @@
     android:layout_marginStart="@dimen/margin_40"
     android:layout_marginEnd="@dimen/margin_40">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_26"
-        android:layout_marginTop="@dimen/margin_24"
-        android:src="@drawable/ic_visa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardImage"
         android:layout_width="@dimen/size_zero"
@@ -24,19 +15,35 @@
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_26"
+            android:layout_marginTop="@dimen/margin_24"
+            android:src="@drawable/ic_visa" />
 
-    <ImageView
-        android:layout_width="@dimen/size_52"
-        android:layout_height="@dimen/size_68"
-        android:layout_gravity="end"
-        android:layout_marginTop="@dimen/margin_118"
-        android:layout_marginEnd="@dimen/margin_40"
-        android:src="@drawable/ic_card_chip"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:adjustViewBounds="true"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="@dimen/size_52"
+            android:layout_height="@dimen/size_68"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_118"
+            android:layout_marginEnd="@dimen/margin_40"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_card_chip" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginStart="@dimen/margin_30"
+            android:layout_marginEnd="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/margin_26"
+            android:adjustViewBounds="true"
+            android:src="@drawable/the_best_v_cards" />
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -51,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_16"
-        android:layout_marginBottom="@dimen/margin_34"
+        android:layout_marginBottom="@dimen/margin_52"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/issue_card"
         android:textColor="@color/white"
