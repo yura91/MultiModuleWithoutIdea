@@ -11,33 +11,45 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import net.pst.cash.R
-import net.pst.cash.presentation.CardsAdapter.CardViewHolder
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.dpToPx
 
 class CardsAdapter(private val context: Context, private val cardModels: List<CardModel>) :
-    RecyclerView.Adapter<CardViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
-        return CardViewHolder(view)
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == 0) {
+            val view =
+                LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
+            return CardViewHolder(view)
+        } else {
+            val view =
+                LayoutInflater.from(context).inflate(R.layout.issue_card_item_layout, parent, false)
+            return IssueCardViewHolder(view)
+        }
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        setGradient(holder)
-        holder.cardBalance.text = cardModels[position].balance
-        holder.cardHolderFront.text = cardModels[position].holderName
-        holder.cardHolderBack.text = cardModels[position].holderName
-        holder.cardNumLastDigits.text = cardModels[position].lastCardDigits
-        holder.cardExpiryDate.text = cardModels[position].expireDate
-        holder.cardInfoFront.setOnClickListener {
-            holder.easyFlipView.setFlipTypeFromFront()
-            holder.easyFlipView.flipTheView()
-        }
-        holder.clickedArea.setOnClickListener {
-            holder.easyFlipView.setFlipTypeFromBack()
-            holder.easyFlipView.flipTheView()
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder.itemViewType == 0) {
+            val cardViewHolder = holder as CardViewHolder
+            setGradient(cardViewHolder)
+            cardViewHolder.cardBalance.text = cardModels[position].balance
+            cardViewHolder.cardHolderFront.text = cardModels[position].holderName
+            cardViewHolder.cardHolderBack.text = cardModels[position].holderName
+            cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
+            cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
+            cardViewHolder.cardInfoFront.setOnClickListener {
+                cardViewHolder.easyFlipView.setFlipTypeFromFront()
+                cardViewHolder.easyFlipView.flipTheView()
+            }
+            cardViewHolder.clickedArea.setOnClickListener {
+                cardViewHolder.easyFlipView.setFlipTypeFromBack()
+                cardViewHolder.easyFlipView.flipTheView()
+            }
+        } else {
+            val issueCardViewHolder = holder as IssueCardViewHolder
         }
     }
 
@@ -67,6 +79,23 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
+        }
+    }
+
+    inner class IssueCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val issueCardButton: MaterialButton
+
+        init {
+            issueCardButton = itemView.findViewById(R.id.issueCard)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (cardModels[position].id != null) {
+            0
+        } else {
+            1
         }
     }
 

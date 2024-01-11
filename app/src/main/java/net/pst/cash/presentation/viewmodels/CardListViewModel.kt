@@ -60,7 +60,7 @@ class CardListViewModel @Inject constructor(
                     cards.add(card)
                 }
             }
-
+            cards.add(CardModel())
             _cardList.value = cards
         }
     }
