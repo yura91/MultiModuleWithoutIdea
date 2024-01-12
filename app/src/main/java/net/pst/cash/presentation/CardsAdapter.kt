@@ -17,7 +17,11 @@ import net.pst.cash.R
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.dpToPx
 
-class CardsAdapter(private val context: Context, private val cardModels: List<CardModel>) :
+class CardsAdapter(
+    private val context: Context,
+    private val cardModels: List<CardModel>,
+    val issueCardAction: () -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == cardType) {
@@ -123,6 +127,9 @@ class CardsAdapter(private val context: Context, private val cardModels: List<Ca
         init {
             issueCardButton = itemView.findViewById(R.id.issueCard)
             issueCardImage = itemView.findViewById(R.id.cardImage)
+            issueCardButton.setOnClickListener {
+                issueCardAction()
+            }
         }
 
         fun setGradient() {
