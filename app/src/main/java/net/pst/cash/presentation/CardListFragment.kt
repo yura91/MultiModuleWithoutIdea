@@ -49,6 +49,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 )
             }
             binding?.cardCarousel?.adapter = cardsAdapter
+            binding?.cardCarousel?.setCurrentItem(cardListViewModel.viewPagerPosition, false)
         }
 
         binding?.cardCarousel?.apply {
@@ -73,6 +74,13 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         cardListViewModel.getActiveBalance()
         cardListViewModel.getAllCards()
     }
+
+    override fun onPause() {
+        super.onPause()
+        // Сохраните позицию ViewPager
+        cardListViewModel.viewPagerPosition = binding?.cardCarousel?.currentItem!!
+    }
+
 
     companion object {
         private const val argsTag = "showAdditionalItems"

@@ -27,8 +27,50 @@
             layout="@layout/restricted_card_item_layout" />
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 
-    <View
-        android:id="@+id/view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_220" />
+        android:layout_height="@dimen/size_220"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/paymentsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/margin_30"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/simplePaymentList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/payments"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_22"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/payments"
+                style="@style/Widget.MaterialComponents.Button.IconOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:background="@drawable/rounded_corner_gray_bg"
+                android:text="@string/view_all"
+                android:textColor="@color/black"
+                app:backgroundTint="@null"
+                app:iconGravity="textStart" />
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

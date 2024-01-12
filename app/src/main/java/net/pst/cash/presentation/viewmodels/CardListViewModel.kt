@@ -21,7 +21,7 @@ class CardListViewModel @Inject constructor(
     private val accountsInteractor: AccountsInteractor,
     private val activeCardInteractor: ActiveCardInteractor
 ) : AndroidViewModel(application) {
-    var balance: String = ""
+    var viewPagerPosition = 0
 
     private val _cardList = MutableLiveData<List<CardModel>>()
     val cardList: LiveData<List<CardModel>>

@@ -62,4 +62,5 @@
     <dimen name="margin_58">58dp</dimen>
     <dimen name="margin_110">110dp</dimen>
     <dimen name="size_182">182dp</dimen>
+    <dimen name="size_40">40dp</dimen>
 </resources>
