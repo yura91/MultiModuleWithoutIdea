@@ -11,7 +11,7 @@
         android:layout_width="@dimen/size_zero"
         android:layout_height="@dimen/size_zero"
         android:background="@drawable/card_background_bg"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="@dimen/size_30"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
