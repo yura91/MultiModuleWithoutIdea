@@ -4,8 +4,8 @@
     android:id="@+id/cardItemRestrictedLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/margin_40"
-    android:layout_marginEnd="@dimen/margin_40">
+    android:layout_marginStart="@dimen/margin_20"
+    android:layout_marginEnd="@dimen/margin_20">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardInfoFront"
@@ -26,7 +26,7 @@
             android:layout_height="@dimen/size_68"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/margin_118"
-            android:layout_marginEnd="@dimen/margin_40"
+            android:layout_marginEnd="80dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_card_chip" />
 
