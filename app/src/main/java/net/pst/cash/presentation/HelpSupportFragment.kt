@@ -9,7 +9,7 @@ import net.pst.cash.databinding.FragmentHelpSupportBinding
 
 
 class HelpSupportFragment :
-    BaseFragment<FragmentHelpSupportBinding>(FragmentHelpSupportBinding::inflate) {
+    BaseDialogFragment<FragmentHelpSupportBinding>(FragmentHelpSupportBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.toolbar?.setNavigationOnClickListener {

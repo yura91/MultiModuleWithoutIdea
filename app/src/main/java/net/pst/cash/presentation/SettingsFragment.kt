@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSettingsBinding
 
 
-class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
+class SettingsFragment :
+    BaseDialogFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
     private val argsKey = "showAdditionalItems"
     private val argsTag = "clearBackStack"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,11 +28,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             binding?.closeCard?.isVisible = false
         }
         binding?.helpSupport?.setOnClickListener {
-            it.findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_helpSupportFragment)
         }
 
         binding?.legalInformation?.setOnClickListener {
-            it.findNavController()
+            findNavController()
                 .navigate(R.id.action_settingsFragment_to_legalInformationFragment)
         }
 

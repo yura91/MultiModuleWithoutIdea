@@ -5,16 +5,13 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -24,12 +21,14 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
+import net.pst.cash.databinding.FragmentSelectBalanceBinding
 import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 
 @AndroidEntryPoint
-class SelectBalanceFragment : DialogFragment() {
+class SelectBalanceFragment :
+    BaseDialogFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
     private val navOptions =
         NavOptions.Builder()
@@ -38,20 +37,6 @@ class SelectBalanceFragment : DialogFragment() {
             .setPopEnterAnim(R.anim.slide_in_bottom)
             .setPopExitAnim(R.anim.slide_out_bottom)
             .build()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.FullScreenDialogStyle)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_select_balance, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -102,13 +87,13 @@ class SelectBalanceFragment : DialogFragment() {
             findNavController().navigate(R.id.action_selectBalanceFragment_to_cardListFragment)
         }
 
-        view.findViewById<SwipeRefreshLayout>(R.id.swipeContainer).setOnRefreshListener {
+        binding?.swipeContainer?.setOnRefreshListener {
             selectBalanceViewModel.getActiveBalance()
         }
 
         setGradient()
 
-        view.findViewById<ImageView>(R.id.selectBalanceImage).apply {
+        binding?.selectBalanceImage?.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
@@ -128,7 +113,7 @@ class SelectBalanceFragment : DialogFragment() {
             findNavController().popBackStack()
         }
 
-        view.findViewById<ImageView>(R.id.actionMore).setOnClickListener {
+        binding?.toolbar?.actionMore?.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean(argsTag, true)
             findNavController().navigate(
@@ -136,11 +121,11 @@ class SelectBalanceFragment : DialogFragment() {
                 bundle
             )
         }
-        view.findViewById<MaterialButton>(R.id.issueCardButton).setOnClickListener {
+        binding?.issueCardButton?.setOnClickListener {
             selectBalanceViewModel.issueCard()
         }
 
-        view.findViewById<MaterialButton>(R.id.topUpCardButton).setOnClickListener {
+        binding?.topUpCardButton?.setOnClickListener {
             findNavController().navigate(
                 R.id.action_selectBalanceFragment_to_topUpFragment,
                 null,
@@ -180,7 +165,7 @@ class SelectBalanceFragment : DialogFragment() {
                 AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
             val layers = arrayOf(layer1, layer2)
             val layerDrawable = LayerDrawable(layers)
-            view?.findViewById<ImageView>(R.id.selectBalanceImage)?.background = layerDrawable
+            binding?.selectBalanceImage?.background = layerDrawable
         }
     }
 

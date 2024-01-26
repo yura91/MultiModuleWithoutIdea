@@ -39,7 +39,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 )
             }
             binding?.cardCarousel?.adapter = cardsAdapter
-            binding?.cardCarousel?.setCurrentItem(cardListViewModel.viewPagerPosition, false)
         }
 
         binding?.cardCarousel?.apply {

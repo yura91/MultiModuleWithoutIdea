@@ -9,7 +9,7 @@ import net.pst.cash.databinding.FragmentLegalInformationBinding
 
 
 class LegalInformationFragment :
-    BaseFragment<FragmentLegalInformationBinding>(FragmentLegalInformationBinding::inflate) {
+    BaseDialogFragment<FragmentLegalInformationBinding>(FragmentLegalInformationBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.toolbar?.setNavigationOnClickListener {
