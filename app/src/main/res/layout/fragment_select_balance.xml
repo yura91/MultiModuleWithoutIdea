@@ -59,7 +59,7 @@
             android:layout_marginStart="@dimen/margin_40"
             android:layout_marginTop="@dimen/margin_34"
             android:layout_marginEnd="@dimen/margin_40"
-            android:layout_marginBottom="@dimen/margin_30"
+            android:layout_marginBottom="@dimen/margin_35"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
