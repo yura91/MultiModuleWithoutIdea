@@ -10,14 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -59,18 +62,19 @@ class SelectBalanceFragment : DialogFragment() {
         selectBalanceViewModel.account.observe(viewLifecycleOwner) {
             view.findViewById<SwipeRefreshLayout>(R.id.swipeContainer).isRefreshing = false
             val balance = it
-//            view.findViewById<Toolbar>(R.id.toolbar).cardBalance.text = getString(R.string.usd, balance)
+            val cardBalance = view.findViewById<TextView>(R.id.cardBalance)
+            cardBalance.text = getString(R.string.usd, balance)
         }
 
-        /* selectBalanceViewModel.buttonTopUpEvent.observe(viewLifecycleOwner) {
-             binding?.topUpCardButton?.isVisible = true
-             binding?.issueCardButton?.isVisible = false
-         }
+        selectBalanceViewModel.buttonTopUpEvent.observe(viewLifecycleOwner) {
+            view.findViewById<MaterialButton>(R.id.topUpCardButton).isVisible = true
+            view.findViewById<MaterialButton>(R.id.issueCardButton).isVisible = false
+        }
 
-         selectBalanceViewModel.buttonIssueCardEvent.observe(viewLifecycleOwner) {
-             binding?.topUpCardButton?.isVisible = false
-             binding?.issueCardButton?.isVisible = true
-         }*/
+        selectBalanceViewModel.buttonIssueCardEvent.observe(viewLifecycleOwner) {
+            view.findViewById<MaterialButton>(R.id.topUpCardButton).isVisible = false
+            view.findViewById<MaterialButton>(R.id.issueCardButton).isVisible = true
+        }
 
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
@@ -98,9 +102,9 @@ class SelectBalanceFragment : DialogFragment() {
             findNavController().navigate(R.id.action_selectBalanceFragment_to_cardListFragment)
         }
 
-        /* binding?.swipeContainer?.setOnRefreshListener {
-             selectBalanceViewModel.getActiveBalance()
-         }*/
+        view.findViewById<SwipeRefreshLayout>(R.id.swipeContainer).setOnRefreshListener {
+            selectBalanceViewModel.getActiveBalance()
+        }
 
         setGradient()
 
@@ -124,24 +128,25 @@ class SelectBalanceFragment : DialogFragment() {
             findNavController().popBackStack()
         }
 
-        /*  binding?.toolbar?.actionMore?.setOnClickListener {
-              val bundle = Bundle()
-              bundle.putBoolean(argsTag, true)
-              findNavController().navigate(
-                  R.id.action_selectBalanceFragment_to_settings_nav_graph,
-                  bundle
-              )
-          }
-          binding?.issueCardButton?.setOnClickListener {
-              selectBalanceViewModel.issueCard()
-          }
-          binding?.topUpCardButton?.setOnClickListener {
-              findNavController().navigate(
-                  R.id.action_selectBalanceFragment_to_topUpFragment,
-                  null,
-                  navOptions
-              )
-          }*/
+        view.findViewById<ImageView>(R.id.actionMore).setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean(argsTag, true)
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_settings_nav_graph,
+                bundle
+            )
+        }
+        view.findViewById<MaterialButton>(R.id.issueCardButton).setOnClickListener {
+            selectBalanceViewModel.issueCard()
+        }
+
+        view.findViewById<MaterialButton>(R.id.topUpCardButton).setOnClickListener {
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_topUpFragment,
+                null,
+                navOptions
+            )
+        }
     }
 
     private fun setGradient() {

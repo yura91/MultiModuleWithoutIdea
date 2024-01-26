@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,13 +34,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
             val cardsAdapter = CardsAdapter(requireContext(), it) {
-                val navOptions =
-                    NavOptions.Builder()
-                        .setEnterAnim(R.anim.slide_in_top)
-                        .setExitAnim(R.anim.slide_out_top)
-                        .setPopEnterAnim(R.anim.slide_in_bottom)
-                        .setPopExitAnim(R.anim.slide_out_bottom)
-                        .build()
                 findNavController().navigate(
                     R.id.action_cardListFragment_to_selectBalanceFragment
                 )
