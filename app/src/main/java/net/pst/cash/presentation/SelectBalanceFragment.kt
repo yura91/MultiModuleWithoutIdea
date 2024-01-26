@@ -13,7 +13,6 @@ import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -30,13 +29,6 @@ import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 class SelectBalanceFragment :
     BaseDialogFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
-    private val navOptions =
-        NavOptions.Builder()
-            .setEnterAnim(R.anim.slide_in_top)
-            .setExitAnim(R.anim.slide_out_top)
-            .setPopEnterAnim(R.anim.slide_in_bottom)
-            .setPopExitAnim(R.anim.slide_out_bottom)
-            .build()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -127,9 +119,7 @@ class SelectBalanceFragment :
 
         binding?.topUpCardButton?.setOnClickListener {
             findNavController().navigate(
-                R.id.action_selectBalanceFragment_to_topUpFragment,
-                null,
-                navOptions
+                R.id.action_selectBalanceFragment_to_topUpFragment
             )
         }
     }

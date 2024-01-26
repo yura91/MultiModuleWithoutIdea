@@ -99,7 +99,7 @@
             android:id="@+id/action_cardInfoFragment_to_settings_nav_graph2"
             app:destination="@id/settings_nav_graph" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/topUpFragment"
         android:name="net.pst.cash.presentation.TopUpFragment"
         android:label="fragment_top_up"
@@ -107,7 +107,7 @@
         <argument
             android:name="balance"
             app:argType="string" />
-    </fragment>
+    </dialog>
     <fragment
         android:id="@+id/historyPaymentsFragment"
         android:name="net.pst.cash.presentation.HistoryPaymentsFragment"

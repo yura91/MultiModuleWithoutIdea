@@ -15,7 +15,7 @@ import net.pst.cash.presentation.viewmodels.TopUpViewModel
 
 
 @AndroidEntryPoint
-class TopUpFragment : BaseFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
+class TopUpFragment : BaseDialogFragment<FragmentTopUpBinding>(FragmentTopUpBinding::inflate) {
     private val topUpViewModel: TopUpViewModel by viewModels()
     private val balanceKey = "balance"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
