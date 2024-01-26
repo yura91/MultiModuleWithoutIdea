@@ -12,8 +12,11 @@ import javax.inject.Inject
 class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
     HistoryInteractor {
 
-    override suspend fun getTransactionList(token: String): Flow<PagingData<RowHistoryItems>> {
-        val rowHistoryItems = historyListRepo.getTransactionList(token)
+    override suspend fun getTransactionList(
+        token: String,
+        cardId: String
+    ): Flow<PagingData<RowHistoryItems>> {
+        val rowHistoryItems = historyListRepo.getTransactionList(token, cardId)
         return rowHistoryItems.map { pagingData ->
             pagingData.map {
                 val historyItems = mutableListOf<HistoryItem>()

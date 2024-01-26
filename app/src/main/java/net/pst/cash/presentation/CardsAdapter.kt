@@ -10,23 +10,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.wajahatkarim3.easyflipview.EasyFlipView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.pst.cash.R
 import net.pst.cash.presentation.model.CardModel
-import net.pst.cash.presentation.model.HistoryItem
-import net.pst.cash.presentation.model.RowHistoryItems
 import net.pst.cash.presentation.model.dpToPx
 
 class CardsAdapter(
     private val context: Context,
     private val cardModels: List<CardModel>,
-    val issueCardAction: () -> Unit
+    val issueCardAction: () -> Unit,
+    val showPaymentsAction: (cardId: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -56,6 +51,10 @@ class CardsAdapter(
                 cardViewHolder.easyFlipView.setFlipTypeFromBack()
                 cardViewHolder.easyFlipView.flipTheView()
             }
+
+            cardViewHolder.payments.setOnClickListener {
+                cardModels[position].id?.let { showPaymentsAction(it) }
+            }
         } else {
             val issueCardViewHolder = holder as IssueCardViewHolder
             issueCardViewHolder.setGradient()
@@ -75,6 +74,7 @@ class CardsAdapter(
         val cardExpiryDate: TextView
         val easyFlipView: EasyFlipView
         val simplePaymentList: RecyclerView
+        val payments: MaterialButton
         private val historyAdapter = HistoryPaymentsAdapter()
 
         init {
@@ -84,27 +84,9 @@ class CardsAdapter(
             clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             cardExpiryDate = itemView.findViewById(R.id.expDate)
+            payments = itemView.findViewById(R.id.payments)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
             simplePaymentList = itemView.findViewById(R.id.simplePaymentList)
-            simplePaymentList?.adapter = historyAdapter
-
-            val historyItems = mutableListOf<HistoryItem>()
-            val historyItem1 = HistoryItem("100", "Netfix", "23:55")
-            val historyItem2 = HistoryItem("200", "Netfix", "23:55")
-            val historyItem3 = HistoryItem("300", "Netfix", "00:56")
-            val historyItem4 = HistoryItem("400", "Netfix", "00:55")
-
-            historyItems.add(historyItem1)
-            historyItems.add(historyItem2)
-            historyItems.add(historyItem3)
-            historyItems.add(historyItem4)
-
-            val rowHistoryItems = mutableListOf<RowHistoryItems>()
-            val rowHistoryItem = RowHistoryItems("23.11.04", historyItems)
-            rowHistoryItems.add(rowHistoryItem)
-            CoroutineScope(Dispatchers.IO).launch {
-                historyAdapter.submitData(PagingData.from(rowHistoryItems))
-            }
         }
 
         fun setGradient() {

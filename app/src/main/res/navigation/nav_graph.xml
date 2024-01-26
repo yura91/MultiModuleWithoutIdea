@@ -108,7 +108,7 @@
             android:name="balance"
             app:argType="string" />
     </dialog>
-    <fragment
+    <dialog
         android:id="@+id/historyPaymentsFragment"
         android:name="net.pst.cash.presentation.HistoryPaymentsFragment"
         android:label="fragment_history_payments"
@@ -182,5 +182,8 @@
             app:destination="@id/selectBalanceFragment"
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@anim/slide_out_top" />
+        <action
+            android:id="@+id/action_cardListFragment_to_historyPaymentsFragment"
+            app:destination="@id/historyPaymentsFragment" />
     </fragment>
 </navigation>

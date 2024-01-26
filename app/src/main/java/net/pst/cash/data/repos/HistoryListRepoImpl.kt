@@ -19,9 +19,12 @@ class HistoryListRepoImpl @Inject constructor(
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
 
-    override suspend fun getTransactionList(token: String): Flow<PagingData<RowHistoryItems>> {
+    override suspend fun getTransactionList(
+        token: String,
+        cardId: String
+    ): Flow<PagingData<RowHistoryItems>> {
         val listData = Pager(PagingConfig(pageSize = 1)) {
-            HistoryDataPagingSource(api, token)
+            HistoryDataPagingSource(api, token, cardId)
 
         }.flow
         return listData

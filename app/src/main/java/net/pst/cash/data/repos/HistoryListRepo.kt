@@ -7,6 +7,6 @@ import net.pst.cash.data.paging.RowHistoryItems
 
 interface HistoryListRepo {
     val errorMessage: LiveData<String>
-    suspend fun getTransactionList(token: String): Flow<PagingData<RowHistoryItems>>
+    suspend fun getTransactionList(token: String, cardId: String): Flow<PagingData<RowHistoryItems>>
 
 }
