@@ -5,26 +5,28 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.ImageView
 import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
-import net.pst.cash.databinding.FragmentSelectBalanceBinding
 import net.pst.cash.presentation.model.BalanceItemModel
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.SelectBalanceViewModel
 
 @AndroidEntryPoint
-class SelectBalanceFragment :
-    BaseFragment<FragmentSelectBalanceBinding>(FragmentSelectBalanceBinding::inflate) {
+class SelectBalanceFragment : DialogFragment() {
     private val selectBalanceViewModel: SelectBalanceViewModel by viewModels()
     private val navOptions =
         NavOptions.Builder()
@@ -34,26 +36,41 @@ class SelectBalanceFragment :
             .setPopExitAnim(R.anim.slide_out_bottom)
             .build()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.FullScreenDialogStyle)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_select_balance, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.balanceList?.addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
+        view.findViewById<RecyclerView>(R.id.balanceList)
+            .addItemDecoration(VerticalSpaceItemDecoration(8f.dpToPx().toInt()))
 
         selectBalanceViewModel.account.observe(viewLifecycleOwner) {
-            binding?.swipeContainer?.isRefreshing = false
+            view.findViewById<SwipeRefreshLayout>(R.id.swipeContainer).isRefreshing = false
             val balance = it
-            binding?.toolbar?.cardBalance?.text = getString(R.string.usd, balance)
+//            view.findViewById<Toolbar>(R.id.toolbar).cardBalance.text = getString(R.string.usd, balance)
         }
 
-        selectBalanceViewModel.buttonTopUpEvent.observe(viewLifecycleOwner) {
-            binding?.topUpCardButton?.isVisible = true
-            binding?.issueCardButton?.isVisible = false
-        }
+        /* selectBalanceViewModel.buttonTopUpEvent.observe(viewLifecycleOwner) {
+             binding?.topUpCardButton?.isVisible = true
+             binding?.issueCardButton?.isVisible = false
+         }
 
-        selectBalanceViewModel.buttonIssueCardEvent.observe(viewLifecycleOwner) {
-            binding?.topUpCardButton?.isVisible = false
-            binding?.issueCardButton?.isVisible = true
-        }
+         selectBalanceViewModel.buttonIssueCardEvent.observe(viewLifecycleOwner) {
+             binding?.topUpCardButton?.isVisible = false
+             binding?.issueCardButton?.isVisible = true
+         }*/
 
         selectBalanceViewModel.configData.observe(viewLifecycleOwner) {
             val balanceItemModels: List<BalanceItemModel>? = it
@@ -69,7 +86,7 @@ class SelectBalanceFragment :
                         selectBalanceViewModel.costCard = costCard
                         selectBalanceViewModel.calculateBalance()
                     }
-                binding?.balanceList?.adapter = balanceListAdapter
+                view.findViewById<RecyclerView>(R.id.balanceList).adapter = balanceListAdapter
             }
         }
 
@@ -81,13 +98,13 @@ class SelectBalanceFragment :
             findNavController().navigate(R.id.action_selectBalanceFragment_to_cardListFragment)
         }
 
-        binding?.swipeContainer?.setOnRefreshListener {
-            selectBalanceViewModel.getActiveBalance()
-        }
+        /* binding?.swipeContainer?.setOnRefreshListener {
+             selectBalanceViewModel.getActiveBalance()
+         }*/
 
         setGradient()
 
-        binding?.selectBalanceImage?.apply {
+        view.findViewById<ImageView>(R.id.selectBalanceImage).apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
@@ -107,24 +124,24 @@ class SelectBalanceFragment :
             findNavController().popBackStack()
         }
 
-        binding?.toolbar?.actionMore?.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean(argsTag, true)
-            findNavController().navigate(
-                R.id.action_selectBalanceFragment_to_settings_nav_graph,
-                bundle
-            )
-        }
-        binding?.issueCardButton?.setOnClickListener {
-            selectBalanceViewModel.issueCard()
-        }
-        binding?.topUpCardButton?.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_selectBalanceFragment_to_topUpFragment,
-                null,
-                navOptions
-            )
-        }
+        /*  binding?.toolbar?.actionMore?.setOnClickListener {
+              val bundle = Bundle()
+              bundle.putBoolean(argsTag, true)
+              findNavController().navigate(
+                  R.id.action_selectBalanceFragment_to_settings_nav_graph,
+                  bundle
+              )
+          }
+          binding?.issueCardButton?.setOnClickListener {
+              selectBalanceViewModel.issueCard()
+          }
+          binding?.topUpCardButton?.setOnClickListener {
+              findNavController().navigate(
+                  R.id.action_selectBalanceFragment_to_topUpFragment,
+                  null,
+                  navOptions
+              )
+          }*/
     }
 
     private fun setGradient() {
@@ -158,7 +175,7 @@ class SelectBalanceFragment :
                 AppCompatResources.getDrawable(requireContext(), R.drawable.card_background_bg)
             val layers = arrayOf(layer1, layer2)
             val layerDrawable = LayerDrawable(layers)
-            binding?.selectBalanceImage?.background = layerDrawable
+            view?.findViewById<ImageView>(R.id.selectBalanceImage)?.background = layerDrawable
         }
     }
 

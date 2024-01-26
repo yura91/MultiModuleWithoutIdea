@@ -70,7 +70,7 @@
             android:id="@+id/action_cardPaletteFragment_to_issueCardFragment"
             app:destination="@id/issueCardFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/selectBalanceFragment"
         android:name="net.pst.cash.presentation.SelectBalanceFragment"
         android:label="SelectBalanceFragment">
@@ -83,7 +83,7 @@
         <action
             android:id="@+id/action_selectBalanceFragment_to_cardListFragment"
             app:destination="@id/cardListFragment" />
-    </fragment>
+    </dialog>
     <fragment
         android:id="@+id/cardInfoFragment"
         android:name="net.pst.cash.presentation.CardInfoFragment"
@@ -179,6 +179,8 @@
             app:destination="@id/settings_nav_graph" />
         <action
             android:id="@+id/action_cardListFragment_to_selectBalanceFragment"
-            app:destination="@id/selectBalanceFragment" />
+            app:destination="@id/selectBalanceFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top" />
     </fragment>
 </navigation>

@@ -43,9 +43,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                         .setPopExitAnim(R.anim.slide_out_bottom)
                         .build()
                 findNavController().navigate(
-                    R.id.action_cardListFragment_to_selectBalanceFragment,
-                    null,
-                    navOptions
+                    R.id.action_cardListFragment_to_selectBalanceFragment
                 )
             }
             binding?.cardCarousel?.adapter = cardsAdapter
