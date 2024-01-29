@@ -11,15 +11,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
+import net.pst.cash.domain.HistoryInteractor
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.Currency
+import net.pst.cash.presentation.model.HistoryItem
+import net.pst.cash.presentation.model.RowHistoryItems
 import javax.inject.Inject
 
 @HiltViewModel
 class CardListViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
-    private val activeCardInteractor: ActiveCardInteractor
+    private val activeCardInteractor: ActiveCardInteractor,
+    private val historyInteractor: HistoryInteractor
 ) : AndroidViewModel(application) {
     var viewPagerPosition = 0
 
@@ -61,12 +65,38 @@ class CardListViewModel @Inject constructor(
                 }
             }
             cards.add(CardModel())
+
+            getAllCardHistories(cards)
             _cardList.value = cards
         }
     }
 
-    private fun getAllCardHistories(cardList: List<CardModel>) {
+    private suspend fun getAllCardHistories(cardList: List<CardModel>) {
+        val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", "")
 
+        cardList.subList(0, cardList.size - 1).forEach {
+            val cardId = it.id.toString()
+            if (token != null) {
+                historyInteractor.getShortTransactionList("Bearer $token", cardId)
+                    .collect { pagingData ->
+                        pagingData.map { rowHistoryItem ->
+                            val historyItems = mutableListOf<HistoryItem>()
+                            rowHistoryItem.elements.forEach { historyItem ->
+                                historyItems.add(
+                                    HistoryItem(
+                                        historyItem.sum,
+                                        historyItem.description,
+                                        historyItem.timePart,
+                                        historyItem.status
+                                    )
+                                )
+                            }
+                            RowHistoryItems(rowHistoryItem.date, historyItems)
+                        }
+                    }
+            }
+        }
     }
 
     fun getActiveBalance() {

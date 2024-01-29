@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TransactionsListResponse(
     @SerializedName("data")
-    val `data`: List<TransactionsListData>? = listOf(),
+    val data: List<TransactionsListData>? = listOf(),
     @SerializedName("links")
     val links: TransactionsLinks? = TransactionsLinks(),
     @SerializedName("meta")
