@@ -10,9 +10,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.wajahatkarim3.easyflipview.EasyFlipView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.pst.cash.R
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.dpToPx
@@ -52,6 +56,14 @@ class CardsAdapter(
                 cardViewHolder.easyFlipView.flipTheView()
             }
 
+            val historyAdapter = HistoryPaymentsAdapter()
+
+            cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
+
+            CoroutineScope(Dispatchers.IO).launch {
+                historyAdapter.submitData(PagingData.from(cardModels[position].rowHistoryItems))
+            }
+
             cardViewHolder.payments.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
             }
@@ -75,7 +87,6 @@ class CardsAdapter(
         val easyFlipView: EasyFlipView
         val shortHistoryPaymentList: RecyclerView
         val payments: MaterialButton
-        private val historyAdapter = HistoryPaymentsAdapter()
 
         init {
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)

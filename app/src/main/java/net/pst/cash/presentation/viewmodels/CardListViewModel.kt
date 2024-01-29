@@ -75,12 +75,12 @@ class CardListViewModel @Inject constructor(
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
 
-        cardList.subList(0, cardList.size - 1).forEach {
-            val cardId = it.id.toString()
+        cardList.subList(0, cardList.size - 1).forEach { cardModel ->
+            val cardId = cardModel.id.toString()
             if (token != null) {
                 historyInteractor.getShortTransactionList("Bearer $token", cardId)
-                    .collect { pagingData ->
-                        pagingData.map { rowHistoryItem ->
+                    .collect {
+                        val payments = it.map { rowHistoryItem ->
                             val historyItems = mutableListOf<HistoryItem>()
                             rowHistoryItem.elements.forEach { historyItem ->
                                 historyItems.add(
@@ -94,6 +94,7 @@ class CardListViewModel @Inject constructor(
                             }
                             RowHistoryItems(rowHistoryItem.date, historyItems)
                         }
+                        cardModel.rowHistoryItems = payments
                     }
             }
         }
