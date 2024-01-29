@@ -60,7 +60,8 @@ interface ApiService {
     @GET
     suspend fun getMoreTransactions(
         @Header("Authorization") token: String,
-        @Url url: String
+        @Url url: String,
+        @Query("cards") cards: String
     ): Response<TransactionsListResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")

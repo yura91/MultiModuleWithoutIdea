@@ -66,7 +66,7 @@ class HistoryDataPagingSource(
                         Log.d("CURRENTPAGE", "currentPage $currentPage")
                         val replacedLink = it.replace("http", "https")
                         val listTransDataResp =
-                            apiService.getMoreTransactions(token, replacedLink).body()
+                            apiService.getMoreTransactions(token, replacedLink, cardId).body()
                         nextLink = listTransDataResp?.links?.next
 
                         val data = listTransDataResp?.data

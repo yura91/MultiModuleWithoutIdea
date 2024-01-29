@@ -65,6 +65,10 @@ class CardListViewModel @Inject constructor(
         }
     }
 
+    private fun getAllCardHistories(cardList: List<CardModel>) {
+
+    }
+
     fun getActiveBalance() {
         viewModelScope.launch {
             accountsInteractor.getAccounts()

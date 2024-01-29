@@ -41,7 +41,7 @@
             android:layout_marginEnd="@dimen/margin_35"
             android:layout_marginBottom="@dimen/margin_10"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/simplePaymentList"
+            app:layout_constraintBottom_toTopOf="@+id/shortHistoryPaymentList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/simplePaymentList"
+            android:id="@+id/shortHistoryPaymentList"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_120"
             android:layout_marginStart="@dimen/margin_35"

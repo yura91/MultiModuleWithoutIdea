@@ -73,7 +73,7 @@ class CardsAdapter(
         val cardNumLastDigits: TextView
         val cardExpiryDate: TextView
         val easyFlipView: EasyFlipView
-        val simplePaymentList: RecyclerView
+        val shortHistoryPaymentList: RecyclerView
         val payments: MaterialButton
         private val historyAdapter = HistoryPaymentsAdapter()
 
@@ -86,7 +86,7 @@ class CardsAdapter(
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             payments = itemView.findViewById(R.id.payments)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
-            simplePaymentList = itemView.findViewById(R.id.simplePaymentList)
+            shortHistoryPaymentList = itemView.findViewById(R.id.shortHistoryPaymentList)
         }
 
         fun setGradient() {
