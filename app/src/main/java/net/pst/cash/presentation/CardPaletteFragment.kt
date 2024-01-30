@@ -55,7 +55,7 @@ class CardPaletteFragment :
                 putInt(userId + getString(R.string.endcolor), cardPalleteViewModel.endColor)
                 apply()
             }
-            it.findNavController().navigate(R.id.action_cardPaletteFragment_to_issueCardFragment)
+            it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardListFragment)
         }
 
         binding?.actionMore?.setOnClickListener {

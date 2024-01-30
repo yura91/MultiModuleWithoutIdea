@@ -58,7 +58,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         }
 
         signInViewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_signInFragment_to_issueCardFragment)
+            findNavController().navigate(R.id.action_signInFragment_to_cardListFragment)
         }
         signInViewModel.appleLink.observe(viewLifecycleOwner) { link ->
             val action = SignInFragmentDirections.actionSignInFragmentToAppleWebViewFragment(link)

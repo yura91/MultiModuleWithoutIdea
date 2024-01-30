@@ -109,14 +109,14 @@ class CardsAdapter(
             val userId = sharedPref.getString(itemView.context.getString(R.string.userid), "")
             val startColor = sharedPref.getInt(
                 userId + itemView.context.getString(R.string.startcolor),
-                IssueCardFragment.defColorValue
+                defColorValue
             )
             val endColor = sharedPref.getInt(
                 userId + itemView.context.getString(R.string.endcolor),
-                IssueCardFragment.defColorValue
+                defColorValue
             )
 
-            if (startColor != IssueCardFragment.defColorValue && endColor != IssueCardFragment.defColorValue) {
+            if (startColor != defColorValue && endColor != defColorValue) {
                 val gradientDrawable = GradientDrawable(
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(startColor, endColor)
@@ -161,14 +161,14 @@ class CardsAdapter(
             val userId = sharedPref.getString(itemView.context.getString(R.string.userid), "")
             val startColor = sharedPref.getInt(
                 userId + itemView.context.getString(R.string.startcolor),
-                IssueCardFragment.defColorValue
+                defColorValue
             )
             val endColor = sharedPref.getInt(
                 userId + itemView.context.getString(R.string.endcolor),
-                IssueCardFragment.defColorValue
+                defColorValue
             )
 
-            if (startColor != IssueCardFragment.defColorValue && endColor != IssueCardFragment.defColorValue) {
+            if (startColor != defColorValue && endColor != defColorValue) {
                 val gradientDrawable = GradientDrawable(
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     intArrayOf(startColor, endColor)
@@ -198,5 +198,6 @@ class CardsAdapter(
     companion object {
         const val cardType = 0
         const val issueType = 1
+        const val defColorValue = -1
     }
 }

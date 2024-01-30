@@ -35,7 +35,7 @@ class AppleWebViewFragment : BaseFragment<FragmentWebViewBinding>(FragmentWebVie
         }
 
         viewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_appleWebViewFragment_to_issueCardFragment)
+            findNavController().navigate(R.id.action_appleWebViewFragment_to_cardListFragment)
         }
 
         viewModel.configData.observe(viewLifecycleOwner) {

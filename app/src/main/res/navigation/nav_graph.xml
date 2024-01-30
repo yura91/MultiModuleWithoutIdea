@@ -16,11 +16,13 @@
             android:id="@+id/action_signInFragment_to_apple_webViewFragment"
             app:destination="@id/appleWebViewFragment" />
         <action
-            android:id="@+id/action_signInFragment_to_issueCardFragment"
-            app:destination="@id/issueCardFragment" />
-        <action
             android:id="@+id/action_signInFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/getAcquaintedFragment"
@@ -67,8 +69,10 @@
             android:id="@+id/action_cardPaletteFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
         <action
-            android:id="@+id/action_cardPaletteFragment_to_issueCardFragment"
-            app:destination="@id/issueCardFragment" />
+            android:id="@+id/action_cardPaletteFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/cardPaletteFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/selectBalanceFragment"
@@ -114,17 +118,6 @@
         android:label="fragment_history_payments"
         tools:layout="@layout/fragment_history_payments" />
     <fragment
-        android:id="@+id/issueCardFragment"
-        android:name="net.pst.cash.presentation.IssueCardFragment"
-        android:label="IssueCardFragment">
-        <action
-            android:id="@+id/action_issueCardFragment_to_settings_nav_graph"
-            app:destination="@id/settings_nav_graph" />
-        <action
-            android:id="@+id/action_issueCardFragment_to_selectBalanceFragment"
-            app:destination="@id/selectBalanceFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/appleWebViewFragment"
         android:name="net.pst.cash.presentation.AppleWebViewFragment"
         android:label="fragment_web_view"
@@ -132,14 +125,17 @@
         <argument
             android:name="link"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_appleWebViewFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/appleWebViewFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_webViewFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment"
             app:popUpTo="@id/appleWebViewFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_appleWebViewFragment_to_issueCardFragment"
-            app:destination="@id/issueCardFragment" />
         <action
             android:id="@+id/action_appleWebViewFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
@@ -155,9 +151,6 @@
             app:popUpTo="@id/loadingFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_loadingFragment_to_issueCardFragment"
-            app:destination="@id/issueCardFragment" />
-        <action
             android:id="@+id/action_loadingFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment" />
         <action
@@ -165,6 +158,8 @@
             app:destination="@id/cardPaletteFragment" />
         <action
             android:id="@+id/action_loadingFragment_to_cardListFragment"
+            app:popUpTo="@id/loadingFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/cardListFragment" />
     </fragment>
     <fragment

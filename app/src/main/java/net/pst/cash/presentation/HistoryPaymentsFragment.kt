@@ -3,10 +3,8 @@ package net.pst.cash.presentation
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,12 +48,8 @@ class HistoryPaymentsFragment : BaseDialogFragment<FragmentHistoryPaymentsBindin
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().popBackStack()
-        }
-
         binding?.toolbar?.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            dismiss()
         }
     }
 
