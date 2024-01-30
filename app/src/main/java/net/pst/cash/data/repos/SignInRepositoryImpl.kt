@@ -89,7 +89,7 @@ class SignInRepositoryImpl @Inject constructor(
                 if (signInAppleResponse.isSuccessful) {
                     val token = signInAppleResponse.body()?.data?.token
                     with(sharedPref.edit()) {
-                        putString(token, token)
+                        putString(Companion.token, token)
                         apply()
                     }
                     token?.let {

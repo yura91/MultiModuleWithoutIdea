@@ -2,6 +2,7 @@ package net.pst.cash.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,6 +40,10 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         cardListViewModel.errorLoadCardList.observe(viewLifecycleOwner) {
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
         }
 
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
