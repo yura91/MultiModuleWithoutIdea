@@ -6,6 +6,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentCardListBinding
@@ -30,6 +31,14 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         cardListViewModel.account.observe(viewLifecycleOwner) {
             binding?.toolbar?.cardBalance?.text = it
+        }
+
+        cardListViewModel.error.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+        }
+
+        cardListViewModel.errorLoadCardList.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
         }
 
         cardListViewModel.cardList.observe(viewLifecycleOwner) {

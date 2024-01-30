@@ -3,9 +3,11 @@ package net.pst.cash.data.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.pst.cash.data.ApiService
+import net.pst.cash.data.responses.ErrorResponse
 import net.pst.cash.data.responses.TransactionsListData
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,61 +36,29 @@ class HistoryDataPagingSource(
                     val responseData = mutableListOf<TransactionsListData>()
                     Log.d("CURRENTPAGE", "currentPage $currentPage")
                     val response = apiService.getTransactionsList(token, cardId)
-                    nextLink = response.body()?.links?.next
-                    Log.d("NEXTLINK", "currentPage $nextLink")
-                    val data = response.body()?.data
-                    if (data != null) {
-                        responseData.addAll(data)
-                    }
-                    transactionModels = responseData.map {
-                        var dateTime = Pair("", "")
-                        if (it.processedAt != null) {
-                            dateTime = getDateAndTime(it.processedAt)
-                        }
-                        var sum = ""
-                        if (it.amount != null) {
-                            sum = it.amount
-                        }
-                        var description = ""
-                        if (it.description != null) {
-                            description = it.description
-                        }
-                        var status: Int = 0
-                        if (it.status != null) {
-                            status = it.status
-                        }
-                        TransactionModel(sum, description, dateTime.first, dateTime.second, status)
-                    }
-                } else {
-                    Log.d("NEXTLINK", "currentPage $nextLink")
-                    nextLink?.let {
-                        val responseData = mutableListOf<TransactionsListData>()
-                        Log.d("CURRENTPAGE", "currentPage $currentPage")
-                        val replacedLink = it.replace("http", "https")
-                        val listTransDataResp =
-                            apiService.getMoreTransactions(token, replacedLink, cardId).body()
-                        nextLink = listTransDataResp?.links?.next
-
-                        val data = listTransDataResp?.data
+                    if (response.isSuccessful) {
+                        nextLink = response.body()?.links?.next
+                        Log.d("NEXTLINK", "currentPage $nextLink")
+                        val data = response.body()?.data
                         if (data != null) {
                             responseData.addAll(data)
                         }
-                        transactionModels = responseData.map { transactionListData ->
+                        transactionModels = responseData.map {
                             var dateTime = Pair("", "")
-                            if (transactionListData.processedAt != null) {
-                                dateTime = getDateAndTime(transactionListData.processedAt)
+                            if (it.processedAt != null) {
+                                dateTime = getDateAndTime(it.processedAt)
                             }
                             var sum = ""
-                            if (transactionListData.amount != null) {
-                                sum = transactionListData.amount
+                            if (it.amount != null) {
+                                sum = it.amount
                             }
                             var description = ""
-                            if (transactionListData.description != null) {
-                                description = transactionListData.description
+                            if (it.description != null) {
+                                description = it.description
                             }
                             var status: Int = 0
-                            if (transactionListData.status != null) {
-                                status = transactionListData.status
+                            if (it.status != null) {
+                                status = it.status
                             }
                             TransactionModel(
                                 sum,
@@ -97,6 +67,58 @@ class HistoryDataPagingSource(
                                 dateTime.second,
                                 status
                             )
+                        }
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        val gson = Gson()
+                        val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                        throw Exception(errorResponse.message)
+                    }
+                } else {
+                    Log.d("NEXTLINK", "currentPage $nextLink")
+                    nextLink?.let {
+                        val responseData = mutableListOf<TransactionsListData>()
+                        Log.d("CURRENTPAGE", "currentPage $currentPage")
+                        val replacedLink = it.replace("http", "https")
+                        val listTransDataResp =
+                            apiService.getMoreTransactions(token, replacedLink, cardId)
+                        if (listTransDataResp.isSuccessful) {
+                            nextLink = listTransDataResp.body()?.links?.next
+
+                            val data = listTransDataResp.body()?.data
+                            if (data != null) {
+                                responseData.addAll(data)
+                            }
+                            transactionModels = responseData.map { transactionListData ->
+                                var dateTime = Pair("", "")
+                                if (transactionListData.processedAt != null) {
+                                    dateTime = getDateAndTime(transactionListData.processedAt)
+                                }
+                                var sum = ""
+                                if (transactionListData.amount != null) {
+                                    sum = transactionListData.amount
+                                }
+                                var description = ""
+                                if (transactionListData.description != null) {
+                                    description = transactionListData.description
+                                }
+                                var status: Int = 0
+                                if (transactionListData.status != null) {
+                                    status = transactionListData.status
+                                }
+                                TransactionModel(
+                                    sum,
+                                    description,
+                                    dateTime.first,
+                                    dateTime.second,
+                                    status
+                                )
+                            }
+                        } else {
+                            val errorBody = listTransDataResp.errorBody()?.string()
+                            val gson = Gson()
+                            val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                            throw Exception(errorResponse.message)
                         }
                     }
                 }

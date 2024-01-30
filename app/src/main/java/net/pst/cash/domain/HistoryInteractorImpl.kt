@@ -17,7 +17,6 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
     ): Flow<List<RowHistoryItems>> {
         val rowHistoryitems = mutableListOf<RowHistoryItems>()
         return historyListRepo.getShortTransactionList(token, cardId).map { transactions ->
-
             transactions.keys.forEach { key ->
                 val elements = transactions[key]
                 val historyItems = elements?.map {
@@ -36,8 +35,6 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
 
             rowHistoryitems
         }
-
-//        return flowOf(rowHistoryitems)
     }
 
     override suspend fun getTransactionList(

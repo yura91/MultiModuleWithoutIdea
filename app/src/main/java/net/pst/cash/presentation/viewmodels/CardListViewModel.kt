@@ -31,6 +31,12 @@ class CardListViewModel @Inject constructor(
     val cardList: LiveData<List<CardModel>>
         get() = _cardList
 
+    val errorLoadCardList = activeCardInteractor.errorMessage
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
     private val _account = accountsInteractor.account.map {
         it?.balance?.split(" ")?.get(0)
     }
