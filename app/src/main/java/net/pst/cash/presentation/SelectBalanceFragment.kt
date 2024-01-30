@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.TextView
-import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -101,9 +100,6 @@ class SelectBalanceFragment :
             })
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().popBackStack()
-        }
 
         binding?.toolbar?.actionMore?.setOnClickListener {
             val bundle = Bundle()

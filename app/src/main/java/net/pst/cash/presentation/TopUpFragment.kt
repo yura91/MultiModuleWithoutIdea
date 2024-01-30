@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentTopUpBinding
@@ -36,13 +34,9 @@ class TopUpFragment : BaseDialogFragment<FragmentTopUpBinding>(FragmentTopUpBind
             binding?.qrCode?.setImageBitmap(it)
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().popBackStack()
-        }
-
         binding?.toolbar?.actionMore?.setImageResource(R.drawable.ic_close)
         binding?.toolbar?.actionMore?.setOnClickListener {
-            findNavController().popBackStack()
+           dismiss()
         }
         binding?.copyQr?.setOnClickListener {
             Toast.makeText(requireContext(), "QR is copied", Toast.LENGTH_SHORT).show()
