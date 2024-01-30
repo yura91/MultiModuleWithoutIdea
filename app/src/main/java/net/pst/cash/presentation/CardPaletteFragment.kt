@@ -26,8 +26,6 @@ class CardPaletteFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args = arguments
-        val clearBackStack = args?.getBoolean(argsKey)
 
         val colors: IntArray = intArrayOf(
             getColor(requireContext(), R.color.red_gr_color),
@@ -63,10 +61,7 @@ class CardPaletteFragment :
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            if (clearBackStack != null && clearBackStack == true) {
                 requireActivity().finish()
-            } else {
-            }
         }
 
         binding?.toolbar?.setNavigationOnClickListener {
@@ -153,6 +148,5 @@ class CardPaletteFragment :
 
     companion object {
         const val defColorValue = -1
-        private const val argsKey = "clearBackStack"
     }
 }
