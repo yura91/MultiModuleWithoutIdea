@@ -47,7 +47,7 @@ class CardListViewModel @Inject constructor(
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            val cardList = activeCardInteractor.getActiveCardModel("Bearer $token")
+            val cardList = activeCardInteractor.getAllCards("Bearer $token")
             val cards: MutableList<CardModel> = mutableListOf()
             cardList?.let {
                 it.forEach { cardModel ->

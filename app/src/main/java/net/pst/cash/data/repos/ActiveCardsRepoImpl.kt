@@ -17,10 +17,10 @@ class ActiveCardsRepoImpl @Inject constructor(
     override val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    override suspend fun checkActiveCard(token: String): List<CardResponseData>? {
+    override suspend fun getAllCards(token: String): List<CardResponseData>? {
         return withContext(Dispatchers.IO) {
             try {
-                val cardDataResponse = api.checkActiveCard(token)
+                val cardDataResponse = api.getAllCards(token)
                 if (cardDataResponse.isSuccessful) {
                     cardDataResponse.body()?.data
                 } else {

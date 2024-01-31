@@ -35,7 +35,7 @@ interface ApiService {
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/card")
-    suspend fun checkActiveCard(@Header("Authorization") token: String): Response<CheckCardResponse>
+    suspend fun getAllCards(@Header("Authorization") token: String): Response<CheckCardResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/oauth/apple/link")

@@ -12,8 +12,8 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
     ActiveCardInteractor {
 
     override val errorMessage: LiveData<String> = activeCardsRepo.errorMessage
-    override suspend fun getActiveCardModel(token: String): List<CardModel>? {
-        val activeCardsResponse: List<CardResponseData>? = activeCardsRepo.checkActiveCard(token)
+    override suspend fun getAllCards(token: String): List<CardModel>? {
+        val activeCardsResponse: List<CardResponseData>? = activeCardsRepo.getAllCards(token)
         return if (!activeCardsResponse.isNullOrEmpty()) {
             val cardModels: MutableList<CardModel> = mutableListOf()
             activeCardsResponse.forEach { cardDataModel ->
