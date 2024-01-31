@@ -7,5 +7,5 @@ data class CardModel(
     val holderName: String? = null,
     val lastCardDigits: String? = null,
     val expireDate: String? = null,
-    var rowHistoryItems: List<RowHistoryItems> = listOf()
+    var rowHistoryItems: MutableList<RowHistoryItems> = mutableListOf()
 )

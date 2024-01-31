@@ -86,13 +86,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         cardListViewModel.getAllCards()
     }
 
-    override fun onPause() {
-        super.onPause()
-        // Сохраните позицию ViewPager
-        cardListViewModel.viewPagerPosition = binding?.cardCarousel?.currentItem!!
-    }
-
-
     companion object {
         private const val argsTag = "showAdditionalItems"
         private const val cardIdTag = "cardId"

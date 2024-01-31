@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_24"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_22"
+        android:textSize="@dimen/text_16"
         android:textStyle="bold"
         tools:text="Today" />
 

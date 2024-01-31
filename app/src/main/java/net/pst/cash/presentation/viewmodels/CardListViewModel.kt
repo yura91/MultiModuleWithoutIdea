@@ -25,7 +25,6 @@ class CardListViewModel @Inject constructor(
     private val activeCardInteractor: ActiveCardInteractor,
     private val historyInteractor: HistoryInteractor
 ) : AndroidViewModel(application) {
-    var viewPagerPosition = 0
 
     private val _cardList = MutableLiveData<List<CardModel>>()
     val cardList: LiveData<List<CardModel>>
@@ -100,7 +99,8 @@ class CardListViewModel @Inject constructor(
                             }
                             RowHistoryItems(rowHistoryItem.date, historyItems)
                         }
-                        cardModel.rowHistoryItems = payments
+                        cardModel.rowHistoryItems.addAll(payments)
+                        cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
                     }
             }
         }
