@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardItemRestrictedLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_182"
+            android:layout_height="150dp"
             android:layout_gravity="bottom"
             android:background="@drawable/tint_background" />
 
@@ -42,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginStart="@dimen/margin_26"
-            android:layout_marginBottom="@dimen/margin_110"
-            android:text="@string/_0_00"
+            android:layout_marginBottom="78dp"
+            tools:text="@string/card_balance"
             android:textColor="@color/white"
             android:textSize="@dimen/text_46" />
 
@@ -51,9 +52,9 @@
             android:id="@+id/cardNumLastDigits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/margin_34"
-            android:layout_marginBottom="@dimen/margin_60"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="@dimen/margin_34"
+            android:layout_marginBottom="@dimen/margin_34"
             android:text="@string/card_num_holder"
             android:textColor="@color/white"
             android:textSize="@dimen/text_16" />

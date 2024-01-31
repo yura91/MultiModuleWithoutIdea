@@ -54,35 +54,24 @@
         android:id="@+id/cardNumTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_34"
-        android:layout_marginBottom="@dimen/margin_56"
+        android:layout_marginStart="@dimen/margin_34"
         android:text="@string/card_num_holder"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
-        app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
-        app:layout_constraintEnd_toEndOf="@+id/cardDesign" />
+        app:layout_constraintBottom_toBottomOf="@+id/expDate"
+        app:layout_constraintStart_toStartOf="@+id/cardDesign" />
 
     <TextView
+        android:id="@+id/expDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="@dimen/margin_34"
         android:text="@string/card_exp_date"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardNumTemp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_28"
-        android:layout_marginBottom="@dimen/margin_56"
-        android:text="@string/john_doe"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_16"
-        app:layout_constraintBottom_toBottomOf="@+id/cardDesign"
-        app:layout_constraintStart_toStartOf="@+id/cardDesign" />
+        app:layout_constraintBottom_toBottomOf="@+id/cardDesign" />
 
     <com.rtugeek.android.colorseekbar.ColorSeekBar
         android:id="@+id/colorSeekBar"

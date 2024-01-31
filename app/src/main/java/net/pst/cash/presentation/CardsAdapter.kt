@@ -40,7 +40,8 @@ class CardsAdapter(
         if (holder.itemViewType == cardType) {
             val cardViewHolder = holder as CardViewHolder
             cardViewHolder.setGradient()
-            cardViewHolder.cardBalance.text = cardModels[position].balance
+            cardViewHolder.cardBalance.text =
+                context.getString(R.string.card_balance, cardModels[position].balance)
             cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
             cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
             cardViewHolder.cardInfoFront.setOnClickListener {
