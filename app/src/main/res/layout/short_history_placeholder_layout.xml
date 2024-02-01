@@ -39,7 +39,6 @@
                     android:layout_width="@dimen/size_20"
                     android:layout_height="@dimen/size_10"
                     android:layout_marginStart="@dimen/margin_10"
-
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 

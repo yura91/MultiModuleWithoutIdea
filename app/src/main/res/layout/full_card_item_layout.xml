@@ -88,6 +88,32 @@
                 app:layout_constraintTop_toTopOf="@+id/cardNumber" />
         </LinearLayout>
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/backSideCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_118"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="220dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:background="@android:color/darker_gray" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <LinearLayout
             android:id="@+id/copyExpDate"
             android:layout_width="wrap_content"
@@ -111,6 +137,31 @@
                 android:layout_marginStart="@dimen/margin_10"
                 android:src="@drawable/ic_copy" />
         </LinearLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/backSideExpDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_28">
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:background="@android:color/darker_gray" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -145,5 +196,31 @@
                 android:layout_marginStart="@dimen/margin_10"
                 android:src="@drawable/ic_copy" />
         </LinearLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/backSideCvv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_24"
+                android:layout_marginBottom="@dimen/margin_28">
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:background="@android:color/darker_gray" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>
