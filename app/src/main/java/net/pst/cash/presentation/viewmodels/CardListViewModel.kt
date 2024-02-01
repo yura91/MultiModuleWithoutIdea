@@ -30,6 +30,10 @@ class CardListViewModel @Inject constructor(
     val cardList: LiveData<List<CardModel>>
         get() = _cardList
 
+    private val _updateCardList = MutableLiveData<List<CardModel>>()
+    val updateCardList: LiveData<List<CardModel>>
+        get() = _updateCardList
+
     val errorLoadCardList = activeCardInteractor.errorMessage
 
     private val _error = MutableLiveData<String>()
@@ -70,39 +74,39 @@ class CardListViewModel @Inject constructor(
                 }
             }
             cards.add(CardModel())
-
-            getAllCardHistories(cards)
             _cardList.value = cards
         }
     }
 
-    private suspend fun getAllCardHistories(cardList: List<CardModel>) {
+    fun getAllCardHistories(cardList: List<CardModel>) {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
-
-        cardList.subList(0, cardList.size - 1).forEach { cardModel ->
-            val cardId = cardModel.id.toString()
-            if (token != null) {
-                historyInteractor.getShortTransactionList("Bearer $token", cardId)
-                    .collect {
-                        val payments = it.map { rowHistoryItem ->
-                            val historyItems = mutableListOf<HistoryItem>()
-                            rowHistoryItem.elements.forEach { historyItem ->
-                                historyItems.add(
-                                    HistoryItem(
-                                        historyItem.sum,
-                                        historyItem.description,
-                                        historyItem.timePart,
-                                        historyItem.status
+        viewModelScope.launch {
+            cardList.subList(0, cardList.size - 1).forEach { cardModel ->
+                val cardId = cardModel.id.toString()
+                if (token != null) {
+                    historyInteractor.getShortTransactionList("Bearer $token", cardId)
+                        .collect {
+                            val payments = it.map { rowHistoryItem ->
+                                val historyItems = mutableListOf<HistoryItem>()
+                                rowHistoryItem.elements.forEach { historyItem ->
+                                    historyItems.add(
+                                        HistoryItem(
+                                            historyItem.sum,
+                                            historyItem.description,
+                                            historyItem.timePart,
+                                            historyItem.status
+                                        )
                                     )
-                                )
+                                }
+                                RowHistoryItems(rowHistoryItem.date, historyItems)
                             }
-                            RowHistoryItems(rowHistoryItem.date, historyItems)
+                            cardModel.rowHistoryItems.addAll(payments)
+                            cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
                         }
-                        cardModel.rowHistoryItems.addAll(payments)
-                        cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
-                    }
+                }
             }
+            _updateCardList.value = cardList
         }
     }
 

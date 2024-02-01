@@ -75,11 +75,27 @@
 
         </LinearLayout>
 
+        <include
+            android:id="@+id/shimmer1"
+            layout="@layout/short_history_placeholder_layout"
+            android:visibility="gone"></include>
+
+        <include
+            android:id="@+id/shimmer2"
+            layout="@layout/short_history_placeholder_layout"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/shimmer3"
+            layout="@layout/short_history_placeholder_layout"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shortHistoryPaymentList"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_120"
             android:layout_marginStart="@dimen/margin_35"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/margin_35"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent" />

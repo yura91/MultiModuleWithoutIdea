@@ -45,22 +45,29 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().finish()
         }
+        val cardsAdapter = CardsAdapter(requireContext(), listOf(), {
+            findNavController().navigate(
+                R.id.action_cardListFragment_to_selectBalanceFragment
+            )
+        }) { cardid ->
+            val bundle = Bundle()
+            bundle.putInt(cardIdTag, cardid)
 
+            findNavController().navigate(
+                R.id.action_cardListFragment_to_historyPaymentsFragment,
+                bundle
+            )
+        }
+        binding?.cardCarousel?.adapter = cardsAdapter
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
-            val cardsAdapter = CardsAdapter(requireContext(), it, {
-                findNavController().navigate(
-                    R.id.action_cardListFragment_to_selectBalanceFragment
-                )
-            }) { cardid ->
-                val bundle = Bundle()
-                bundle.putInt(cardIdTag, cardid)
 
-                findNavController().navigate(
-                    R.id.action_cardListFragment_to_historyPaymentsFragment,
-                    bundle
-                )
-            }
-            binding?.cardCarousel?.adapter = cardsAdapter
+            cardsAdapter.updateCardModels(it)
+
+            cardListViewModel.getAllCardHistories(it)
+        }
+
+        cardListViewModel.updateCardList.observe(viewLifecycleOwner) {
+            cardsAdapter.updateCardModels(it)
         }
 
         binding?.cardCarousel?.apply {

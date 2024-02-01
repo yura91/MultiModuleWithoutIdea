@@ -63,4 +63,8 @@
     <dimen name="margin_110">110dp</dimen>
     <dimen name="size_182">182dp</dimen>
     <dimen name="size_40">40dp</dimen>
+    <dimen name="size_16">16dp</dimen>
+    <dimen name="size_10">10dp</dimen>
+    <dimen name="size_20">20dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
 </resources>
