@@ -109,21 +109,21 @@ class CardsAdapter(
             }
 
             if (cardModels[position].rowHistoryItems.isEmpty()) {
-                cardViewHolder.shimmer1.startShimmer()
-                cardViewHolder.shimmer2.startShimmer()
-                cardViewHolder.shimmer3.startShimmer()
-                cardViewHolder.shimmer1.isVisible = true
-                cardViewHolder.shimmer2.isVisible = true
-                cardViewHolder.shimmer3.isVisible = true
+                cardViewHolder.shortHistoryShimmer1.startShimmer()
+                cardViewHolder.shortHistoryShimmer2.startShimmer()
+                cardViewHolder.shortHistoryShimmer3.startShimmer()
+                cardViewHolder.shortHistoryShimmer1.isVisible = true
+                cardViewHolder.shortHistoryShimmer2.isVisible = true
+                cardViewHolder.shortHistoryShimmer3.isVisible = true
                 cardViewHolder.shortHistoryPaymentList.isVisible = false
                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
             } else {
-                cardViewHolder.shimmer1.stopShimmer()
-                cardViewHolder.shimmer2.stopShimmer()
-                cardViewHolder.shimmer3.stopShimmer()
-                cardViewHolder.shimmer1.isVisible = false
-                cardViewHolder.shimmer2.isVisible = false
-                cardViewHolder.shimmer3.isVisible = false
+                cardViewHolder.shortHistoryShimmer1.stopShimmer()
+                cardViewHolder.shortHistoryShimmer2.stopShimmer()
+                cardViewHolder.shortHistoryShimmer3.stopShimmer()
+                cardViewHolder.shortHistoryShimmer1.isVisible = false
+                cardViewHolder.shortHistoryShimmer2.isVisible = false
+                cardViewHolder.shortHistoryShimmer3.isVisible = false
                 cardViewHolder.shortHistoryPaymentList.isVisible = true
                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
             }
@@ -154,9 +154,9 @@ class CardsAdapter(
         val shortHistoryPaymentList: RecyclerView
         val fullCardNumberLayout: LinearLayout
         val expDateBackLayout: LinearLayout
-        val shimmer1: ShimmerFrameLayout
-        val shimmer2: ShimmerFrameLayout
-        val shimmer3: ShimmerFrameLayout
+        val shortHistoryShimmer1: ShimmerFrameLayout
+        val shortHistoryShimmer2: ShimmerFrameLayout
+        val shortHistoryShimmer3: ShimmerFrameLayout
         val shimmerFront: ShimmerFrameLayout
         val shimmerFourDigits: View
         val shimmerExpDateFront: View
@@ -180,9 +180,9 @@ class CardsAdapter(
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
             fullCardNumber = itemView.findViewById(R.id.cardNumber)
             cvv = itemView.findViewById(R.id.cvv)
-            shimmer1 = itemView.findViewById(R.id.shimmer1)
-            shimmer2 = itemView.findViewById(R.id.shimmer2)
-            shimmer3 = itemView.findViewById(R.id.shimmer3)
+            shortHistoryShimmer1 = itemView.findViewById(R.id.shimmer1)
+            shortHistoryShimmer2 = itemView.findViewById(R.id.shimmer2)
+            shortHistoryShimmer3 = itemView.findViewById(R.id.shimmer3)
             shimmerFront = itemView.findViewById(R.id.frontSideShimmer)
             backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
             shimmerExpDateBack = itemView.findViewById(R.id.backSideExpDateShimmer)
