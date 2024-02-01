@@ -60,13 +60,11 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         }
         binding?.cardCarousel?.adapter = cardsAdapter
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
-
             cardsAdapter.updateCardModels(it)
-
-            cardListViewModel.getAllCardHistories(it)
+            cardListViewModel.getAllCardHistories()
         }
 
-        cardListViewModel.updateCardList.observe(viewLifecycleOwner) {
+        cardListViewModel.cardHistoriesList.observe(viewLifecycleOwner) {
             cardsAdapter.updateCardModels(it)
         }
 

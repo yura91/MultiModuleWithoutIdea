@@ -79,8 +79,8 @@ class CardsAdapter(
                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
             } else {
                 cardViewHolder.shimmer1.stopShimmer()
-                cardViewHolder.shimmer2.startShimmer()
-                cardViewHolder.shimmer3.startShimmer()
+                cardViewHolder.shimmer2.stopShimmer()
+                cardViewHolder.shimmer3.stopShimmer()
                 cardViewHolder.shimmer1.isVisible = false
                 cardViewHolder.shimmer2.isVisible = false
                 cardViewHolder.shimmer3.isVisible = false

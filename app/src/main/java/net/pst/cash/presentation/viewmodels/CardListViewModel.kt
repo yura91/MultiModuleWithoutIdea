@@ -30,9 +30,9 @@ class CardListViewModel @Inject constructor(
     val cardList: LiveData<List<CardModel>>
         get() = _cardList
 
-    private val _updateCardList = MutableLiveData<List<CardModel>>()
-    val updateCardList: LiveData<List<CardModel>>
-        get() = _updateCardList
+    private val _cardHistoriesList = MutableLiveData<List<CardModel>>()
+    val cardHistoriesList: LiveData<List<CardModel>>
+        get() = _cardHistoriesList
 
     val errorLoadCardList = activeCardInteractor.errorMessage
 
@@ -78,35 +78,39 @@ class CardListViewModel @Inject constructor(
         }
     }
 
-    fun getAllCardHistories(cardList: List<CardModel>) {
+    fun getAllCardHistories() {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
         viewModelScope.launch {
-            cardList.subList(0, cardList.size - 1).forEach { cardModel ->
-                val cardId = cardModel.id.toString()
-                if (token != null) {
-                    historyInteractor.getShortTransactionList("Bearer $token", cardId)
-                        .collect {
-                            val payments = it.map { rowHistoryItem ->
-                                val historyItems = mutableListOf<HistoryItem>()
-                                rowHistoryItem.elements.forEach { historyItem ->
-                                    historyItems.add(
-                                        HistoryItem(
-                                            historyItem.sum,
-                                            historyItem.description,
-                                            historyItem.timePart,
-                                            historyItem.status
+            val cardList = cardList.value
+            if (!cardList.isNullOrEmpty()) {
+                cardList.subList(0, cardList.size - 1).forEach { cardModel ->
+                    val cardId = cardModel.id.toString()
+                    if (token != null) {
+                        historyInteractor.getShortTransactionList("Bearer $token", cardId)
+                            .collect {
+                                val payments = it.map { rowHistoryItem ->
+                                    val historyItems = mutableListOf<HistoryItem>()
+                                    rowHistoryItem.elements.forEach { historyItem ->
+                                        historyItems.add(
+                                            HistoryItem(
+                                                historyItem.sum,
+                                                historyItem.description,
+                                                historyItem.timePart,
+                                                historyItem.status
+                                            )
                                         )
-                                    )
+                                    }
+                                    RowHistoryItems(rowHistoryItem.date, historyItems)
                                 }
-                                RowHistoryItems(rowHistoryItem.date, historyItems)
+                                cardModel.rowHistoryItems.addAll(payments)
+                                cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
                             }
-                            cardModel.rowHistoryItems.addAll(payments)
-                            cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
-                        }
+                    }
                 }
+
+                _cardHistoriesList.value = cardList
             }
-            _updateCardList.value = cardList
         }
     }
 
