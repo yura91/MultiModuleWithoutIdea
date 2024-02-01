@@ -6,5 +6,5 @@ import net.pst.cash.data.responses.AccountsResponse
 
 interface AccountsRepo {
     val errorMessage: LiveData<String>
-    suspend fun getAccounts(token: String): AccountsResponse?
+    suspend fun getAccounts(): AccountsResponse?
 }
