@@ -23,8 +23,7 @@ class CardsAdapter(
     private val context: Context,
     private var cardModels: List<CardModel>,
     val issueCardAction: () -> Unit,
-    val showPaymentsAction: (cardId: Int) -> Unit,
-    val getCardData: (cardId: Int) -> Unit
+    val showPaymentsAction: (cardId: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -53,7 +52,6 @@ class CardsAdapter(
             cardViewHolder.cardBalance.text =
                 context.getString(R.string.card_balance, balance, currency)
             cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
-            cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
             cardViewHolder.cardInfoFront.setOnClickListener {
                 cardViewHolder.easyFlipView.setFlipTypeFromFront()
                 cardViewHolder.easyFlipView.flipTheView()
@@ -71,7 +69,8 @@ class CardsAdapter(
             )
             cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
             cardViewHolder.cvv.text = cardModels[position].cvv
-            cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
+            cardViewHolder.cardExpiryDateFront.text = cardModels[position].expireDate
+            cardViewHolder.cardExpiryDateBack.text = cardModels[position].expireDate
 
             if (cardModels[position].rowHistoryItems.isEmpty()) {
                 cardViewHolder.shimmer1.startShimmer()
@@ -97,13 +96,6 @@ class CardsAdapter(
             cardViewHolder.payments.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
             }
-            cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
-                if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {
-                    cardModels[position].id?.let {
-                        getCardData(it)
-                    }
-                }
-            }
         } else {
             val issueCardViewHolder = holder as IssueCardViewHolder
             issueCardViewHolder.setGradient()
@@ -120,7 +112,8 @@ class CardsAdapter(
         val cardBalance: TextView
         val clickedArea: View
         val cardNumLastDigits: TextView
-        val cardExpiryDate: TextView
+        val cardExpiryDateFront: TextView
+        val cardExpiryDateBack: TextView
         val easyFlipView: EasyFlipView
         val shortHistoryPaymentList: RecyclerView
         val shimmer1: ShimmerFrameLayout
@@ -136,7 +129,8 @@ class CardsAdapter(
             cardBalance = itemView.findViewById(R.id.cardBalance)
             clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
-            cardExpiryDate = itemView.findViewById(R.id.expDate)
+            cardExpiryDateFront = itemView.findViewById(R.id.expDateFront)
+            cardExpiryDateBack = itemView.findViewById(R.id.expDateBack)
             payments = itemView.findViewById(R.id.payments)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
             fullCardNumber = itemView.findViewById(R.id.cardNumber)

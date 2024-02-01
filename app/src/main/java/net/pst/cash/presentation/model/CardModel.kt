@@ -5,7 +5,7 @@ data class CardModel(
     val currencyType: String? = null,
     val balance: String? = null,
     val holderName: String? = null,
-    val lastCardDigits: String? = null,
+    var lastCardDigits: String? = null,
     var expireDate: String? = null,
     var cvv: String? = null,
     var fullCardNumber: String? = null,

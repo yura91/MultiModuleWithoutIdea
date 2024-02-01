@@ -13,7 +13,6 @@ import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
 import net.pst.cash.domain.CardInfoInteractor
 import net.pst.cash.domain.HistoryInteractor
-import net.pst.cash.presentation.model.CardInfoData
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.Currency
 import net.pst.cash.presentation.model.HistoryItem
@@ -37,6 +36,10 @@ class CardListViewModel @Inject constructor(
     val cardHistoriesList: LiveData<List<CardModel>>
         get() = _cardHistoriesList
 
+    private val _cardInfoList = MutableLiveData<List<CardModel>>()
+    val cardInfoList: LiveData<List<CardModel>>
+        get() = _cardInfoList
+
     val errorLoadCardList = activeCardInteractor.errorMessage
 
     private val _error = MutableLiveData<String>()
@@ -57,8 +60,8 @@ class CardListViewModel @Inject constructor(
             val cardList = activeCardInteractor.getAllCards("Bearer $token")
             val cards: MutableList<CardModel> = mutableListOf()
             cardList?.let {
-                it.forEach { cardModel ->
-                    val currencyType: String = when (cardModel.currencyId) {
+                it.forEach { cardData ->
+                    val currencyType: String = when (cardData.currencyId) {
                         Currency.DOLAR.currencyCode -> "$"
                         Currency.EURO.currencyCode -> "€"
                         else -> {
@@ -66,12 +69,9 @@ class CardListViewModel @Inject constructor(
                         }
                     }
                     val card = CardModel(
-                        cardModel.id,
+                        cardData.id,
                         currencyType,
-                        cardModel.balance,
-                        cardModel.holderName,
-                        cardModel.lastCardDigits,
-                        cardModel.expireDate
+                        cardData.balance,
                     )
                     cards.add(card)
                 }
@@ -82,9 +82,9 @@ class CardListViewModel @Inject constructor(
     }
 
     fun getAllCardHistories() {
-        val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("token", "")
         viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
             val cardList = cardList.value
             if (!cardList.isNullOrEmpty()) {
                 cardList.subList(0, cardList.size - 1).forEach { cardModel ->
@@ -117,31 +117,31 @@ class CardListViewModel @Inject constructor(
         }
     }
 
-    fun getCardInfo(cardId: String) {
-        val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("token", "")
+    fun getAllCardInfo() {
         viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            val cardList = cardList.value
             token?.let { token ->
-                val cardInfoModel = cardInfoInteractor.getCardInfo("Bearer $token", cardId)
-                val expMounth = cardInfoModel.expMonth
-                val expYear = cardInfoModel.expYear
-                val expDate = "$expMounth/$expYear"
-                val cardInfoData = CardInfoData(cardInfoModel.number, cardInfoModel.cvx2, expDate)
-                val cardList = cardList.value
                 if (!cardList.isNullOrEmpty()) {
-                    val cardUpdatedModel = cardList.first {
-                        it.id.toString() == cardId
+                    cardList.subList(0, cardList.size - 1).forEach { cardModel ->
+                        val cardId = cardModel.id.toString()
+                        val showPanDataModel =
+                            cardInfoInteractor.getCardInfo("Bearer $token", cardId)
+                        cardModel.fullCardNumber = showPanDataModel.number
+                        val expMonth = showPanDataModel.expMonth
+                        val expYear = showPanDataModel.expYear
+                        cardModel.expireDate = "$expMonth/$expYear"
+                        cardModel.cvv = showPanDataModel.cvx2
+                        cardModel.lastCardDigits = showPanDataModel.lastDigitsNumber
                     }
 
-                    cardUpdatedModel.fullCardNumber = cardInfoData.number
-                    cardUpdatedModel.cvv = cardInfoData.cvv
-                    cardUpdatedModel.expireDate = cardInfoData.expDate
-
-                    _cardList.value = cardList
+                    _cardInfoList.value = cardList
                 }
             }
         }
     }
+
 
     fun getActiveBalance() {
         viewModelScope.launch {
