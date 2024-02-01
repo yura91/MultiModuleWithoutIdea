@@ -84,6 +84,7 @@
                 android:orientation="horizontal">
 
                 <View
+                    android:id="@+id/shimmerFourDigit"
                     android:layout_width="@dimen/size_50"
                     android:layout_height="@dimen/size_16"
                     android:layout_marginStart="@dimen/margin_34"
@@ -96,6 +97,7 @@
                     android:layout_weight="1" />
 
                 <View
+                    android:id="@+id/shimmerExpDateFront"
                     android:layout_width="@dimen/size_50"
                     android:layout_height="@dimen/size_16"
                     android:layout_marginEnd="@dimen/margin_34"

@@ -69,14 +69,14 @@ class CardsAdapter(
             )
             val fullcardNumber = cardModels[position].fullCardNumber
             if (fullcardNumber != null) {
-                cardViewHolder.shimmerFront.isVisible = false
+                cardViewHolder.shimmerFourDigits.isVisible = false
                 cardViewHolder.backSideCardNumberShimmer.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = true
                 cardViewHolder.cardNumLastDigits.isVisible = true
                 cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
                 cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
             } else {
-                cardViewHolder.shimmerFront.isVisible = true
+                cardViewHolder.shimmerFourDigits.isVisible = true
                 cardViewHolder.backSideCardNumberShimmer.isVisible = true
                 cardViewHolder.cardNumLastDigits.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = false
@@ -92,10 +92,21 @@ class CardsAdapter(
                 cardViewHolder.cvvLayout.isVisible = false
             }
 
+            val expDate = cardModels[position].expireDate
 
-
-            cardViewHolder.cardExpiryDateFront.text = cardModels[position].expireDate
-            cardViewHolder.cardExpiryDateBack.text = cardModels[position].expireDate
+            if (expDate != null) {
+                cardViewHolder.shimmerExpDateFront.isVisible = false
+                cardViewHolder.shimmerExpDateBack.isVisible = false
+                cardViewHolder.cardExpiryDateFront.isVisible = true
+                cardViewHolder.expDateBackLayout.isVisible = true
+                cardViewHolder.cardExpiryDateFront.text = expDate
+                cardViewHolder.cardExpiryDateBack.text = expDate
+            } else {
+                cardViewHolder.shimmerExpDateFront.isVisible = true
+                cardViewHolder.shimmerExpDateBack.isVisible = true
+                cardViewHolder.cardExpiryDateFront.isVisible = false
+                cardViewHolder.expDateBackLayout.isVisible = false
+            }
 
             if (cardModels[position].rowHistoryItems.isEmpty()) {
                 cardViewHolder.shimmer1.startShimmer()
@@ -142,12 +153,15 @@ class CardsAdapter(
         val easyFlipView: EasyFlipView
         val shortHistoryPaymentList: RecyclerView
         val fullCardNumberLayout: LinearLayout
+        val expDateBackLayout: LinearLayout
         val shimmer1: ShimmerFrameLayout
         val shimmer2: ShimmerFrameLayout
         val shimmer3: ShimmerFrameLayout
         val shimmerFront: ShimmerFrameLayout
+        val shimmerFourDigits: View
+        val shimmerExpDateFront: View
         val backSideCardNumberShimmer: ShimmerFrameLayout
-        val backSideExpDateShimmer: ShimmerFrameLayout
+        val shimmerExpDateBack: ShimmerFrameLayout
         val backSideCvvShimmer: ShimmerFrameLayout
         val payments: MaterialButton
         val fullCardNumber: TextView
@@ -171,11 +185,14 @@ class CardsAdapter(
             shimmer3 = itemView.findViewById(R.id.shimmer3)
             shimmerFront = itemView.findViewById(R.id.frontSideShimmer)
             backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
-            backSideExpDateShimmer = itemView.findViewById(R.id.backSideExpDateShimmer)
+            shimmerExpDateBack = itemView.findViewById(R.id.backSideExpDateShimmer)
             backSideCvvShimmer = itemView.findViewById(R.id.backSideCvvShimmer)
             shortHistoryPaymentList = itemView.findViewById(R.id.shortHistoryPaymentList)
             fullCardNumberLayout = itemView.findViewById(R.id.fullCardNumber)
             cvvLayout = itemView.findViewById(R.id.cvvLayout)
+            shimmerFourDigits = itemView.findViewById(R.id.shimmerFourDigit)
+            shimmerExpDateFront = itemView.findViewById(R.id.shimmerExpDateFront)
+            expDateBackLayout = itemView.findViewById(R.id.expDateBackLayout)
         }
 
         fun setGradient() {
