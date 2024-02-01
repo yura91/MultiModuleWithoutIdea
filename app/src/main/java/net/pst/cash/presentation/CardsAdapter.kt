@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
@@ -51,7 +52,6 @@ class CardsAdapter(
             val currency = cardModels[position].currencyType
             cardViewHolder.cardBalance.text =
                 context.getString(R.string.card_balance, balance, currency)
-            cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
             cardViewHolder.cardInfoFront.setOnClickListener {
                 cardViewHolder.easyFlipView.setFlipTypeFromFront()
                 cardViewHolder.easyFlipView.flipTheView()
@@ -67,8 +67,33 @@ class CardsAdapter(
                 cardModels[position].rowHistoryItems,
                 showPaymentsAction
             )
-            cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
-            cardViewHolder.cvv.text = cardModels[position].cvv
+            val fullcardNumber = cardModels[position].fullCardNumber
+            if (fullcardNumber != null) {
+                cardViewHolder.shimmerFront.isVisible = false
+                cardViewHolder.backSideCardNumberShimmer.isVisible = false
+                cardViewHolder.fullCardNumberLayout.isVisible = true
+                cardViewHolder.cardNumLastDigits.isVisible = true
+                cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
+                cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
+            } else {
+                cardViewHolder.shimmerFront.isVisible = true
+                cardViewHolder.backSideCardNumberShimmer.isVisible = true
+                cardViewHolder.cardNumLastDigits.isVisible = false
+                cardViewHolder.fullCardNumberLayout.isVisible = false
+            }
+
+            val cvv = cardModels[position].cvv
+            if (cvv != null) {
+                cardViewHolder.backSideCvvShimmer.isVisible = false
+                cardViewHolder.cvvLayout.isVisible = true
+                cardViewHolder.cvv.text = cardModels[position].cvv
+            } else {
+                cardViewHolder.backSideCvvShimmer.isVisible = true
+                cardViewHolder.cvvLayout.isVisible = false
+            }
+
+
+
             cardViewHolder.cardExpiryDateFront.text = cardModels[position].expireDate
             cardViewHolder.cardExpiryDateBack.text = cardModels[position].expireDate
 
@@ -116,12 +141,18 @@ class CardsAdapter(
         val cardExpiryDateBack: TextView
         val easyFlipView: EasyFlipView
         val shortHistoryPaymentList: RecyclerView
+        val fullCardNumberLayout: LinearLayout
         val shimmer1: ShimmerFrameLayout
         val shimmer2: ShimmerFrameLayout
         val shimmer3: ShimmerFrameLayout
+        val shimmerFront: ShimmerFrameLayout
+        val backSideCardNumberShimmer: ShimmerFrameLayout
+        val backSideExpDateShimmer: ShimmerFrameLayout
+        val backSideCvvShimmer: ShimmerFrameLayout
         val payments: MaterialButton
         val fullCardNumber: TextView
         val cvv: TextView
+        val cvvLayout: LinearLayout
 
         init {
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
@@ -138,7 +169,13 @@ class CardsAdapter(
             shimmer1 = itemView.findViewById(R.id.shimmer1)
             shimmer2 = itemView.findViewById(R.id.shimmer2)
             shimmer3 = itemView.findViewById(R.id.shimmer3)
+            shimmerFront = itemView.findViewById(R.id.frontSideShimmer)
+            backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
+            backSideExpDateShimmer = itemView.findViewById(R.id.backSideExpDateShimmer)
+            backSideCvvShimmer = itemView.findViewById(R.id.backSideCvvShimmer)
             shortHistoryPaymentList = itemView.findViewById(R.id.shortHistoryPaymentList)
+            fullCardNumberLayout = itemView.findViewById(R.id.fullCardNumber)
+            cvvLayout = itemView.findViewById(R.id.cvvLayout)
         }
 
         fun setGradient() {

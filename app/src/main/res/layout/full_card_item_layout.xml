@@ -63,6 +63,7 @@
             android:id="@+id/fullCardNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="bottom|start"
             android:layout_marginBottom="@dimen/margin_118"
             app:layout_constraintBottom_toTopOf="@+id/expDateTitle"
@@ -89,7 +90,7 @@
         </LinearLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/backSideCardNumber"
+            android:id="@+id/backSideCardNumberShimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start">
@@ -118,6 +119,7 @@
             android:id="@+id/copyExpDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="bottom|start"
             android:layout_marginBottom="@dimen/margin_28">
 
@@ -139,7 +141,7 @@
         </LinearLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/backSideExpDate"
+            android:id="@+id/backSideExpDateShimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start">
@@ -174,9 +176,10 @@
             android:textSize="@dimen/text_16" />
 
         <LinearLayout
-            android:id="@+id/copyCvv"
+            android:id="@+id/cvvLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_24"
             android:layout_marginBottom="@dimen/margin_28">
@@ -198,7 +201,7 @@
         </LinearLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/backSideCvv"
+            android:id="@+id/backSideCvvShimmer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end">
