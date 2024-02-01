@@ -11,7 +11,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
+import net.pst.cash.domain.CardInfoInteractor
 import net.pst.cash.domain.HistoryInteractor
+import net.pst.cash.presentation.model.CardInfoData
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.Currency
 import net.pst.cash.presentation.model.HistoryItem
@@ -23,7 +25,8 @@ class CardListViewModel @Inject constructor(
     private val application: Application,
     private val accountsInteractor: AccountsInteractor,
     private val activeCardInteractor: ActiveCardInteractor,
-    private val historyInteractor: HistoryInteractor
+    private val historyInteractor: HistoryInteractor,
+    private val cardInfoInteractor: CardInfoInteractor
 ) : AndroidViewModel(application) {
 
     private val _cardList = MutableLiveData<List<CardModel>>()
@@ -104,12 +107,38 @@ class CardListViewModel @Inject constructor(
                                     RowHistoryItems(rowHistoryItem.date, historyItems)
                                 }
                                 cardModel.rowHistoryItems.addAll(payments)
-                                cardModel.rowHistoryItems.add(RowHistoryItems("", mutableListOf()))
+                                cardModel.rowHistoryItems.add(RowHistoryItems())
                             }
                     }
                 }
 
                 _cardHistoriesList.value = cardList
+            }
+        }
+    }
+
+    fun getCardInfo(cardId: String) {
+        val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", "")
+        viewModelScope.launch {
+            token?.let { token ->
+                val cardInfoModel = cardInfoInteractor.getCardInfo("Bearer $token", cardId)
+                val expMounth = cardInfoModel.expMonth
+                val expYear = cardInfoModel.expYear
+                val expDate = "$expMounth/$expYear"
+                val cardInfoData = CardInfoData(cardInfoModel.number, cardInfoModel.cvx2, expDate)
+                val cardList = cardList.value
+                if (!cardList.isNullOrEmpty()) {
+                    val cardUpdatedModel = cardList.first {
+                        it.id.toString() == cardId
+                    }
+
+                    cardUpdatedModel.fullCardNumber = cardInfoData.number
+                    cardUpdatedModel.cvv = cardInfoData.cvv
+                    cardUpdatedModel.expireDate = cardInfoData.expDate
+
+                    _cardList.value = cardList
+                }
             }
         }
     }

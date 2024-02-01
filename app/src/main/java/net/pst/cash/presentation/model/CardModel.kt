@@ -6,6 +6,8 @@ data class CardModel(
     val balance: String? = null,
     val holderName: String? = null,
     val lastCardDigits: String? = null,
-    val expireDate: String? = null,
+    var expireDate: String? = null,
+    var cvv: String? = null,
+    var fullCardNumber: String? = null,
     var rowHistoryItems: MutableList<RowHistoryItems> = mutableListOf()
 )

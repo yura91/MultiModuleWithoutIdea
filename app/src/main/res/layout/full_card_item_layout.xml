@@ -56,11 +56,11 @@
             android:text="@string/card_number"
             android:textColor="@color/hint_color"
             android:textSize="@dimen/text_16"
-            app:layout_constraintBottom_toTopOf="@+id/copyCardNumber"
+            app:layout_constraintBottom_toTopOf="@+id/fullCardNumber"
             app:layout_constraintStart_toStartOf="@+id/cardInfo" />
 
         <LinearLayout
-            android:id="@+id/copyCardNumber"
+            android:id="@+id/fullCardNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"

@@ -23,7 +23,8 @@ class CardsAdapter(
     private val context: Context,
     private var cardModels: List<CardModel>,
     val issueCardAction: () -> Unit,
-    val showPaymentsAction: (cardId: Int) -> Unit
+    val showPaymentsAction: (cardId: Int) -> Unit,
+    val getCardData: (cardId: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -68,6 +69,10 @@ class CardsAdapter(
                 cardModels[position].rowHistoryItems,
                 showPaymentsAction
             )
+            cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
+            cardViewHolder.cvv.text = cardModels[position].cvv
+            cardViewHolder.cardExpiryDate.text = cardModels[position].expireDate
+
             if (cardModels[position].rowHistoryItems.isEmpty()) {
                 cardViewHolder.shimmer1.startShimmer()
                 cardViewHolder.shimmer2.startShimmer()
@@ -92,6 +97,13 @@ class CardsAdapter(
             cardViewHolder.payments.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
             }
+            cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
+                if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {
+                    cardModels[position].id?.let {
+                        getCardData(it)
+                    }
+                }
+            }
         } else {
             val issueCardViewHolder = holder as IssueCardViewHolder
             issueCardViewHolder.setGradient()
@@ -115,6 +127,8 @@ class CardsAdapter(
         val shimmer2: ShimmerFrameLayout
         val shimmer3: ShimmerFrameLayout
         val payments: MaterialButton
+        val fullCardNumber: TextView
+        val cvv: TextView
 
         init {
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
@@ -125,6 +139,8 @@ class CardsAdapter(
             cardExpiryDate = itemView.findViewById(R.id.expDate)
             payments = itemView.findViewById(R.id.payments)
             easyFlipView = itemView.findViewById(R.id.easyFlipView)
+            fullCardNumber = itemView.findViewById(R.id.cardNumber)
+            cvv = itemView.findViewById(R.id.cvv)
             shimmer1 = itemView.findViewById(R.id.shimmer1)
             shimmer2 = itemView.findViewById(R.id.shimmer2)
             shimmer3 = itemView.findViewById(R.id.shimmer3)

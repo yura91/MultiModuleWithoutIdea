@@ -49,7 +49,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             findNavController().navigate(
                 R.id.action_cardListFragment_to_selectBalanceFragment
             )
-        }) { cardid ->
+        }, { cardid ->
             val bundle = Bundle()
             bundle.putInt(cardIdTag, cardid)
 
@@ -57,6 +57,8 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 R.id.action_cardListFragment_to_historyPaymentsFragment,
                 bundle
             )
+        }) {
+            cardListViewModel.getCardInfo(it.toString())
         }
         binding?.cardCarousel?.adapter = cardsAdapter
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
