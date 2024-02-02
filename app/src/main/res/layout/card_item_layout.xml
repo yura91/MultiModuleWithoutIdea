@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/payments"
-                android:layout_marginBottom="@dimen/margin_4"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_22"
                 android:textStyle="bold" />
@@ -62,10 +61,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/payments"
-                style="@style/Widget.MaterialComponents.Button.IconOnly"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                app:elevation="0dp"
+                app:pressedTranslationZ="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_4"
                 android:layout_gravity="center_vertical"
                 android:paddingStart="@dimen/padding_12"
                 android:paddingTop="@dimen/padding_10"
