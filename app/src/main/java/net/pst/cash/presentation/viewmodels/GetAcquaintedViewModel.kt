@@ -39,14 +39,17 @@ class GetAcquaintedViewModel : ViewModel() {
 
     private val _errorLastname: MutableLiveData<Boolean> = MutableLiveData()
 
+    val errorAge: LiveData<Boolean>
+        get() = _errorAge
+
     private val _errorAge: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun validateFirstName(text: String) {
-        _errorFirstname.value = text.length < 3
+    fun validateFirstName(text: String?) {
+        _errorFirstname.value = text.isNullOrEmpty() || text.length < 3
     }
 
-    fun validateLastName(text: String) {
-        _errorLastname.value = text.length < 3
+    fun validateLastName(text: String?) {
+        _errorLastname.value = text.isNullOrEmpty() || text.length < 3
     }
 
     fun setSelectedDate(selectedYear: Int, selectedMonth: Int, selectedDay: Int) {
@@ -55,7 +58,7 @@ class GetAcquaintedViewModel : ViewModel() {
         this.selectedDay = selectedDay
     }
 
-    fun validate(firstName: String, lastName: String) {
+    fun validate(firstName: String?, lastName: String?) {
         validateFirstName(firstName)
         validateLastName(lastName)
         var age = currentYear - selectedYear

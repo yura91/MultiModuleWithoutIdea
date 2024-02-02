@@ -144,7 +144,6 @@ class LocationFragment : BaseFragment<FragmentLocationBinding>(FragmentLocationB
         binding?.next?.setOnClickListener {
             val sharedPref = requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
-            findNavController().navigate(R.id.action_locationFragment_to_cardPaletteFragment)
             token?.let { token ->
                 viewModel.goNext(
                     "Bearer $token"

@@ -19,7 +19,6 @@ class LocationViewModel @Inject constructor(
 ) : ViewModel() {
     val snackBarVerificationErrorMessage = verificationInteractor.errorMessage
     val snackBarCountriesErrorMessage = countriesInteractor.errorMessage
-    private var canGoNext = false
     private val bannedCountries = listOf(
         "Afghanistan",
         "Belarus",
@@ -52,13 +51,7 @@ class LocationViewModel @Inject constructor(
     var selectedItem: CountryModel? = null
         set(country) {
             field = country
-            if (!bannedCountries.contains(country?.title)) {
-                _banned.value = false
-                canGoNext = true
-            } else {
-                _banned.value = true
-                canGoNext = false
-            }
+            _banned.value = bannedCountries.contains(country?.title)
         }
     private val _countriesList = MutableLiveData<List<CountryModel>>()
     val countriesList: LiveData<List<CountryModel>> get() = _countriesList
@@ -81,9 +74,7 @@ class LocationViewModel @Inject constructor(
     }
 
     fun goNext(token: String) {
-        if (canGoNext) {
             verifyUser(token)
-        }
     }
 
     private fun verifyUser(

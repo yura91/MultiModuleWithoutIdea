@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentGetAcquaintedBinding
 import net.pst.cash.presentation.model.formatDate
@@ -66,6 +67,12 @@ class GetAcquaintedFragment :
                 binding?.firstNameField?.error = getString(R.string.error_input_text)
             } else {
                 binding?.firstNameField?.error = null
+            }
+        }
+
+        getAcquaintedViewModel.errorAge.observe(viewLifecycleOwner) {
+            if (it) {
+                Snackbar.make(view, "Age is less then 18", Snackbar.LENGTH_LONG).show();
             }
         }
 
@@ -141,13 +148,9 @@ class GetAcquaintedFragment :
         }
 
         binding?.next?.setOnClickListener {
-            val action =
-                GetAcquaintedFragmentDirections.actionGetAcquaintedFragmentToLocationFragment(
-                    binding?.firstNameField?.text.toString(),
-                    binding?.lastNameField?.text.toString(),
-                    binding?.birthDate?.text.toString()
-                )
-            findNavController().navigate(action)
+            val firstName = binding?.firstNameField?.text
+            val lastName = binding?.lastNameField?.text
+            getAcquaintedViewModel.validate(firstName.toString(), lastName.toString())
         }
     }
 }
