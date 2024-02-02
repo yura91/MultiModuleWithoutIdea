@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginBottom="148dp"
+            android:layout_marginBottom="@dimen/margin_148"
             android:text="@string/card_number"
             android:textColor="@color/hint_color"
             android:textSize="@dimen/text_16"

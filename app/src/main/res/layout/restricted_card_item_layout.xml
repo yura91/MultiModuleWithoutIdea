@@ -17,7 +17,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/size_150"
             android:layout_gravity="bottom"
             android:background="@drawable/tint_background" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginStart="@dimen/margin_26"
-            android:layout_marginBottom="78dp"
+            android:layout_marginBottom="@dimen/margin_78"
             tools:text="@string/card_balance"
             android:textColor="@color/white"
             android:textSize="@dimen/text_46" />
