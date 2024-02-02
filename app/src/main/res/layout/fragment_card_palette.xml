@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="@dimen/margin_34"
-        android:text="@string/card_exp_date"
+        tools:text="@string/card_exp_date"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
         app:layout_constraintEnd_toEndOf="parent"

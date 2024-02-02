@@ -56,12 +56,14 @@ class CardPaletteFragment :
             it.findNavController().navigate(R.id.action_cardPaletteFragment_to_cardListFragment)
         }
 
+        binding?.expDate?.text = cardPalleteViewModel.getExpiryDate()
+
         binding?.actionMore?.setOnClickListener {
             findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                requireActivity().finish()
+            requireActivity().finish()
         }
 
         binding?.toolbar?.setNavigationOnClickListener {
