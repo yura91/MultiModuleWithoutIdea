@@ -102,14 +102,14 @@
                 android:orientation="horizontal">
 
                 <View
-                    android:layout_width="220dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_220"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_16"
                     android:background="@android:color/darker_gray" />
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_10"
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
@@ -152,14 +152,14 @@
                 android:layout_marginBottom="@dimen/margin_28">
 
                 <View
-                    android:layout_width="50dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_50"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_16"
                     android:background="@android:color/darker_gray" />
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_10"
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
@@ -169,8 +169,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="62dp"
-            android:layout_marginBottom="58dp"
+            android:layout_marginEnd="@dimen/margin_62"
+            android:layout_marginBottom="@dimen/margin_58"
             android:text="@string/cvv"
             android:textColor="@color/hint_color"
             android:textSize="@dimen/text_16" />
@@ -213,14 +213,14 @@
                 android:layout_marginBottom="@dimen/margin_28">
 
                 <View
-                    android:layout_width="50dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_50"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_16"
                     android:background="@android:color/darker_gray" />
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_22"
                     android:layout_marginStart="@dimen/margin_10"
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
