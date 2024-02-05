@@ -91,8 +91,8 @@ class CardsAdapter(
                 cardViewHolder.cardNumLastDigits.text = ""
             }
 
-            val fullcardNumber = cardModels[position].fullCardNumber
-            if (fullcardNumber != null) {
+            val fullCardNumber = cardModels[position].fullCardNumber
+            if (fullCardNumber != null) {
                 cardViewHolder.backSideCardNumberShimmer.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = true
                 cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
@@ -117,6 +117,7 @@ class CardsAdapter(
                 cardViewHolder.shimmerExpDateBack.isVisible = false
                 cardViewHolder.expDateBackLayout.isVisible = true
                 cardViewHolder.cardExpiryDateBack.text = expDate
+                cardViewHolder.cardExpiryDateFront.text = expDate
             } else {
                 cardViewHolder.shimmerExpDateBack.isVisible = true
                 cardViewHolder.expDateBackLayout.isVisible = false

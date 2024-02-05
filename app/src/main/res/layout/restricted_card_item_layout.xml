@@ -65,7 +65,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_34"
             android:layout_marginBottom="@dimen/margin_34"
-            android:text="• • / • • "
+            android:text="@string/placeholder_expDate"
             android:textColor="@color/white"
             android:textSize="@dimen/text_16" />
 

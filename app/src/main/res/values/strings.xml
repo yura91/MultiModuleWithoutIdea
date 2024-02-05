@@ -74,4 +74,5 @@
     <string name="top_up_account">Top up account</string>
     <string name="userid">userId</string>
     <string name="card_holder_tittle">Name</string>
+    <string name="placeholder_expDate">• • / • •</string>
 </resources>
