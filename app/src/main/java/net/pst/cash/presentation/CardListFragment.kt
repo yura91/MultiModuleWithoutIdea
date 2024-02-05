@@ -57,12 +57,18 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 R.id.action_cardListFragment_to_historyPaymentsFragment,
                 bundle
             )
-        })
+        }) {
+            cardListViewModel.getCardInfo(it)
+        }
+
         binding?.cardCarousel?.adapter = cardsAdapter
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
             cardsAdapter.updateCardModels(it)
             cardListViewModel.getAllCardHistories()
-            cardListViewModel.getAllCardInfo()
+        }
+
+        cardListViewModel.cardInfoModel.observe(viewLifecycleOwner) {
+            cardsAdapter.updateCardModel(it)
         }
 
         cardListViewModel.cardInfoList.observe(viewLifecycleOwner) {

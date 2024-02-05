@@ -37,8 +37,14 @@ class CardListViewModel @Inject constructor(
         get() = _cardHistoriesList
 
     private val _cardInfoList = MutableLiveData<List<CardModel>>()
+
     val cardInfoList: LiveData<List<CardModel>>
         get() = _cardInfoList
+
+    private val _cardInfoModel = MutableLiveData<CardModel>()
+
+    val cardInfoModel: LiveData<CardModel>
+        get() = _cardInfoModel
 
     val errorLoadCardList = activeCardInteractor.errorMessage
 
@@ -117,31 +123,30 @@ class CardListViewModel @Inject constructor(
         }
     }
 
-    fun getAllCardInfo() {
+    fun getCardInfo(cardId: Int?) {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
-            token?.let { token ->
-                if (!cardList.isNullOrEmpty()) {
-                    cardList.subList(0, cardList.size - 1).forEach { cardModel ->
-                        val cardId = cardModel.id.toString()
-                        val showPanDataModel =
-                            cardInfoInteractor.getCardInfo("Bearer $token", cardId)
-                        cardModel.fullCardNumber = showPanDataModel.number
-                        val expMonth = showPanDataModel.expMonth
-                        val expYear = showPanDataModel.expYear
-                        cardModel.expireDate = "$expMonth/$expYear"
-                        cardModel.cvv = showPanDataModel.cvx2
-                        cardModel.lastCardDigits = showPanDataModel.lastDigitsNumber
-                    }
-
-                    _cardInfoList.value = cardList
+            val requestedCardModel = cardList?.find {
+                it.id == cardId
+            }
+            requestedCardModel?.let {
+                token?.let { token ->
+                    val showPanDataModel =
+                        cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
+                    it.fullCardNumber = showPanDataModel.number
+                    val expMonth = showPanDataModel.expMonth
+                    val expYear = showPanDataModel.expYear
+                    it.expireDate = "$expMonth/$expYear"
+                    it.cvv = showPanDataModel.cvx2
+                    it.lastCardDigits = showPanDataModel.lastDigitsNumber
                 }
             }
+
+            _cardInfoModel.value = requestedCardModel
         }
     }
-
 
     fun getActiveBalance() {
         viewModelScope.launch {

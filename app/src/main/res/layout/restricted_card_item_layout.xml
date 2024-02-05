@@ -52,11 +52,9 @@
             android:id="@+id/cardNumLastDigits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_gravity="bottom|start"
             android:layout_marginStart="@dimen/margin_34"
             android:layout_marginBottom="@dimen/margin_34"
-            android:text="@string/card_num_holder"
             android:textColor="@color/white"
             android:textSize="@dimen/text_16" />
 
@@ -65,46 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:visibility="gone"
             android:layout_marginEnd="@dimen/margin_34"
             android:layout_marginBottom="@dimen/margin_34"
-            android:text="@string/card_exp_date"
+            android:text="• • / • • "
             android:textColor="@color/white"
             android:textSize="@dimen/text_16" />
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/frontSideShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:id="@+id/shimmerFourDigit"
-                    android:layout_width="@dimen/size_50"
-                    android:layout_height="@dimen/size_16"
-                    android:layout_marginStart="@dimen/margin_34"
-                    android:layout_marginBottom="@dimen/margin_34"
-                    android:background="@android:color/darker_gray" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <View
-                    android:id="@+id/shimmerExpDateFront"
-                    android:layout_width="@dimen/size_50"
-                    android:layout_height="@dimen/size_16"
-                    android:layout_marginEnd="@dimen/margin_34"
-                    android:layout_marginBottom="@dimen/margin_34"
-                    android:background="@android:color/darker_gray"
-                    android:textSize="@dimen/text_16" />
-            </LinearLayout>
-        </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

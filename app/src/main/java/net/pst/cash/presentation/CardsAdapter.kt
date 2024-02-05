@@ -24,7 +24,8 @@ class CardsAdapter(
     private val context: Context,
     private var cardModels: List<CardModel>,
     val issueCardAction: () -> Unit,
-    val showPaymentsAction: (cardId: Int) -> Unit
+    val showPaymentsAction: (cardId: Int) -> Unit,
+    val getCardInfoAction: (cardId: Int?) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -41,7 +42,14 @@ class CardsAdapter(
 
     fun updateCardModels(cardModels: List<CardModel>) {
         this.cardModels = cardModels
-        notifyItemRangeChanged(0, cardModels.size - 1)
+        notifyItemRangeChanged(0, cardModels.size)
+    }
+
+    fun updateCardModel(cardModel: CardModel) {
+        val requestedIndex = cardModels.indexOfFirst {
+            it.id == cardModel.id
+        }
+        notifyItemChanged(requestedIndex)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -61,6 +69,12 @@ class CardsAdapter(
                 cardViewHolder.easyFlipView.flipTheView()
             }
 
+            cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
+                if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {
+                    getCardInfoAction(cardModels[position].id)
+                }
+            }
+
             val historyAdapter = ShortHistoryPaymentsAdapter(
                 context,
                 cardModels[position].id,
@@ -69,14 +83,11 @@ class CardsAdapter(
             )
             val fullcardNumber = cardModels[position].fullCardNumber
             if (fullcardNumber != null) {
-                cardViewHolder.shimmerFourDigits.isVisible = false
                 cardViewHolder.backSideCardNumberShimmer.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = true
                 cardViewHolder.cardNumLastDigits.isVisible = true
-                cardViewHolder.cardNumLastDigits.text = cardModels[position].lastCardDigits
                 cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
             } else {
-                cardViewHolder.shimmerFourDigits.isVisible = true
                 cardViewHolder.backSideCardNumberShimmer.isVisible = true
                 cardViewHolder.cardNumLastDigits.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = false
@@ -95,16 +106,11 @@ class CardsAdapter(
             val expDate = cardModels[position].expireDate
 
             if (expDate != null) {
-                cardViewHolder.shimmerExpDateFront.isVisible = false
                 cardViewHolder.shimmerExpDateBack.isVisible = false
-                cardViewHolder.cardExpiryDateFront.isVisible = true
                 cardViewHolder.expDateBackLayout.isVisible = true
-                cardViewHolder.cardExpiryDateFront.text = expDate
                 cardViewHolder.cardExpiryDateBack.text = expDate
             } else {
-                cardViewHolder.shimmerExpDateFront.isVisible = true
                 cardViewHolder.shimmerExpDateBack.isVisible = true
-                cardViewHolder.cardExpiryDateFront.isVisible = false
                 cardViewHolder.expDateBackLayout.isVisible = false
             }
 
@@ -157,9 +163,6 @@ class CardsAdapter(
         val shortHistoryShimmer1: ShimmerFrameLayout
         val shortHistoryShimmer2: ShimmerFrameLayout
         val shortHistoryShimmer3: ShimmerFrameLayout
-        val shimmerFront: ShimmerFrameLayout
-        val shimmerFourDigits: View
-        val shimmerExpDateFront: View
         val backSideCardNumberShimmer: ShimmerFrameLayout
         val shimmerExpDateBack: ShimmerFrameLayout
         val backSideCvvShimmer: ShimmerFrameLayout
@@ -183,15 +186,12 @@ class CardsAdapter(
             shortHistoryShimmer1 = itemView.findViewById(R.id.shimmer1)
             shortHistoryShimmer2 = itemView.findViewById(R.id.shimmer2)
             shortHistoryShimmer3 = itemView.findViewById(R.id.shimmer3)
-            shimmerFront = itemView.findViewById(R.id.frontSideShimmer)
             backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
             shimmerExpDateBack = itemView.findViewById(R.id.backSideExpDateShimmer)
             backSideCvvShimmer = itemView.findViewById(R.id.backSideCvvShimmer)
             shortHistoryPaymentList = itemView.findViewById(R.id.shortHistoryPaymentList)
             fullCardNumberLayout = itemView.findViewById(R.id.fullCardNumber)
             cvvLayout = itemView.findViewById(R.id.cvvLayout)
-            shimmerFourDigits = itemView.findViewById(R.id.shimmerFourDigit)
-            shimmerExpDateFront = itemView.findViewById(R.id.shimmerExpDateFront)
             expDateBackLayout = itemView.findViewById(R.id.expDateBackLayout)
         }
 
