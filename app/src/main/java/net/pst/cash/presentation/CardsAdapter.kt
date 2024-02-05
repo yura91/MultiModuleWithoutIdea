@@ -45,11 +45,8 @@ class CardsAdapter(
         notifyItemRangeChanged(0, cardModels.size)
     }
 
-    fun updateCardModel(cardModel: CardModel) {
-        val requestedIndex = cardModels.indexOfFirst {
-            it.id == cardModel.id
-        }
-        notifyItemChanged(requestedIndex)
+    fun updateCardModel(cardModelPos: Int) {
+        notifyItemChanged(cardModelPos)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

@@ -67,7 +67,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             cardListViewModel.getAllCardHistories()
         }
 
-        cardListViewModel.cardInfoModel.observe(viewLifecycleOwner) {
+        cardListViewModel.cardInfoModelPos.observe(viewLifecycleOwner) {
             cardsAdapter.updateCardModel(it)
         }
 

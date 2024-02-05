@@ -41,10 +41,10 @@ class CardListViewModel @Inject constructor(
     val cardInfoList: LiveData<List<CardModel>>
         get() = _cardInfoList
 
-    private val _cardInfoModel = MutableLiveData<CardModel>()
+    private val _cardInfoModelPos = MutableLiveData<Int>()
 
-    val cardInfoModel: LiveData<CardModel>
-        get() = _cardInfoModel
+    val cardInfoModelPos: LiveData<Int>
+        get() = _cardInfoModelPos
 
     val errorLoadCardList = activeCardInteractor.errorMessage
 
@@ -129,24 +129,26 @@ class CardListViewModel @Inject constructor(
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
-            val requestedCardModel = cardList?.find {
+            val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
             }
-            requestedCardModel?.let {
-                token?.let { token ->
-                    if (requestedCardModel.fullCardNumber == null && requestedCardModel.cvv == null && requestedCardModel.expireDate == null) {
-                        val showPanDataModel =
-                            cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
-                        it.fullCardNumber = showPanDataModel.number
-                        val expMonth = showPanDataModel.expMonth
-                        val expYear = showPanDataModel.expYear
-                        it.expireDate = "$expMonth/$expYear"
-                        it.cvv = showPanDataModel.cvx2
+            cardModelIndex?.let { index ->
+                cardList[index].let {
+                    token?.let { token ->
+                        if (it.fullCardNumber == null && it.cvv == null && it.expireDate == null) {
+                            val showPanDataModel =
+                                cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
+                            it.fullCardNumber = showPanDataModel.number
+                            val expMonth = showPanDataModel.expMonth
+                            val expYear = showPanDataModel.expYear
+                            it.expireDate = "$expMonth/$expYear"
+                            it.cvv = showPanDataModel.cvx2
+
+                            _cardInfoModelPos.value = cardModelIndex
+                        }
                     }
                 }
             }
-
-            _cardInfoModel.value = requestedCardModel
         }
     }
 
