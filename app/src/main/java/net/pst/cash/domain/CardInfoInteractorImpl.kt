@@ -8,9 +8,7 @@ class CardInfoInteractorImpl @Inject constructor(private val cardInfoRepo: CardI
     CardInfoInteractor {
     override suspend fun getCardInfo(token: String, id: String): ShowPanDataModel {
         val cardInfoResponse = cardInfoRepo.getCardInfo(token, id)
-        val lastCardDigits = cardInfoResponse?.data?.number?.let { it.substring(it.length - 4) }
         return ShowPanDataModel(
-            lastCardDigits,
             cardInfoResponse?.data?.number,
             cardInfoResponse?.data?.cvx2,
             cardInfoResponse?.data?.expMonth,

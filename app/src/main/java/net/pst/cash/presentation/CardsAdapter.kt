@@ -81,15 +81,23 @@ class CardsAdapter(
                 cardModels[position].rowHistoryItems,
                 showPaymentsAction
             )
+            val lastCardDigits = cardModels[position].lastCardDigits
+            if (lastCardDigits != null) {
+                cardViewHolder.cardNumLastDigits.text = context.getString(
+                    R.string.short_card_number,
+                    cardModels[position].lastCardDigits
+                )
+            } else {
+                cardViewHolder.cardNumLastDigits.text = ""
+            }
+
             val fullcardNumber = cardModels[position].fullCardNumber
             if (fullcardNumber != null) {
                 cardViewHolder.backSideCardNumberShimmer.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = true
-                cardViewHolder.cardNumLastDigits.isVisible = true
                 cardViewHolder.fullCardNumber.text = cardModels[position].fullCardNumber
             } else {
                 cardViewHolder.backSideCardNumberShimmer.isVisible = true
-                cardViewHolder.cardNumLastDigits.isVisible = false
                 cardViewHolder.fullCardNumberLayout.isVisible = false
             }
 

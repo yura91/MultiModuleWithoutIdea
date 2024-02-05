@@ -19,6 +19,7 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
                     cardDataModel.id,
                     cardDataModel.account?.currencyId,
                     cardDataModel.account?.balance,
+                    cardDataModel.mask.let { it?.substring(it.length - 4) }
                 )
                 cardModels.add(cardModel)
             }

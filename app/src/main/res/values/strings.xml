@@ -41,7 +41,8 @@
     <string name="close_card_positive">Close card</string>
     <string name="log_out_negative">No</string>
     <string name="close_card_negative">No</string>
-    <string name="card_num_holder">• • • • 0000</string>
+    <string name="card_num_placeholder">• • • • 0000</string>
+    <string name="short_card_number">• • • • %1$s</string>
     <string name="card_exp_date">02/24</string>
     <string name="john_doe">JOHN DOE</string>
     <string name="card_balance">%1$s %2$s</string>

@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_34"
-        android:text="@string/card_num_holder"
+        android:text="@string/card_num_placeholder"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16"
         app:layout_constraintBottom_toBottomOf="@+id/expDate"

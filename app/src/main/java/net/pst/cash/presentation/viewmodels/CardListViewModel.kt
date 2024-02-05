@@ -78,6 +78,7 @@ class CardListViewModel @Inject constructor(
                         cardData.id,
                         currencyType,
                         cardData.balance,
+                        lastCardDigits = cardData.lastFourDigits
                     )
                     cards.add(card)
                 }
@@ -140,7 +141,6 @@ class CardListViewModel @Inject constructor(
                     val expYear = showPanDataModel.expYear
                     it.expireDate = "$expMonth/$expYear"
                     it.cvv = showPanDataModel.cvx2
-                    it.lastCardDigits = showPanDataModel.lastDigitsNumber
                 }
             }
 
