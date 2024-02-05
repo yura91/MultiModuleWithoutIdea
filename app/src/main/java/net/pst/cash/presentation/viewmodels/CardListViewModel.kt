@@ -134,13 +134,15 @@ class CardListViewModel @Inject constructor(
             }
             requestedCardModel?.let {
                 token?.let { token ->
-                    val showPanDataModel =
-                        cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
-                    it.fullCardNumber = showPanDataModel.number
-                    val expMonth = showPanDataModel.expMonth
-                    val expYear = showPanDataModel.expYear
-                    it.expireDate = "$expMonth/$expYear"
-                    it.cvv = showPanDataModel.cvx2
+                    if (requestedCardModel.fullCardNumber == null && requestedCardModel.cvv == null && requestedCardModel.expireDate == null) {
+                        val showPanDataModel =
+                            cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
+                        it.fullCardNumber = showPanDataModel.number
+                        val expMonth = showPanDataModel.expMonth
+                        val expYear = showPanDataModel.expYear
+                        it.expireDate = "$expMonth/$expYear"
+                        it.cvv = showPanDataModel.cvx2
+                    }
                 }
             }
 
