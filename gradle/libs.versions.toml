@@ -25,12 +25,14 @@ play-services-auth = "20.7.0"
 retrofit2 = "2.9.0"
 gsonconverter = "2.9.0"
 easyflipview = "3.0.3"
+shimmer = "0.5.0"
 swiperefreshlayout = "1.1.0"
 zxing-android-embedded = "4.3.0"
 
 [libraries]
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging-runtime" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "core" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

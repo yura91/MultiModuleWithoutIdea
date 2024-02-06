@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardItemLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/margin_40"
         app:autoFlipBack="false"
         app:flipDuration="400"
         app:flipEnabled="true"
         app:flipFrom="right"
         app:flipOnTouch="false"
-        app:flipType="horizontal">
+        app:flipType="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/paymentsLayout"
+        app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/full_card_layout"
@@ -28,81 +29,90 @@
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 
     <LinearLayout
+        android:id="@+id/paymentsLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_220"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/shortHistoryPaymentList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/paymentsLayout"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:layout_marginBottom="@dimen/margin_10"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/shortHistoryPaymentList"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_gravity="center_vertical"
+            android:text="@string/payments"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_22"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/payments"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_22"
-                android:textStyle="bold" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/payments"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                app:elevation="0dp"
-                app:pressedTranslationZ="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingStart="@dimen/padding_12"
-                android:paddingTop="@dimen/padding_10"
-                android:paddingEnd="@dimen/padding_12"
-                android:paddingBottom="@dimen/padding_10"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_14"
-                android:background="@drawable/rounded_corner_gray_bg"
-                android:text="@string/view_all"
-                android:textColor="@color/black"
-                app:backgroundTint="@null"
-                app:iconGravity="textStart" />
-        </LinearLayout>
-
-        <include
-            android:id="@+id/shimmer1"
-            layout="@layout/short_history_placeholder_layout"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/shimmer2"
-            layout="@layout/short_history_placeholder_layout"
-            android:visibility="gone" />
-
-        <include
-            android:id="@+id/shimmer3"
-            layout="@layout/short_history_placeholder_layout"
-            android:visibility="gone" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shortHistoryPaymentList"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_120"
-            android:layout_marginStart="@dimen/margin_35"
-            android:visibility="gone"
-            android:layout_marginEnd="@dimen/margin_35"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/payments"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rounded_corner_gray_bg"
+            android:paddingStart="@dimen/padding_12"
+            android:paddingTop="@dimen/padding_10"
+            android:paddingEnd="@dimen/padding_12"
+            android:paddingBottom="@dimen/padding_10"
+            android:text="@string/view_all"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_14"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
+            app:iconGravity="textStart"
+            app:pressedTranslationZ="0dp" />
     </LinearLayout>
-</LinearLayout>
+
+    <include
+        android:id="@+id/shimmer1"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/shortHistoryPaymentList" />
+
+    <include
+        android:id="@+id/shimmer2"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer1" />
+
+    <include
+        android:id="@+id/shimmer3"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shortHistoryPaymentList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_120"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:visibility="invisible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

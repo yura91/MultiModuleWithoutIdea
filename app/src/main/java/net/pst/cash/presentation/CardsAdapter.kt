@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -72,12 +73,6 @@ class CardsAdapter(
                 }
             }
 
-            val historyAdapter = ShortHistoryPaymentsAdapter(
-                context,
-                cardModels[position].id,
-                cardModels[position].rowHistoryItems,
-                showPaymentsAction
-            )
             val lastCardDigits = cardModels[position].lastCardDigits
             if (lastCardDigits != null) {
                 cardViewHolder.cardNumLastDigits.text = context.getString(
@@ -109,7 +104,6 @@ class CardsAdapter(
             }
 
             val expDate = cardModels[position].expireDate
-
             if (expDate != null) {
                 cardViewHolder.shimmerExpDateBack.isVisible = false
                 cardViewHolder.expDateBackLayout.isVisible = true
@@ -120,15 +114,15 @@ class CardsAdapter(
                 cardViewHolder.expDateBackLayout.isVisible = false
             }
 
-            if (cardModels[position].rowHistoryItems.isEmpty()) {
+            val historyItems = cardModels[position].rowHistoryItems
+            if (historyItems.isEmpty()) {
                 cardViewHolder.shortHistoryShimmer1.startShimmer()
                 cardViewHolder.shortHistoryShimmer2.startShimmer()
                 cardViewHolder.shortHistoryShimmer3.startShimmer()
                 cardViewHolder.shortHistoryShimmer1.isVisible = true
                 cardViewHolder.shortHistoryShimmer2.isVisible = true
                 cardViewHolder.shortHistoryShimmer3.isVisible = true
-                cardViewHolder.shortHistoryPaymentList.isVisible = false
-                cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
+                cardViewHolder.shortHistoryPaymentList.isInvisible = true
             } else {
                 cardViewHolder.shortHistoryShimmer1.stopShimmer()
                 cardViewHolder.shortHistoryShimmer2.stopShimmer()
@@ -136,7 +130,13 @@ class CardsAdapter(
                 cardViewHolder.shortHistoryShimmer1.isVisible = false
                 cardViewHolder.shortHistoryShimmer2.isVisible = false
                 cardViewHolder.shortHistoryShimmer3.isVisible = false
-                cardViewHolder.shortHistoryPaymentList.isVisible = true
+                cardViewHolder.shortHistoryPaymentList.isInvisible = false
+                val historyAdapter = ShortHistoryPaymentsAdapter(
+                    context,
+                    cardModels[position].id,
+                    historyItems,
+                    showPaymentsAction
+                )
                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
             }
 
