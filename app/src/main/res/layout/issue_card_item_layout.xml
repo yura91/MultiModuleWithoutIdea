@@ -9,10 +9,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardImage"
         android:layout_width="@dimen/size_zero"
-        android:layout_height="@dimen/size_zero"
+        android:layout_height="400dp"
         android:background="@drawable/card_background_bg"
         app:cardCornerRadius="@dimen/size_30"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -43,13 +42,6 @@
             android:adjustViewBounds="true"
             android:src="@drawable/the_best_v_cards" />
     </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/size_220" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/issueCard"
