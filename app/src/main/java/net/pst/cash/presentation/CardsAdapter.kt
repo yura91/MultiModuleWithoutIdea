@@ -11,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -114,22 +116,34 @@ class CardsAdapter(
             }
 
             val historyItems = cardModels[position].rowHistoryItems
+            val expandedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.expanded)
+            val collapsedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.collapsed)
             if (historyItems.isEmpty()) {
-                /*cardViewHolder.shortHistoryShimmer1.startShimmer()
-                cardViewHolder.shortHistoryShimmer2.startShimmer()
-                cardViewHolder.shortHistoryShimmer3.startShimmer()
-                cardViewHolder.shortHistoryShimmer1.isVisible = true
-                cardViewHolder.shortHistoryShimmer2.isVisible = true
-                cardViewHolder.shortHistoryShimmer3.isVisible = true*/
-//                cardViewHolder.shortHistoryPaymentList.isInvisible = true
+                expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer1, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.shimmer2, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer2, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.shimmer4, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer4, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
             } else {
-                /*ardViewHolder.shortHistoryShimmer1.stopShimmer()
-                cardViewHolder.shortHistoryShimmer2.stopShimmer()
-                cardViewHolder.shortHistoryShimmer3.stopShimmer()
-                cardViewHolder.shortHistoryShimmer1.isVisible = false
-                cardViewHolder.shortHistoryShimmer2.isVisible = false
-                cardViewHolder.shortHistoryShimmer3.isVisible = false*/
-//                cardViewHolder.shortHistoryPaymentList.isInvisible = false
+                expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shimmer2, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer2, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shimmer3, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer3, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shimmer4, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer4, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
+                collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
                 val historyAdapter = ShortHistoryPaymentsAdapter(
                     context,
                     cardModels[position].id,
@@ -166,8 +180,9 @@ class CardsAdapter(
         val fullCardNumberLayout: LinearLayout
         val expDateBackLayout: LinearLayout
         val shortHistoryShimmer1: ShimmerFrameLayout
-        val shortHistoryShimmer2: ShimmerFrameLayout
-        val shortHistoryShimmer3: ShimmerFrameLayout
+
+        /*val shortHistoryShimmer2: ShimmerFrameLayout
+        val shortHistoryShimmer3: ShimmerFrameLayout*/
         val backSideCardNumberShimmer: ShimmerFrameLayout
         val shimmerExpDateBack: ShimmerFrameLayout
         val backSideCvvShimmer: ShimmerFrameLayout
@@ -175,6 +190,7 @@ class CardsAdapter(
         val fullCardNumber: TextView
         val cvv: TextView
         val cvvLayout: LinearLayout
+        val cardItemLayout: MotionLayout
 
         init {
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
@@ -189,14 +205,15 @@ class CardsAdapter(
             fullCardNumber = itemView.findViewById(R.id.cardNumber)
             cvv = itemView.findViewById(R.id.cvv)
             shortHistoryShimmer1 = itemView.findViewById(R.id.shimmer1)
-            shortHistoryShimmer2 = itemView.findViewById(R.id.shimmer2)
-            shortHistoryShimmer3 = itemView.findViewById(R.id.shimmer3)
+            /*shortHistoryShimmer2 = itemView.findViewById(R.id.shimmer2)
+            shortHistoryShimmer3 = itemView.findViewById(R.id.shimmer3)*/
             backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
             shimmerExpDateBack = itemView.findViewById(R.id.backSideExpDateShimmer)
             backSideCvvShimmer = itemView.findViewById(R.id.backSideCvvShimmer)
             shortHistoryPaymentList = itemView.findViewById(R.id.shortHistoryPaymentList)
             fullCardNumberLayout = itemView.findViewById(R.id.fullCardNumber)
             cvvLayout = itemView.findViewById(R.id.cvvLayout)
+            cardItemLayout = itemView.findViewById(R.id.cardItemLayout)
             expDateBackLayout = itemView.findViewById(R.id.expDateBackLayout)
         }
 

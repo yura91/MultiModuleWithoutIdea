@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_35"
         android:layout_marginEnd="@dimen/margin_35"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="@+id/shortHistoryPaymentList" />
 
     <include
@@ -92,7 +92,6 @@
         android:layout_marginStart="@dimen/margin_35"
         android:layout_marginTop="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_35"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/shimmer1" />
 
     <include
@@ -103,7 +102,37 @@
         android:layout_marginStart="@dimen/margin_35"
         android:layout_marginTop="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_35"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/shimmer2" />
+
+    <include
+        android:id="@+id/shimmer4"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_35"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer3" />
+
+    <include
+        android:id="@+id/shimmer5"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_35"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer4" />
+
+    <include
+        android:id="@+id/shimmer6"
+        layout="@layout/short_history_placeholder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_35"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer5" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shortHistoryPaymentList"
