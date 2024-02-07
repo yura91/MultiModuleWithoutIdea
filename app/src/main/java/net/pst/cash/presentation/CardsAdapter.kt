@@ -131,6 +131,7 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
+
             } else {
                 expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
                 collapsedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
@@ -144,6 +145,17 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
                 expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
                 collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
+            }
+            if (historyItems.size == 1) {
+                expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
+                collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
+                expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
+                collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
+            } else {
+                expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 val historyAdapter = ShortHistoryPaymentsAdapter(
                     context,
                     cardModels[position].id,
@@ -152,7 +164,6 @@ class CardsAdapter(
                 )
                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
             }
-
 
             cardViewHolder.payments.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
