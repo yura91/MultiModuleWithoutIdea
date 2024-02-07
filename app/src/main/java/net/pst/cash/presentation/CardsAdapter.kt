@@ -180,9 +180,6 @@ class CardsAdapter(
         val fullCardNumberLayout: LinearLayout
         val expDateBackLayout: LinearLayout
         val shortHistoryShimmer1: ShimmerFrameLayout
-
-        /*val shortHistoryShimmer2: ShimmerFrameLayout
-        val shortHistoryShimmer3: ShimmerFrameLayout*/
         val backSideCardNumberShimmer: ShimmerFrameLayout
         val shimmerExpDateBack: ShimmerFrameLayout
         val backSideCvvShimmer: ShimmerFrameLayout
@@ -205,8 +202,6 @@ class CardsAdapter(
             fullCardNumber = itemView.findViewById(R.id.cardNumber)
             cvv = itemView.findViewById(R.id.cvv)
             shortHistoryShimmer1 = itemView.findViewById(R.id.shimmer1)
-            /*shortHistoryShimmer2 = itemView.findViewById(R.id.shimmer2)
-            shortHistoryShimmer3 = itemView.findViewById(R.id.shimmer3)*/
             backSideCardNumberShimmer = itemView.findViewById(R.id.backSideCardNumberShimmer)
             shimmerExpDateBack = itemView.findViewById(R.id.backSideExpDateShimmer)
             backSideCvvShimmer = itemView.findViewById(R.id.backSideCvvShimmer)

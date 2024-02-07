@@ -62,7 +62,7 @@ class SettingsFragment :
 
         binding?.redesign?.setOnClickListener {
             findNavController().navigate(
-                R.id.action_settingsFragment_to_cardPaletteFragment,
+                R.id.action_settingsFragment_to_cardPaletteDialogFragment,
             )
         }
 

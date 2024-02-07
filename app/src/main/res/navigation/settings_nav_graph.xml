@@ -20,11 +20,8 @@
             android:id="@+id/action_settingsFragment_to_legalInformationFragment"
             app:destination="@id/legalInformationFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_cardPaletteFragment"
-            app:destination="@id/cardPaletteFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/design_nav_graph"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_settingsFragment_to_cardPaletteDialogFragment"
+            app:destination="@id/cardPaletteDialogFragment" />
     </dialog>
 
     <dialog
@@ -35,4 +32,13 @@
         android:id="@+id/legalInformationFragment"
         android:name="net.pst.cash.presentation.LegalInformationFragment"
         android:label="LegalInformationFragment" />
+    <dialog
+        android:id="@+id/cardPaletteDialogFragment"
+        android:name="net.pst.cash.presentation.CardPaletteDialogFragment"
+        android:label="CardPaletteDialogFragment">
+        <action
+            android:id="@+id/action_cardPaletteDialogFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:launchSingleTop="true" />
+    </dialog>
 </navigation>

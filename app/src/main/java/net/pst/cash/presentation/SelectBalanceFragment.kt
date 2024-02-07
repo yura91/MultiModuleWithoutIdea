@@ -102,11 +102,8 @@ class SelectBalanceFragment :
 
 
         binding?.toolbar?.actionMore?.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean(argsTag, true)
             findNavController().navigate(
                 R.id.action_selectBalanceFragment_to_settings_nav_graph,
-                bundle
             )
         }
         binding?.issueCardButton?.setOnClickListener {
@@ -157,7 +154,5 @@ class SelectBalanceFragment :
 
     companion object {
         const val defColorValue = -1
-        private const val balanceKey = "balance"
-        private const val argsTag = "showAdditionalItems"
     }
 }

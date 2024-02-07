@@ -12,12 +12,12 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import net.pst.cash.R
-import net.pst.cash.databinding.FragmentCardPaletteBinding
+import net.pst.cash.databinding.FragmentDialogCardPaletteBinding
 import net.pst.cash.presentation.model.dpToPx
 import net.pst.cash.presentation.viewmodels.CardPaletteViewModel
 
-class CardPaletteFragment :
-    BaseFragment<FragmentCardPaletteBinding>(FragmentCardPaletteBinding::inflate) {
+class CardPaletteDialogFragment :
+    BaseDialogFragment<FragmentDialogCardPaletteBinding>(FragmentDialogCardPaletteBinding::inflate) {
     private val gradientOffset = 25.0F
     private val initialProgress = 0
     private val initialColor = -312545
@@ -52,17 +52,13 @@ class CardPaletteFragment :
                 putInt(userId + getString(R.string.endcolor), cardPalleteViewModel.endColor)
                 apply()
             }
-            findNavController().navigate(R.id.action_cardPaletteFragment_to_cardListFragment)
+            findNavController().navigate(R.id.action_cardPaletteDialogFragment_to_cardListFragment)
         }
 
         binding?.expDate?.text = cardPalleteViewModel.getExpiryDate()
 
-        binding?.actionMore?.setOnClickListener {
-            findNavController().navigate(R.id.action_cardPaletteFragment_to_settings_nav_graph)
-        }
-
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            requireActivity().finish()
+            dismiss()
         }
 
         binding?.toolbar?.setNavigationOnClickListener {
