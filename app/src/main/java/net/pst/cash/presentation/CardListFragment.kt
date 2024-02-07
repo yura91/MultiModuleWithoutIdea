@@ -21,6 +21,12 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         super.onViewCreated(view, savedInstanceState)
         val toolbarBinding = binding?.toolbar
 
+        val args = arguments
+        val newCardId = args?.getInt("newCardId")
+        newCardId?.let {
+            cardListViewModel.newCardId = it
+        }
+
         toolbarBinding?.actionMore?.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean(argsTag, true)

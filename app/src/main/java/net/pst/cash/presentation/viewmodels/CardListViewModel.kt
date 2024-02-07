@@ -28,6 +28,8 @@ class CardListViewModel @Inject constructor(
     private val cardInfoInteractor: CardInfoInteractor
 ) : AndroidViewModel(application) {
 
+    var newCardId: Int = -1
+
     private val _cardList = MutableLiveData<List<CardModel>>()
     val cardList: LiveData<List<CardModel>>
         get() = _cardList
@@ -84,6 +86,15 @@ class CardListViewModel @Inject constructor(
                 }
             }
             cards.add(CardModel())
+            val newCardModelIndex = cards.indexOfFirst {
+                it.id == newCardId
+            }
+            if (newCardModelIndex != -1) {
+                val newCardModel = cards.removeAt(newCardModelIndex)
+                newCardModel.let {
+                    cards.add(0, it)
+                }
+            }
             _cardList.value = cards
         }
     }
@@ -144,7 +155,7 @@ class CardListViewModel @Inject constructor(
                             it.expireDate = "$expMonth/$expYear"
                             it.cvv = showPanDataModel.cvx2
 
-                            _cardInfoModelPos.value = cardModelIndex
+                            _cardInfoModelPos.value = index
                         }
                     }
                 }

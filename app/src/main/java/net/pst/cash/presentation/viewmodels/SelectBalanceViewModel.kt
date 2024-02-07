@@ -41,8 +41,8 @@ class SelectBalanceViewModel @Inject constructor(
         get() = _buttonIssueCardEvent
     private val _buttonIssueCardEvent = SingleLiveEvent<Unit>()
 
-    private val _issueCardEvent = SingleLiveEvent<Unit>()
-    val issueCardEvent: LiveData<Unit>
+    private val _issueCardEvent = SingleLiveEvent<Int>()
+    val issueCardEvent: LiveData<Int>
         get() = _issueCardEvent
 
     private val _account = accountsInteractor.account.map {
@@ -93,7 +93,9 @@ class SelectBalanceViewModel @Inject constructor(
                     val issueCardResponse =
                         issueCardInteractor.issueCard("Bearer $token", accountId, balanceCard)
                     issueCardResponse?.let {
-                        _issueCardEvent.value = Unit
+                        it.data?.id?.let {
+                            _issueCardEvent.value = it
+                        }
                     }
                 }
             }

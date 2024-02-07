@@ -75,7 +75,12 @@ class SelectBalanceFragment :
         }
 
         selectBalanceViewModel.issueCardEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_selectBalanceFragment_to_cardListFragment)
+            val bundle = Bundle()
+            bundle.putInt("newCardId", it)
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_cardListFragment,
+                bundle
+            )
         }
 
         binding?.swipeContainer?.setOnRefreshListener {

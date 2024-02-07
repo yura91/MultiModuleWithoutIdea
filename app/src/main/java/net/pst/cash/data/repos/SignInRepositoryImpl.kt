@@ -97,7 +97,7 @@ class SignInRepositoryImpl @Inject constructor(
                         val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                         val userId = userInfoResponseBody?.data?.userId
                         with(sharedPref.edit()) {
-                            putString(userId, userId)
+                            putString(Companion.userId, userId)
                             apply()
                         }
                     }
