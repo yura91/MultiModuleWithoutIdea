@@ -23,7 +23,7 @@ class HistoryPaymentsFragment : BaseDialogFragment<FragmentHistoryPaymentsBindin
         binding?.historyPayments?.adapter = historyAdapter
         binding?.swipeContainer?.setOnRefreshListener {
             lifecycleScope.launch {
-                historyViewModel.getTransactionHistory(cardId.toString()).collect {
+                historyViewModel.getPaymentsHistory(cardId.toString()).collect {
                     binding?.swipeContainer?.isRefreshing = false
                     historyAdapter.submitData(it)
                 }
@@ -43,7 +43,7 @@ class HistoryPaymentsFragment : BaseDialogFragment<FragmentHistoryPaymentsBindin
         }
 
         lifecycleScope.launch {
-            historyViewModel.getTransactionHistory(cardId.toString()).collect {
+            historyViewModel.getPaymentsHistory(cardId.toString()).collect {
                 historyAdapter.submitData(it)
             }
         }

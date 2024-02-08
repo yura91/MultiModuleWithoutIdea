@@ -11,12 +11,12 @@ import javax.inject.Inject
 
 class HistoryInteractorImpl @Inject constructor(private val historyListRepo: HistoryListRepo) :
     HistoryInteractor {
-    override suspend fun getShortTransactionList(
+    override suspend fun getShortHistory(
         token: String,
         cardId: String
     ): Flow<List<RowHistoryItems>> {
         val rowHistoryitems = mutableListOf<RowHistoryItems>()
-        return historyListRepo.getShortTransactionList(token, cardId).map { transactions ->
+        return historyListRepo.getShortHistory(token, cardId).map { transactions ->
             transactions.keys.forEach { key ->
                 val elements = transactions[key]
                 val historyItems = elements?.map {
@@ -37,11 +37,11 @@ class HistoryInteractorImpl @Inject constructor(private val historyListRepo: His
         }
     }
 
-    override suspend fun getTransactionList(
+    override suspend fun getPaymentsHistory(
         token: String,
         cardId: String
     ): Flow<PagingData<RowHistoryItems>> {
-        val rowHistoryItems = historyListRepo.getTransactionList(token, cardId)
+        val rowHistoryItems = historyListRepo.getPaymentsHistory(token, cardId)
         return rowHistoryItems.map { pagingData ->
             pagingData.map {
                 val historyItems = mutableListOf<HistoryItem>()

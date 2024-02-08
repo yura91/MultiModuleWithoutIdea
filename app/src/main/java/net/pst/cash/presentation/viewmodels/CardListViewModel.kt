@@ -38,11 +38,6 @@ class CardListViewModel @Inject constructor(
     val cardHistoriesList: LiveData<List<CardModel>>
         get() = _cardHistoriesList
 
-    private val _cardInfoList = MutableLiveData<List<CardModel>>()
-
-    val cardInfoList: LiveData<List<CardModel>>
-        get() = _cardInfoList
-
     private val _cardInfoModelPos = MutableLiveData<Int>()
 
     val cardInfoModelPos: LiveData<Int>
@@ -108,7 +103,7 @@ class CardListViewModel @Inject constructor(
                 cardList.subList(0, cardList.size - 1).forEach { cardModel ->
                     val cardId = cardModel.id.toString()
                     if (token != null) {
-                        historyInteractor.getShortTransactionList("Bearer $token", cardId)
+                        historyInteractor.getShortHistory("Bearer $token", cardId)
                             .collect {
                                 val payments = it.map { rowHistoryItem ->
                                     val historyItems = mutableListOf<HistoryItem>()

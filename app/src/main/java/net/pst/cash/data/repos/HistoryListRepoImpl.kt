@@ -23,7 +23,7 @@ class HistoryListRepoImpl @Inject constructor(
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
 
-    override suspend fun getTransactionList(
+    override suspend fun getPaymentsHistory(
         token: String,
         cardId: String
     ): Flow<PagingData<RowHistoryItems>> {
@@ -34,7 +34,7 @@ class HistoryListRepoImpl @Inject constructor(
         return listData
     }
 
-    override suspend fun getShortTransactionList(
+    override suspend fun getShortHistory(
         token: String,
         cardId: String
     ): Flow<Map<String, List<TransactionModel>>> {

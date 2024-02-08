@@ -22,10 +22,10 @@ class HistoryPaymentsViewModel @Inject constructor(
     private val historyInteractor: HistoryInteractor,
 ) : AndroidViewModel(application) {
 
-    suspend fun getTransactionHistory(cardId: String): Flow<PagingData<RowHistoryItems>> {
+    suspend fun getPaymentsHistory(cardId: String): Flow<PagingData<RowHistoryItems>> {
         val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val token = sharedPref.getString("token", "")
-        val transactionList = historyInteractor.getTransactionList("Bearer $token", cardId)
+        val transactionList = historyInteractor.getPaymentsHistory("Bearer $token", cardId)
         return transactionList.map { pagingData ->
             pagingData.map {
                 val historyItems = mutableListOf<HistoryItem>()
