@@ -81,6 +81,7 @@
                 android:textSize="@dimen/text_22" />
 
             <ImageView
+                android:id="@+id/copyCardNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -135,6 +136,7 @@
                 android:textSize="@dimen/text_22" />
 
             <ImageView
+                android:id="@+id/copyExpDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -195,6 +197,7 @@
                 android:textSize="@dimen/text_22" />
 
             <ImageView
+                android:id="@+id/copyCvv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

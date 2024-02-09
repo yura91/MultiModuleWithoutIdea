@@ -1,5 +1,7 @@
 package net.pst.cash.presentation
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -7,6 +9,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
@@ -51,6 +54,12 @@ class CardsAdapter(
         notifyItemChanged(cardModelPos)
     }
 
+    private fun Context.copyToClipboard(text: CharSequence) {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", text)
+        clipboard.setPrimaryClip(clip)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == cardType) {
             val cardViewHolder = holder as CardViewHolder
@@ -68,6 +77,17 @@ class CardsAdapter(
                 cardViewHolder.easyFlipView.flipTheView()
             }
 
+            cardViewHolder.copyCardNumber.setOnClickListener {
+                context.copyToClipboard(cardViewHolder.fullCardNumber.text)
+            }
+
+            cardViewHolder.copyExpDate.setOnClickListener {
+                context.copyToClipboard(cardViewHolder.cardExpiryDateBack.text)
+            }
+
+            cardViewHolder.copyCvv.setOnClickListener {
+                context.copyToClipboard(cardViewHolder.cvv.text)
+            }
             cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
                 if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {
                     getCardInfoAction(cardModels[position].id)
@@ -196,6 +216,9 @@ class CardsAdapter(
         val backSideCvvShimmer: ShimmerFrameLayout
         val payments: MaterialButton
         val fullCardNumber: TextView
+        val copyCardNumber: ImageView
+        val copyExpDate: ImageView
+        val copyCvv: ImageView
         val cvv: TextView
         val cvvLayout: LinearLayout
         val cardItemLayout: MotionLayout
@@ -208,6 +231,9 @@ class CardsAdapter(
             cardBalance = itemView.findViewById(R.id.cardBalance)
             clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
+            copyCardNumber = itemView.findViewById(R.id.copyCardNumber)
+            copyExpDate = itemView.findViewById(R.id.copyExpDate)
+            copyCvv = itemView.findViewById(R.id.copyCvv)
             cardExpiryDateFront = itemView.findViewById(R.id.expDateFront)
             cardExpiryDateBack = itemView.findViewById(R.id.expDateBack)
             payments = itemView.findViewById(R.id.payments)
