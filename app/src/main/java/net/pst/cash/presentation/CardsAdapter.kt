@@ -199,6 +199,8 @@ class CardsAdapter(
         val cvv: TextView
         val cvvLayout: LinearLayout
         val cardItemLayout: MotionLayout
+        val collapsedSet: ConstraintSet
+        val expandedSet: ConstraintSet
 
         init {
             cardInfoFront = itemView.findViewById(R.id.cardInfoFront)
@@ -221,6 +223,8 @@ class CardsAdapter(
             cvvLayout = itemView.findViewById(R.id.cvvLayout)
             cardItemLayout = itemView.findViewById(R.id.cardItemLayout)
             expDateBackLayout = itemView.findViewById(R.id.expDateBackLayout)
+            expandedSet = cardItemLayout.getConstraintSet(R.id.expanded)
+            collapsedSet = cardItemLayout.getConstraintSet(R.id.collapsed)
         }
 
         fun setGradient() {
