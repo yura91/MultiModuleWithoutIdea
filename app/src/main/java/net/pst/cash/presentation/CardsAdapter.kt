@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -79,14 +80,26 @@ class CardsAdapter(
 
             cardViewHolder.copyCardNumber.setOnClickListener {
                 context.copyToClipboard(cardViewHolder.fullCardNumber.text)
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.card_number_is_copied), Toast.LENGTH_SHORT
+                ).show()
             }
 
             cardViewHolder.copyExpDate.setOnClickListener {
                 context.copyToClipboard(cardViewHolder.cardExpiryDateBack.text)
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.expiry_date_is_copied), Toast.LENGTH_SHORT
+                ).show()
             }
 
             cardViewHolder.copyCvv.setOnClickListener {
                 context.copyToClipboard(cardViewHolder.cvv.text)
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.cvv_is_copied), Toast.LENGTH_SHORT
+                ).show()
             }
             cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
                 if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {

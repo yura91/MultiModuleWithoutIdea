@@ -75,4 +75,7 @@
     <string name="userid">userId</string>
     <string name="card_holder_tittle">Name</string>
     <string name="placeholder_expDate">• • / • •</string>
+    <string name="card_number_is_copied">Card number is copied</string>
+    <string name="expiry_date_is_copied">Expiry date is copied</string>
+    <string name="cvv_is_copied">CVV is copied</string>
 </resources>
