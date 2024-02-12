@@ -228,11 +228,13 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
                 collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
+                cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = false
             } else {
                 expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
+                cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
                 val historyAdapter = ShortHistoryPaymentsAdapter(
                     context,
                     cardModels[position].id,
