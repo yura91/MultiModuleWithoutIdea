@@ -67,6 +67,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             cardListViewModel.getCardInfo(it)
         }) {
             cardListViewModel.updateCard(it)
+            cardListViewModel.updateCardHistory(it)
         }
 
         binding?.cardCarousel?.adapter = cardsAdapter

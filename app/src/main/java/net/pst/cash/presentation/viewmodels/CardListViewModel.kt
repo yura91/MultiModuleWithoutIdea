@@ -158,6 +158,40 @@ class CardListViewModel @Inject constructor(
         }
     }
 
+    fun updateCardHistory(cardId: Int?) {
+        viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            val cardList = cardList.value
+            val cardModelIndex = cardList?.indexOfFirst {
+                it.id == cardId
+            }
+            cardModelIndex?.let { index ->
+                historyInteractor.getShortHistory("Bearer $token", cardId.toString())
+                    .collect {
+                        val payments = it.map { rowHistoryItem ->
+                            val historyItems = mutableListOf<HistoryItem>()
+                            rowHistoryItem.elements.forEach { historyItem ->
+                                historyItems.add(
+                                    HistoryItem(
+                                        historyItem.sum,
+                                        historyItem.description,
+                                        historyItem.timePart,
+                                        historyItem.status
+                                    )
+                                )
+                            }
+                            RowHistoryItems(rowHistoryItem.date, historyItems)
+                        }
+                        cardList[index].rowHistoryItems.addAll(payments)
+                        cardList[index].rowHistoryItems.add(RowHistoryItems())
+                        _cardInfoModelPos.value = index
+                    }
+            }
+
+        }
+    }
+
     fun updateCard(cardId: Int?) {
         viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)

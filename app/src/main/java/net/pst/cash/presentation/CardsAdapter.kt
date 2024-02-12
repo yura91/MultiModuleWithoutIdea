@@ -196,6 +196,10 @@ class CardsAdapter(
             val expandedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.expanded)
             val collapsedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.collapsed)
             if (historyItems.isEmpty()) {
+                expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
+                collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
+                expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
+                collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
                 expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shimmer1, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.shimmer2, ConstraintSet.VISIBLE)
@@ -208,6 +212,7 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
+                cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = false
 
             } else {
                 expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
@@ -222,6 +227,11 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
                 expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
                 collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
+                expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
+                expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
+                collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
+                cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
             }
             if (historyItems.size == 1) {
                 expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
