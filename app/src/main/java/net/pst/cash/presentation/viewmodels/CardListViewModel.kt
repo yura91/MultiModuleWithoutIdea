@@ -43,6 +43,11 @@ class CardListViewModel @Inject constructor(
     val cardInfoModelPos: LiveData<Int>
         get() = _cardInfoModelPos
 
+    private val _deleteCardPos = MutableLiveData<Int>()
+
+    val deleteCardPos: LiveData<Int>
+        get() = _deleteCardPos
+
     val errorLoadCardList = activeCardInteractor.errorMessage
 
     private val _error = MutableLiveData<String>()
@@ -223,6 +228,23 @@ class CardListViewModel @Inject constructor(
                     it.lastCardDigits = card.lastCardDigits
                 }
                 _cardInfoModelPos.value = index
+            }
+        }
+    }
+
+    fun deleteCard(cardId: Int?) {
+        viewModelScope.launch {
+            val cardList = cardList.value
+            val cardModelIndex = cardList?.indexOfFirst {
+                it.id == cardId
+            }
+            cardModelIndex?.let {
+                val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                val token = sharedPref.getString("token", "")
+                val success = activeCardInteractor.deleteCard("Bearer $token", cardId.toString())
+                if (success) {
+                    _deleteCardPos.value = cardModelIndex
+                }
             }
         }
     }

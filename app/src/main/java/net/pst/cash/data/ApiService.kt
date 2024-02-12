@@ -11,6 +11,7 @@ import net.pst.cash.data.responses.CardUpdateResponse
 import net.pst.cash.data.responses.CheckCardResponse
 import net.pst.cash.data.responses.ConfigResponse
 import net.pst.cash.data.responses.CountriesListResponse
+import net.pst.cash.data.responses.DeleteCardResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
 import net.pst.cash.data.responses.IssueCardResponse
 import net.pst.cash.data.responses.ShowPanResponse
@@ -20,6 +21,7 @@ import net.pst.cash.data.responses.VerificationNeedResponse
 import net.pst.cash.data.responses.VerificationResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
@@ -84,6 +86,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): Response<ShowPanResponse>
+
+    @DELETE("/card/{id}")
+    suspend fun deleteCard(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Response<DeleteCardResponse>
 
     @GET("/account")
     suspend fun getAccounts(

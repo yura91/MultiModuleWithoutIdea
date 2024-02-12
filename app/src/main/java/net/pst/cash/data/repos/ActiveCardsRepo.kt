@@ -8,4 +8,6 @@ interface ActiveCardsRepo {
     suspend fun getAllCards(token: String): List<CardResponseData>?
 
     suspend fun updateCard(token: String, cardId: String): CardResponseData?
+
+    suspend fun deleteCard(token: String, cardId: String): Boolean?
 }

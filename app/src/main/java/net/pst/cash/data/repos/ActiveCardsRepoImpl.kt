@@ -58,4 +58,25 @@ class ActiveCardsRepoImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteCard(token: String, cardId: String): Boolean? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val cardDataResponse = api.deleteCard(token, cardId)
+                if (cardDataResponse.isSuccessful) {
+                    cardDataResponse.body()?.success
+                } else {
+                    val errorBody = cardDataResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
+                    false
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
+                false
+            }
+        }
+    }
 }

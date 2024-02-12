@@ -43,4 +43,9 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
             null
         }
     }
+
+    override suspend fun deleteCard(token: String, cardId: String): Boolean {
+        val deleteCardResponse: Boolean? = activeCardsRepo.deleteCard(token, cardId)
+        return deleteCardResponse == true
+    }
 }
