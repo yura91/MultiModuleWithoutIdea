@@ -19,6 +19,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.button.MaterialButton
 import com.wajahatkarim3.easyflipview.EasyFlipView
@@ -31,7 +32,8 @@ class CardsAdapter(
     private var cardModels: List<CardModel>,
     val issueCardAction: () -> Unit,
     val showPaymentsAction: (cardId: Int) -> Unit,
-    val getCardInfoAction: (cardId: Int?) -> Unit
+    val getCardInfoAction: (cardId: Int?) -> Unit,
+    val updateCardAction: (cardId: Int?) -> Unit,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -148,6 +150,48 @@ class CardsAdapter(
                 cardViewHolder.expDateBackLayout.isVisible = false
             }
 
+            cardViewHolder.swipeContainer.setOnRefreshListener {
+                updateCardAction(cardModels[position].id)
+                cardViewHolder.swipeContainer.isRefreshing = false
+            }
+            cardViewHolder.cardItemLayout.setTransitionListener(object :
+                MotionLayout.TransitionListener {
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int
+                ) {
+
+                }
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float
+                ) {
+
+                }
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    if (currentId == R.id.collapsed) {
+                        cardViewHolder.swipeContainer.isEnabled = false
+                    } else if (currentId == R.id.expanded) {
+                        cardViewHolder.swipeContainer.isEnabled = true
+                    }
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float
+                ) {
+
+                }
+
+            })
+
             val historyItems = cardModels[position].rowHistoryItems
             val expandedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.expanded)
             val collapsedSet = cardViewHolder.cardItemLayout.getConstraintSet(R.id.collapsed)
@@ -220,6 +264,7 @@ class CardsAdapter(
         val cardExpiryDateFront: TextView
         val cardExpiryDateBack: TextView
         val easyFlipView: EasyFlipView
+        val swipeContainer: SwipeRefreshLayout
         val shortHistoryPaymentList: RecyclerView
         val fullCardNumberLayout: LinearLayout
         val expDateBackLayout: LinearLayout
@@ -244,6 +289,7 @@ class CardsAdapter(
             cardBalance = itemView.findViewById(R.id.cardBalance)
             clickedArea = itemView.findViewById(R.id.clickedArea)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
+            swipeContainer = itemView.findViewById(R.id.swipeContainer)
             copyCardNumber = itemView.findViewById(R.id.copyCardNumber)
             copyExpDate = itemView.findViewById(R.id.copyExpDate)
             copyCvv = itemView.findViewById(R.id.copyCvv)

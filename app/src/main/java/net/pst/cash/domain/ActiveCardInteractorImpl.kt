@@ -28,4 +28,19 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
             null
         }
     }
+
+    override suspend fun updateCard(token: String, cardId: String): CardModel? {
+        val activeCardsResponse: CardResponseData? = activeCardsRepo.updateCard(token, cardId)
+        return if (activeCardsResponse != null) {
+            val cardModel = CardModel(
+                activeCardsResponse.id,
+                activeCardsResponse.account?.currencyId,
+                activeCardsResponse.account?.balance,
+                activeCardsResponse.mask.let { it?.substring(it.length - 4) }
+            )
+            cardModel
+        } else {
+            null
+        }
+    }
 }

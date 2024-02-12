@@ -158,6 +158,42 @@ class CardListViewModel @Inject constructor(
         }
     }
 
+    fun updateCard(cardId: Int?) {
+        viewModelScope.launch {
+            val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+            val token = sharedPref.getString("token", "")
+            val cardItem = activeCardInteractor.updateCard("Bearer $token", cardId.toString())
+            val currencyType: String = when (cardItem?.currencyId) {
+                Currency.DOLAR.currencyCode -> "$"
+                Currency.EURO.currencyCode -> "€"
+                else -> {
+                    ""
+                }
+            }
+            val cardList = cardList.value
+            val card = CardModel(
+                cardItem?.id,
+                currencyType,
+                cardItem?.balance,
+                lastCardDigits = cardItem?.lastFourDigits
+            )
+
+            val cardModelIndex = cardList?.indexOfFirst {
+                it.id == cardId
+            }
+
+            cardModelIndex?.let { index ->
+                cardList[index].let {
+                    it.currencyType = card.currencyType
+                    it.balance = card.balance
+                    it.lastCardDigits = card.lastCardDigits
+                }
+                _cardInfoModelPos.value = index
+            }
+        }
+    }
+
+
     fun getActiveBalance() {
         viewModelScope.launch {
             accountsInteractor.getAccounts()

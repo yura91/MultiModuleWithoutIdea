@@ -6,4 +6,6 @@ import net.pst.cash.data.responses.CardResponseData
 interface ActiveCardsRepo {
     val errorMessage: LiveData<String>
     suspend fun getAllCards(token: String): List<CardResponseData>?
+
+    suspend fun updateCard(token: String, cardId: String): CardResponseData?
 }

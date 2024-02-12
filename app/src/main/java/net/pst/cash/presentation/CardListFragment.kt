@@ -63,8 +63,10 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 R.id.action_cardListFragment_to_historyPaymentsFragment,
                 bundle
             )
-        }) {
+        }, {
             cardListViewModel.getCardInfo(it)
+        }) {
+            cardListViewModel.updateCard(it)
         }
 
         binding?.cardCarousel?.adapter = cardsAdapter

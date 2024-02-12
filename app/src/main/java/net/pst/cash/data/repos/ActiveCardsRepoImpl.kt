@@ -37,4 +37,25 @@ class ActiveCardsRepoImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun updateCard(token: String, cardId: String): CardResponseData? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val cardDataResponse = api.updateCard(token, cardId)
+                if (cardDataResponse.isSuccessful) {
+                    cardDataResponse.body()?.data
+                } else {
+                    val errorBody = cardDataResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
+                    null
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
+                null
+            }
+        }
+    }
 }

@@ -2,8 +2,8 @@ package net.pst.cash.presentation.model
 
 data class CardModel(
     val id: Int? = null,
-    val currencyType: String? = null,
-    val balance: String? = null,
+    var currencyType: String? = null,
+    var balance: String? = null,
     val holderName: String? = null,
     var lastCardDigits: String? = null,
     var expireDate: String? = null,
