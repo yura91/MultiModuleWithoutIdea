@@ -8,5 +8,5 @@ interface ActiveCardInteractor {
     suspend fun getAllCards(token: String): List<CardModel>?
     suspend fun updateCard(token: String, cardId: String): CardModel?
 
-    suspend fun deleteCard(token: String, cardId: String): Boolean
+    suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean
 }

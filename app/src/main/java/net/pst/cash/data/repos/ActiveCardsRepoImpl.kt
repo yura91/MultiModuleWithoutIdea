@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.pst.cash.data.ApiService
+import net.pst.cash.data.requests.DeleteCardRequest
 import net.pst.cash.data.responses.CardResponseData
 import net.pst.cash.data.responses.ErrorResponse
 import javax.inject.Inject
@@ -59,10 +60,10 @@ class ActiveCardsRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteCard(token: String, cardId: String): Boolean? {
+    override suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean? {
         return withContext(Dispatchers.IO) {
             try {
-                val cardDataResponse = api.deleteCard(token, cardId)
+                val cardDataResponse = api.deleteCard(token, cardId, DeleteCardRequest(accountId))
                 if (cardDataResponse.isSuccessful) {
                     cardDataResponse.body()?.success
                 } else {

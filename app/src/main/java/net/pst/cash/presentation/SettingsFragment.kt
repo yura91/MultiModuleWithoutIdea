@@ -18,12 +18,14 @@ class SettingsFragment :
     BaseDialogFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
     private val argsKey = "showAdditionalItems"
     private val cardIdKey = "cardId"
+    private val accountIdKey = "accountId"
     private val cardListViewModel: CardListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val args = arguments
         val showItems = args?.getBoolean(argsKey)
         val cardId = args?.getInt(cardIdKey)
+        val accountId = args?.getInt(accountIdKey)
 
         if (showItems != null && showItems == true) {
             binding?.redesign?.isVisible = true
@@ -51,7 +53,7 @@ class SettingsFragment :
                 R.string.close_card_positive,
                 R.string.close_card_negative,
                 {
-                    cardListViewModel.deleteCard(cardId)
+                    cardListViewModel.deleteCard(cardId, accountId)
                     dismiss()
                 },
                 {

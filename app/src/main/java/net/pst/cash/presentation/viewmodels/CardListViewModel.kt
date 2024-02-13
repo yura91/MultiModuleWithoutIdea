@@ -78,6 +78,7 @@ class CardListViewModel @Inject constructor(
                     }
                     val card = CardModel(
                         cardData.id,
+                        cardData.accountId,
                         currencyType,
                         cardData.balance,
                         lastCardDigits = cardData.lastFourDigits
@@ -212,6 +213,7 @@ class CardListViewModel @Inject constructor(
             val cardList = cardList.value
             val card = CardModel(
                 cardItem?.id,
+                cardItem?.accountId,
                 currencyType,
                 cardItem?.balance,
                 lastCardDigits = cardItem?.lastFourDigits
@@ -232,7 +234,7 @@ class CardListViewModel @Inject constructor(
         }
     }
 
-    fun deleteCard(cardId: Int?) {
+    fun deleteCard(cardId: Int?, accountId: Int?) {
         viewModelScope.launch {
             val cardList = cardList.value
             val cardModelIndex = cardList?.indexOfFirst {
@@ -241,9 +243,10 @@ class CardListViewModel @Inject constructor(
             cardModelIndex?.let {
                 val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("token", "")
-                val success = activeCardInteractor.deleteCard("Bearer $token", cardId.toString())
+                val success =
+                    activeCardInteractor.deleteCard("Bearer $token", cardId.toString(), accountId)
                 if (success) {
-                    _deleteCardPos.value = cardModelIndex
+                    _deleteCardPos.value = it
                 }
             }
         }

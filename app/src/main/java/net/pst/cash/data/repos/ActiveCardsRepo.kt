@@ -9,5 +9,5 @@ interface ActiveCardsRepo {
 
     suspend fun updateCard(token: String, cardId: String): CardResponseData?
 
-    suspend fun deleteCard(token: String, cardId: String): Boolean?
+    suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean?
 }

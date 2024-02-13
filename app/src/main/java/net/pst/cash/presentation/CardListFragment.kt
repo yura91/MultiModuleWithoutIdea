@@ -40,6 +40,9 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                 bundle.putInt(cardIdTag, it)
             }
 
+            currentCardModel?.accountId?.let {
+                bundle.putInt(accountIdTag, it)
+            }
             findNavController().navigate(
                 R.id.action_cardListFragment_to_settings_nav_graph,
                 bundle
@@ -122,5 +125,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
     companion object {
         private const val argsTag = "showAdditionalItems"
         private const val cardIdTag = "cardId"
+        private const val accountIdTag = "accountId"
     }
 }

@@ -1,14 +1,15 @@
 package net.pst.cash.data
 
 import net.pst.cash.data.requests.AppleSignInRequest
+import net.pst.cash.data.requests.DeleteCardRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.requests.IssueCardRequest
 import net.pst.cash.data.requests.VerificationRequest
 import net.pst.cash.data.responses.AccountsResponse
+import net.pst.cash.data.responses.AllCardsResponse
 import net.pst.cash.data.responses.AppleLinkResponse
 import net.pst.cash.data.responses.AppleSignInResponse
 import net.pst.cash.data.responses.CardUpdateResponse
-import net.pst.cash.data.responses.CheckCardResponse
 import net.pst.cash.data.responses.ConfigResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.DeleteCardResponse
@@ -21,8 +22,8 @@ import net.pst.cash.data.responses.VerificationNeedResponse
 import net.pst.cash.data.responses.VerificationResponse
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -38,7 +39,7 @@ interface ApiService {
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/card")
-    suspend fun getAllCards(@Header("Authorization") token: String): Response<CheckCardResponse>
+    suspend fun getAllCards(@Header("Authorization") token: String): Response<AllCardsResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/oauth/apple/link")
@@ -88,10 +89,11 @@ interface ApiService {
     ): Response<ShowPanResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
-    @DELETE("/card/{id}")
+    @HTTP(method = "DELETE", path = "/card/{id}", hasBody = true)
     suspend fun deleteCard(
         @Header("Authorization") token: String,
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Body requestBody: DeleteCardRequest
     ): Response<DeleteCardResponse>
 
     @GET("/account")

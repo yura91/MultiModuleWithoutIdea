@@ -17,6 +17,7 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
             activeCardsResponse.forEach { cardDataModel ->
                 val cardModel = CardModel(
                     cardDataModel.id,
+                    cardDataModel.userAccountId,
                     cardDataModel.account?.currencyId,
                     cardDataModel.account?.balance,
                     cardDataModel.mask.let { it?.substring(it.length - 4) }
@@ -34,6 +35,7 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
         return if (activeCardsResponse != null) {
             val cardModel = CardModel(
                 activeCardsResponse.id,
+                activeCardsResponse.userAccountId,
                 activeCardsResponse.account?.currencyId,
                 activeCardsResponse.account?.balance,
                 activeCardsResponse.mask.let { it?.substring(it.length - 4) }
@@ -44,8 +46,8 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
         }
     }
 
-    override suspend fun deleteCard(token: String, cardId: String): Boolean {
-        val deleteCardResponse: Boolean? = activeCardsRepo.deleteCard(token, cardId)
+    override suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean {
+        val deleteCardResponse: Boolean? = activeCardsRepo.deleteCard(token, cardId, accountId)
         return deleteCardResponse == true
     }
 }
