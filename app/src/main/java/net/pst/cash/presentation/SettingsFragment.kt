@@ -5,18 +5,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSettingsBinding
+import net.pst.cash.presentation.viewmodels.CardListViewModel
 
 
+@AndroidEntryPoint
 class SettingsFragment :
     BaseDialogFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
     private val argsKey = "showAdditionalItems"
+    private val cardIdKey = "cardId"
+    private val cardListViewModel: CardListViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val args = arguments
         val showItems = args?.getBoolean(argsKey)
+        val cardId = args?.getInt(cardIdKey)
 
         if (showItems != null && showItems == true) {
             binding?.redesign?.isVisible = true
@@ -44,11 +51,8 @@ class SettingsFragment :
                 R.string.close_card_positive,
                 R.string.close_card_negative,
                 {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.card_is_closed),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    cardListViewModel.deleteCard(cardId)
+                    dismiss()
                 },
                 {
                     Toast.makeText(

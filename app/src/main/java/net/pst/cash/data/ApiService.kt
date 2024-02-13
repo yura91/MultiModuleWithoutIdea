@@ -87,6 +87,7 @@ interface ApiService {
         @Path("id") id: String
     ): Response<ShowPanResponse>
 
+    @Headers("accept: application/json", "Content-Type: application/json")
     @DELETE("/card/{id}")
     suspend fun deleteCard(
         @Header("Authorization") token: String,

@@ -57,11 +57,20 @@ class CardsAdapter(
         notifyItemChanged(cardModelPos)
     }
 
+    fun removeCardModel(cardModelPos: Int) {
+        notifyItemRemoved(cardModelPos)
+    }
+
     private fun Context.copyToClipboard(text: CharSequence) {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
     }
+
+    fun getItemData(position: Int): CardModel {
+        return cardModels[position]
+    }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == cardType) {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
@@ -15,7 +15,7 @@ import net.pst.cash.presentation.viewmodels.CardListViewModel
 
 @AndroidEntryPoint
 class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListBinding::inflate) {
-    private val cardListViewModel: CardListViewModel by viewModels()
+    private val cardListViewModel: CardListViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,8 +28,18 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         }
 
         toolbarBinding?.actionMore?.setOnClickListener {
+
+            val currentPosition = binding?.cardCarousel?.currentItem
+            val cardsAdapter = binding?.cardCarousel?.adapter as CardsAdapter
+            val currentCardModel = currentPosition?.let {
+                cardsAdapter.getItemData(it)
+            }
             val bundle = Bundle()
             bundle.putBoolean(argsTag, true)
+            currentCardModel?.id?.let {
+                bundle.putInt(cardIdTag, it)
+            }
+
             findNavController().navigate(
                 R.id.action_cardListFragment_to_settings_nav_graph,
                 bundle
@@ -75,7 +85,9 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             cardsAdapter.updateCardModels(it)
             cardListViewModel.getAllCardHistories()
         }
-
+        cardListViewModel.deleteCardPos.observe(viewLifecycleOwner) {
+            cardsAdapter.removeCardModel(it)
+        }
         cardListViewModel.cardInfoModelPos.observe(viewLifecycleOwner) {
             cardsAdapter.updateCardModel(it)
         }
