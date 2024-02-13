@@ -32,10 +32,20 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             val currentPosition = binding?.cardCarousel?.currentItem
             val cardsAdapter = binding?.cardCarousel?.adapter as CardsAdapter
             val currentCardModel = currentPosition?.let {
-                cardsAdapter.getItemData(it)
+                if (it < cardsAdapter.itemCount) {
+                    return@let cardsAdapter.getItemData(it)
+                } else {
+                    return@let null
+                }
             }
             val bundle = Bundle()
-            bundle.putBoolean(argsTag, true)
+
+            val cardList = cardListViewModel.cardList.value
+
+            if (cardList != null && cardList.size > 1) {
+                bundle.putBoolean(showAdItemsTag, true)
+            }
+
             currentCardModel?.id?.let {
                 bundle.putInt(cardIdTag, it)
             }
@@ -129,7 +139,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
     }
 
     companion object {
-        private const val argsTag = "showAdditionalItems"
+        private const val showAdItemsTag = "showAdditionalItems"
         private const val cardIdTag = "cardId"
         private const val accountIdTag = "accountId"
     }
