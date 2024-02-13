@@ -88,21 +88,6 @@
             android:id="@+id/action_selectBalanceFragment_to_cardListFragment"
             app:destination="@id/cardListFragment" />
     </dialog>
-    <fragment
-        android:id="@+id/cardInfoFragment"
-        android:name="net.pst.cash.presentation.CardInfoFragment"
-        android:label="restricted_card_info"
-        tools:layout="@layout/restricted_card_info">
-        <action
-            android:id="@+id/action_cardInfoFragment_to_historyPaymentsFragment"
-            app:destination="@id/historyPaymentsFragment" />
-        <action
-            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph"
-            app:destination="@id/settings_nav_graph" />
-        <action
-            android:id="@+id/action_cardInfoFragment_to_settings_nav_graph2"
-            app:destination="@id/settings_nav_graph" />
-    </fragment>
     <dialog
         android:id="@+id/topUpFragment"
         android:name="net.pst.cash.presentation.TopUpFragment"
@@ -167,9 +152,6 @@
         android:name="net.pst.cash.presentation.CardListFragment"
         android:label="CardListFragment">
         <action
-            android:id="@+id/action_cardListFragment_to_cardInfoFragment"
-            app:destination="@id/cardInfoFragment" />
-        <action
             android:id="@+id/action_cardListFragment_to_settings_nav_graph"
             app:destination="@id/settings_nav_graph" />
         <action
@@ -180,5 +162,8 @@
         <action
             android:id="@+id/action_cardListFragment_to_historyPaymentsFragment"
             app:destination="@id/historyPaymentsFragment" />
+        <action
+            android:id="@+id/action_cardListFragment_to_topUpFragment"
+            app:destination="@id/topUpFragment" />
     </fragment>
 </navigation>

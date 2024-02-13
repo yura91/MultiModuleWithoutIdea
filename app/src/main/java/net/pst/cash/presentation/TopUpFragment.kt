@@ -34,9 +34,12 @@ class TopUpFragment : BaseDialogFragment<FragmentTopUpBinding>(FragmentTopUpBind
             binding?.qrCode?.setImageBitmap(it)
         }
 
+        binding?.toolbar?.addBalance?.isVisible = false
+
+
         binding?.toolbar?.actionMore?.setImageResource(R.drawable.ic_close)
         binding?.toolbar?.actionMore?.setOnClickListener {
-           dismiss()
+            dismiss()
         }
         binding?.copyQr?.setOnClickListener {
             Toast.makeText(requireContext(), "QR is copied", Toast.LENGTH_SHORT).show()

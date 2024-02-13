@@ -99,6 +99,12 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             cardsAdapter.updateCardModels(it)
         }
 
+        binding?.toolbar?.addBalance?.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_cardListFragment_to_topUpFragment
+            )
+        }
+
         binding?.cardCarousel?.apply {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             offscreenPageLimit = 3

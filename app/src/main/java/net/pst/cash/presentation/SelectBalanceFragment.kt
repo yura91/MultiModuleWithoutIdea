@@ -120,6 +120,12 @@ class SelectBalanceFragment :
                 R.id.action_selectBalanceFragment_to_topUpFragment
             )
         }
+
+        binding?.toolbar?.addBalance?.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_selectBalanceFragment_to_topUpFragment
+            )
+        }
     }
 
     private fun setGradient() {
