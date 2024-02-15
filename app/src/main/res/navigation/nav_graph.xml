@@ -176,5 +176,16 @@
         <action
             android:id="@+id/action_signInEmailFragment_to_getAcquaintedFragment"
             app:destination="@id/getAcquaintedFragment" />
+        <action
+            android:id="@+id/action_signInEmailFragment_to_getAcquaintedFragment2"
+            app:destination="@id/getAcquaintedFragment" />
+        <action
+            android:id="@+id/action_signInEmailFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signInEmailFragment_to_cardPaletteFragment"
+            app:destination="@id/cardPaletteFragment" />
     </fragment>
 </navigation>

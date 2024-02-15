@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -54,6 +55,18 @@ class SignInEmailFragment :
                 )
                 binding?.signInButton?.layoutParams = params
             }
+        }
+
+        signInEmailViewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInEmailFragment_to_getAcquaintedFragment)
+        }
+
+        signInEmailViewModel.navigateToCardPaletteScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInEmailFragment_to_cardPaletteFragment)
+        }
+
+        signInEmailViewModel.navigateToReadyScreen.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signInEmailFragment_to_cardListFragment)
         }
 
         signInEmailViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
