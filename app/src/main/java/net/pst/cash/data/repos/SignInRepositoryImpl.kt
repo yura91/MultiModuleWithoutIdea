@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.pst.cash.data.ApiService
 import net.pst.cash.data.requests.AppleSignInRequest
+import net.pst.cash.data.requests.EmailSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.responses.ErrorResponse
 import net.pst.cash.data.responses.UserInfoResponse
@@ -116,6 +117,42 @@ class SignInRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun signInEmail(email: String, password: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val signInEmailResponse = api.signInEmail(EmailSignInRequest(email, password))
+                if (signInEmailResponse.isSuccessful) {
+                    val token = signInEmailResponse.body()?.token
+                    with(sharedPref.edit()) {
+                        putString(Companion.token, token)
+                        apply()
+                    }
+                    token?.let {
+                        val userInfoResponse = api.getUserInfo("Bearer $it")
+                        val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
+                        val userId = userInfoResponseBody?.data?.userId
+                        with(sharedPref.edit()) {
+                            putString(Companion.userId, userId)
+                            apply()
+                        }
+                    }
+                    true
+                } else {
+                    val errorBody = signInEmailResponse.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, ErrorResponse::class.java)
+                    _errorMessage.postValue(errorResponse.message)
+                    false
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _errorMessage.postValue(e.message)
+                false
+            }
+        }
+    }
+
 
     companion object {
         const val token = "token"

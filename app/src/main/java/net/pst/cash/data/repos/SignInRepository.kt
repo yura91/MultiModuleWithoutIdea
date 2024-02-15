@@ -10,4 +10,6 @@ interface SignInRepository {
     suspend fun getAppleLink(): String?
 
     suspend fun signInApple(code: String?, registerHash: String?): Boolean
+
+    suspend fun signInEmail(email: String, password: String): Boolean
 }

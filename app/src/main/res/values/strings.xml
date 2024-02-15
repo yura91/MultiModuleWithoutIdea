@@ -81,4 +81,6 @@
     <string name="sign_in_with_email">Sign in with email</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="field_email_can_not_be_empty">Field email can not be empty</string>
+    <string name="field_password_can_not_be_empty">Field password can not be empty</string>
 </resources>

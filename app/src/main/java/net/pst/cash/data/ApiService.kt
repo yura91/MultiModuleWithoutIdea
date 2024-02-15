@@ -2,6 +2,7 @@ package net.pst.cash.data
 
 import net.pst.cash.data.requests.AppleSignInRequest
 import net.pst.cash.data.requests.DeleteCardRequest
+import net.pst.cash.data.requests.EmailSignInRequest
 import net.pst.cash.data.requests.GoogleSignInRequest
 import net.pst.cash.data.requests.IssueCardRequest
 import net.pst.cash.data.requests.VerificationRequest
@@ -13,6 +14,7 @@ import net.pst.cash.data.responses.CardUpdateResponse
 import net.pst.cash.data.responses.ConfigResponse
 import net.pst.cash.data.responses.CountriesListResponse
 import net.pst.cash.data.responses.DeleteCardResponse
+import net.pst.cash.data.responses.EmailSignInResponse
 import net.pst.cash.data.responses.GoogleSignInResponse
 import net.pst.cash.data.responses.IssueCardResponse
 import net.pst.cash.data.responses.ShowPanResponse
@@ -36,6 +38,10 @@ interface ApiService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("/oauth/google/callback-jwt")
     suspend fun signInGoogle(@Body requestBody: GoogleSignInRequest): Response<GoogleSignInResponse>
+
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("/user/login")
+    suspend fun signInEmail(@Body requestBody: EmailSignInRequest): Response<EmailSignInResponse>
 
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/card")

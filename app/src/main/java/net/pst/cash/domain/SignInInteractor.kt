@@ -7,6 +7,8 @@ interface SignInInteractor {
 
     suspend fun signInGoogle(registerHash: String, googleToken: String): Boolean
 
+    suspend fun signInEmail(email: String, password: String): Boolean
+
     suspend fun signInApple(code: String?, registerHash: String?): Boolean
 
     suspend fun getAppleLink(): String?
