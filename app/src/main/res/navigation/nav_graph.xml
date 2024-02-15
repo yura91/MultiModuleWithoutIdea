@@ -172,5 +172,9 @@
     <fragment
         android:id="@+id/signInEmailFragment"
         android:name="net.pst.cash.presentation.SignInEmailFragment"
-        android:label="SignInEmailFragment" />
+        android:label="SignInEmailFragment">
+        <action
+            android:id="@+id/action_signInEmailFragment_to_getAcquaintedFragment"
+            app:destination="@id/getAcquaintedFragment" />
+    </fragment>
 </navigation>

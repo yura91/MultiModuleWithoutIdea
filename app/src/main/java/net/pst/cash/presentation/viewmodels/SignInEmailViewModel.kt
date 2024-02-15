@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInEmailViewModel @Inject constructor(
-    private val application: Application,
+    application: Application,
     private val signInInteractor: SignInInteractor,
 ) : AndroidViewModel(application) {
     val snackBarErrorMessage = signInInteractor.errorMessage
@@ -31,7 +31,7 @@ class SignInEmailViewModel @Inject constructor(
 
     fun signInEmail(email: String, password: String) {
         viewModelScope.launch {
-            signInInteractor.signInEmail(email, password)
+            val signInResult = signInInteractor.signInEmail(email, password)
         }
     }
 
