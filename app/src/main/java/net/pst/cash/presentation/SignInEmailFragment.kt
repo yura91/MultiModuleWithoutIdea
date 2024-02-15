@@ -2,7 +2,9 @@ package net.pst.cash.presentation
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
@@ -26,11 +28,8 @@ class SignInEmailFragment :
             val r = Rect()
             contentView.getWindowVisibleDisplayFrame(r)
             val screenHeight = contentView.rootView.height
-
-            // Высота, которую занимает клавиатура
             val keypadHeight = screenHeight - r.bottom
-            if (keypadHeight > screenHeight * 0.15) { // Если клавиатура открыта
-                // Поднимаем или изменяем ваш макет здесь
+            if (keypadHeight > screenHeight * 0.15) {
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -43,7 +42,6 @@ class SignInEmailFragment :
                 )
                 binding?.signInButton?.layoutParams = params
             } else {
-                // Возвращаем макет в исходное положение, если клавиатура закрыта
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -58,9 +56,13 @@ class SignInEmailFragment :
             }
         }
 
-
         signInEmailViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+            val snack: Snackbar = Snackbar.make(contentView, it, Snackbar.LENGTH_LONG)
+            val view = snack.view
+            val params = view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            view.layoutParams = params
+            snack.show()
         }
 
         signInEmailViewModel.emptyEmailLiveData.observe(viewLifecycleOwner) {
