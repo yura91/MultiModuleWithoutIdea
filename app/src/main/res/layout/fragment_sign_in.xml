@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_40"
-        android:layout_marginBottom="@dimen/margin_34"
+        android:layout_marginBottom="@dimen/margin_10"
         android:background="@drawable/rounded_corner_black_bg"
         android:text="@string/sign_in_with_google"
         android:textColor="@color/white"
@@ -96,6 +96,21 @@
         app:icon="@drawable/ic_google"
         app:iconGravity="textStart"
         app:iconTint="@null"
+        app:layout_constraintBottom_toTopOf="@id/signWithEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signWithEmail"
+        android:layout_width="@dimen/size_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_40"
+        android:layout_marginEnd="@dimen/margin_40"
+        android:layout_marginBottom="@dimen/margin_34"
+        android:background="@drawable/rounded_corner_black_bg"
+        android:text="@string/sign_in_with_email"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@id/textPrivacyPolicy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

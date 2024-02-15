@@ -23,6 +23,9 @@
             app:destination="@id/cardListFragment"
             app:popUpTo="@id/signInFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signInFragment_to_signInEmailFragment"
+            app:destination="@id/signInEmailFragment" />
     </fragment>
     <fragment
         android:id="@+id/getAcquaintedFragment"
@@ -166,4 +169,8 @@
             android:id="@+id/action_cardListFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/signInEmailFragment"
+        android:name="net.pst.cash.presentation.SignInEmailFragment"
+        android:label="SignInEmailFragment" />
 </navigation>

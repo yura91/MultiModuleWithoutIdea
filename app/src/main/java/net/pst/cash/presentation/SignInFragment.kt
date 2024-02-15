@@ -69,6 +69,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             signInViewModel.signInWithGoogle()
         }
 
+        binding?.signWithEmail?.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_signInEmailFragment)
+        }
+
         binding?.signWithApple?.setOnClickListener {
             signInViewModel.getAppleLink()
         }

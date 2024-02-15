@@ -39,12 +39,10 @@ class CardListViewModel @Inject constructor(
         get() = _cardHistoriesList
 
     private val _cardInfoModelPos = MutableLiveData<Int>()
-
     val cardInfoModelPos: LiveData<Int>
         get() = _cardInfoModelPos
 
     private val _deleteCardPos = MutableLiveData<Int>()
-
     val deleteCardPos: LiveData<Int>
         get() = _deleteCardPos
 
@@ -57,7 +55,6 @@ class CardListViewModel @Inject constructor(
     private val _account = accountsInteractor.account.map {
         it?.balance?.split(" ")?.get(0)
     }
-
     val account: LiveData<String?>
         get() = _account
 
