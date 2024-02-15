@@ -18,7 +18,7 @@ import net.pst.cash.presentation.viewmodels.SignInEmailViewModel
 
 @AndroidEntryPoint
 class SignInEmailFragment :
-    BaseFragment<FragmentSignInEmailBinding>(FragmentSignInEmailBinding::inflate) {
+    BaseDialogFragment<FragmentSignInEmailBinding>(FragmentSignInEmailBinding::inflate) {
     private val signInEmailViewModel: SignInEmailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class SignInEmailFragment :
         }
 
         signInEmailViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
-            val snack: Snackbar = Snackbar.make(contentView, it, Snackbar.LENGTH_LONG)
+            val snack: Snackbar = Snackbar.make(view, it, Snackbar.LENGTH_LONG)
             val view = snack.view
             val params = view.layoutParams as FrameLayout.LayoutParams
             params.gravity = Gravity.TOP

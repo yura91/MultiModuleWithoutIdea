@@ -169,7 +169,7 @@
             android:id="@+id/action_cardListFragment_to_topUpFragment"
             app:destination="@id/topUpFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/signInEmailFragment"
         android:name="net.pst.cash.presentation.SignInEmailFragment"
         android:label="SignInEmailFragment">
@@ -187,5 +187,5 @@
         <action
             android:id="@+id/action_signInEmailFragment_to_cardPaletteFragment"
             app:destination="@id/cardPaletteFragment" />
-    </fragment>
+    </dialog>
 </navigation>
