@@ -39,7 +39,7 @@ class SignInEmailFragment :
                     requireContext().dpToPx(20f).toInt(),
                     requireContext().dpToPx(20f).toInt(),
                     requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(150f).toInt()
+                    requireContext().dpToPx(200f).toInt()
                 )
                 binding?.signInButton?.layoutParams = params
             } else {
@@ -59,6 +59,10 @@ class SignInEmailFragment :
 
         signInEmailViewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_signInEmailFragment_to_getAcquaintedFragment)
+        }
+
+        binding?.toolbar?.setNavigationOnClickListener {
+            dismiss()
         }
 
         signInEmailViewModel.navigateToCardPaletteScreen.observe(viewLifecycleOwner) {
