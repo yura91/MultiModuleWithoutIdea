@@ -34,7 +34,7 @@
             android:layout_width="@dimen/size_52"
             android:layout_height="@dimen/size_68"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/margin_118"
+            android:layout_marginTop="@dimen/margin_100"
             android:layout_marginEnd="@dimen/margin_80"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_card_chip" />

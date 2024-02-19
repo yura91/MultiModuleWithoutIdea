@@ -27,7 +27,7 @@ class SelectBalanceViewModel @Inject constructor(
     var costCard: Double = 0.0
     var selectedPos: Int = 0
     private var accountId: Int? = null
-    var accountBalance: String? = null
+    private var accountBalance: String? = null
 
     val snackBarErrorMessage = issueCardInteractor.errorModel.map {
         it.message
@@ -91,10 +91,10 @@ class SelectBalanceViewModel @Inject constructor(
             token?.let { tokenValue ->
                 accountId?.let { accountId ->
                     val issueCardResponse =
-                        issueCardInteractor.issueCard("Bearer $token", accountId, balanceCard)
+                        issueCardInteractor.issueCard("Bearer $tokenValue", accountId, balanceCard)
                     issueCardResponse?.let {
-                        it.data?.id?.let {
-                            _issueCardEvent.value = it
+                        it.data?.id?.let { id ->
+                            _issueCardEvent.value = id
                         }
                     }
                 }

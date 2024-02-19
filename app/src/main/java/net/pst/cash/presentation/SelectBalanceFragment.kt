@@ -121,7 +121,7 @@ class SelectBalanceFragment :
             )
         }
 
-        binding?.toolbar?.addBalance?.setOnClickListener {
+        binding?.toolbar?.balanceLayout?.setOnClickListener {
             findNavController().navigate(
                 R.id.action_selectBalanceFragment_to_topUpFragment
             )

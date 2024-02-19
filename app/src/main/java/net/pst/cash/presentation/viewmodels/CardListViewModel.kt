@@ -186,6 +186,7 @@ class CardListViewModel @Inject constructor(
                             }
                             RowHistoryItems(rowHistoryItem.date, historyItems)
                         }
+                        cardList[index].rowHistoryItems.clear()
                         cardList[index].rowHistoryItems.addAll(payments)
                         cardList[index].rowHistoryItems.add(RowHistoryItems())
                         _cardInfoModelPos.value = index
