@@ -141,19 +141,24 @@ class CardListViewModel @Inject constructor(
             val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
             }
-            cardModelIndex?.let { index ->
-                cardList[index].let {
-                    token?.let { token ->
-                        if (it.fullCardNumber == null && it.cvv == null && it.expireDate == null) {
-                            val showPanDataModel =
-                                cardInfoInteractor.getCardInfo("Bearer $token", cardId.toString())
-                            it.fullCardNumber = showPanDataModel.number
-                            val expMonth = showPanDataModel.expMonth
-                            val expYear = showPanDataModel.expYear
-                            it.expireDate = "$expMonth/$expYear"
-                            it.cvv = showPanDataModel.cvx2
+            if (cardModelIndex != -1) {
+                cardModelIndex?.let { index ->
+                    cardList[index].let {
+                        token?.let { token ->
+                            if (it.fullCardNumber == null && it.cvv == null && it.expireDate == null) {
+                                val showPanDataModel =
+                                    cardInfoInteractor.getCardInfo(
+                                        "Bearer $token",
+                                        cardId.toString()
+                                    )
+                                it.fullCardNumber = showPanDataModel.number
+                                val expMonth = showPanDataModel.expMonth
+                                val expYear = showPanDataModel.expYear
+                                it.expireDate = "$expMonth/$expYear"
+                                it.cvv = showPanDataModel.cvx2
 
-                            _cardInfoModelPos.value = index
+                                _cardInfoModelPos.value = index
+                            }
                         }
                     }
                 }
@@ -169,30 +174,31 @@ class CardListViewModel @Inject constructor(
             val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
             }
-            cardModelIndex?.let { index ->
-                historyInteractor.getShortHistory("Bearer $token", cardId.toString())
-                    .collect {
-                        val payments = it.map { rowHistoryItem ->
-                            val historyItems = mutableListOf<HistoryItem>()
-                            rowHistoryItem.elements.forEach { historyItem ->
-                                historyItems.add(
-                                    HistoryItem(
-                                        historyItem.sum,
-                                        historyItem.description,
-                                        historyItem.timePart,
-                                        historyItem.status
+            if (cardModelIndex != -1) {
+                cardModelIndex?.let { index ->
+                    historyInteractor.getShortHistory("Bearer $token", cardId.toString())
+                        .collect {
+                            val payments = it.map { rowHistoryItem ->
+                                val historyItems = mutableListOf<HistoryItem>()
+                                rowHistoryItem.elements.forEach { historyItem ->
+                                    historyItems.add(
+                                        HistoryItem(
+                                            historyItem.sum,
+                                            historyItem.description,
+                                            historyItem.timePart,
+                                            historyItem.status
+                                        )
                                     )
-                                )
+                                }
+                                RowHistoryItems(rowHistoryItem.date, historyItems)
                             }
-                            RowHistoryItems(rowHistoryItem.date, historyItems)
+                            cardList[index].rowHistoryItems.clear()
+                            cardList[index].rowHistoryItems.addAll(payments)
+                            cardList[index].rowHistoryItems.add(RowHistoryItems())
+                            _cardInfoModelPos.value = index
                         }
-                        cardList[index].rowHistoryItems.clear()
-                        cardList[index].rowHistoryItems.addAll(payments)
-                        cardList[index].rowHistoryItems.add(RowHistoryItems())
-                        _cardInfoModelPos.value = index
-                    }
+                }
             }
-
         }
     }
 
@@ -220,14 +226,15 @@ class CardListViewModel @Inject constructor(
             val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
             }
-
-            cardModelIndex?.let { index ->
-                cardList[index].let {
-                    it.currencyType = card.currencyType
-                    it.balance = card.balance
-                    it.lastCardDigits = card.lastCardDigits
+            if (cardModelIndex != -1) {
+                cardModelIndex?.let { index ->
+                    cardList[index].let {
+                        it.currencyType = card.currencyType
+                        it.balance = card.balance
+                        it.lastCardDigits = card.lastCardDigits
+                    }
+                    _cardInfoModelPos.value = index
                 }
-                _cardInfoModelPos.value = index
             }
         }
     }
@@ -238,13 +245,20 @@ class CardListViewModel @Inject constructor(
             val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
             }
-            cardModelIndex?.let {
-                val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-                val token = sharedPref.getString("token", "")
-                val success =
-                    activeCardInteractor.deleteCard("Bearer $token", cardId.toString(), accountId)
-                if (success) {
-                    _deleteCardPos.value = it
+            if (cardModelIndex != -1) {
+                cardModelIndex?.let {
+                    val sharedPref =
+                        application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                    val token = sharedPref.getString("token", "")
+                    val success =
+                        activeCardInteractor.deleteCard(
+                            "Bearer $token",
+                            cardId.toString(),
+                            accountId
+                        )
+                    if (success) {
+                        _deleteCardPos.value = it
+                    }
                 }
             }
         }
