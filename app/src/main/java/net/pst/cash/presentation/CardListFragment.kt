@@ -28,7 +28,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         }
 
         toolbarBinding?.actionMore?.setOnClickListener {
-
             val currentPosition = binding?.cardCarousel?.currentItem
             val cardsAdapter = binding?.cardCarousel?.adapter as CardsAdapter
             val currentCardModel = currentPosition?.let {
@@ -38,10 +37,9 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
                     return@let null
                 }
             }
+
             val bundle = Bundle()
-
             val cardList = cardListViewModel.cardList.value
-
             if (cardList != null && cardList.size > 1) {
                 bundle.putBoolean(showAdItemsTag, true)
             }

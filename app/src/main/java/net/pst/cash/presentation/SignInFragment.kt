@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -47,6 +48,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
         signInViewModel.snackBarErrorMessage.observe(viewLifecycleOwner) {
             Snackbar.make(view, it, Snackbar.LENGTH_LONG).show();
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            requireActivity().finish()
         }
 
         signInViewModel.navigateToGetAcquaintedScreen.observe(viewLifecycleOwner) {

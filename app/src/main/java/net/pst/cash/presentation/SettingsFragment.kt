@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -85,7 +86,10 @@ class SettingsFragment :
                         getString(R.string.you_are_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
-                    requireActivity().finish()
+                    findNavController().navigate(
+                        SettingsFragmentDirections.actionSettingsFragmentToSignInFragment(),
+                        NavOptions.Builder().setLaunchSingleTop(true).build()
+                    )
                 },
                 {
                     Toast.makeText(
