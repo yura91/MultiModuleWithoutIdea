@@ -8,6 +8,7 @@ import net.pst.cash.domain.model.Account
 import java.util.Timer
 import java.util.TimerTask
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 
 class AccountsInteractorImpl @Inject constructor(
@@ -39,14 +40,16 @@ class AccountsInteractorImpl @Inject constructor(
                     }
                 }
             }
-        }, 0, 60000)
+        }, delay, timeInMillis)
     }
 
     fun roundOffDecimal(number: Double): Double {
-        return Math.round(number * 100.0) / 100.0
+        return (number * divider).roundToInt() / divider
     }
 
     companion object {
-        const val token = "token"
+        const val divider = 100.0
+        const val timeInMillis: Long = 60000
+        const val delay: Long = 0
     }
 }

@@ -1,8 +1,10 @@
 package net.pst.cash.data.repos
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.pst.cash.R
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 class UserInfoRepositoryImpl @Inject constructor(
     private val api: ApiService,
-    private val context: Context
+    private val sharedPreferences: SharedPreferences,
+    @ApplicationContext private val appContext: Context
 ) : UserInfoRepository {
     override val errorMessage: LiveData<String>
         get() = _errorMessage
@@ -26,9 +29,8 @@ class UserInfoRepositoryImpl @Inject constructor(
                 if (userInfoResponse.isSuccessful) {
                     val userInfoResponseBody: UserInfoResponse? = userInfoResponse.body()
                     val userId = userInfoResponseBody?.data?.userId
-                    val sharedPref = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-                    with(sharedPref.edit()) {
-                        putString(context.getString(R.string.userid), userId)
+                    with(sharedPreferences.edit()) {
+                        putString(appContext.getString(R.string.userid), userId)
                         apply()
                     }
                 }

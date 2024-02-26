@@ -88,6 +88,7 @@ interface ApiService {
         @Path("id") id: String
     ): Response<CardUpdateResponse>
 
+    @Headers("accept: application/json", "Content-Type: application/json")
     @GET("/card/{id}/showpan")
     suspend fun getCardInfo(
         @Header("Authorization") token: String,

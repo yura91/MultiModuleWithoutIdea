@@ -15,10 +15,11 @@ class AccountsRepoImpl @Inject constructor(
     private val api: ApiService,
     private val sharedPreferences: SharedPreferences,
 ) : AccountsRepo {
+
     override val errorMessage: LiveData<String>
         get() = _errorMessage
-
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
+
     override suspend fun getAccounts(): AccountsResponse? {
         return withContext(Dispatchers.IO) {
             try {
@@ -40,7 +41,6 @@ class AccountsRepoImpl @Inject constructor(
                 _errorMessage.postValue(e.message)
                 return@withContext null
             }
-
         }
     }
 
