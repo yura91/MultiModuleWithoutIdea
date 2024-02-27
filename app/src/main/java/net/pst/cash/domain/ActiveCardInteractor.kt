@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import net.pst.cash.domain.model.CardModel
 
 interface ActiveCardInteractor {
-    val errorMessage: LiveData<String>
+    val errorMessage: LiveData<String?>
     suspend fun getAllCards(token: String): List<CardModel>?
     suspend fun updateCard(token: String, cardId: String): CardModel?
 
     suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean
+
+    fun clearErrors()
 }

@@ -86,7 +86,7 @@ class SettingsFragment :
                         getString(R.string.you_are_logged_out),
                         Toast.LENGTH_SHORT
                     ).show()
-
+                    cardListViewModel.cancelAllJobs()
                     findNavController().clearBackStack(R.id.settingsFragment)
                     findNavController().navigate(
                         SettingsFragmentDirections.actionSettingsFragmentToSignInFragment(),

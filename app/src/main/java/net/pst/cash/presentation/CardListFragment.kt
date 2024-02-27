@@ -51,6 +51,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             currentCardModel?.accountId?.let {
                 bundle.putInt(accountIdTag, it)
             }
+
             findNavController().navigate(
                 R.id.action_cardListFragment_to_settings_nav_graph,
                 bundle
@@ -58,15 +59,15 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         }
 
         cardListViewModel.account.observe(viewLifecycleOwner) {
-            binding?.toolbar?.cardBalance?.text = it
-        }
-
-        cardListViewModel.error.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+            it?.let {
+                binding?.toolbar?.cardBalance?.text = it
+            }
         }
 
         cardListViewModel.errorLoadCardList.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+            it?.let {
+                Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -93,18 +94,20 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         binding?.cardCarousel?.adapter = cardsAdapter
         cardListViewModel.cardList.observe(viewLifecycleOwner) {
-            cardsAdapter.updateCardModels(it)
-            cardListViewModel.getAllCardHistories()
+            it?.let {
+                cardsAdapter.updateCardModels(it)
+                cardListViewModel.getAllCardHistories()
+            }
         }
         cardListViewModel.deleteCardPos.observe(viewLifecycleOwner) {
-            cardsAdapter.removeCardModel(it)
+            it?.let { cardsAdapter.removeCardModel(it) }
         }
         cardListViewModel.cardInfoModelPos.observe(viewLifecycleOwner) {
-            cardsAdapter.updateCardModel(it)
+            it?.let { cardsAdapter.updateCardModel(it) }
         }
 
         cardListViewModel.cardHistoriesList.observe(viewLifecycleOwner) {
-            cardsAdapter.updateCardModels(it)
+            it?.let { cardsAdapter.updateCardModels(it) }
         }
 
         binding?.toolbar?.balanceLayout?.setOnClickListener {

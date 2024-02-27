@@ -14,8 +14,8 @@ import javax.inject.Inject
 class ActiveCardsRepoImpl @Inject constructor(
     private val api: ApiService
 ) : ActiveCardsRepo {
-    private val _errorMessage: MutableLiveData<String> = MutableLiveData()
-    override val errorMessage: LiveData<String>
+    private val _errorMessage: MutableLiveData<String?> = MutableLiveData()
+    override val errorMessage: LiveData<String?>
         get() = _errorMessage
 
     override suspend fun getAllCards(token: String): List<CardResponseData>? {
@@ -79,5 +79,9 @@ class ActiveCardsRepoImpl @Inject constructor(
                 false
             }
         }
+    }
+
+    override fun clearErrors() {
+        _errorMessage.value = null
     }
 }

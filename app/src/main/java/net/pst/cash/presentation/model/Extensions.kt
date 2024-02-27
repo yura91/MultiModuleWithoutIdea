@@ -74,6 +74,11 @@ fun Float.dpToPx(): Float {
     return this * scale
 }
 
+fun Float.pxFromDp(): Int {
+    val scale = Resources.getSystem().displayMetrics.density
+    return (this * scale).toInt()
+}
+
 fun Activity.hideKeyBoard(
     view: View?
 ) {

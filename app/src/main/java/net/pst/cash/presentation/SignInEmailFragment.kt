@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
 import net.pst.cash.databinding.FragmentSignInEmailBinding
-import net.pst.cash.presentation.model.dpToPx
+import net.pst.cash.presentation.model.pxFromDp
 import net.pst.cash.presentation.viewmodels.SignInEmailViewModel
 
 
@@ -36,10 +36,10 @@ class SignInEmailFragment :
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
                 params.setMargins(
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(200f).toInt()
+                    20f.pxFromDp(),
+                    20f.pxFromDp(),
+                    20f.pxFromDp(),
+                    200f.pxFromDp()
                 )
                 binding?.signInButton?.layoutParams = params
             } else {
@@ -48,10 +48,10 @@ class SignInEmailFragment :
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
                 params.setMargins(
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(20f).toInt(),
-                    requireContext().dpToPx(0f).toInt()
+                    20f.pxFromDp(),
+                    20f.pxFromDp(),
+                    20f.pxFromDp(),
+                    0f.pxFromDp()
                 )
                 binding?.signInButton?.layoutParams = params
             }

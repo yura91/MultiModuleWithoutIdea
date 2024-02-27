@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
@@ -30,27 +31,23 @@ class CardListViewModel @Inject constructor(
 
     var newCardId: Int = -1
 
-    private val _cardList = MutableLiveData<List<CardModel>>()
-    val cardList: LiveData<List<CardModel>>
+    private val _cardList = MutableLiveData<List<CardModel>?>()
+    val cardList: LiveData<List<CardModel>?>
         get() = _cardList
 
-    private val _cardHistoriesList = MutableLiveData<List<CardModel>>()
-    val cardHistoriesList: LiveData<List<CardModel>>
+    private val _cardHistoriesList = MutableLiveData<List<CardModel>?>()
+    val cardHistoriesList: LiveData<List<CardModel>?>
         get() = _cardHistoriesList
 
-    private val _cardInfoModelPos = MutableLiveData<Int>()
-    val cardInfoModelPos: LiveData<Int>
+    private val _cardInfoModelPos = MutableLiveData<Int?>()
+    val cardInfoModelPos: LiveData<Int?>
         get() = _cardInfoModelPos
 
-    private val _deleteCardPos = MutableLiveData<Int>()
-    val deleteCardPos: LiveData<Int>
+    private val _deleteCardPos = MutableLiveData<Int?>()
+    val deleteCardPos: LiveData<Int?>
         get() = _deleteCardPos
 
     val errorLoadCardList = activeCardInteractor.errorMessage
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
-        get() = _error
 
     private val _account = accountsInteractor.account.map {
         it?.balance?.split(" ")?.get(0)
@@ -58,8 +55,16 @@ class CardListViewModel @Inject constructor(
     val account: LiveData<String?>
         get() = _account
 
+    private var jobAllCards: Job = Job()
+    private var jobAllHistories: Job = Job()
+    private var jobCardInfo: Job = Job()
+    private var jobUpdateCardHistory: Job = Job()
+    private var jobUpdateCard: Job = Job()
+    private var jobDeleteCard: Job = Job()
+    private var jobActiveBalance: Job = Job()
+
     fun getAllCards() {
-        viewModelScope.launch {
+        jobAllCards = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = activeCardInteractor.getAllCards("Bearer $token")
@@ -98,7 +103,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun getAllCardHistories() {
-        viewModelScope.launch {
+        jobAllHistories = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
@@ -134,7 +139,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun getCardInfo(cardId: Int?) {
-        viewModelScope.launch {
+        jobCardInfo = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
@@ -167,7 +172,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun updateCardHistory(cardId: Int?) {
-        viewModelScope.launch {
+        jobUpdateCardHistory = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
@@ -203,7 +208,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun updateCard(cardId: Int?) {
-        viewModelScope.launch {
+        jobUpdateCard = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("token", "")
             val cardItem = activeCardInteractor.updateCard("Bearer $token", cardId.toString())
@@ -240,7 +245,7 @@ class CardListViewModel @Inject constructor(
     }
 
     fun deleteCard(cardId: Int?, accountId: Int?) {
-        viewModelScope.launch {
+        jobDeleteCard = viewModelScope.launch {
             val cardList = cardList.value
             val cardModelIndex = cardList?.indexOfFirst {
                 it.id == cardId
@@ -266,8 +271,24 @@ class CardListViewModel @Inject constructor(
 
 
     fun getActiveBalance() {
-        viewModelScope.launch {
+        jobActiveBalance = viewModelScope.launch {
             accountsInteractor.getAccounts()
         }
+    }
+
+    fun cancelAllJobs() {
+        jobActiveBalance.cancel()
+        jobDeleteCard.cancel()
+        jobUpdateCard.cancel()
+        jobCardInfo.cancel()
+        jobAllCards.cancel()
+        jobAllHistories.cancel()
+        jobUpdateCardHistory.cancel()
+
+        _cardList.value = null
+        _cardHistoriesList.value = null
+        _cardInfoModelPos.value = null
+        _deleteCardPos.value = null
+        activeCardInteractor.clearErrors()
     }
 }

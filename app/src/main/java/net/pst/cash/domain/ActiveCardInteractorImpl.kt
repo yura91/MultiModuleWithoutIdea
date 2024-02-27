@@ -9,7 +9,7 @@ import javax.inject.Inject
 class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: ActiveCardsRepo) :
     ActiveCardInteractor {
 
-    override val errorMessage: LiveData<String> = activeCardsRepo.errorMessage
+    override val errorMessage: LiveData<String?> = activeCardsRepo.errorMessage
     override suspend fun getAllCards(token: String): List<CardModel>? {
         val activeCardsResponse: List<CardResponseData>? = activeCardsRepo.getAllCards(token)
         return if (!activeCardsResponse.isNullOrEmpty()) {
@@ -49,5 +49,9 @@ class ActiveCardInteractorImpl @Inject constructor(private val activeCardsRepo: 
     override suspend fun deleteCard(token: String, cardId: String, accountId: Int?): Boolean {
         val deleteCardResponse: Boolean? = activeCardsRepo.deleteCard(token, cardId, accountId)
         return deleteCardResponse == true
+    }
+
+    override fun clearErrors() {
+        activeCardsRepo.clearErrors()
     }
 }
