@@ -1,7 +1,5 @@
 package net.pst.cash.presentation
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -25,6 +23,7 @@ import com.google.android.material.button.MaterialButton
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import net.pst.cash.R
 import net.pst.cash.presentation.model.CardModel
+import net.pst.cash.presentation.model.copyToClipboard
 import net.pst.cash.presentation.model.dpToPx
 
 class CardsAdapter(
@@ -61,16 +60,9 @@ class CardsAdapter(
         notifyItemRemoved(cardModelPos)
     }
 
-    private fun Context.copyToClipboard(text: CharSequence) {
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", text)
-        clipboard.setPrimaryClip(clip)
-    }
-
     fun getItemData(position: Int): CardModel {
         return cardModels[position]
     }
-
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == cardType) {
@@ -112,6 +104,7 @@ class CardsAdapter(
                     context.getString(R.string.cvv_is_copied), Toast.LENGTH_SHORT
                 ).show()
             }
+
             cardViewHolder.easyFlipView.setOnFlipListener { easyFlipView, newCurrentSide ->
                 if (newCurrentSide == EasyFlipView.FlipState.BACK_SIDE) {
                     getCardInfoAction(cardModels[position].id)

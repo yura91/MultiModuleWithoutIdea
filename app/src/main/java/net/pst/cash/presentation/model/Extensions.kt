@@ -1,6 +1,8 @@
 package net.pst.cash.presentation.model
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -62,6 +64,12 @@ fun String.getClickableSpan(
     }
 
     return span
+}
+
+fun Context.copyToClipboard(text: CharSequence) {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("label", text)
+    clipboard.setPrimaryClip(clip)
 }
 
 fun Context.dpToPx(dp: Float): Float {
