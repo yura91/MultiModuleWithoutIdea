@@ -305,8 +305,6 @@ class CardsAdapter(
         val historyItemLayout2: ConstraintLayout
         val historyItemLayout3: ConstraintLayout
         val historyItemLayout4: ConstraintLayout
-        val historyItemLayout5: ConstraintLayout
-        val historyItemLayout6: ConstraintLayout
         val historyItemLayouts: MutableList<ConstraintLayout> = mutableListOf()
         val payments: MaterialButton
         val fullCardNumber: TextView
@@ -351,14 +349,10 @@ class CardsAdapter(
             historyItemLayout2 = itemView.findViewById(R.id.inner_history_payment_item2)
             historyItemLayout3 = itemView.findViewById(R.id.inner_history_payment_item3)
             historyItemLayout4 = itemView.findViewById(R.id.inner_history_payment_item4)
-            historyItemLayout5 = itemView.findViewById(R.id.inner_history_payment_item5)
-            historyItemLayout6 = itemView.findViewById(R.id.inner_history_payment_item6)
             historyItemLayouts.add(historyItemLayout1)
             historyItemLayouts.add(historyItemLayout2)
             historyItemLayouts.add(historyItemLayout3)
             historyItemLayouts.add(historyItemLayout4)
-            historyItemLayouts.add(historyItemLayout5)
-            historyItemLayouts.add(historyItemLayout6)
         }
 
         fun setGradient() {

@@ -142,13 +142,12 @@
     <LinearLayout
         android:id="@+id/shortHistoryPaymentList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_35"
-        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_40"
         android:layout_marginEnd="@dimen/margin_35"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/paymentsLayout">
 
         <include
@@ -165,14 +164,6 @@
 
         <include
             android:id="@+id/inner_history_payment_item4"
-            layout="@layout/inner_history_payment_item" />
-
-        <include
-            android:id="@+id/inner_history_payment_item5"
-            layout="@layout/inner_history_payment_item" />
-
-        <include
-            android:id="@+id/inner_history_payment_item6"
             layout="@layout/inner_history_payment_item" />
 
         <include
