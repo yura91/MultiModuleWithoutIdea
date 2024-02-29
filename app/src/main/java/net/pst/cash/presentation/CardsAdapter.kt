@@ -3,6 +3,7 @@ package net.pst.cash.presentation
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -172,7 +173,10 @@ class CardsAdapter(
                     endId: Int,
                     progress: Float
                 ) {
-
+                    if (progress != 0f) {
+                        cardViewHolder.swipeContainer.isEnabled = false
+                    }
+                    Log.d("v,xclv,xl", "bfbdbgdfb")
                 }
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
@@ -189,9 +193,8 @@ class CardsAdapter(
                     positive: Boolean,
                     progress: Float
                 ) {
-
+                    Log.d("v,xclv,xl", "bfbdbgdfb")
                 }
-
             })
 
             val historyItems = cardModels[position].rowHistoryItems
@@ -247,13 +250,13 @@ class CardsAdapter(
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
-                val historyAdapter = ShortHistoryPaymentsAdapter(
-                    context,
-                    cardModels[position].id,
-                    historyItems,
-                    showPaymentsAction
-                )
-                cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter
+                /* val historyAdapter = ShortHistoryPaymentsAdapter(
+                     context,
+                     cardModels[position].id,
+                     historyItems,
+                     showPaymentsAction
+                 )
+                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter*/
             }
 
             cardViewHolder.payments.setOnClickListener {
@@ -279,7 +282,7 @@ class CardsAdapter(
         val cardExpiryDateBack: TextView
         val easyFlipView: EasyFlipView
         val swipeContainer: SwipeRefreshLayout
-        val shortHistoryPaymentList: RecyclerView
+        val shortHistoryPaymentList: LinearLayout
         val fullCardNumberLayout: LinearLayout
         val expDateBackLayout: LinearLayout
         val shortHistoryShimmer1: ShimmerFrameLayout

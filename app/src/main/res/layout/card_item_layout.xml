@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/cardItemLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutDescription="@xml/collapsing_layout">
+<androidx.constraintlayout.motion.widget.MotionLayout
+    android:id="@+id/cardItemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/collapsing_layout">
 
-        <com.wajahatkarim3.easyflipview.EasyFlipView
-            android:id="@+id/easyFlipView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            app:autoFlipBack="false"
-            app:flipDuration="400"
-            app:flipEnabled="true"
-            app:flipFrom="right"
-            app:flipOnTouch="false"
+    <com.wajahatkarim3.easyflipview.EasyFlipView
+        android:id="@+id/easyFlipView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:autoFlipBack="false"
+        app:flipDuration="400"
+        app:flipEnabled="true"
+        app:flipFrom="right"
+        app:flipOnTouch="false"
             app:flipType="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -139,15 +139,45 @@
             android:layout_marginEnd="@dimen/margin_35"
             app:layout_constraintTop_toBottomOf="@+id/shimmer5" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shortHistoryPaymentList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_35"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paymentsLayout" />
+    <LinearLayout
+        android:id="@+id/shortHistoryPaymentList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_35"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentsLayout">
+
+        <include
+            android:id="@+id/inner_history_payment_item"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/inner_history_payment_item2"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/inner_history_payment_item3"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/inner_history_payment_item4"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/inner_history_payment_item5"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/inner_history_payment_item6"
+            layout="@layout/inner_history_payment_item" />
+
+        <include
+            android:id="@+id/view_all_button_item"
+            layout="@layout/view_all_button_item_layout" />
+    </LinearLayout>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
