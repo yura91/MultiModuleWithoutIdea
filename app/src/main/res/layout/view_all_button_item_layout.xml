@@ -15,5 +15,4 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@null" />
-
 </FrameLayout>

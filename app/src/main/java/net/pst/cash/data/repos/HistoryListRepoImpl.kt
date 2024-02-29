@@ -43,7 +43,7 @@ class HistoryListRepoImpl @Inject constructor(
             val response = api.getTransactionsList(token, cardId)
             val data = response.body()?.data
             val transactionModels = mutableListOf<TransactionModel>()
-            val transactions = data?.take(4)?.map {
+            val transactions = data?.take(3)?.map {
                 var dateTime = Pair("", "")
                 if (it.processedAt != null) {
                     dateTime = getDateAndTime(it.processedAt)

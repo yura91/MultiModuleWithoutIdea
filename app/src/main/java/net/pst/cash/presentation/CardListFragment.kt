@@ -73,6 +73,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().finish()
         }
+
         val cardsAdapter = CardsAdapter(requireContext(), listOf(), {
             findNavController().navigate(
                 R.id.action_cardListFragment_to_selectBalanceFragment

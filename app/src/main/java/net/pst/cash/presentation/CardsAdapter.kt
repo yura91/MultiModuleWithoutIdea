@@ -253,6 +253,13 @@ class CardsAdapter(
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
                 var index = 0
                 historyItems.forEach {
+                    if (index < cardViewHolder.historyDates.size && it.date.isNotEmpty()) {
+                        cardViewHolder.historyDates[index].isVisible = true
+                        cardViewHolder.historyDates[index].text = it.date
+                    } else if (index < cardViewHolder.historyDates.size) {
+                        cardViewHolder.historyDates[index].isVisible = false
+                        cardViewHolder.historyDates[index].text = it.date
+                    }
                     it.elements.forEach { historyItem ->
                         val historyLayout = cardViewHolder.historyItemLayouts[index]
                         val operationType = historyLayout.findViewById<TextView>(R.id.operationType)
@@ -304,10 +311,13 @@ class CardsAdapter(
         val historyItemLayout1: ConstraintLayout
         val historyItemLayout2: ConstraintLayout
         val historyItemLayout3: ConstraintLayout
-        val historyItemLayout4: ConstraintLayout
         val historyItemLayouts: MutableList<ConstraintLayout> = mutableListOf()
+        val historyDates: MutableList<TextView> = mutableListOf()
         val payments: MaterialButton
         val fullCardNumber: TextView
+        val date1: TextView
+        val date2: TextView
+        val date3: TextView
         val copyCardNumber: ImageView
         val copyExpDate: ImageView
         val copyCvv: ImageView
@@ -348,11 +358,15 @@ class CardsAdapter(
             historyItemLayout1 = itemView.findViewById(R.id.inner_history_payment_item)
             historyItemLayout2 = itemView.findViewById(R.id.inner_history_payment_item2)
             historyItemLayout3 = itemView.findViewById(R.id.inner_history_payment_item3)
-            historyItemLayout4 = itemView.findViewById(R.id.inner_history_payment_item4)
             historyItemLayouts.add(historyItemLayout1)
             historyItemLayouts.add(historyItemLayout2)
             historyItemLayouts.add(historyItemLayout3)
-            historyItemLayouts.add(historyItemLayout4)
+            date1 = itemView.findViewById(R.id.date1)
+            date2 = itemView.findViewById(R.id.date2)
+            date3 = itemView.findViewById(R.id.date3)
+            historyDates.add(date1)
+            historyDates.add(date2)
+            historyDates.add(date3)
         }
 
         fun setGradient() {

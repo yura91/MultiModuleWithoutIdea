@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -150,20 +151,52 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/paymentsLayout">
 
+        <TextView
+            android:id="@+id/date1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="Today" />
+
         <include
             android:id="@+id/inner_history_payment_item"
             layout="@layout/inner_history_payment_item" />
+
+        <TextView
+            android:id="@+id/date2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="Today" />
 
         <include
             android:id="@+id/inner_history_payment_item2"
             layout="@layout/inner_history_payment_item" />
 
-        <include
-            android:id="@+id/inner_history_payment_item3"
-            layout="@layout/inner_history_payment_item" />
+        <TextView
+            android:id="@+id/date3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="Today" />
 
         <include
-            android:id="@+id/inner_history_payment_item4"
+            android:id="@+id/inner_history_payment_item3"
             layout="@layout/inner_history_payment_item" />
 
         <include
