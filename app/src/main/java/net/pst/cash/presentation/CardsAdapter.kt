@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -250,16 +251,26 @@ class CardsAdapter(
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
-                /* val historyAdapter = ShortHistoryPaymentsAdapter(
-                     context,
-                     cardModels[position].id,
-                     historyItems,
-                     showPaymentsAction
-                 )
-                 cardViewHolder.shortHistoryPaymentList.adapter = historyAdapter*/
+                var index = 0
+                historyItems.forEach {
+                    it.elements.forEach { historyItem ->
+                        val historyLayout = cardViewHolder.historyItemLayouts[index]
+                        val operationType = historyLayout.findViewById<TextView>(R.id.operationType)
+                        val operationValue =
+                            historyLayout.findViewById<TextView>(R.id.operationValue)
+                        val operationTime = historyLayout.findViewById<TextView>(R.id.operationTime)
+                        operationType.text = historyItem.description
+                        operationValue.text = historyItem.sum
+                        operationTime.text = historyItem.timePart
+                        index++
+                    }
+                }
             }
 
             cardViewHolder.payments.setOnClickListener {
+                cardModels[position].id?.let { showPaymentsAction(it) }
+            }
+            cardViewHolder.viewAllButton.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
             }
         } else {
@@ -281,6 +292,7 @@ class CardsAdapter(
         val cardExpiryDateFront: TextView
         val cardExpiryDateBack: TextView
         val easyFlipView: EasyFlipView
+        val viewAllButton: MaterialButton
         val swipeContainer: SwipeRefreshLayout
         val shortHistoryPaymentList: LinearLayout
         val fullCardNumberLayout: LinearLayout
@@ -289,6 +301,13 @@ class CardsAdapter(
         val backSideCardNumberShimmer: ShimmerFrameLayout
         val shimmerExpDateBack: ShimmerFrameLayout
         val backSideCvvShimmer: ShimmerFrameLayout
+        val historyItemLayout1: ConstraintLayout
+        val historyItemLayout2: ConstraintLayout
+        val historyItemLayout3: ConstraintLayout
+        val historyItemLayout4: ConstraintLayout
+        val historyItemLayout5: ConstraintLayout
+        val historyItemLayout6: ConstraintLayout
+        val historyItemLayouts: MutableList<ConstraintLayout> = mutableListOf()
         val payments: MaterialButton
         val fullCardNumber: TextView
         val copyCardNumber: ImageView
@@ -305,6 +324,7 @@ class CardsAdapter(
             cardInfoBack = itemView.findViewById(R.id.cardInfoBack)
             cardBalance = itemView.findViewById(R.id.cardBalance)
             clickedArea = itemView.findViewById(R.id.clickedArea)
+            viewAllButton = itemView.findViewById(R.id.viewAllHistButton)
             cardNumLastDigits = itemView.findViewById(R.id.cardNumLastDigits)
             swipeContainer = itemView.findViewById(R.id.swipeContainer)
             copyCardNumber = itemView.findViewById(R.id.copyCardNumber)
@@ -327,6 +347,18 @@ class CardsAdapter(
             expDateBackLayout = itemView.findViewById(R.id.expDateBackLayout)
             expandedSet = cardItemLayout.getConstraintSet(R.id.expanded)
             collapsedSet = cardItemLayout.getConstraintSet(R.id.collapsed)
+            historyItemLayout1 = itemView.findViewById(R.id.inner_history_payment_item)
+            historyItemLayout2 = itemView.findViewById(R.id.inner_history_payment_item2)
+            historyItemLayout3 = itemView.findViewById(R.id.inner_history_payment_item3)
+            historyItemLayout4 = itemView.findViewById(R.id.inner_history_payment_item4)
+            historyItemLayout5 = itemView.findViewById(R.id.inner_history_payment_item5)
+            historyItemLayout6 = itemView.findViewById(R.id.inner_history_payment_item6)
+            historyItemLayouts.add(historyItemLayout1)
+            historyItemLayouts.add(historyItemLayout2)
+            historyItemLayouts.add(historyItemLayout3)
+            historyItemLayouts.add(historyItemLayout4)
+            historyItemLayouts.add(historyItemLayout5)
+            historyItemLayouts.add(historyItemLayout6)
         }
 
         fun setGradient() {
