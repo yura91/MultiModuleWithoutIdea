@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_40"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="@dimen/margin_35"
             app:layout_constraintTop_toBottomOf="@+id/paymentsLayout" />
 
@@ -67,35 +67,6 @@
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/shimmer2" />
 
-        <Constraint
-            android:id="@id/shimmer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer3" />
-
-        <Constraint
-            android:id="@id/shimmer5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer4" />
-
-        <Constraint
-            android:id="@id/shimmer6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer5" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/collapsed">
@@ -152,35 +123,5 @@
             android:layout_marginEnd="@dimen/margin_35"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/shimmer2" />
-
-        <Constraint
-            android:id="@id/shimmer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer3" />
-
-        <Constraint
-            android:id="@id/shimmer5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer4" />
-
-        <Constraint
-            android:id="@id/shimmer6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_35"
-            android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/shimmer5" />
     </ConstraintSet>
 </MotionScene>

@@ -74,7 +74,7 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             requireActivity().finish()
         }
 
-        val cardsAdapter = CardsAdapter(requireContext(), listOf(), {
+        val cardsAdapter = CardsAdapter(requireContext(), mutableListOf(), {
             findNavController().navigate(
                 R.id.action_cardListFragment_to_selectBalanceFragment
             )

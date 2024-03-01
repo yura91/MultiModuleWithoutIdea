@@ -108,7 +108,7 @@ class CardListViewModel @Inject constructor(
             val token = sharedPref.getString("token", "")
             val cardList = cardList.value
             if (!cardList.isNullOrEmpty()) {
-                cardList.subList(0, cardList.size - 1).forEach { cardModel ->
+                cardList.subList(0, cardList.size - 1).forEachIndexed { index, cardModel ->
                     val cardId = cardModel.id.toString()
                     if (token != null) {
                         historyInteractor.getShortHistory("Bearer $token", cardId)
@@ -128,12 +128,12 @@ class CardListViewModel @Inject constructor(
                                     RowHistoryItems(rowHistoryItem.date, historyItems)
                                 }
                                 cardModel.rowHistoryItems.addAll(payments)
-                                cardModel.rowHistoryItems.add(RowHistoryItems())
+                                _cardInfoModelPos.value = index
                             }
                     }
                 }
 
-                _cardHistoriesList.value = cardList
+//                _cardHistoriesList.value = cardList
             }
         }
     }
@@ -199,7 +199,6 @@ class CardListViewModel @Inject constructor(
                             }
                             cardList[index].rowHistoryItems.clear()
                             cardList[index].rowHistoryItems.addAll(payments)
-                            cardList[index].rowHistoryItems.add(RowHistoryItems())
                             _cardInfoModelPos.value = index
                         }
                 }

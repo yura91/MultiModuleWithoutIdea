@@ -30,7 +30,7 @@ import net.pst.cash.presentation.model.dpToPx
 
 class CardsAdapter(
     private val context: Context,
-    private var cardModels: List<CardModel>,
+    private var cardModels: MutableList<CardModel>,
     val issueCardAction: () -> Unit,
     val showPaymentsAction: (cardId: Int) -> Unit,
     val getCardInfoAction: (cardId: Int?) -> Unit,
@@ -50,8 +50,9 @@ class CardsAdapter(
     }
 
     fun updateCardModels(cardModels: List<CardModel>) {
-        this.cardModels = cardModels
-        notifyItemRangeChanged(0, cardModels.size)
+        this.cardModels.clear()
+        this.cardModels.addAll(cardModels)
+        notifyItemRangeChanged(0, this.cardModels.size)
     }
 
     fun updateCardModel(cardModelPos: Int) {
@@ -212,12 +213,6 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer2, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
-                expandedSet.setVisibility(R.id.shimmer4, ConstraintSet.VISIBLE)
-                collapsedSet.setVisibility(R.id.shimmer4, ConstraintSet.VISIBLE)
-                expandedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
-                collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.VISIBLE)
-                expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
-                collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.VISIBLE)
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = false
 
             } else {
@@ -227,25 +222,12 @@ class CardsAdapter(
                 collapsedSet.setVisibility(R.id.shimmer2, ConstraintSet.GONE)
                 expandedSet.setVisibility(R.id.shimmer3, ConstraintSet.GONE)
                 collapsedSet.setVisibility(R.id.shimmer3, ConstraintSet.GONE)
-                expandedSet.setVisibility(R.id.shimmer4, ConstraintSet.GONE)
-                collapsedSet.setVisibility(R.id.shimmer4, ConstraintSet.GONE)
-                expandedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
-                collapsedSet.setVisibility(R.id.shimmer5, ConstraintSet.GONE)
-                expandedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
-                collapsedSet.setVisibility(R.id.shimmer6, ConstraintSet.GONE)
                 expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = true
             }
-            if (historyItems.size == 1) {
-                expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
-                collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.INVISIBLE)
-                expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
-                collapsedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.INVISIBLE)
-                cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = false
-            } else {
                 expandedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shortHistoryPaymentList, ConstraintSet.VISIBLE)
                 expandedSet.setVisibility(R.id.paymentsLayout, ConstraintSet.VISIBLE)
@@ -272,7 +254,6 @@ class CardsAdapter(
                         index++
                     }
                 }
-            }
 
             cardViewHolder.payments.setOnClickListener {
                 cardModels[position].id?.let { showPaymentsAction(it) }
