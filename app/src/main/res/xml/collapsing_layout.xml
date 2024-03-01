@@ -17,7 +17,7 @@
             android:id="@id/easyFlipView"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginBottom="@dimen/margin_40" />
+            app:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/paymentsLayout"
             android:layout_width="0dp"
