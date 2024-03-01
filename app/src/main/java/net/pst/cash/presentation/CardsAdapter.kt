@@ -3,7 +3,6 @@ package net.pst.cash.presentation
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -175,10 +174,6 @@ class CardsAdapter(
                     endId: Int,
                     progress: Float
                 ) {
-                    if (progress != 0f) {
-                        cardViewHolder.swipeContainer.isEnabled = false
-                    }
-                    Log.d("v,xclv,xl", "bfbdbgdfb")
                 }
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
@@ -195,7 +190,6 @@ class CardsAdapter(
                     positive: Boolean,
                     progress: Float
                 ) {
-                    Log.d("v,xclv,xl", "bfbdbgdfb")
                 }
             })
 
@@ -214,7 +208,6 @@ class CardsAdapter(
                 expandedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
                 collapsedSet.setVisibility(R.id.shimmer3, ConstraintSet.VISIBLE)
                 cardViewHolder.cardItemLayout.getTransition(R.id.transition).isEnabled = false
-
             } else {
                 expandedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)
                 collapsedSet.setVisibility(R.id.shimmer1, ConstraintSet.GONE)

@@ -76,8 +76,7 @@
                 android:textSize="@dimen/text_14"
                 app:backgroundTint="@null"
                 app:elevation="0dp"
-                app:iconGravity="textStart"
-                app:pressedTranslationZ="0dp" />
+                app:iconGravity="textStart" />
         </LinearLayout>
 
         <include

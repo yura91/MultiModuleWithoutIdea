@@ -8,7 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
@@ -112,6 +114,7 @@ class CardListViewModel @Inject constructor(
                     val cardId = cardModel.id.toString()
                     if (token != null) {
                         historyInteractor.getShortHistory("Bearer $token", cardId)
+                            .flowOn(Dispatchers.IO)
                             .collect {
                                 val payments = it.map { rowHistoryItem ->
                                     val historyItems = mutableListOf<HistoryItem>()
@@ -132,8 +135,6 @@ class CardListViewModel @Inject constructor(
                             }
                     }
                 }
-
-//                _cardHistoriesList.value = cardList
             }
         }
     }
@@ -182,6 +183,7 @@ class CardListViewModel @Inject constructor(
             if (cardModelIndex != -1) {
                 cardModelIndex?.let { index ->
                     historyInteractor.getShortHistory("Bearer $token", cardId.toString())
+                        .flowOn(Dispatchers.IO)
                         .collect {
                             val payments = it.map { rowHistoryItem ->
                                 val historyItems = mutableListOf<HistoryItem>()
