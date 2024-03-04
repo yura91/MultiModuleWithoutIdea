@@ -16,6 +16,7 @@ import net.pst.cash.domain.AccountsInteractor
 import net.pst.cash.domain.ActiveCardInteractor
 import net.pst.cash.domain.CardInfoInteractor
 import net.pst.cash.domain.HistoryInteractor
+import net.pst.cash.presentation.SingleLiveEvent
 import net.pst.cash.presentation.model.CardModel
 import net.pst.cash.presentation.model.Currency
 import net.pst.cash.presentation.model.HistoryItem
@@ -48,6 +49,10 @@ class CardListViewModel @Inject constructor(
     private val _deleteCardPos = MutableLiveData<Int?>()
     val deleteCardPos: LiveData<Int?>
         get() = _deleteCardPos
+
+    private val _navigateToLoginScreen = SingleLiveEvent<Unit>()
+    val navigateToLoginScreen: LiveData<Unit>
+        get() = _navigateToLoginScreen
 
     val errorLoadCardList = activeCardInteractor.errorMessage
 
@@ -102,6 +107,11 @@ class CardListViewModel @Inject constructor(
             }
             _cardList.value = cards
         }
+    }
+
+    fun navigateToLogin() {
+        cancelAllJobs()
+        _navigateToLoginScreen.value = Unit
     }
 
     fun getAllCardHistories() {
@@ -208,6 +218,22 @@ class CardListViewModel @Inject constructor(
         }
     }
 
+    private fun cancelAllJobs() {
+        jobActiveBalance.cancel()
+        jobDeleteCard.cancel()
+        jobUpdateCard.cancel()
+        jobCardInfo.cancel()
+        jobAllCards.cancel()
+        jobAllHistories.cancel()
+        jobUpdateCardHistory.cancel()
+
+        _cardList.value = null
+        _cardHistoriesList.value = null
+        _cardInfoModelPos.value = null
+        _deleteCardPos.value = null
+        activeCardInteractor.clearErrors()
+    }
+
     fun updateCard(cardId: Int?) {
         jobUpdateCard = viewModelScope.launch {
             val sharedPref = application.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
@@ -277,19 +303,7 @@ class CardListViewModel @Inject constructor(
         }
     }
 
-    fun cancelAllJobs() {
-        jobActiveBalance.cancel()
-        jobDeleteCard.cancel()
-        jobUpdateCard.cancel()
-        jobCardInfo.cancel()
-        jobAllCards.cancel()
-        jobAllHistories.cancel()
-        jobUpdateCardHistory.cancel()
-
-        _cardList.value = null
-        _cardHistoriesList.value = null
-        _cardInfoModelPos.value = null
-        _deleteCardPos.value = null
-        activeCardInteractor.clearErrors()
+    override fun onCleared() {
+        super.onCleared()
     }
 }

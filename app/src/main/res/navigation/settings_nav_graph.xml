@@ -22,11 +22,6 @@
         <action
             android:id="@+id/action_settingsFragment_to_cardPaletteDialogFragment"
             app:destination="@id/cardPaletteDialogFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@+id/settingsFragment"
-            app:popUpToInclusive="true" />
     </dialog>
     <dialog
         android:id="@+id/helpSupportFragment"

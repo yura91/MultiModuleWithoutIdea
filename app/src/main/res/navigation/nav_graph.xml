@@ -163,6 +163,11 @@
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@anim/slide_out_top" />
         <action
+            android:id="@+id/action_cardList_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/cardListFragment"
+            app:popUpToInclusive="true" />
+        <action
             android:id="@+id/action_cardListFragment_to_historyPaymentsFragment"
             app:destination="@id/historyPaymentsFragment" />
         <action

@@ -58,6 +58,11 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             )
         }
 
+        cardListViewModel.navigateToLoginScreen.observe(viewLifecycleOwner) {
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_cardList_to_signInFragment)
+        }
+
         cardListViewModel.account.observe(viewLifecycleOwner) {
             it?.let {
                 binding?.toolbar?.cardBalance?.text = it
@@ -138,6 +143,10 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         cardListViewModel.getActiveBalance()
         cardListViewModel.getAllCards()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     companion object {
