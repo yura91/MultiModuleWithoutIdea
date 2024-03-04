@@ -2,7 +2,6 @@ package net.pst.cash.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -75,10 +74,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            requireActivity().finish()
-        }
-
         val cardsAdapter = CardsAdapter(requireContext(), mutableListOf(), {
             findNavController().navigate(
                 R.id.action_cardListFragment_to_selectBalanceFragment
@@ -143,10 +138,6 @@ class CardListFragment : BaseFragment<FragmentCardListBinding>(FragmentCardListB
 
         cardListViewModel.getActiveBalance()
         cardListViewModel.getAllCards()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     companion object {

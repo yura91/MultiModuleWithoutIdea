@@ -38,6 +38,7 @@
         <action
             android:id="@+id/action_cardPaletteDialogFragment_to_cardListFragment"
             app:destination="@id/cardListFragment"
-            app:launchSingleTop="true" />
+            app:popUpTo="@id/cardListFragment"
+            app:popUpToInclusive="true" />
     </dialog>
 </navigation>
