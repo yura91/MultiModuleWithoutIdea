@@ -6,21 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.motion.widget.MotionLayout
-    android:id="@+id/cardItemLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/collapsing_layout">
-
-    <com.wajahatkarim3.easyflipview.EasyFlipView
-        android:id="@+id/easyFlipView"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/cardItemLayout"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        app:autoFlipBack="false"
-        app:flipDuration="400"
-        app:flipEnabled="true"
-        app:flipFrom="right"
-        app:flipOnTouch="false"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/collapsing_layout">
+
+        <com.wajahatkarim3.easyflipview.EasyFlipView
+            android:id="@+id/easyFlipView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:autoFlipBack="false"
+            app:flipDuration="400"
+            app:flipEnabled="true"
+            app:flipFrom="right"
+            app:flipOnTouch="false"
             app:flipType="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -109,68 +109,68 @@
             android:layout_marginEnd="@dimen/margin_35"
             app:layout_constraintTop_toBottomOf="@+id/shimmer2" />
 
-    <LinearLayout
-        android:id="@+id/shortHistoryPaymentList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_35"
-        android:layout_marginTop="@dimen/margin_25"
-        android:layout_marginEnd="@dimen/margin_35"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/paymentsLayout">
-
-        <TextView
-            android:id="@+id/date1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/shortHistoryPaymentList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_24"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_16"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="Today" />
+            android:layout_marginStart="@dimen/margin_35"
+            android:layout_marginTop="@dimen/margin_25"
+            android:layout_marginEnd="@dimen/margin_35"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/paymentsLayout">
 
-        <include
-            android:id="@+id/inner_history_payment_item"
-            layout="@layout/inner_history_payment_item" />
+            <TextView
+                android:id="@+id/date1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_24"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Today" />
 
-        <TextView
-            android:id="@+id/date2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_24"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_16"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="Today" />
+            <include
+                android:id="@+id/inner_history_payment_item"
+                layout="@layout/inner_history_payment_item" />
 
-        <include
-            android:id="@+id/inner_history_payment_item2"
-            layout="@layout/inner_history_payment_item" />
+            <TextView
+                android:id="@+id/date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_24"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Today" />
 
-        <TextView
-            android:id="@+id/date3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_24"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_16"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:text="Today" />
+            <include
+                android:id="@+id/inner_history_payment_item2"
+                layout="@layout/inner_history_payment_item" />
 
-        <include
-            android:id="@+id/inner_history_payment_item3"
-            layout="@layout/inner_history_payment_item" />
+            <TextView
+                android:id="@+id/date3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_24"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Today" />
 
-        <include
-            android:id="@+id/view_all_button_item"
-            layout="@layout/view_all_button_item_layout" />
-    </LinearLayout>
+            <include
+                android:id="@+id/inner_history_payment_item3"
+                layout="@layout/inner_history_payment_item" />
+
+            <include
+                android:id="@+id/view_all_button_item"
+                layout="@layout/view_all_button_item_layout" />
+        </LinearLayout>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

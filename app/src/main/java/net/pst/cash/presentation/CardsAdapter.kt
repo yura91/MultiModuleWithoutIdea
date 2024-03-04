@@ -236,15 +236,19 @@ class CardsAdapter(
                         cardViewHolder.historyDates[index].text = it.date
                     }
                     it.elements.forEach { historyItem ->
-                        val historyLayout = cardViewHolder.historyItemLayouts[index]
-                        val operationType = historyLayout.findViewById<TextView>(R.id.operationType)
-                        val operationValue =
-                            historyLayout.findViewById<TextView>(R.id.operationValue)
-                        val operationTime = historyLayout.findViewById<TextView>(R.id.operationTime)
-                        operationType.text = historyItem.description
-                        operationValue.text = historyItem.sum
-                        operationTime.text = historyItem.timePart
-                        index++
+                        if (index < cardViewHolder.historyItemLayouts.size) {
+                            val historyLayout = cardViewHolder.historyItemLayouts[index]
+                            val operationType =
+                                historyLayout.findViewById<TextView>(R.id.operationType)
+                            val operationValue =
+                                historyLayout.findViewById<TextView>(R.id.operationValue)
+                            val operationTime =
+                                historyLayout.findViewById<TextView>(R.id.operationTime)
+                            operationType.text = historyItem.description
+                            operationValue.text = historyItem.sum
+                            operationTime.text = historyItem.timePart
+                            index++
+                        }
                     }
                 }
 

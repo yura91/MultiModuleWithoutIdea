@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import net.pst.cash.R
@@ -87,11 +86,7 @@ class SettingsFragment :
                         Toast.LENGTH_SHORT
                     ).show()
                     cardListViewModel.cancelAllJobs()
-                    findNavController().clearBackStack(R.id.settingsFragment)
-                    findNavController().navigate(
-                        SettingsFragmentDirections.actionSettingsFragmentToSignInFragment(),
-                        NavOptions.Builder().setLaunchSingleTop(true).build()
-                    )
+                    findNavController().navigate(R.id.action_settingsFragment_to_signInFragment)
                 },
                 {
                     Toast.makeText(
